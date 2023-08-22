@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--
-        <link rel="stylesheet" href="contacts/contacts.html">
-    <script src="contacts/contacts.js"></script>
--->
+    
+<!--     <link rel="icon" href="assets/img/" type="image/png">
+    <link rel="stylesheet" href="contacts/contacts.html">
+    <script src="contacts/contacts.js"></script>-->
+
     <title>contacts</title>
     <style>
         body {
@@ -18,14 +19,12 @@
             overflow: hidden;
             margin: 0;
         }
-
         .contacts-frame {
             width: 428px;
             height: 99vh;
             display: flex;
             flex-direction: column;
         }
-
         header {
             background-color: rgb(69, 137, 255);
             width: 100%; /* in mockup: 428px*/
@@ -34,9 +33,11 @@
             z-index: 10;
             display: flex;
             justify-content: space-between;
-
         }
-
+        header img {
+            width: 32px;
+            height: 39.02px;
+        }
         main {
             background-color: rgb(255, 255, 255);
             width: 100%;
@@ -47,7 +48,6 @@
             align-items: center;
             flex-direction: column;
         }
-
         footer {
             background-color: rgb(69, 137, 255);
             width: 100%;
@@ -78,12 +78,17 @@
 
 <body>
     <div class="contacts-frame">
-        <header></header>
+        <header>
+            <img src="../assets/img/logo_mobile.png" alt="">
+        </header>
         <main>
-            <div class="letter-box" id="letterBox"></div>
-            <div class="line-box">
-                <div class="line"></div>
+            <div class="letter-box" id="letterBox">
+                <span>A</span>
             </div>
+                <div class="line-box">
+                    <div class="line">                        
+                    </div>
+                </div>
             <div class="name-box" id="nameBox"></div>
 
         </main>
