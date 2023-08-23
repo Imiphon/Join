@@ -43,6 +43,21 @@ main {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.add-btn {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    right: 16px;
+    bottom: 96px;
+    background-color: var(--reg-blue);
+    border-radius: 10px;
+    z-index: 20;
+    border-width: 0;
+    box-shadow: var(--shadow);
+}
+.add-btn img {
+    z-index: 21;    
+}
 footer {
     background-color: white;
     width: 100%;
