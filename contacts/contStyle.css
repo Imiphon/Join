@@ -17,7 +17,7 @@ body {
     overflow: hidden;
 }
 header {
-    background-color: var(--standard);
+    background-color: var(--reg-blue);
     width: 100%; /* in mockup: 428px*/
     height: 80px;
     /*padding: 20px 25px 20px 25px;*/
@@ -42,15 +42,16 @@ main {
     flex-direction: column;
 }
 footer {
-    background-color: rgb(69, 137, 255);
+    background-color: white;
     width: 100%;
     height: 80px;
     z-index: 10;
 }
 .letter-box {
-    font-family: var(--ff-letter);
-    font-size: var(--fs-letter);
-    font-weight: var(--fw-letter);
+    font-family: var(--ff-s-mob);
+    font-size: var(--fs-s-mob);
+    font-weight: var(--fw-s-mob);
+    line-height: var(--lh-s-mob);
     width: 352px;
     height: 56px;
     padding: 17px 36px 17px 60px;
@@ -68,6 +69,26 @@ footer {
 .line {
     width: 352px;
     height: 1px;
-    background-color: #D1D1D1;
+    background-color: var(--line-col);
     border: 1px;
+}
+.name-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+}
+.full-name {
+    font-family: var(--ff-reg-mob);
+    font-size: var(--fs-reg-mob);
+    font-weight: var(--fw-reg-mob);
+    line-height: var(--lh-reg-mob);
+}
+.mail-mob {
+    font-family: var(--ff-s-mob);
+    font-size: var(--fs-s-mob);
+    font-weight: var(--fw-s-mob);
+    line-height: var(--lh-s-mob);
+    color: var(--mail-blue);
 }
