@@ -1,0 +1,30 @@
+/*  ===============
+     NORMALIZE 
+    =============== */
+
+:root {
+    /* using-example:  color: var(--standard)*/
+    --standard: rgb(69, 137, 255);
+    --ff-letter: "open-sans", sans-serif;    
+    --ff-base: "inter-regular", sans-serif;
+    --fw-letter: 400;
+    --fs-letter: 18px;
+    --fw-regular: 500;
+    --fw-bold: 700;
+    /*ATTENTION: not yet evaluated!*/
+    --box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+/*  ================
+    General Styling 
+    ================ */
+
+
+body {
+    margin: 0;
+    padding: 0;
+    /* for other font-family use: var(--letter);  */
+    font-family: var(--ff-base);
+    font-weight: var(--fw-regular);
+    font-size: 16px;
+}
