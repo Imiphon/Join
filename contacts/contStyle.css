@@ -1,0 +1,68 @@
+body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.body-frame {
+    position: relativ;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background-color: rgb(69, 137, 255);
+    width: 100%; /* in mockup: 428px*/
+    height: 80px;
+    /*padding: 20px 25px 20px 25px;*/
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header img {
+    width: 32px;
+    height: 39.02px;
+    margin: 20px; /*instat padding in header*/
+}
+main {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+footer {
+    background-color: rgb(69, 137, 255);
+    width: 100%;
+    height: 80px;
+    z-index: 10;
+}
+.letter-box {
+    width: 352px;
+    height: 56px;
+    padding: 17px 36px 17px 36px;
+    gap: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.line-box {
+    Width: 352px;
+    Height: 16px;
+    Padding: 8px, 0px, 8px, 0px;
+    Gap: 10px;
+}
+.line {
+    width: 352px;
+    height: 1px;
+    background-color: #D1D1D1;
+    border: 1px;
+}
