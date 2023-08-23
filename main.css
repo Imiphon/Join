@@ -35,14 +35,12 @@
     --fs-mail-mob: 16px;
     --lh-mail-mob: 19.2px;
 
-    /*short-name in contacts/mobile/name-box*/
-
-    /*names in contacts/mobile/shorts and other font-style in inter*/
+    /*font-style for names in contacts/mobile/shorts and other inter-stuff*/
     --ff-inter: "inter-regular", sans-serif;
     --fw-inter: 400;
     --fs-inter: 12px;
     /*ATTENTION: not yet evaluated!*/
-    --box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
 }
 
 /*  ================
