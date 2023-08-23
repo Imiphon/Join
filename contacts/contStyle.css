@@ -72,12 +72,40 @@ footer {
     background-color: var(--line-col);
     border: 1px;
 }
-.name-box {
+.name-frame {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex-direction: column;
-
+}
+.name-box {
+    width: 352px;
+    height: 77px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 10px;
+    gap: 35px;
+    padding: 15px, 24px, 15px, 24px;
+}
+.name-ellipse {
+    position: relative;
+    left: 0;
+    color: white;
+    font-family: var(--ff-inter);
+    font-size: var(--fs-inter);
+    font-weight: var(--fw-inter);
+    line-height: var(--lh-inter);
+    background-color: gray;
+    width: 42px;
+    height: 42px;
+    border: 2px;
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center; 
 }
 .full-name {
     font-family: var(--ff-reg-mob);
@@ -85,7 +113,7 @@ footer {
     font-weight: var(--fw-reg-mob);
     line-height: var(--lh-reg-mob);
 }
-.mail-mob {
+.mail {
     font-family: var(--ff-s-mob);
     font-size: var(--fs-s-mob);
     font-weight: var(--fw-s-mob);

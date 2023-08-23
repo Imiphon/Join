@@ -9,6 +9,13 @@
     --reg-blue: rgb(69, 137, 255);
     --mail-blue: rgb(173,203,255);
     --line-col:  rgb(209, 209, 209); 
+    --user-orange: rgb(255, 122, 0);
+    --user-lila: #9327FF;
+    --user-blue: #6E52FF;
+    --user-rose: #FC71FF;
+    --user-yellow:#FFBB2B;
+    --user-green: #1FD7C1;
+
     /*----------- FONT STYLES -----------*/
     /* regular font style for names in mobile*/
     --ff-reg-mob: "open-sans", sans-serif;
@@ -30,7 +37,7 @@
 
     /*short-name in contacts/mobile/name-box*/
 
-    /*names in contacts/mobile/short*/
+    /*names in contacts/mobile/shorts and other font-style in inter*/
     --ff-inter: "inter-regular", sans-serif;
     --fw-inter: 400;
     --fs-inter: 12px;
@@ -46,8 +53,4 @@
 body {
     margin: 0;
     padding: 0;
-    /* for other font-family use: var(--letter);  */
-    font-family: var(--ff-base);
-    font-weight: var(--fw-regular);
-    font-size: 16px;
 }
