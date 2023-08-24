@@ -1,3 +1,7 @@
+.d-none-welcome_message_html {
+    display: none;
+}
+
 .welcomeMsgDiv {
     width: 80vw;
     height: 40px;
@@ -7,14 +11,14 @@
 }
 
 .welcomeText {
-    font-style: var(--ff-reg-mob);
+    font-family: var(--ff-reg-mob);
     font-weight: var(--fw-reg-mob);
     font-size: var(--fs-welcome-msg);
     color: var(--user-black-welcome-message);
 }
 
 .welcomeTextuserName {
-    font-style: var(--ff-reg-mob);
+    font-family: var(--ff-reg-mob);
     font-size: var(--fs-welcome-msg-user-name);
     color: var(--user-blue-welcome-message-name);
 }
