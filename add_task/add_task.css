@@ -1,4 +1,10 @@
+section{
+    width: 100%;
+    max-width: 460px;
+}
+
 form {
+    margin-top: 100px;
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -24,7 +30,9 @@ form {
 .title-div input {
     padding-left: 8px;
     outline: none;
-    font-size: 30px;
+    font-size: 28px;
+    line-height: 120px;
+    font-weight: var(--fw-s-mob);
     border: none;
     border-bottom: 1px solid var(--user-grey);
 }
@@ -61,6 +69,7 @@ form {
 
 #date[type="date"]::-webkit-calendar-picker-indicator {
     background: none;
+    cursor: pointer;
     z-index: 20;
     padding: 8px;
 }
@@ -74,7 +83,7 @@ form {
 
 /* Assigned span styles */
 .assigned-div span {
-    padding: 7px 16px;
+    padding: 7px 8px;
     display: flex;
     justify-content: space-between;
     border-bottom: solid 1px var(--user-grey);
@@ -84,6 +93,10 @@ form {
     cursor: pointer;
     color: var(--reg-blue);
     font-size: 16px !important;
+}
+
+.bi-caret-down-fill{
+    margin-right: -5px;
 }
 
 /* Dropdown content styles */
@@ -154,10 +167,34 @@ form {
     align-items: center;
 }
 
+.category-div{
+    position: relative;
+    justify-content: space-between;
+}
+
+.category-div select{
+    padding: 7px 8px;
+    font-size: 16px;
+    border: none;
+    appearance: none;
+    border-bottom: 1px solid var(--user-grey);
+}
+
+.icon-conatiner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
 .prio-values span {
     cursor: pointer;
     border-radius: 12px;
     display: flex;
+    width: 100px;
+    height: 50px;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
@@ -182,4 +219,11 @@ form {
 
 .prio-values span:hover {
     background-color: lightgray;
+}
+
+
+/* There is the responsiveness for the Medium screen */
+
+@media only screen and (min-width: 641px) and (max-width: 1007px) {
+
 }
