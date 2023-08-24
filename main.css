@@ -4,15 +4,47 @@
 
 :root {
     /* using-example:  color: var(--standard)*/
-    --standard: rgb(69, 137, 255);
-    --ff-letter: "open-sans", sans-serif;    
-    --ff-base: "inter-regular", sans-serif;
-    --fw-letter: 400;
-    --fs-letter: 18px;
-    --fw-regular: 500;
-    --fw-bold: 700;
+
+    /* --------- COLORS --------------*/
+    --reg-blue: #4589ff;
+    --mail-blue: #adcbff;
+    --light-grey: #e7e7e7; /* for buttons and descriptions*/
+    --user-grey:  #d1d1d1; /* also for lines*/
+    --dark-grey: #8992a4; /* icon-color in footer*/
+    --user-orange: #ff7a00;
+    --user-lila: #9327FF;
+    --user-blue: #6E52FF;
+    --user-rose: #FC71FF;
+    --user-yellow:#FFBB2B;
+    --user-green: #1FD7C1;
+    --user-red: #fb4746;
+    --user-turquoise: #24bee8;
+
+    /*----------- FONT STYLES -----------*/
+    /* regular font style for names in mobile*/
+    --ff-reg-mob: "open-sans", sans-serif;
+    --fw-reg-mob: 400;
+    --fs-reg-mob: 19px;
+    --lh-reg-mob: 22.8px;
+
+    /* font style for small names and letters in mobile*/
+    --ff-s-mob: "open-sans", sans-serif;
+    --fw-s-mob: 400;
+    --fs-s-mob: 18px;
+    --lh-s-mob: 21.6px;
+        
+    /* font style for email  in mobile*/
+    --ff-mail-mob: "open-sans", sans-serif;
+    --fw-mail-mob: 400;
+    --fs-mail-mob: 16px;
+    --lh-mail-mob: 19.2px;
+
+    /*font-style for names in contacts/mobile/shorts and other inter-stuff*/
+    --ff-inter: "inter-regular", sans-serif;
+    --fw-inter: 400;
+    --fs-inter: 12px;
     /*ATTENTION: not yet evaluated!*/
-    --box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
 }
 
 /*  ================
@@ -28,8 +60,4 @@
 body {
     margin: 0;
     padding: 0;
-    /* for other font-family use: var(--letter);  */
-    font-family: var(--ff-base);
-    font-weight: var(--fw-regular);
-    font-size: 16px;
 }

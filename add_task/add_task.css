@@ -1,0 +1,209 @@
+/* Reset styles and global styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "open-sans", sans-serif;
+}
+
+/* Root variables */
+:root {
+    --style-color: #D1D1D1;
+    --blue: #4589FF;
+}
+
+/* Main section */
+.add_task_section {
+    max-width: 428px;
+    margin: 100px auto 0px;
+    gap: 24px;
+    padding: 8px;
+}
+
+/* Form styles */
+form {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Div container styles */
+.add_task_section div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+}
+
+/* Title input styles */
+.title-div {
+    display: flex;
+    padding: 7px 16px;
+    gap: 8px;
+}
+
+.title-div input {
+    padding-left: 8px;
+    outline: none;
+    font-size: 30px;
+    border: none;
+    border-bottom: 1px solid var(--style-color);
+}
+
+.title-div input::placeholder {
+    color: var(--style-color);
+}
+
+/* Description styles */
+.description {
+    height: 80px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border: 2px solid var(--style-color);
+    padding: 12px;
+    padding-bottom: 40px;
+}
+
+/* Date input styles */
+.date-div {
+    position: relative;
+    padding: 0 !important;
+}
+
+#date {
+    height: 100%;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--style-color);
+}
+
+#date[type="date"]::-webkit-calendar-picker-indicator {
+    background: none;
+    z-index: 20;
+    padding: 8px;
+}
+
+.bi-calendar {
+    color: var(--blue);
+    z-index: 0;
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+}
+
+/* Assigned span styles */
+.assigned-div span {
+    padding: 7px 16px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px var(--style-color);
+}
+
+.bi {
+    cursor: pointer;
+    color: var(--blue);
+    font-size: 16px !important;
+}
+
+/* Dropdown content styles */
+.dropdown-content {
+    height: 100px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Scrollbar styles */
+.dropdown-content::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background: #969696;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb:active {
+    background: #bfbfbf;
+}
+
+/* Options styles */
+.options {
+    cursor: pointer;
+    padding: 5px !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options:hover {
+    background-color: lightgray;
+}
+
+/* Profile styles */
+.profile {
+    display: flex !important;
+    width: 30px;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 30px;
+    border-radius: 50%;
+    padding: 3px !important;
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+/* Hidden class */
+.d-none {
+    display: none !important;
+}
+
+/* Priority values styles */
+.prio-values {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prio-values span {
+    cursor: pointer;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    box-shadow: 1px 6px 24px 0px rgba(0, 0, 0, 0.32);
+}
+
+.bi-chevron-double-up{
+    font-weight: bold;
+}
+
+.equal-sign {
+    font-size: 20px !important;
+    font-weight: bold;
+    color: #FFA800
+}
+
+.bi-chevron-double-down{
+    font-weight: bold;
+    color: #7AE229;
+}
+
+.prio-values span:hover {
+    background-color: lightgray;
+}

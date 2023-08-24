@@ -17,7 +17,7 @@ body {
     overflow: hidden;
 }
 header {
-    background-color: var(--standard);
+    background-color: var(--reg-blue);
     width: 100%; /* in mockup: 428px*/
     height: 80px;
     /*padding: 20px 25px 20px 25px;*/
@@ -40,17 +40,40 @@ main {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.add-btn {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    right: 16px;
+    bottom: 96px;
+    background-color: var(--reg-blue);
+    border-radius: 10px;
+    z-index: 20;
+    border-width: 0;
+    box-shadow: var(--shadow);
+}
+.add-btn img {
+    z-index: 21;    
 }
 footer {
-    background-color: rgb(69, 137, 255);
+    background-color: white;
     width: 100%;
     height: 80px;
     z-index: 10;
 }
+.name-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;    
+}
 .letter-box {
-    font-family: var(--ff-letter);
-    font-size: var(--fs-letter);
-    font-weight: var(--fw-letter);
+    font-family: var(--ff-s-mob);
+    font-size: var(--fs-s-mob);
+    font-weight: var(--fw-s-mob);
+    line-height: var(--lh-s-mob);
     width: 352px;
     height: 56px;
     padding: 17px 36px 17px 60px;
@@ -68,6 +91,54 @@ footer {
 .line {
     width: 352px;
     height: 1px;
-    background-color: #D1D1D1;
+    background-color: var(--line-col);
     border: 1px;
+}
+.name-frame {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.name-box {
+    width: 352px;
+    height: 77px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-bottom: 10px;
+    gap: 35px;
+    padding: 15px, 24px, 15px, 24px;
+}
+.name-ellipse {
+    position: relative;
+    left: 0;
+    color: white;
+    font-family: var(--ff-inter);
+    font-size: var(--fs-inter);
+    font-weight: var(--fw-inter);
+    line-height: var(--lh-inter);
+    background-color: gray;
+    width: 42px;
+    height: 42px;
+    border: 2px;
+    margin-left: 16px;
+    margin-right: 16px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center; 
+}
+.full-name {
+    font-family: var(--ff-reg-mob);
+    font-size: var(--fs-reg-mob);
+    font-weight: var(--fw-reg-mob);
+    line-height: var(--lh-reg-mob);
+}
+.mail {
+    font-family: var(--ff-s-mob);
+    font-size: var(--fs-s-mob);
+    font-weight: var(--fw-s-mob);
+    line-height: var(--lh-s-mob);
+    color: var(--mail-blue);
 }
