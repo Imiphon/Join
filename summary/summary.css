@@ -1,0 +1,66 @@
+.summaryContainer {
+    width: 400px;
+    height: 632px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.line {
+    height: 118px;
+    border: 2px solid #FFFFFF;
+    border-radius: 3px;
+}
+
+.clockAndDateDiv {
+    color: #FFFFFF;
+    font-family: var(--ff-s-mob);
+    height: 150px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background-color: var(--reg-blue);
+    border-radius: 30px;
+    padding: 28px 28px 28px 28px;
+}
+
+
+.clockAndTextDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.clockAndTaskNrDiv {
+    display: flex;
+    align-items: center;
+}
+
+.dateDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.date {
+    font-weight: var(--fw-700-mob);
+    font-size: var(--fs-23px-mob);
+}
+
+.deadlineText {
+    font-size: var(--fs-mail-mob);
+}
+
+.taskNrDiv {
+    font-weight: var(--fw-700-mob);
+    font-size: var(--fs-40px-mob);
+}
+
+.taskUrgentDiv {
+    font-weight: var(--fw-reg-mob);
+    font-size: var(--fs-reg-mob);
+}
