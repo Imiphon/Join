@@ -4,7 +4,14 @@ footer {
     height: 76px;
     background-color: #FFFFFF;
     padding: 0px 16px 0px 16px;
-    /* box-shadow: 0 -5px 5px -5px #0000001A; */
     box-shadow: 0 0 5px #0000001A;
     width: 100%;
+}
+
+.footerMenuContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
 }
