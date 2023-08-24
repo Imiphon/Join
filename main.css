@@ -8,14 +8,17 @@
     /* --------- COLORS --------------*/
     --reg-blue: #4589ff;
     --mail-blue: #adcbff;
-    --light-grey: #e7e7e7; /* for buttons and descriptions*/
-    --user-grey:  #d1d1d1; /* also for lines*/
-    --dark-grey: #8992a4; /* icon-color in footer*/
+    --light-grey: #e7e7e7;
+    /* for buttons and descriptions*/
+    --user-grey: #d1d1d1;
+    /* also for lines*/
+    --dark-grey: #8992a4;
+    /* icon-color in footer*/
     --user-orange: #ff7a00;
     --user-lila: #9327FF;
     --user-blue: #6E52FF;
     --user-rose: #FC71FF;
-    --user-yellow:#FFBB2B;
+    --user-yellow: #FFBB2B;
     --user-green: #1FD7C1;
     --user-red: #fb4746;
     --user-turquoise: #24bee8;
@@ -32,6 +35,12 @@
     --fs-welcome-msg-user-name: 47px;
     --fs-welcome-msg: 33px;
 
+    /* font style for small text in mobile help and co.*/
+    --ff-ss-mob: "open-sans", sans-serif;
+    --fw-ss-mob: 400;
+    --fs-ss-mob: 16px;
+    --lh-ss-mob: 19.2px;
+
     /* font style for small names and letters in mobile*/
     --ff-s-mob: "open-sans", sans-serif;
     --fw-s-mob: 400;
@@ -40,7 +49,7 @@
     --fs-40px-mob: 40px;
     --fs-s-mob: 18px;
     --lh-s-mob: 21.6px;
-        
+
     /* font style for email  in mobile*/
     --ff-mail-mob: "open-sans", sans-serif;
     --fw-mail-mob: 400;
@@ -52,7 +61,8 @@
     --fw-inter: 400;
     --fs-inter: 12px;
     /*ATTENTION: not yet evaluated!*/
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
 }
 
 /*  ================
@@ -62,8 +72,13 @@
 
 * {
     box-sizing: border-box;
-}    
-
+}
+.jblue {
+    color: var(--reg-blue);
+}
+.center {
+    text-align: center;
+}
 
 body {
     margin: 0;
