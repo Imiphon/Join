@@ -9,17 +9,18 @@
     <link rel="stylesheet" href="contStyle.css">
     <link rel="stylesheet" href="../fonts.css">
     <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../styles/footer_mobile.css">
+    <link rel="stylesheet" href="../styles/header_mobile.css">
     <script src="contScript.js"></script>
+    <script src="../templates/include-html.js"></script>
     <title>contacts</title>
 </head>
 
-<body>
+<body onload="includeHTML()">
 
     <div class="body-frame">
-
-        <header>
-            <img src="../assets/img/logo_mobile.png" alt="">
-        </header>
+        <header include-html="../templates/header.html"></header>
+<!---<header><img src="../assets/img/logo_mobile.png" alt=""></header>-->
         <main>
             <button class="add-btn" id="addBtn">
                 <img src="../assets/img/person_add.png" alt="">
@@ -137,11 +138,8 @@
                     </div>
                 </div>
     </div>
-                
-            
-
         </main>
-        <footer></footer>
+        <footer include-html="../templates/footer.html"></footer>
     </div>
 
 </body>
