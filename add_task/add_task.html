@@ -9,78 +9,87 @@
 
     <title>Add Task</title>
 </head>
-<body>
-    <header include-html="./templates/header.html">
 
-    </header>
-
-    <section class="add_task_section">
-        <form onsubmit="addTask(); return false;">
-            <div class="title-div">
-                <input type="text" id="title" class="title" placeholder="Enter a title" required>
-            </div>
-
-            <div class="description-div">
-                <b>Description</b>
-                <input type="text" id="description" class="description" placeholder="Enter Description" required>
-            </div>
-
-            <div class="date-container">
-                <b>Due date</b>
-                <div class="date-div">
-                  <input type="date" name="Date" id="date" required>
-                  <i for="date" class="bi bi-calendar"></i>
-                </div>
-               </div>
-
-
-
-                <div class="assigned-div">
-                    <span>Select contact to assign
-                        <i class="bi bi-caret-down-fill" id="caret-down" onclick="showOptions()"></i>
-                    </span>
-
-                    <div id="dropdown-options" class="dropdown-content d-none">
-                        <div class="options">
-                            <span class="profile" id="profile">KL</span>
-                            <label for="checkboc">Karwan</label>
-                            <input type="checkbox" id="checkboc" value="KL">
+<body onload="includeHTML()">
+    <header style="position: fixed; top: 0;" include-html="../templates/header.html"></header>
+    <div class="body-frame">
+         <main>
+             <!--------------- ------------------------->
+             <section class="add_task_section">
+                <form onsubmit="addTask(); return false;">
+                    <div class="title-div">
+                        <input type="text" id="title" class="title" placeholder="Enter a title" required>
+                    </div>
+        
+                    <div class="description-div">
+                        <b>Description</b>
+                        <input type="text" id="description" class="description" placeholder="Enter Description" required>
+                    </div>
+        
+                    <div class="date-container">
+                        <b>Due date</b>
+                        <div class="date-div">
+                          <input type="date" name="Date" id="date" required>
+                          <i for="date" class="bi bi-calendar"></i>
+                        </div>
+                       </div>
+        
+        
+        
+                        <div class="assigned-div">
+                            <span>Select contact to assign
+                                <i class="bi bi-caret-down-fill" id="caret-down" onclick="showOptions()"></i>
+                            </span>
+        
+                            <div id="dropdown-options" class="dropdown-content d-none">
+                                <div class="options">
+                                    <span class="profile" id="profile">KL</span>
+                                    <label for="checkboc">Karwan</label>
+                                    <input type="checkbox" id="checkboc" value="KL">
+                                </div>
+                            </div>
+                        </div>
+        
+        
+                    
+                    <div class="categoriy-div" id="categoriy-div">
+                        <b>Category</b>
+                        <select name="Select task Cate" id="category" required>
+                            <option value="design">design</option>
+                        </select>
+        
+                        <div class="icon-conatiner">
+                            <i class="bi bi-caret-down-fill"></i>
                         </div>
                     </div>
-                </div>
-
-
+        
+                    
+                    <div class="prio">
+                        <b>Prio</b>
+                        <div class="prio-values">
+                            <span>Urgent <i class="bi bi-chevron-double-up" id="bi bi-chevron-double-up"></i></span>
+                            <span>Medium  <p class="bi equal-sign" id="equal-sign">=</p></span>
+                            <span>Low <i class="bi bi-chevron-double-down" id="bi-chevron-double-down"></i> </span>
+                        </div>
+                    </div>
+        
+                    <label for="subtaks">Subtasks</label>
+                    <div>
+                        <input type="text" id="subtaks" placeholder="Add new subtask" required>  
+                        <i class="bi bi-x"></i>
+                    </div>
+                              
+                </form>
+            </section>
+ 
             
-            <div class="categoriy-div" id="categoriy-div">
-                <b>Category</b>
-                <select name="Select task Cate" id="category" required>
-                    <option value="design">design</option>
-                </select>
+         </main>
+         <footer include-html="../templates/footer.html">
+         </footer>
+     </div> 
+     <script src="add_task.js"></script>
+     <script src="../templates/include-html.js"></script>
+<body>
 
-                <div class="icon-conatiner">
-                    <i class="bi bi-caret-down-fill"></i>
-                </div>
-            </div>
 
-            
-            <div class="prio">
-                <b>Prio</b>
-                <div class="prio-values">
-                    <span>Urgent <i class="bi bi-chevron-double-up" id="bi bi-chevron-double-up"></i></span>
-                    <span>Medium  <p class="bi equal-sign" id="equal-sign">=</p></span>
-                    <span>Low <i class="bi bi-chevron-double-down" id="bi-chevron-double-down"></i> </span>
-                </div>
-            </div>
-
-            <label for="subtaks">Subtasks</label>
-            <div>
-                <input type="text" id="subtaks" placeholder="Add new subtask" required>  
-                <i class="bi bi-x"></i>
-            </div>
-                      
-        </form>
-    </section>
-
-    <script src="add_task.js"></script>
-</body>
 </html>

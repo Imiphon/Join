@@ -1,26 +1,3 @@
-/* Reset styles and global styles */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "open-sans", sans-serif;
-}
-
-/* Root variables */
-:root {
-    --style-color: #D1D1D1;
-    --blue: #4589FF;
-}
-
-/* Main section */
-.add_task_section {
-    max-width: 428px;
-    margin: 100px auto 0px;
-    gap: 24px;
-    padding: 8px;
-}
-
-/* Form styles */
 form {
     width: 100%;
     display: flex;
@@ -49,11 +26,11 @@ form {
     outline: none;
     font-size: 30px;
     border: none;
-    border-bottom: 1px solid var(--style-color);
+    border-bottom: 1px solid var(--user-grey);
 }
 
 .title-div input::placeholder {
-    color: var(--style-color);
+    color: var(--user-grey);
 }
 
 /* Description styles */
@@ -62,7 +39,7 @@ form {
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
-    border: 2px solid var(--style-color);
+    border: 2px solid var(--user-grey);
     padding: 12px;
     padding-bottom: 40px;
 }
@@ -79,7 +56,7 @@ form {
     padding-bottom: 8px;
     outline: none;
     border: none;
-    border-bottom: 1px solid var(--style-color);
+    border-bottom: 1px solid var(--user-grey);
 }
 
 #date[type="date"]::-webkit-calendar-picker-indicator {
@@ -89,7 +66,6 @@ form {
 }
 
 .bi-calendar {
-    color: var(--blue);
     z-index: 0;
     position: absolute;
     right: 5px;
@@ -101,12 +77,12 @@ form {
     padding: 7px 16px;
     display: flex;
     justify-content: space-between;
-    border-bottom: solid 1px var(--style-color);
+    border-bottom: solid 1px var(--user-grey);
 }
 
 .bi {
     cursor: pointer;
-    color: var(--blue);
+    color: var(--reg-blue);
     font-size: 16px !important;
 }
 
@@ -149,7 +125,7 @@ form {
 }
 
 .options:hover {
-    background-color: lightgray;
+    background-color: var(--user-grey);
 }
 
 /* Profile styles */
@@ -161,7 +137,7 @@ form {
     height: 30px;
     border-radius: 50%;
     padding: 3px !important;
-    background-color: #3498db;
+    background-color:var(--reg-blue);
     color: #ffffff;
 }
 
