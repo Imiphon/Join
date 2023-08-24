@@ -71,7 +71,10 @@
 
 
 * {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    font-family: var(--ff-reg-mob);
 }
 .jblue {
     color: var(--reg-blue);
@@ -93,6 +96,8 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 .body-frame {
     position: relative;
