@@ -31,6 +31,8 @@
     --fw-reg-mob: 400;
     --fs-reg-mob: 19px;
     --lh-reg-mob: 22.8px;
+
+
     --fw-welcome-msg-user-name: 700;
     --fs-welcome-msg-user-name: 47px;
     --fs-welcome-msg: 33px;
@@ -60,15 +62,16 @@
     --ff-inter: "inter-regular", sans-serif;
     --fw-inter: 400;
     --fs-inter: 12px;
-    /*ATTENTION: not yet evaluated!*/
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
+
+        /*ATTENTION: not yet evaluated!*/
+        --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
+
 }
 
 /*  ================
     General Styling 
     ================ */
-
 
 * {
     padding: 0;
@@ -84,9 +87,9 @@
 }
 
 
-/*  ================
+/*  ==========================================
     Styling for body, header, main and footer
-    ================ */
+    ========================================== */
 
 body {
     height: 100%;
@@ -144,4 +147,57 @@ footer {
     z-index: 10;
 }
 
+
+/*  ==============
+    Font Variables
+    =============== */
+
+/* regular font style for names in mobile*/
+.reg-names {
+    --ff-reg-mob: "open-sans", sans-serif;
+    --fw-reg-mob: 400;
+    --fs-reg-mob: 19px;
+    --lh-reg-mob: 22.8px;
+}
+
+.welcome {
+    --fw-welcome-msg-user-name: 700;
+    --fs-welcome-msg-user-name: 47px;
+    --fs-welcome-msg: 33px;
+}
+
+/* font style for small text in mobile help and co.*/
+.info-text {
+--ff-ss-mob: "open-sans", sans-serif;
+--fw-ss-mob: 400;
+--fs-ss-mob: 16px;
+--lh-ss-mob: 19.2px;
+}
+
+/* font style for small names and letters in mobile*/
+.s-names {
+    --ff-s-mob: "open-sans", sans-serif;
+    --fw-s-mob: 400;
+    --fw-700-mob: 700;
+    --fs-23px-mob: 23px;
+    --fs-40px-mob: 40px;
+    --fs-s-mob: 18px;
+    --lh-s-mob: 21.6px;
+}
+
+
+/* font style for email  in mobile*/
+.mail {
+--ff-mail-mob: "open-sans", sans-serif;
+--fw-mail-mob: 400;
+--fs-mail-mob: 16px;
+--lh-mail-mob: 19.2px;
+}
+
+/*font-style for names in contacts/mobile/shorts and other inter-stuff*/
+.font-inter {
+    --ff-inter: "inter-regular", sans-serif;
+    --fw-inter: 400;
+    --fs-inter: 12px;
+}
 
