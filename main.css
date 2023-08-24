@@ -35,6 +35,9 @@
     /* font style for small names and letters in mobile*/
     --ff-s-mob: "open-sans", sans-serif;
     --fw-s-mob: 400;
+    --fw-700-mob: 700;
+    --fs-23px-mob: 23px;
+    --fs-40px-mob: 40px;
     --fs-s-mob: 18px;
     --lh-s-mob: 21.6px;
         
