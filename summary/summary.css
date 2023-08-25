@@ -5,6 +5,7 @@
     margin: 0 auto;
     margin-top: 64px;
     gap: 24px;
+    user-select: none;
 }
 
 
@@ -122,5 +123,5 @@
     font-size: var(--fs-reg-mob);
     font-weight: var(--fw-reg-mob);
     color: var(--reg-blue);
-
+    margin-top: 7px;
 }
