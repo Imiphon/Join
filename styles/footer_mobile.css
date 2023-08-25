@@ -6,6 +6,7 @@ footer {
     padding: 0px 16px 0px 16px;
     box-shadow: 0 0 5px #0000001A;
     width: 100%;
+    user-select: none;
 }
 
 .footerMenuContainer {
@@ -15,3 +16,19 @@ footer {
     height: 100%;
     gap: 4px;
 }
+
+.footerMenuContainer button {
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+}
+
+/* .footerMenuContainer {
+    background-image: url('../assets/img/summary_button_footer_mobile.png');
+    background-repeat: no-repeat;
+}
+
+.btnSummaryFooterMenu:active {
+    background-image: url('../assets/img/summary_icon_default_mobile.png');
+    background-repeat: no-repeat;
+} */
