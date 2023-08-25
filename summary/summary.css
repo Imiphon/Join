@@ -80,7 +80,7 @@
     align-items: center;
     border-radius: 30px;
     background-color: var(--light-blue);
-    padding: 28px 28px 28px 28px;
+    padding: 24px;
 }
 
 .tasksToDoDivText {
