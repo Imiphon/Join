@@ -41,7 +41,7 @@
         
         
                         <div class="assigned-div">
-                            <span>Select contact to assign
+                            <span id="assigned-div">Select contact to assign
                                 <i class="bi bi-caret-down-fill" id="caret-down" onclick="showOptions()"></i>
                             </span>
         
@@ -58,14 +58,17 @@
                     
                     <div class="category-div" id="category-div">
                         <b>Category</b>
-                        <select name="Select task Cate" id="category" required>
-                            <option value="design">design</option>
-                        </select>
-        
-                        <div class="icon-conatiner">
-                            <i class="bi bi-caret-down-fill"></i>
+                        <div class="select-container">
+                            <select name="Select task Cate" id="category" required onclick="rotateIcon()">
+                                <option disabled selected>Select task Category</option>
+                                <option value="design">Design</option>
+                                <option value="programming">Programming</option>
+                                <option value="marketing">Marketing</option> <!-- Du hattest einen Tippfehler in "Marketinf" -->
+                            </select>
+                            <i class="bi bi-caret-down-fill" id="category-caret-down"></i>
                         </div>
                     </div>
+                        
         
                     
                     <div class="prio">
@@ -77,12 +80,20 @@
                         </div>
                     </div>
         
-                    <label for="subtaks">Subtasks</label>
-                    <div>
-                        <input type="text" id="subtaks" placeholder="Add new subtask" required>  
-                        <i class="bi bi-x"></i>
+                    
+                    <div style="padding: 0;" class="subtask-container" id="subtask-container">
+                        <div class="subtask" id="subtask">
+                            <b>Subtasks</b>
+                            <div class="subtask-wrapper" id="subtask-wrapper">
+                                <input onclick="openAddTask()" type="text" id="subtask-value" placeholder="Add new subtask" required>  
+                            </div>
+                        </div>
                     </div>
-                              
+
+                    <button id="create-task" class="create-task">
+                        <span>Create Task</span>
+                        <i class="bi bi-check-lg"></i>
+                    </button>
                 </form>
             </section>
  
