@@ -5,7 +5,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 25px 20px 25px;
+    padding: 20px 25px 20px 0px;
     box-shadow: 0px 5px 5px #0000001A;
 }
 
