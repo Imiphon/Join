@@ -1,10 +1,12 @@
-section{
+.add_task_section{
     width: 100%;
+    margin: 0 auto;
     max-width: 460px;
 }
 
 form {
-    margin-top: 100px;
+    padding-bottom: 40px;
+    padding-top: 40px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -281,6 +283,7 @@ form {
 }
 
 .create-task{
+    transition: all ease-in .125s;
     cursor: pointer;
     display: flex;
     padding: 12px 8px !important;
@@ -297,11 +300,15 @@ form {
 }
 
 .create-task i{
+    transition: none !important;
+    transform: none !important;
     color: white;
 }
 
 .create-task:hover{
     background-color: #5a96fc;
+    color: white;
+    transform: scale(1.05) !important;
 }
 
 
