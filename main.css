@@ -27,44 +27,45 @@
     --user-blue-welcome-message-name: #005DFF;
 
     /*----------- FONT STYLES -----------*/
-    /* regular font style for names in mobile*/
+    /* font-family OLD*/
     --ff-reg-mob: "open-sans", sans-serif;
+    --ff-ss-mob: "open-sans", sans-serif;
+    --ff-s-mob: "open-sans", sans-serif;
+    --ff-mail-mob: "open-sans", sans-serif;
+    --ff-inter: "inter-regular", sans-serif;
+   /*--- font-family NEW-------*/
+   --ff-opensans: "open-sans", sans-serif;
+   --ff-inter: "inter-regular", sans-serif;
+
+   /*---------font-wight OLD -----------*/
     --fw-reg-mob: 400;
+    --fw-ss-mob: 400;
+    --fw-welcome-msg-user-name: 700;
+    --fw-s-mob: 400;
+    --fw-700-mob: 700;
+    --fw-mail-mob: 400;
+    --fw-inter: 400;
+   --fw-700: 700;
+   --fw-400: 400;
+
+    /*---------font-style OLD -----------*/
     --fs-reg-mob: 19px;
     --fs-48px-mob: 48px;
     --fs-40px-mob: 40px;
-    --lh-reg-mob: 22.8px;
-
-
-    --fw-welcome-msg-user-name: 700;
     --fs-welcome-msg-user-name: 47px;
     --fs-welcome-msg: 33px;
-
-    /* font style for small text in mobile help and co.*/
-    --ff-ss-mob: "open-sans", sans-serif;
-    --fw-ss-mob: 400;
     --fs-ss-mob: 16px;
-    --lh-ss-mob: 19.2px;
-
-    /* font style for small names and letters in mobile*/
-    --ff-s-mob: "open-sans", sans-serif;
-    --fw-s-mob: 400;
-    --fw-700-mob: 700;
     --fs-23px-mob: 23px;
     --fs-40px-mob: 40px;
     --fs-s-mob: 18px;
-    --lh-s-mob: 21.6px;
-
-    /* font style for email  in mobile*/
-    --ff-mail-mob: "open-sans", sans-serif;
-    --fw-mail-mob: 400;
     --fs-mail-mob: 16px;
-    --lh-mail-mob: 19.2px;
-
-    /*font-style for names in contacts/mobile/shorts and other inter-stuff*/
-    --ff-inter: "inter-regular", sans-serif;
-    --fw-inter: 400;
     --fs-inter: 12px;
+
+    /* line-height OLD*/
+    --lh-s-mob: 21.6px;
+    --lh-ss-mob: 19.2px;
+    --lh-reg-mob: 22.8px;
+    --lh-mail-mob: 19.2px;
 
         /*ATTENTION: not yet evaluated!*/
         --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -90,9 +91,9 @@
 }
 
 
-/*  ==========================================
-    Styling for body, header, main and footer
-    ========================================== */
+/*  ===========================================================
+    general styles for selectors: body, header, main and footer
+    =========================================================== */
 
     body {
         height: 100%;
@@ -141,9 +142,9 @@
         align-items: center;
         flex-direction: column;
         overflow-x: hidden;
-        overflow-y: auto; /* Dies ermöglicht das Scrollen, wenn nötig */
-        padding-top: 80px; /* Gleiche Höhe wie der header, um den Inhalt sichtbar zu machen */
-        padding-bottom: 80px; /* Gleiche Höhe wie der footer, um sicherzustellen, dass der Inhalt nicht dahinter verborgen ist */
+        overflow-y: auto; 
+        padding-top: 80px; /* same height like header */
+        padding-bottom: 80px; /* same height like footer */
         padding-left: 14px;
         padding-right: 14px;
     }
@@ -160,9 +161,9 @@
     
 
 
-/*  ==============
-    Font Variables
-    =============== */
+/*  =======================
+    GENERAL CLASS-SELECTORS
+    ======================= */
 
 /* regular font style for names in mobile*/
 .reg-names {
