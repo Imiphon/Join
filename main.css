@@ -68,7 +68,7 @@
     --lh-mail-mob: 19.2px;
 
     /*ATTENTION: not yet evaluated!*/
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
 
 }
