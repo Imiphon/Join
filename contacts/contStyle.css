@@ -130,6 +130,8 @@ footer {
         line-height: 23px;
         letter-spacing: 0em;
         text-align: left;
+        display: flex;
+        justify-content: space-between;
     }
     
     .detail-name-box {
