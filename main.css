@@ -145,8 +145,6 @@
         overflow-y: auto; 
         padding-top: 80px; /* same height like header */
         padding-bottom: 80px; /* same height like footer */
-        padding-left: 14px;
-        padding-right: 14px;
     }
     
     footer {
