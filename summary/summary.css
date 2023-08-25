@@ -98,6 +98,7 @@
     display: flex;
     justify-content: space-between;
     gap: 12px;
+    font-family: var(--ff-reg-mob);
 }
 
 .taskDiv {
@@ -105,4 +106,21 @@
     height: 152px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    padding: 15px 30px 15px 30px;
+}
+
+.taskDivImgAndNr {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: var(--fs-40px-mob);
+    font-weight: var(--fw-700-mob);
+}
+
+.taskDivText {
+    text-align: center;
+    font-size: var(--fs-reg-mob);
+    font-weight: var(--fw-reg-mob);
+    color: var(--reg-blue);
+
 }
