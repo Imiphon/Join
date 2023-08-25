@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" href="../assets/img/" type="image/png">
+    <link rel="stylesheet" href="contStyle.css">
+    <link rel="stylesheet" href="../fonts.css">
+    <link rel="stylesheet" href="../main.css">
+    <link rel="stylesheet" href="../styles/footer_mobile.css">
+    <link rel="stylesheet" href="../styles/header_mobile.css">
+    <script src="contScript.js"></script>
+    <script src="../templates/include-html.js"></script>
+    <title>contacts</title>
+</head>
+
+<body onload="includeHTML()">
+
+    <div class="body-frame">
+        <header include-html="../templates/header.html"></header>
+        <main>
+            <button class="add-btn" id="addBtn">
+                <img src="../assets/img/person_add.png" alt="">
+            </button>  
+             <!----------- DETAILS FRAME-------------------------->
+             <div class="detail-frame">
+                <div class="detail-head"></div>
+                <div class="detail-name-box">
+                    <div class="detail-letters"></div>
+                    <div class="detail-name"></div>
+                </div>
+                <div class="detail-adr-box">
+                    <div class="detail-mail-box">
+                        <div class="detail-mail-head"></div>
+                        <div class="detail-mail-adr"></div>
+                    </div>
+                    <div class="detail-phon-box">
+                        <div class="detail-phon-head"></div>
+                        <div class="detail-phon-nr"></div>
+                    </div>
+                </div>
+                
+
+             </div>    
+        </main>
+        <footer include-html="../templates/footer.html">
+
+        </footer>
+    </div> <!-- Ende body-frame-->
+
+</body>
+
+</html>

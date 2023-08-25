@@ -102,3 +102,36 @@ footer {
     line-height: var(--lh-s-mob);
     color: var(--mail-blue);
 }
+
+/*=====================
+    CONTACT DETAILS
+    ====================*/
+
+.detail-frame {
+font-family: Open Sans;
+font-size: 23px;
+font-weight: 400;
+line-height: 28px;
+letter-spacing: 0em;
+text-align: left;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+flex-direction: column;
+}
+.detail-head {
+
+}
+.detail-name-box{
+display: flex;
+}
+.detail-letters {
+
+}
+.detail-name {
+
+}
+.detail-adr-box {
+
+}
+/*email & number = */
