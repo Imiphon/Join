@@ -34,30 +34,53 @@ function showSubmenuMobile() {
 
 
 // ********************************************************************************
-// ******************* Change footer Icon when clicked ****************************
+// ********* This logic changes footer menu icons when clicked ********************
 // ********************************************************************************
-let summaryIconClicked = false;
-let addTaskIconClicked = false;
+let summaryBtnNotClicked = false;
+let addTaskBtnNotClicked = true;
+let contactsBtnNotClicked = true;
+let boardBtnNotClicked = true;
 
 
 function showSummary() {
     let imgSummaryFooterMenu = document.getElementById("imgSummaryFooterMenu");
-    if (summaryIconClicked) {
+    if (summaryBtnNotClicked) {
         imgSummaryFooterMenu.src = "../assets/img/summary_button_footer_mobile.png";
     } else {
         imgSummaryFooterMenu.src = "../assets/img/summary_icon_default_mobile.png";
     }
-    summaryIconClicked = !summaryIconClicked;
+    summaryBtnNotClicked = !summaryBtnNotClicked;
 }
 
 function showAddTask() {
     let imgAddTaskFooterMenu = document.getElementById("imgAddTaskFooterMenu");
-    if (addTaskIconClicked) {
+    if (addTaskBtnNotClicked) {
         imgAddTaskFooterMenu.src = "../assets/img/add-task_clicked_btn_footer_mobile.png";
     } else {
         imgAddTaskFooterMenu.src = "../assets/img/add_task_default_btn_footer_mobile.png";
     }
-    addTaskIconClicked = !addTaskIconClicked;  
+    addTaskBtnNotClicked = !addTaskBtnNotClicked;  
+}
+
+function showContacts() {
+    let imgContactsFooterMenu = document.getElementById("imgContactsFooterMenu");
+    if (contactsBtnNotClicked) {
+        imgContactsFooterMenu.src = "../assets/img/contacts_clicked_btn_footer_mobile.png";
+    } else {
+        imgContactsFooterMenu.src = "../assets/img/contacts_button_footer_mobile.png";
+    }
+    contactsBtnNotClicked = !contactsBtnNotClicked;
+}
+
+
+function showBoard() {
+    let imgBoardFooterMenu = document.getElementById("imgBoardFooterMenu");
+    if (boardBtnNotClicked) {
+        imgBoardFooterMenu.src = "../assets/img/board_clicked_btn_footer_mobile.png";
+    } else {
+        imgBoardFooterMenu.src = "../assets/img/board_button_footer_mobile.png";
+    }
+    boardBtnNotClicked = !boardBtnNotClicked;
 }
 // ********************************************************************************
 // ********************************************************************************
