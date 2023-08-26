@@ -11,7 +11,6 @@
 
 
 .clockAndDateDiv {
-    /* width: 100%; */
     color: #FFFFFF;
     font-family: var(--ff-s-mob);
     height: 150px;
@@ -21,6 +20,9 @@
     background-color: var(--reg-blue);
     border-radius: 30px;
     padding: 24px 24px 24px 24px;
+    transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+    cursor: pointer;
+    border: none;
 }
 
 .lineClockAndDateDiv {
@@ -69,8 +71,8 @@
 }
 
 
-
 /******************************** Task To-do **************************************/
+/*********************************************************************************/
 
 .tasksToDoDiv {
     font-family: var(--ff-reg-mob);
@@ -81,6 +83,9 @@
     border-radius: 30px;
     background-color: var(--light-blue);
     padding: 24px;
+    transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+    cursor: pointer;
+    border: none;
 }
 
 .tasksToDoDivText {
@@ -101,6 +106,7 @@
     justify-content: space-between;
     gap: 12px;
     font-family: var(--ff-reg-mob);
+    cursor: pointer;
 }
 
 .tasksDivNr {
@@ -115,6 +121,8 @@
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     padding: 15px 24px 15px 24px;
+    transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+    border: none;
 }
 
 .taskDivImgAndNr {
@@ -130,4 +138,47 @@
     font-weight: var(--fw-reg-mob);
     color: var(--reg-blue);
     margin-top: 7px;
+}
+
+
+/******************* hover effects ********************/
+/******************************************************/
+
+.taskDiv:hover {
+    color: #FFFFFF;
+    background-color: var(--dark-blue);
+    border-top-left-radius: 0;
+}
+
+.taskDiv:hover .imgTaskDiv {
+    border-radius: 50%;
+    background-color: #FFFFFF;
+}
+
+.taskDiv:hover .taskDivText {
+    color: #FFFFFF;
+    background-color: var(--dark-blue);
+}
+
+
+.tasksToDoDiv:hover {
+    background-color: #FFFFFF;
+    border-top-left-radius: 0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.tasksToDoDiv:hover .tasksToDoDivNr {
+    color: var(--reg-blue);
+}
+
+.clockAndDateDiv:hover {
+    background-color: #FFFFFF;
+    border-top-left-radius: 0;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    color: var(--reg-blue);
+}
+
+
+.clockAndDateDiv:hover .lineClockAndDateDiv {
+    border: 2px solid var(--dark-blue);
 }
