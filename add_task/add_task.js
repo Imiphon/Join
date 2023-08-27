@@ -53,3 +53,11 @@ function tasksTemplate(){
         </div>
     `
 }
+
+function activeCreateTaskBtn(){
+    document.getElementById('create-task').click();
+}
+
+function activeClearTaskBtn(){
+    document.getElementById('clear-task').click();
+}

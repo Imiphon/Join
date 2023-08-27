@@ -413,7 +413,8 @@ form {
     }
 
     .form-btns{
-        display: none !important;
+        display: none;
+        pointer-events: none;
     }
 
 }
