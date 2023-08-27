@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
+    <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./fonts.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./styles/header_mobile.css">
     <script src="templates/global_arrays.js" defer></script>
 </head>
 
-    <body>
+    <body>        
         <div class="logoDivHeaderMobile">
             <img src="../assets/img/logo_mobile_blue.svg" alt="join logo">
-        </div>
-        <div class="formDiv">
-            
+        </div>            
+
+        <div class="formDiv"></div>
             <form class="login" onsubmit="login(); return false;">
                 <div class="inputDiv">
                     <h1 class="loginHeadline">Log in</h1>
@@ -40,7 +41,16 @@
                 </div>
                 <button class="loginBtn btnBlue" id="userLoginBtn">Log in</button>
                 <button class="loginBtn btnWhite" id="guestLoginBtn">Guest Log in</button>
-            </form> 
-        </div>
+            </form>
+            
+            <div class="signupDiv">
+                <p>Not a Join user?</p> 
+                <button class="loginBtn btnBlue">Sign up</button>
+            </div>
+            <div class="loginFooter">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Legal Notice</a>
+            </div>
+        </div>        
     </body>
 </html>
