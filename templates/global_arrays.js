@@ -1,4 +1,5 @@
 //this array comes from server and has always to be updated
+
 let contactArray = [
     {name:'Anton', lastName:'Anfang', mail:'anton@mail.com', tel:49179111, color:'--user-orange'},
     {name:'Ali', lastName:'Berg', mail:'ali@mail.com', tel:49176000, color:'--user-blue'},
