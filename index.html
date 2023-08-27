@@ -10,12 +10,40 @@
     <script src="templates/global_arrays.js" defer></script>
 </head>
 
+<<<<<<< HEAD
     <header include-html="./templates/header.html"></header>
 
     
 
     <!-- <aside include-html="./templates/sidebar.html"></aside> -->
 
+=======
+<body>
+    <div class="logoDivHeaderMobile">
+        <img src="../assets/img/logo_mobile_blue.svg" alt="join logo">
+    </div>
+
+    <form class="login" onsubmit="login(); return false;">
+        <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="email" placeholder="Email">
+        <div class="line"></div>
+        <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="password" placeholder="Password">
+        <div class="line"></div>
+        <div class="loginOptions">
+            <div>
+                <button class="loginBtn btnTxtBlue">Forgot my Password</button>
+            </div>
+            <div class="rememberMe">
+                <input type="checkbox" id="rememberMe"> 
+                <p>Remember me</p>
+            </div>
+        </div>
+        <button class="loginBtn btnBlue" id="userLoginBtn">Log in</button>
+        <button class="loginBtn btnWhite" id="guestLoginBtn">Guest Log in</button>
+    </form>
+
+    
+
+>>>>>>> ff8237ddeb4a9fc10c62bbb46cf6bfcb6ad30396
     <footer include-html="./templates/footer.html"></footer>
 </body>
 </html>
