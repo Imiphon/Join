@@ -19,13 +19,13 @@ function findInitalGroup() {
 
 //to check for valid user input
 function validateForm() {
-    const namePattern = /^[a-zA-Z]+\s[a-zA-Z]+$/; // Akzeptiert zwei Wörter getrennt durch ein Leerzeichen
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // Einfache Überprüfung für Emails
-    const phonePattern = /^[0-9]{10}$/; // Akzeptiert 10 Ziffern
+    let namePattern = /^[a-zA-Z]+\s[a-zA-Z]+$/; // accept two words
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // email check
+    let phonePattern = /^[0-9]{10}$/; // checked for 10 characters at the moment
 
-    const nameInput = document.getElementById('nameLastName').value;
-    const emailInput = document.getElementById('email').value;
-    const phoneInput = document.getElementById('phone').value;
+    let nameInput = document.getElementById('nameLastName').value;
+    let emailInput = document.getElementById('email').value;
+    let phoneInput = document.getElementById('phone').value;
 
     if (!namePattern.test(nameInput)) {
         alert('Bitte geben Sie einen gültigen Name und Nachname ein.');
@@ -41,7 +41,6 @@ function validateForm() {
         alert('Bitte geben Sie eine gültige Telefonnummer ein.');
         return false;
     }
-
-    // Wenn alles gültig ist:
+    // if all right:
     return true;
 }

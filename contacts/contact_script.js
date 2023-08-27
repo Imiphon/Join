@@ -137,19 +137,46 @@ function showAddContact() {
                 </div>
             </form>    
             <div class="btn-box">
-                <button onclick="submitForm()">Submit</button>
+                <button onclick="addContactToArray()">Create Contact</button>
             </div>
         </div>
     </div>
         `;
 }
 
+function addContactToArray() {  
+    if (!validateForm()) {
+        return;
+    } else {
+        let name = document.getElementById('nameLastName').value.split(' ');
+        let mail = document.getElementById('email').value;
+        let tel = parseInt(document.getElementById('phone').value);    
+        // check for TWO names
+        if (name.length !== 2) {
+            alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
+            return;
+        }
+        let preName = upperCase(name[0]);
+        let lastName = upperCase(name[1]);
+    
+        //in templates/global_arrays.js
+        contactArray.push({
+            name: preName,
+            lastName: lastName,
+            mail: mail,
+            tel: tel,
+            color: '--user-orange'
+        });
+        document.getElementById('userForm').reset();
+    } 
+    closePopup();
+    showContacts();
+}
 
-
-function addName() {
-    let inputName = document.getElementById('nameInput').value;
+function upperCase(name) {
+    let inputName = name;
     let formattedName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
-    newContact.name = formattedName;
+    return formattedName;
 }
 
 
