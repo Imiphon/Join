@@ -45,6 +45,7 @@ function showNameGroup() {
             <div class="line-box">
                 <div class="line"> </div>
             </div>
+            
         `;
 
         initialGroups[initial].forEach(person => {
