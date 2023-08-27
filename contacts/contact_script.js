@@ -20,20 +20,8 @@ function showContacts() {
     showNameGroup();
 }
 
-function findInitalGroup() {
-    initialGroups = contactArray.reduce((acc, current) => {
-        let initial = current.name[0].toUpperCase();    
-        // if key not exist as a letter in the accumulator, push it
-        if (!acc[initial]) {
-            acc[initial] = [];
-        }    
-        // push current name to acc
-        acc[initial].push(current);    
-        return acc;
-    }, {});
-}
-
 // showNameGroup with inside create initials
+
 function showNameGroup() {
     let content = document.getElementById('nameGroup'); 
     content.innerHTML = ''; 
@@ -45,7 +33,6 @@ function showNameGroup() {
             <div class="line-box">
                 <div class="line"> </div>
             </div>
-            
         `;
 
         initialGroups[initial].forEach(person => {
@@ -70,6 +57,7 @@ function showNameGroup() {
         });
     }
 }
+
 
 
 /*******************************
