@@ -33,41 +33,7 @@ function findInitalGroup() {
     }, {});
 }
 
-function showNameGroup() {
-    let content = document.getElementById('nameGroup');
-
-    for (let initial in initialGroups) {
-        let personsWithSameInitial = initialGroups[initial];
-        
-        for (let i = 0; i < personsWithSameInitial.length; i++) {
-            let person = personsWithSameInitial[i];
-            content.innerHTML += `
-            <div class="letter-box">
-                <span id="letterBox">${initial}</span>
-            </div>
-            <div class="line-box">
-                <div class="line"> </div>
-            </div>
-            <div class="name-frame">
-                <div class="name-box" onclick="contactDetails()">
-                    <div class="name-ellipse" id="initals">
-                        ${person.name[0]}${person.lastName[0]}
-                    </div>
-                    <div class="name-mail-frame">
-                        <div class="full-name">
-                            ${person.name} ${person.lastName}
-                        </div>
-                        <div class="mail" id="mail">
-                            ${person.mail}
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-        }
-    }
-}
-
-/* showNameGroup with inside create initials
+// showNameGroup with inside create initials
 function showNameGroup() {
     let content = document.getElementById('nameGroup'); 
     content.innerHTML = ''; 
@@ -103,7 +69,7 @@ function showNameGroup() {
         });
     }
 }
-*/
+
 
 /*******************************
  * FUNCTIONS FOR DETAILS
