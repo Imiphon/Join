@@ -1,6 +1,7 @@
-
-
-
+/*****************************
+ * FUNCTIONS FOR CONTACTS
+ ******************************/
+//await end of loading contacts.html
 document.addEventListener("DOMContentLoaded", function() {
     showContacts();
 });
@@ -9,18 +10,18 @@ function showContacts() {
     let content = document.querySelector('main');
     content.innerHTML = '';
     content.innerHTML += `
-        <button class="add-btn" id="addBtn" onclick="addContact()">
+        <button class="add-btn" id="addBtn" onclick="addNewContact()">
             <img src="../assets/img/person_add.png" alt="">
         </button>
         <div class="name-group" id="nameGroup">
         </div> 
     `;
-    findInitalGroup();
+    findInitalGroup(); //
     showNameGroup();
 }
 
 function findInitalGroup() {
-    initialGroups = serverArray.reduce((acc, current) => {
+    initialGroups = contactArray.reduce((acc, current) => {
         let initial = current.name[0].toUpperCase();    
         // if key not exist as a letter in the accumulator, push it
         if (!acc[initial]) {
@@ -32,6 +33,41 @@ function findInitalGroup() {
     }, {});
 }
 
+function showNameGroup() {
+    let content = document.getElementById('nameGroup');
+
+    for (let initial in initialGroups) {
+        let personsWithSameInitial = initialGroups[initial];
+        
+        for (let i = 0; i < personsWithSameInitial.length; i++) {
+            let person = personsWithSameInitial[i];
+            content.innerHTML += `
+            <div class="letter-box">
+                <span id="letterBox">${initial}</span>
+            </div>
+            <div class="line-box">
+                <div class="line"> </div>
+            </div>
+            <div class="name-frame">
+                <div class="name-box" onclick="contactDetails()">
+                    <div class="name-ellipse" id="initals">
+                        ${person.name[0]}${person.lastName[0]}
+                    </div>
+                    <div class="name-mail-frame">
+                        <div class="full-name">
+                            ${person.name} ${person.lastName}
+                        </div>
+                        <div class="mail" id="mail">
+                            ${person.mail}
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+    }
+}
+
+/* showNameGroup with inside create initials
 function showNameGroup() {
     let content = document.getElementById('nameGroup'); 
     content.innerHTML = ''; 
@@ -49,7 +85,7 @@ function showNameGroup() {
             let initials = person.name[0] + person.lastName[0];
             content.innerHTML += `
                 <div class="name-frame">
-                    <div class="name-box" onclick="nameDetails()">
+                    <div class="name-box" onclick="contactDetails()">
                         <div class="name-ellipse" id="initials">
                             ${initials}
                         </div>
@@ -67,48 +103,56 @@ function showNameGroup() {
         });
     }
 }
+*/
 
-function nameDetails() {
-    console.log('nameDetails() starts');
+/*******************************
+ * FUNCTIONS FOR DETAILS
+ ********************************/
+function contactDetails() {
+    console.log('contactDetails() starts');
 }
+
+/*************************************
+ * FUNCTIONS FOR POPUP
+ *************************************/
 
 function createPopup() {
-    let popupHTML = `
-    <div class="popup-background" id="popupBackground">
-        <div class="popup">            
-            <div class="popup-content" id="popContent">
-                
+    return new Promise((resolve) => {
+        let popupHTML = `
+        <div class="popup-background" id="popupBackground">
+            <div class="popup">            
+                <div class="popup-content" id="popContent">
+
+                </div>
             </div>
         </div>
-    </div>
-    `;
-    // Popup-HTML to doc
-    document.body.innerHTML += popupHTML;
+        `;
+        document.body.innerHTML += popupHTML;
+        let popupBg = document.getElementById('popupBackground');
+        popupBg.style.display = 'block';
+        setTimeout(() => {
+            resolve();
+        }, 0);
+    });
 }
 
-function editUser() {
-    if (!document.getElementById("popupBackground")) {
-        createPopup();
-    }
-    document.getElementById("popupBackground").style.display = "block";
-}
-function addContact() {
-    if (!document.getElementById("popupBackground")) {
-        createPopup();
-    }
-    document.getElementById("popupBackground").style.display = "block";
-}
-function closePopEdit() {
+
+function closePopup() {
     document.getElementById("popupBackground").style.display = "none";
 }
 
-function showEditor(l, name, num, adr) {
+/*************************************
+ * FUNCTIONS FOR EDIT CONTACT
+ *************************************/
+
+function showEditor() {
     let content = document.getElementById('popContent');
     content.innerHTML = '';
     content.innerHTML += `
         <div class="pop-top">                
-            <a onclick="closePopEdit()"><img src="../assets/img/close.png" alt="close"></a>
-                    
+            <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+            <span class="pop-header">Edit contact</span> 
+            <span class="pop-subtitle">Tasks are better with a team!</span>        
         </div>
         <div class="popup-circle">
 
@@ -119,3 +163,47 @@ function showEditor(l, name, num, adr) {
                 `;
     return content;
 }
+
+function editUser() {
+    if (!document.getElementById("popupBackground")) {
+        createPopup();
+    }
+    document.getElementById("popupBackground").style.display = "block";
+}
+
+/*************************************
+ * FUNCTIONS FOR NEW CONTACT
+ *************************************/
+
+// has send to global adress array
+let newContact = {};
+
+async function addNewContact() {
+    await createPopup();
+    showAddContact();
+}
+
+function showAddContact() {
+    let content = document.getElementById('popContent');
+    content.innerHTML = '';
+    content.innerHTML += `
+            <div class="pop-top">                
+                <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+                <span class="pop-header">Add contact</span> 
+                <span class="pop-subtitle">Tasks are better with a team!</span> 
+            </div>
+            <div class="popup-circle">
+
+            </div>
+            <div class="pop-bottom">
+
+            </div>
+    `;
+}
+
+function addName() {
+    let inputName = document.getElementById('nameInput').value;
+    let formattedName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
+    newContact.name = formattedName;
+}
+

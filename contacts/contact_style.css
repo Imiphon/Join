@@ -73,9 +73,9 @@ footer {
     position: relative;
     left: 0;
     color: white;
-    font-family: var(--ff-inter);
-    font-size: var(--fs-inter);
-    font-weight: var(--fw-inter);
+    font-family: "inter-regular", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
     line-height: var(--lh-inter);
     background-color: gray;
     width: 42px;
@@ -88,16 +88,16 @@ footer {
     place-items: center; 
 }
 .full-name {
-    font-family: var(--ff-reg-mob);
-    font-size: var(--fs-reg-mob);
-    font-weight: var(--fw-reg-mob);
-    line-height: var(--lh-reg-mob);
+    font-family: "open-sans", sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 22.8px;
 }
 .mail {
-    font-family: var(--ff-s-mob);
-    font-size: var(--fs-s-mob);
-    font-weight: var(--fw-s-mob);
-    line-height: var(--lh-s-mob);
+    font-family: "open-sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;
     color: var(--mail-blue);
 }
 
@@ -182,8 +182,6 @@ footer {
     /*=====================
     POPOUP SELECTORS
     ====================*/
-
-    /* Grundlegender Stil für den Popup-Hintergrund */
     .popup-background {
         display: none;
         position: fixed;
@@ -193,24 +191,21 @@ footer {
         height: 100%;
         background-color: rgba(255, 255, 255, 0.5);
         z-index: 1000;
-    }
-    
+    }    
     .popup {
         margin: 85px 30px;
         position: relative;
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 2 * 85px);
-        
-    }
-    
+        height: calc(100vh - 2 * 85px);        
+    }      
     .popup-close {
+        /*in pop-top*/  
         position: absolute;
         top: 10px;
         right: 10px;
         cursor: pointer;
-    }
-    
+    }    
     .popup-content {
         position: relative;
         height: 100%;
@@ -221,8 +216,11 @@ footer {
     }
     
     .pop-top, .pop-bottom {
+        display: flex;
         flex: 1;
-        
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .popup-circle {

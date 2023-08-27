@@ -28,45 +28,11 @@
     --user-blue-welcome-message-name: #005DFF;
 
     /*----------- FONT STYLES -----------*/
-    /* font-family OLD*/
-    --ff-reg-mob: "open-sans", sans-serif;
-    --ff-ss-mob: "open-sans", sans-serif;
-    --ff-s-mob: "open-sans", sans-serif;
-    --ff-mail-mob: "open-sans", sans-serif;
-    --ff-inter: "inter-regular", sans-serif;
+
     /*--- font-family NEW-------*/
     --ff-opensans: "open-sans", sans-serif;
     --ff-inter: "inter-regular", sans-serif;
 
-    /*---------font-wight OLD -----------*/
-    --fw-reg-mob: 400;
-    --fw-ss-mob: 400;
-    --fw-welcome-msg-user-name: 700;
-    --fw-s-mob: 400;
-    --fw-700-mob: 700;
-    --fw-mail-mob: 400;
-    --fw-inter: 400;
-    --fw-700: 700;
-    --fw-400: 400;
-
-    /*---------font-style OLD -----------*/
-    --fs-reg-mob: 19px;
-    --fs-48px-mob: 48px;
-    --fs-40px-mob: 40px;
-    --fs-welcome-msg-user-name: 47px;
-    --fs-welcome-msg: 33px;
-    --fs-ss-mob: 16px;
-    --fs-23px-mob: 23px;
-    --fs-40px-mob: 40px;
-    --fs-s-mob: 18px;
-    --fs-mail-mob: 16px;
-    --fs-inter: 12px;
-
-    /* line-height OLD*/
-    --lh-s-mob: 21.6px;
-    --lh-ss-mob: 19.2px;
-    --lh-reg-mob: 22.8px;
-    --lh-mail-mob: 19.2px;
 
     /*ATTENTION: not yet evaluated!*/
     --shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -87,25 +53,33 @@
 
 a {
     cursor: pointer;
-    transition: color 0.3s ease;    /* smooth change of color */
-    transform: 0.3s ease;    /* time to transform */
-    display: inline-block;    /* to get transform working */
+    transition: color 0.3s ease;
+    /* smooth change of color */
+    transform: 0.3s ease;
+    /* time to transform */
+    display: inline-block;
+    /* to get transform working */
 }
 
 a:hover {
-    color: var(--mail-blue); /* soft color-change */
+    color: var(--mail-blue);
+    /* soft color-change */
     transform: scale(1.1);
 }
 
 button {
     cursor: pointer;
-    transition: color 0.3s ease;    /* smooth change of color */
-    transform: 0.3s ease;    /* time to transform */
-    display: inline-block;    /* to get transform working */
+    transition: color 0.3s ease;
+    /* smooth change of color */
+    transform: 0.3s ease;
+    /* time to transform */
+    display: inline-block;
+    /* to get transform working */
 }
 
 button:hover {
-    color: rgba(255, 255, 255, 0.9);    /* soft color-change */
+    color: rgba(255, 255, 255, 0.9);
+    /* soft color-change */
     color: var(--mail-blue);
     transform: scale(1.1);
 }
@@ -196,13 +170,6 @@ footer {
     GENERAL CLASS-SELECTORS
     ======================= */
 
-/* regular font style for names in mobile*/
-.reg-names {
-    --ff-reg-mob: "open-sans", sans-serif;
-    --fw-reg-mob: 400;
-    --fs-reg-mob: 19px;
-    --lh-reg-mob: 22.8px;
-}
 
 .welcome {
     --fw-welcome-msg-user-name: 700;
@@ -210,32 +177,43 @@ footer {
     --fs-welcome-msg: 33px;
 }
 
+.pop-header {
+    font-family: "inter-regular", sans-serif;
+    font-weight: 700;
+    font-size: 47px;
+    line-height: 56px;
+}
+
+.pop-subtitle {
+    font-family: "inter-regular", sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+}
+
 /* font style for small text in mobile help and co.*/
 .info-text {
-    --ff-ss-mob: "open-sans", sans-serif;
-    --fw-ss-mob: 400;
-    --fs-ss-mob: 16px;
-    --lh-ss-mob: 19.2px;
+    font-family: "open-sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
 }
 
 /* font style for small names and letters in mobile*/
 .s-names {
-    --ff-s-mob: "open-sans", sans-serif;
-    --fw-s-mob: 400;
-    --fw-700-mob: 700;
-    --fs-23px-mob: 23px;
-    --fs-40px-mob: 40px;
-    --fs-s-mob: 18px;
-    --lh-s-mob: 21.6px;
+    font-family: "open-sans", sans-serif;
+    font-weight: 400;
+    font-style: 23px;
+    line-height: 21.6px;
 }
 
 
 /* font style for email  in mobile*/
 .mail {
-    --ff-mail-mob: "open-sans", sans-serif;
-    --fw-mail-mob: 400;
-    --fs-mail-mob: 16px;
-    --lh-mail-mob: 19.2px;
+    font-family: "open-sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
 }
 
 /*font-style for names in contacts/mobile/shorts and other inter-stuff*/
@@ -244,3 +222,51 @@ footer {
     --fw-inter: 400;
     --fs-inter: 12px;
 }
+
+/*
+OLD STUFF
+
+
+    // font-family OLD
+    --ff-reg-mob: "open-sans", sans-serif;
+    --ff-ss-mob: "open-sans", sans-serif;
+    --ff-s-mob: "open-sans", sans-serif;
+    --ff-mail-mob: "open-sans", sans-serif;
+    --ff-inter: "inter-regular", sans-serif;
+
+    /*---------font-wight OLD -----------
+    --fw-reg-mob: 400;
+    --fw-ss-mob: 400;
+    --fw-welcome-msg-user-name: 700;
+    --fw-s-mob: 400;
+    --fw-700-mob: 700;
+    --fw-mail-mob: 400;
+    --fw-inter: 400;
+    --fw-700: 700;
+    --fw-400: 400;
+
+    /*---------font-style OLD -----------
+    --fs-reg-mob: 19px;
+    --fs-48px-mob: 48px;
+    --fs-40px-mob: 40px;
+    --fs-welcome-msg-user-name: 47px;
+    --fs-welcome-msg: 33px;
+    --fs-ss-mob: 16px;
+    --fs-23px-mob: 23px;
+    --fs-40px-mob: 40px;
+    --fs-s-mob: 18px;
+    --fs-mail-mob: 16px;
+    --fs-inter: 12px;
+
+    /* line-height OLD
+    --lh-s-mob: 21.6px;
+    --lh-ss-mob: 19.2px;
+    --lh-reg-mob: 22.8px;
+    --lh-mail-mob: 19.2px;
+.reg-names {
+    font-style: var(--ff-opensans);
+    font-weight: 400px;
+    font-style: 19px;
+    line-height: 22.8px;
+}
+*/
