@@ -1,3 +1,7 @@
+/*************************************
+ * FUNCTIONS TO CREATE INITIALS (IN CIRCLE)
+ *************************************/
+
 // initialGroups are in templates/global_arrays.js
 function findInitalGroup() {
     initialGroups = contactArray.reduce((acc, current) => {
@@ -12,3 +16,31 @@ function findInitalGroup() {
     }, {});
 }
 
+/*************************************
+ * FUNCTIONS FOR POPUP IN MOBILE (IN MAIN-DIV)
+ *************************************/
+
+function createMobilePopup() {
+    return new Promise((resolve) => {
+        let popupHTML = `
+        <div class="popup-background" id="popupBackground">
+            <div class="popup">            
+                <div class="popup-content" id="popContent">
+
+                </div>
+            </div>
+        </div>
+        `;
+        document.body.innerHTML += popupHTML;
+        let popupBg = document.getElementById('popupBackground');
+        popupBg.style.display = 'block';
+        setTimeout(() => {
+            resolve();
+        }, 0);
+    });
+}
+
+
+function closePopup() {
+    document.getElementById("popupBackground").style.display = "none";
+}

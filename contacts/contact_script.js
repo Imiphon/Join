@@ -58,42 +58,11 @@ function showNameGroup() {
     }
 }
 
-
-
 /*******************************
  * FUNCTIONS FOR DETAILS
  ********************************/
 function contactDetails() {
     console.log('contactDetails() starts');
-}
-
-/*************************************
- * FUNCTIONS FOR POPUP
- *************************************/
-
-function createPopup() {
-    return new Promise((resolve) => {
-        let popupHTML = `
-        <div class="popup-background" id="popupBackground">
-            <div class="popup">            
-                <div class="popup-content" id="popContent">
-
-                </div>
-            </div>
-        </div>
-        `;
-        document.body.innerHTML += popupHTML;
-        let popupBg = document.getElementById('popupBackground');
-        popupBg.style.display = 'block';
-        setTimeout(() => {
-            resolve();
-        }, 0);
-    });
-}
-
-
-function closePopup() {
-    document.getElementById("popupBackground").style.display = "none";
 }
 
 /*************************************
@@ -121,7 +90,7 @@ function showEditor() {
 
 function editUser() {
     if (!document.getElementById("popupBackground")) {
-        createPopup();
+        createMobilePopup();
     }
     document.getElementById("popupBackground").style.display = "block";
 }
@@ -134,7 +103,7 @@ function editUser() {
 let newContact = {};
 
 async function addNewContact() {
-    await createPopup();
+    await createMobilePopup();
     showAddContact();
 }
 
