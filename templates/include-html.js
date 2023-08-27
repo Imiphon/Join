@@ -80,8 +80,6 @@ function setDefaultContentToSummary() {
 // ********************************************************************************
 async function loadHTMLContent(buttonName) {
     let contentDiv = document.getElementById("mainTagSummaryHtml");
-    console.log(buttonName);
-    console.log(contentDiv);
 
     try {
         let filePath = "";
@@ -102,15 +100,12 @@ async function loadHTMLContent(buttonName) {
                 filePath = `../templates/${buttonName}.html`;
                 break;
         }
-        console.log(filePath);
         const response = await fetch(filePath);
-        console.log(response);
         if (!response.ok) {
             throw new Error(`Failed to fetch HTML (${response.status} ${response.statusText})`);
         }
 
         const data = await response.text();
-        console.log(data);
         contentDiv.innerHTML = data;
     } catch (error) {
         console.error("Error loading HTML:", error);
