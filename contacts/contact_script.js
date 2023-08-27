@@ -2,7 +2,7 @@
  * FUNCTIONS FOR CONTACTS
  ******************************/
 //await end of loading contacts.html
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     showContacts();
 });
 
@@ -23,8 +23,8 @@ function showContacts() {
 // showNameGroup with inside create initials
 
 function showNameGroup() {
-    let content = document.getElementById('nameGroup'); 
-    content.innerHTML = ''; 
+    let content = document.getElementById('nameGroup');
+    content.innerHTML = '';
     for (let initial in initialGroups) {
         content.innerHTML += `
             <div class="letter-box">
@@ -111,19 +111,40 @@ function showAddContact() {
     let content = document.getElementById('popContent');
     content.innerHTML = '';
     content.innerHTML += `
-            <div class="pop-top">                
-                <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
-                <span class="pop-header">Add contact</span> 
-                <span class="pop-subtitle">Tasks are better with a team!</span> 
+    <div class="pop-top">
+    <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+    <span class="pop-header">Add contact</span>
+    <span class="pop-subtitle">Tasks are better with a team!</span>
+    </div>
+    
+    <div class="popup-circle">
+    </div>
+    
+    <div class="pop-bottom">
+        <div class="add-contact-box">
+            <form id="userForm">
+                <div>
+                    <label for="name">Name und Nachname:</label>
+                    <input type="text" id="nameLastName" placeholder="Name Nachname">
+                </div>    
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" placeholder="example@example.com">
+                </div>    
+                <div>
+                    <label for="phone">Telefon:</label>
+                    <input type="text" id="phone" placeholder="0123456789">
+                </div>
+            </form>    
+            <div class="btn-box">
+                <button onclick="submitForm()">Submit</button>
             </div>
-            <div class="popup-circle">
-
-            </div>
-            <div class="pop-bottom">
-
-            </div>
-    `;
+        </div>
+    </div>
+        `;
 }
+
+
 
 function addName() {
     let inputName = document.getElementById('nameInput').value;
