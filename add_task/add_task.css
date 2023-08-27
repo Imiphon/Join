@@ -5,7 +5,6 @@
 }
 
 form {
-    padding-bottom: 40px;
     padding-top: 40px;
     display: flex;
     flex-wrap: nowrap;
@@ -282,6 +281,10 @@ form {
     background-color: lightgray;
 }
 
+.second-div{
+    align-items: center;
+}
+
 .create-task{
     transition: all ease-in .125s;
     cursor: pointer;
@@ -312,8 +315,48 @@ form {
 }
 
 
+/* Media Query für kleine Bildschirme */
+@media screen and (max-width: 641px) {
+    .prio-values span{
+        height: 25px;
+        font-size: smaller;
+    }
+
+    line{
+        display: block !important;
+    }
+}
+
+
+
 /* There is the responsiveness for the Medium screen */
 
-@media only screen and (min-width: 641px) and (max-width: 1007px) {
+@media only screen and (min-width: 768px) and (max-width: 1007px) {
+    form{
+        flex-direction: row ;
+        align-items: stretch;
+        height: 100%;
+        justify-content: space-between;
+    }
 
+    .line{
+        background-color: var(--user-grey);
+        width: 100px;
+        padding: 1px !important;
+    }
+
+    footer{
+        display: none;
+    }
+
+    .second-div{
+        justify-content: space-around;
+    }
+
+    .add_task_section{
+        display: flex;
+        justify-content: center;
+        align-items: center ;
+    }
+    
 }
