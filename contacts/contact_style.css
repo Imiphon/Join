@@ -30,9 +30,9 @@ footer {
     flex-direction: column;    
 }
 .letter-box {    
-    font-size: var(--fs-s-mob);
-    font-weight: var(--fw-s-mob);
-    line-height: var(--lh-s-mob);    
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.6px;    
     height: 56px;
     padding: 17px 36px 17px 60px;
     gap: 8px;
@@ -43,14 +43,15 @@ footer {
 .line-box {
     Width: 352px;
     Height: 16px;
-    Padding: 8px, 0px, 8px, 0px;
     Gap: 10px;
 }
 .line {
     width: 352px;
     height: 1px;
-    background-color: var(--line-col);
+    background-color: var(--dark-grey);
     border: 1px;
+    margin-left: 16px;
+    margin-right: 8px;
 }
 .name-frame {
     width: 100%;
