@@ -17,7 +17,7 @@
     
     <div class="body-frame">
         <header include-html="../templates/header.html"></header>
-         <main>
+         <main class="add-task-main">
              <!--------------- ------------------------->
              <section class="add_task_section">
                 <form onsubmit="addTask(); return false;">
@@ -93,19 +93,37 @@
                             </div>
                         </div>
 
-                        <button id="create-task" class="create-task">
-                            <span>Create Task</span>
-                            <i class="bi bi-check-lg"></i>
-                        </button>
+                        
+                        <div class="btns-container form-btns">
+                            <button id="create-task" class="create-task" onclick="addAnTask()">
+                                <span>Create Task</span>
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+
+                            <button id="create-task" class="create-task clear-btn" onclick="clearAnTask()">
+                                <span>Clear</span>
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                      
                     </div>
                 </form>
-            </div>
-                    
-
             </section>
- 
-            
-         </main>
+
+            <div class="btns-container main-btns-container">
+                <button id="create-task" class="create-task" onclick="addAnTask()">
+                    <span>Create Task</span>
+                    <i class="bi bi-check-lg"></i>
+                </button>
+
+                <button id="create-task" class="create-task clear-btn" onclick="clearAnTask()">
+                    <span>Clear</span>
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+           </main>
+        </div>
+                    
          <footer include-html="../templates/footer.html">
          </footer>
      </div> 
