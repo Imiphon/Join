@@ -1,0 +1,73 @@
+body{
+    padding: 32px;
+}
+
+.login {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;   
+   gap: 21px;
+   padding: 32px;
+}
+
+.loginInput{
+    width: 80%;
+    height: 25px;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: right; 
+    background-size: 24px;       
+}
+
+.loginInput::placeholder {
+    opacity: 0.25;
+}
+
+.loginInput:focus-visible {
+    outline: unset;
+}
+
+.line{
+    background-color: rgb(220, 220, 220);
+    height: 1px;
+    width: 100%;
+}
+
+.loginOptions{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.rememberMe{
+    display: flex;
+    width: 100%;
+}
+
+.loginBtn {
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+}
+
+.btnBlue{
+    background-color: rgb(69,137,255);
+    color: white
+}
+
+.btnWhite{
+    background-color: white;
+    color: rgb(160, 168, 182);
+    border: 2px solid rgb(160, 168, 182);
+}
+
+.btnTxtBlue{
+    color: rgb(69,137,255);
+    background-color: white;
+    width: unset;
+}
+
