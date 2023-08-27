@@ -35,7 +35,7 @@
 
 
     /*ATTENTION: not yet evaluated!*/
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    --shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);;
     /* X=0, Y=4, Blur=8, Color=#000000 mit 20% Opazität */
 
 }
