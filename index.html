@@ -11,6 +11,7 @@
 </head>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <header include-html="./templates/header.html"></header>
 
     
@@ -46,4 +47,39 @@
 >>>>>>> ff8237ddeb4a9fc10c62bbb46cf6bfcb6ad30396
     <footer include-html="./templates/footer.html"></footer>
 </body>
+=======
+    <body>
+        <div class="logoDivHeaderMobile">
+            <img src="../assets/img/logo_mobile_blue.svg" alt="join logo">
+        </div>
+        <div class="formDiv">
+            
+            <form class="login" onsubmit="login(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">Log in</h1>
+                    <div class="line-blue"></div>
+                </div>                
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="email" placeholder="Email">
+                    <div class="line"></div>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="password" placeholder="Password">
+                    <div class="line"></div>
+                </div>
+                <div class="loginOptions">
+                    <div>
+                        <button class="loginBtn btnTxtBlue">Forgot my Password</button>
+                    </div>
+                    <div class="rememberMe">
+                        <input type="checkbox" id="rememberMe"> 
+                        <p>Remember me</p>
+                    </div>
+                </div>
+                <button class="loginBtn btnBlue" id="userLoginBtn">Log in</button>
+                <button class="loginBtn btnWhite" id="guestLoginBtn">Guest Log in</button>
+            </form> 
+        </div>
+    </body>
+>>>>>>> 5b0c7724103afc55fd51912b74f145620898e1a6
 </html>

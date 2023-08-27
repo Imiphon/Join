@@ -228,7 +228,7 @@ form {
     justify-content: center;
     gap: 12px;
     padding: 8px;
-    box-shadow: 1px 6px 24px 0px rgba(0, 0, 0, 0.32);
+    box-shadow: var(--shadow);
 }
 
 .prio-values span .bi{
@@ -307,7 +307,7 @@ form {
     border: none;
     outline: none;
     background-color: var(--reg-blue);
-    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.20);
+    box-shadow: var(--shadow);
     border-radius: 10px;
     font-size: larger;
     color: white;
