@@ -1,11 +1,16 @@
+.add-task-main{
+    display: flex;
+    justify-content: center;
+}
+
 .add_task_section{
     width: 100%;
+    padding-top: 50px;
     margin: 0 auto;
     max-width: 460px;
 }
 
 form {
-    padding-top: 40px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -123,22 +128,22 @@ form {
 }
 
 /* Scrollbar styles */
-.dropdown-content::-webkit-scrollbar {
+*::-webkit-scrollbar{
     width: 10px;
     height: 10px;
 }
 
-.dropdown-content::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background: #969696;
     border: 0px none #ffffff;
     border-radius: 50px;
 }
 
-.dropdown-content::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
     background: #b3b3b3;
 }
 
-.dropdown-content::-webkit-scrollbar-thumb:active {
+*::-webkit-scrollbar-thumb:active {
     background: #bfbfbf;
 }
 
@@ -285,6 +290,12 @@ form {
     align-items: center;
 }
 
+.btns-container{
+    display: flex;
+    flex-direction: row-reverse !important;
+    justify-content: center;
+}
+
 .create-task{
     transition: all ease-in .125s;
     cursor: pointer;
@@ -302,16 +313,36 @@ form {
     color: white;
 }
 
-.create-task i{
+.create-task .bi-check-lg{
     transition: none !important;
     transform: none !important;
     color: white;
 }
 
+.clear-btn{
+    background-color: white;
+    color: var(--dark-grey);
+    border: 1px solid var(--dark-grey);
+}
+
+.clear-btn .bi-x-lg{
+    color: var(--dark-grey);
+}
+
+.clear-btn:hover, .bi-x-lg:hover{
+    background-color: rgba(0, 0, 0, 0.021) !important;
+    color: black !important;
+}
+
+
 .create-task:hover{
     background-color: #5a96fc;
     color: white;
     transform: scale(1.05) !important;
+}
+
+.main-btns-container{
+    display: none ;
 }
 
 
@@ -350,6 +381,7 @@ form {
     }
 
     .second-div{
+        position: static;
         justify-content: space-around;
     }
 
@@ -359,4 +391,29 @@ form {
         align-items: center ;
     }
     
+}
+
+
+@media only screen and (min-width: 1007px){
+    .add_task_section{
+        overflow-y: scroll;
+        height: 100%;
+    }
+
+    .main-btns-container{
+        display: flex !important;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .add-task-main{
+        display: flex !important;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .form-btns{
+        display: none !important;
+    }
+
 }
