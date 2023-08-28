@@ -33,37 +33,40 @@ function showContacts() {
 function showNameGroup() {
     let content = document.getElementById('nameGroup');    
     content.innerHTML = '';
+
     for (let initial in initialGroups) {
         content.innerHTML += `
             <div class="letter-box">
-                <span id="letterBox">${initial}</span>
+                <span class="letterBox">${initial}</span>
             </div>
             <div class="line-box">
                 <div class="line"> </div>
             </div>
-        `;
-        for (let i = 0; i < contactArray.length; i++) {
-            let person = contactArray[i];
+        `; 
+
+        for (let i = 0; i < initialGroups[initial].length; i++) {
+            let person = initialGroups[initial][i];
             content.innerHTML += `
             <div class="name-frame">
-            <div class="name-box" onclick="showDetails(${i})">
-                    <div class="side-circle" id="initials">
+                <div class="name-box" onclick="showDetails(${i})">
+                    <div class="side-circle" class="initials" style="background-color: ${person.color};">
                         ${person.initials}
                     </div>
                     <div class="name-mail-frame">
                         <div class="full-name">
                             ${person.name} ${person.lastName}
                         </div>
-                        <div class="mail" id="mail">
+                        <div class="mail">
                             ${person.mail}
                         </div>
                     </div>
                 </div>
             </div>
-        `;
+            `;
         }
     }
 }
+
 
 
 function showDetails(index) {
