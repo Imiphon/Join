@@ -1,17 +1,43 @@
 body{
-    position: relative;
     flex-direction: column;
     padding: 32px;
     overflow: auto;
+    /*background-color: rgb(69,137,255);*/
 }
 
 .logoDivHeaderMobile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    height: calc(100vh - 64px);
 }
 
-.formDiv {
-    padding-top: 64px;
+.logoDivHeaderMobile img{    
+    height: 300px;
+    width: 300px;
+}
+
+.formDivLogin {
+    opacity: 0;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    padding-top: 64px;
+    justify-content: center;
+}
+
+.formDivResetPwd {
+    width: 100%;
+    display: flex;
+    padding-top: 64px;
+    justify-content: center;
+}
+
+.formDivNewUser {
+    width: 100%;
+    display: flex;
+    padding-top: 64px;
     justify-content: center;
 }
 
@@ -27,12 +53,38 @@ body{
     border-radius: 32px;   
 }
 
+.resetPwd{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+    gap: 21px;
+    padding: 32px 0;
+    box-shadow: 0px 0px 10px 3px rgba(0,0, 0, 0.08);
+    border-radius: 32px;
+    background-color: white;  
+}
+
+.newUser{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+    gap: 21px;
+    padding: 32px 0;
+    box-shadow: 0px 0px 10px 3px rgba(0,0, 0, 0.08);
+    border-radius: 32px;
+    background-color: white; 
+}
+
 .loginHeadline {
     margin: 0;
 }
 
 .line-blue{
-    margin-top: 12px;
+    margin: 12px 0;
     background-color: rgb(69,137,255);
     width: 60px;
     height: 2px;
@@ -43,6 +95,11 @@ body{
     flex-direction: column;
     align-items: center;
     width: 95%;
+    text-align: center;
+}
+
+.inputDiv p{
+    padding: 16px 32px;
 }
 
 .loginInput{
@@ -81,8 +138,32 @@ body{
     gap: 16px;
     padding-bottom: 16px;
 }
+.acceptPrivacy{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 16px;
+    padding-top: 32px;
+}
 
 .loginBtn {
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+}
+
+.resetBtn {
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    margin-top: 32px;
+}
+
+.SignUpBtn {
     width: 180px;
     height: 40px;
     border-radius: 8px;
@@ -93,12 +174,13 @@ body{
 .signupDiv{
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-top: 32px;
+    align-items: center;    
     gap: 16px;
+    margin-top: 32px;
 }
 
 .loginFooter{
+    opacity: 0;
     display: flex;
     justify-content: space-evenly;
     align-items:end;
@@ -127,8 +209,21 @@ body{
     background-color: white;
     width: unset;
 }
+
 #rememberMe {
     accent-color: rgb(69,137,255);
+}
+
+#acceptPrivacy {
+    accent-color: rgb(69,137,255);
+}
+
+.d-none{
+    display: none;
+}
+
+.d-flex{
+    display: flex;
 }
 
 @media(min-height: 800px) {
