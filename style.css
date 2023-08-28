@@ -147,6 +147,7 @@ body{
 .loginOptions{
     display: flex;
     flex-direction: column;
+    gap: 16px;
     width: 85%;
 }
 
@@ -162,6 +163,12 @@ body{
     width: 100%;
     gap: 16px;
     padding-top: 32px;
+}
+
+.loginButtons{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .loginBtn {
