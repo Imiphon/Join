@@ -2,15 +2,15 @@
 
 
 
-    document.addEventListener("DOMContentLoaded", function () {
-        let currentPage = window.location.pathname; 
+document.addEventListener("DOMContentLoaded", function () {
+    let currentPage = window.location.pathname;
 
-        if (currentPage.includes('contact_list')) {
-            showContacts();
-        } else if (currentPage.includes('contact_details')) {
-            showDetails();
-        }
-    });
+    if (currentPage.includes('contact_list')) {
+        showContacts();
+    } else if (currentPage.includes('contact_details')) {
+        showDetails();
+    }
+});
 
 
 function showContacts() {
@@ -31,51 +31,60 @@ function showContacts() {
 // showNameGroup with inside create initials
 
 function showNameGroup() {
-    let content = document.getElementById('nameGroup');    
+    let content = document.getElementById('nameGroup');
     content.innerHTML = '';
 
     for (let initial in initialGroups) {
         content.innerHTML += `
-            <div class="letter-box">
-                <span class="letterBox">${initial}</span>
-            </div>
-            <div class="line-box">
-                <div class="line"> </div>
-            </div>
-        `; 
+                <div class="letter-box">
+                    <span class="letterBox">${initial}</span>
+                </div>
+                <div class="line-box">
+                    <div class="line"> </div>
+                </div>
+            `;
 
-        for (let i = 0; i < contactArray.length; i++) {
-            let thisPerson = contactArray[i];
-            if (initialGroups[initial].includes(thisPerson)) {
-                let person = thisPerson;
-                content.innerHTML += `
-            <div class="name-frame">
-                <div class="name-box" onclick="showDetails(${i})">
-                    <div class="side-circle" class="initials" style="background-color: ${person.color};">
-                        ${person.initials}
-                    </div>
-                    <div class="name-mail-frame">
-                        <div class="full-name">
-                            ${person.name} ${person.lastName}
+        content.innerHTML += personDatas(initial);
+    }
+}
+
+function personDatas(initial) {
+    let htmlContent = '';
+
+    for (let i = 0; i < contactArray.length; i++) {
+        let thisPerson = contactArray[i];
+        if (initialGroups[initial].includes(thisPerson)) {
+            let person = thisPerson;
+            htmlContent += `
+                <div class="name-frame">
+                    <div class="name-box" onclick="showDetails(${i})">
+                        <div class="side-circle" class="initials" style="background-color: ${person.color};">
+                            ${person.initials}
                         </div>
-                        <div class="mail">
-                            ${person.mail}
+                        <div class="name-mail-frame">
+                            <div class="full-name">
+                                ${person.name} ${person.lastName}
+                            </div>
+                            <div class="mail">
+                                ${person.mail}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            `;
-            }   
+                `;
         }
     }
+
+    return htmlContent;
 }
 
 
 
 function showDetails(index) {
     let main = document.querySelector('main');
-    main.innerHTML ='';
+    main.innerHTML = '';
     let person = contactArray[index];
+    
     main.innerHTML += `
     <button class="add-btn" id="addBtn" onclick="editUser()">
                 <img src="../assets/img/more_btn.svg" alt="">
@@ -90,7 +99,7 @@ function showDetails(index) {
 
                 </div>
                 <div class="detail-name-box">
-                    <div class="detail-ellipse">
+                    <div class="detail-ellipse" style="background-color: ${person.color}">
                         ${person.initials}
                     </div>
                     <div class="detail-name">
