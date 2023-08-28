@@ -14,7 +14,7 @@
     <div class="logoDivHeaderMobile">
         <img src="./assets/img/logo_mobile_blue.svg" alt="join logo">
     </div>
-    <div class="formDiv"></div>
+    <div class="formDivLogin d-none">
         <form class="login" onsubmit="login(); return false;">
             <div class="inputDiv">
                 <h1 class="loginHeadline">Log in</h1>
@@ -30,7 +30,7 @@
             </div>
             <div class="loginOptions">
                 <div>
-                    <button class="loginBtn btnTxtBlue">Forgot my password</button>
+                    <button onclick="openForgotPwd()" class="loginBtn btnTxtBlue">Forgot my password</button>
                 </div>
                 <div class="rememberMe">
                     <input type="checkbox" id="rememberMe"> 
@@ -40,13 +40,78 @@
             <button class="loginBtn btnBlue" id="userLoginBtn">Log in</button>
             <button class="loginBtn btnWhite" id="guestLoginBtn">Guest Log in</button>
         </form>
-    </div> 
-
-    <div class="signupDiv">
-        <p>Not a Join user?</p> 
-        <button class="loginBtn btnBlue">Sign up</button>
+        <div class="signupDiv">
+            <p>Not a Join user?</p> 
+            <button class="loginBtn btnBlue">Sign up</button>
+        </div>
     </div>
-    <div class="loginFooter">
+    
+    <div class="d-none">
+        <div class="formDivResetPwd ">
+            <form class="resetPwd" onsubmit="resetPwd(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">I forgot my password</h1>
+                    <div class="line-blue"></div>
+                    <p>Don't worry! We will send you an email with the instructions to reset your password.</p>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="email" placeholder="Email">
+                    <div class="line"></div>
+                </div>
+                <button class="resetBtn btnBlue" id="userLoginBtn">Send me the email</button>
+            </form>
+        </div>
+    
+        <div class="formDivNewUser">
+            <form class="newUser" onsubmit="newUser(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">Sign up</h1>
+                    <div class="line-blue"></div>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-person.svg')" class="loginInput" required id="Name" placeholder="Name">
+                    <div class="line"></div>
+                </div>                                
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="email" placeholder="Email">
+                    <div class="line"></div>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="password" placeholder="Password">
+                    <div class="line"></div>
+                    </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="password" placeholder="Confirm Password">
+                    <div class="line"></div>
+                </div>            
+                <div class="acceptPrivacy">
+                    <input type="checkbox" id="acceptPrivacy"> 
+                    <p>I accept the Privacy policy</p>
+                </div>
+                <button class="SignUpBtn btnBlue" id="userLoginBtn">Sign up</button>
+            </form>
+        </div>
+
+        <div class="formDivResetPwd">
+            <form class="resetPwd" onsubmit="resetPwd(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">Reset your password</h1>
+                    <div class="line-blue"></div>
+                    <p>Change your account password here.</p>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="newPassword" placeholder="New Password">
+                    <div class="line"></div>
+                    </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="confirmNewPassword" placeholder="Confirm Password">
+                    <div class="line"></div>
+                </div>     
+                <button class="resetBtn btnBlue" id="userLoginBtn">Continue</button>
+            </form>
+        </div>
+    </div>
+    <div class="loginFooter d-none">
         <a href="#">Privacy Policy</a>
         <a href="#">Legal Notice</a>
     </div>               
