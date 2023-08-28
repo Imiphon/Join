@@ -3,5 +3,7 @@ git add .
 git commit -m '$*'
 git push
 
-# vor dem ersten Mal: chmod +x up.sh
-# aufruf mit: ./up.sh "Commit-Nachricht"
+
+# der Ordner up.sh liegt im Ordner up
+# vor dem ersten Mal: chmod +x up/up.sh
+# aufruf mit: up/up.sh "Commit-Nachricht"

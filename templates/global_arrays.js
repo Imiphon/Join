@@ -1,13 +1,13 @@
 //this array comes from server and has always to be updated
 
 let contactArray = [
-    {name:'Anton', lastName:'Anfang', mail:'anton@mail.com', tel:49179111, color:'--user-orange'},
-    {name:'Ali', lastName:'Berg', mail:'ali@mail.com', tel:49176000, color:'--user-blue'},
-    {name:'Berta', lastName:'Anfang', mail:'berta@mail.com', tel:49176000, color:'--user-yellow'},
-    {name:'Bert', lastName:'Berg', mail:'bert@mail.com', tel:49176000, color:'--user-lila'},
-    {name:'Cesar', lastName:'Anfang', mail:'cesar@mail.com', tel:49176000, color:'--user-red'},
-    {name:'Dora', lastName:'Berg', mail:'dora@mail.com', tel:49176000, color:'--user-rose'},
-    {name:'Emil', lastName:'Anfang', mail:'emil@mail.com', tel:49176000, color:'--user-turquoise'},
+    {name:'Anton', lastName:'Anfang', mail:'anton@mail.com', phone:49179111, initials:'', color:'--user-orange'},
+    {name:'Ali', lastName:'Berg', mail:'ali@mail.com', phone:49176000, initials:'', color:'--user-blue'},
+    {name:'Berta', lastName:'Anfang', mail:'berta@mail.com', phone:49176000, initials:'', color:'--user-yellow'},
+    {name:'Bert', lastName:'Berg', mail:'bert@mail.com', phone:49176000, initials:'', color:'--user-lila'},
+    {name:'Cesar', lastName:'Anfang', mail:'cesar@mail.com', phone:49176000, initials:'', color:'--user-red'},
+    {name:'Dora', lastName:'Berg', mail:'dora@mail.com', phone:49176000, initials:'', color:'--user-rose'},
+    {name:'Emil', lastName:'Anfang', mail:'emil@mail.com', phone:49176000, initials:'', color:'--user-turquoise'},
 ]
 
 let initialGroups = [];

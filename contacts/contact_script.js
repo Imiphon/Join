@@ -1,10 +1,17 @@
-/*****************************
- * FUNCTIONS FOR CONTACTS
- ******************************/
-//await end of loading contacts.html
-document.addEventListener("DOMContentLoaded", function () {
-    showContacts();
-});
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentPage = window.location.pathname; 
+
+        if (currentPage.includes('contact_list')) {
+            showContacts();
+        } else if (currentPage.includes('contact_details')) {
+            showDetails();
+        }
+    });
+
 
 function showContacts() {
     let content = document.querySelector('main');
@@ -16,14 +23,15 @@ function showContacts() {
         <div class="name-group" id="nameGroup">
         </div> 
     `;
-    findInitalGroup(); //
+    createInitalGroup(); //in script.js
+    createInitials();
     showNameGroup();
 }
 
 // showNameGroup with inside create initials
 
 function showNameGroup() {
-    let content = document.getElementById('nameGroup');
+    let content = document.getElementById('nameGroup');    
     content.innerHTML = '';
     for (let initial in initialGroups) {
         content.innerHTML += `
@@ -34,40 +42,74 @@ function showNameGroup() {
                 <div class="line"> </div>
             </div>
         `;
-
-        initialGroups[initial].forEach(person => {
-            let initials = person.name[0] + person.lastName[0];
+        for (let i = 0; i < contactArray.length; i++) {
+            let person = contactArray[i];
             content.innerHTML += `
-                <div class="name-frame">
-                    <div class="name-box" onclick="contactDetails()">
-                        <div class="name-ellipse" id="initials">
-                            ${initials}
+            <div class="name-frame">
+            <div class="name-box" onclick="showDetails(${i})">
+                    <div class="side-circle" id="initials">
+                        ${person.initials}
+                    </div>
+                    <div class="name-mail-frame">
+                        <div class="full-name">
+                            ${person.name} ${person.lastName}
                         </div>
-                        <div class="name-mail-frame">
-                            <div class="full-name">
-                                ${person.name} ${person.lastName}
-                            </div>
-                            <div class="mail" id="mail">
-                                ${person.mail}
-                            </div>
+                        <div class="mail" id="mail">
+                            ${person.mail}
                         </div>
                     </div>
                 </div>
-            `;
-        });
+            </div>
+        `;
+        }
     }
 }
 
-/*******************************
- * FUNCTIONS FOR DETAILS
- ********************************/
-function contactDetails() {
-    console.log('contactDetails() starts');
+
+function showDetails(index) {
+    let main = document.querySelector('main');
+    main.innerHTML ='';
+    let person = contactArray[index];
+    main.innerHTML += `
+    <button class="add-btn" id="addBtn" onclick="editUser()">
+                <img src="../assets/img/more_btn.svg" alt="">
+            </button>
+            <!----------- DETAILS FRAME-------------------------->
+            <div class="detail-frame">
+                <div class="detail-head">
+                    <div>Contact Informations</div>
+                    <a href="contact_list.html">
+                        <img src="../assets/img/arrow-left-line.svg" alt="back">
+                    </a>
+
+                </div>
+                <div class="detail-name-box">
+                    <div class="detail-ellipse">
+                        ${person.initials}
+                    </div>
+                    <div class="detail-name">
+                    ${person.name} ${person.lastName}
+                    </div>
+                </div>
+                <div class="adr-box">
+                    <div class="detail-description bold">
+                        Email
+                    </div>
+                    <div class="mail">
+                    ${person.mail}
+                    </div>
+                    <div class="detail-description bold">
+                        Phone
+                    </div>
+                    <div class="info-text">
+                    ${person.phone}
+                    </div>
+                </div>
+            </div><!-- End detail-frame-->
+    `;
 }
 
-/*************************************
- * FUNCTIONS FOR EDIT CONTACT
- *************************************/
+
 
 function showEditor() {
     let content = document.getElementById('popContent');
@@ -95,9 +137,7 @@ function editUser() {
     document.getElementById("popupBackground").style.display = "block";
 }
 
-/*************************************
- * FUNCTIONS FOR NEW CONTACT
- *************************************/
+
 
 // has send to global adress array
 let newContact = {};
@@ -118,6 +158,7 @@ function showAddContact() {
     </div>
     
     <div class="popup-circle">
+
     </div>
     
     <div class="pop-bottom">
@@ -144,13 +185,13 @@ function showAddContact() {
         `;
 }
 
-function addContactToArray() {  
+function addContactToArray() {
     if (!validateForm()) {
         return;
     } else {
         let name = document.getElementById('nameLastName').value.split(' ');
         let mail = document.getElementById('email').value;
-        let tel = parseInt(document.getElementById('phone').value);    
+        let tel = parseInt(document.getElementById('phone').value);
         // check for TWO names
         if (name.length !== 2) {
             alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
@@ -158,7 +199,7 @@ function addContactToArray() {
         }
         let preName = upperCase(name[0]);
         let lastName = upperCase(name[1]);
-    
+
         //in templates/global_arrays.js
         contactArray.push({
             name: preName,
@@ -168,8 +209,9 @@ function addContactToArray() {
             color: '--user-orange'
         });
         document.getElementById('userForm').reset();
-    } 
+    }
     closePopup();
+    //finally it's goin to this contact in details
     showContacts();
 }
 
@@ -180,9 +222,7 @@ function upperCase(name) {
 }
 
 
-/*************************************
- * FUNCTIONS FOR POPUP IN MOBILE (IN MAIN-DIV)
- *************************************/
+
 
 function createMobilePopup() {
     return new Promise((resolve) => {

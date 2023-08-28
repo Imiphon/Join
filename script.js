@@ -3,7 +3,7 @@
  *************************************/
 
 // initialGroups are in templates/global_arrays.js
-function findInitalGroup() {
+function createInitalGroup() {
     initialGroups = contactArray.reduce((acc, current) => {
         let initial = current.name[0].toUpperCase();    
         // if key not exist as a letter in the accumulator, push it
@@ -16,6 +16,14 @@ function findInitalGroup() {
     }, {});
 }
 
+//they will pushed in contactArrays
+function createInitials() { 
+    for (let i = 0; i < contactArray.length; i++) {
+        let person = contactArray[i];
+        let initials = person.name[0] + person.lastName[0];
+        contactArray[i].initials = initials;
+    }    
+}
 
 //to check for valid user input
 function validateForm() {
