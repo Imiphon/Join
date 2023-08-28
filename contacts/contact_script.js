@@ -2,7 +2,7 @@
  * FUNCTIONS FOR CONTACTS
  ******************************/
 //await end of loading contacts.html
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     showContacts();
 });
 
@@ -20,23 +20,11 @@ function showContacts() {
     showNameGroup();
 }
 
-function findInitalGroup() {
-    initialGroups = contactArray.reduce((acc, current) => {
-        let initial = current.name[0].toUpperCase();    
-        // if key not exist as a letter in the accumulator, push it
-        if (!acc[initial]) {
-            acc[initial] = [];
-        }    
-        // push current name to acc
-        acc[initial].push(current);    
-        return acc;
-    }, {});
-}
-
 // showNameGroup with inside create initials
+
 function showNameGroup() {
-    let content = document.getElementById('nameGroup'); 
-    content.innerHTML = ''; 
+    let content = document.getElementById('nameGroup');
+    content.innerHTML = '';
     for (let initial in initialGroups) {
         content.innerHTML += `
             <div class="letter-box">
@@ -45,7 +33,6 @@ function showNameGroup() {
             <div class="line-box">
                 <div class="line"> </div>
             </div>
-            
         `;
 
         initialGroups[initial].forEach(person => {
@@ -71,41 +58,11 @@ function showNameGroup() {
     }
 }
 
-
 /*******************************
  * FUNCTIONS FOR DETAILS
  ********************************/
 function contactDetails() {
     console.log('contactDetails() starts');
-}
-
-/*************************************
- * FUNCTIONS FOR POPUP
- *************************************/
-
-function createPopup() {
-    return new Promise((resolve) => {
-        let popupHTML = `
-        <div class="popup-background" id="popupBackground">
-            <div class="popup">            
-                <div class="popup-content" id="popContent">
-
-                </div>
-            </div>
-        </div>
-        `;
-        document.body.innerHTML += popupHTML;
-        let popupBg = document.getElementById('popupBackground');
-        popupBg.style.display = 'block';
-        setTimeout(() => {
-            resolve();
-        }, 0);
-    });
-}
-
-
-function closePopup() {
-    document.getElementById("popupBackground").style.display = "none";
 }
 
 /*************************************
@@ -133,7 +90,7 @@ function showEditor() {
 
 function editUser() {
     if (!document.getElementById("popupBackground")) {
-        createPopup();
+        createMobilePopup();
     }
     document.getElementById("popupBackground").style.display = "block";
 }
@@ -146,7 +103,7 @@ function editUser() {
 let newContact = {};
 
 async function addNewContact() {
-    await createPopup();
+    await createMobilePopup();
     showAddContact();
 }
 
@@ -154,23 +111,100 @@ function showAddContact() {
     let content = document.getElementById('popContent');
     content.innerHTML = '';
     content.innerHTML += `
-            <div class="pop-top">                
-                <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
-                <span class="pop-header">Add contact</span> 
-                <span class="pop-subtitle">Tasks are better with a team!</span> 
+    <div class="pop-top">
+    <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+    <span class="pop-header">Add contact</span>
+    <span class="pop-subtitle">Tasks are better with a team!</span>
+    </div>
+    
+    <div class="popup-circle">
+    </div>
+    
+    <div class="pop-bottom">
+        <div class="add-contact-box">
+            <form id="userForm">
+                <div>
+                    <label for="name">Name und Nachname:</label>
+                    <input type="text" id="nameLastName" placeholder="Name Nachname">
+                </div>    
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" placeholder="example@example.com">
+                </div>    
+                <div>
+                    <label for="phone">Telefon:</label>
+                    <input type="text" id="phone" placeholder="0123456789">
+                </div>
+            </form>    
+            <div class="btn-box">
+                <button onclick="addContactToArray()">Create Contact</button>
             </div>
-            <div class="popup-circle">
-
-            </div>
-            <div class="pop-bottom">
-
-            </div>
-    `;
+        </div>
+    </div>
+        `;
 }
 
-function addName() {
-    let inputName = document.getElementById('nameInput').value;
+function addContactToArray() {  
+    if (!validateForm()) {
+        return;
+    } else {
+        let name = document.getElementById('nameLastName').value.split(' ');
+        let mail = document.getElementById('email').value;
+        let tel = parseInt(document.getElementById('phone').value);    
+        // check for TWO names
+        if (name.length !== 2) {
+            alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
+            return;
+        }
+        let preName = upperCase(name[0]);
+        let lastName = upperCase(name[1]);
+    
+        //in templates/global_arrays.js
+        contactArray.push({
+            name: preName,
+            lastName: lastName,
+            mail: mail,
+            tel: tel,
+            color: '--user-orange'
+        });
+        document.getElementById('userForm').reset();
+    } 
+    closePopup();
+    showContacts();
+}
+
+function upperCase(name) {
+    let inputName = name;
     let formattedName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
-    newContact.name = formattedName;
+    return formattedName;
 }
 
+
+/*************************************
+ * FUNCTIONS FOR POPUP IN MOBILE (IN MAIN-DIV)
+ *************************************/
+
+function createMobilePopup() {
+    return new Promise((resolve) => {
+        let popupHTML = `
+        <div class="popup-background" id="popupBackground">
+            <div class="popup">            
+                <div class="popup-content" id="popContent">
+
+                </div>
+            </div>
+        </div>
+        `;
+        document.body.innerHTML += popupHTML;
+        let popupBg = document.getElementById('popupBackground');
+        popupBg.style.display = 'block';
+        setTimeout(() => {
+            resolve();
+        }, 0);
+    });
+}
+
+
+function closePopup() {
+    document.getElementById("popupBackground").style.display = "none";
+}
