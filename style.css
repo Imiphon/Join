@@ -2,29 +2,46 @@ body{
     flex-direction: column;
     padding: 32px;
     overflow: auto;
-    /*background-color: rgb(69,137,255);*/
+    animation: 450ms changeBackground ease-in-out;
 }
 
-.logoDivHeaderMobile{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@keyframes changeBackground{
+    from{background-color: rgb(69,137,255);} to{background-color: white;};    
+}
+
+.logoDivHeaderMobile{    
     width: 100%;
-    height: calc(100vh - 64px);
+    animation: 450ms moveLogo ease-in-out;
+    top: 32px;
+    left: 32px;
 }
 
-.logoDivHeaderMobile img{    
-    height: 300px;
-    width: 300px;
+@keyframes moveLogo{									
+	from{position: fixed;top:calc(100vh / 2 - 60px);left:calc(100vw / 2 - 49.5px)} to{position: fixed;top:32px;left:32px};
+}
+
+.joinLogo{
+    animation: 450ms changeLogo ease-in-out;
+    background-image: url("./assets/img/logo_mobile_blue.svg");
+    background-size: cover;
+    width: 99px;
+    height: 120px;
+}
+@keyframes changeLogo{
+    from{background-image: url("./assets/img/logo_mobile_white.svg");} to{background-image: url("./assets/img/logo_mobile_blue.svg");};
 }
 
 .formDivLogin {
-    opacity: 0;
     width: 100%;
+    animation: 450ms showForm ease-in-out;
     display: flex;
     flex-direction: column;
     padding-top: 64px;
     justify-content: center;
+}
+
+@keyframes showForm{
+    from{display:none;opacity: 0;padding-top: 184px;} to{display:flex;opacity: 1;padding-top: 184px;};
 }
 
 .formDivResetPwd {
@@ -96,6 +113,7 @@ body{
     align-items: center;
     width: 95%;
     text-align: center;
+    padding-top: 16px;
 }
 
 .inputDiv p{
@@ -180,12 +198,16 @@ body{
 }
 
 .loginFooter{
-    opacity: 0;
+    animation: 450ms showFooter ease-in-out;
     display: flex;
     justify-content: space-evenly;
     align-items:end;
     width: 100%;
     padding: 32px 0;
+}
+
+@keyframes showFooter{
+    from{display:none;opacity: 0;} to{display:flex;opacity: 1;};
 }
 
 .loginFooter a{
@@ -226,7 +248,7 @@ body{
     display: flex;
 }
 
-@media(min-height: 800px) {
+@media(min-height: 900px) {
     .loginFooter{
         position: fixed;
         bottom: 32px;
