@@ -1,4 +1,5 @@
 body{
+    position: relative;
     flex-direction: column;
     padding: 32px;
     overflow: auto;
