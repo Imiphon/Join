@@ -44,9 +44,11 @@ function showNameGroup() {
             </div>
         `; 
 
-        for (let i = 0; i < initialGroups[initial].length; i++) {
-            let person = initialGroups[initial][i];
-            content.innerHTML += `
+        for (let i = 0; i < contactArray.length; i++) {
+            let thisPerson = contactArray[i];
+            if (initialGroups[initial].includes(thisPerson)) {
+                let person = thisPerson;
+                content.innerHTML += `
             <div class="name-frame">
                 <div class="name-box" onclick="showDetails(${i})">
                     <div class="side-circle" class="initials" style="background-color: ${person.color};">
@@ -63,6 +65,7 @@ function showNameGroup() {
                 </div>
             </div>
             `;
+            }   
         }
     }
 }
