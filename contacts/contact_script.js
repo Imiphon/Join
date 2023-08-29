@@ -171,31 +171,35 @@ function showAddContact() {
     <span class="pop-subtitle">Tasks are better with a team!</span>
     </div>
     
-    <div class="popup-circle">
-
+    <div>
+    <img class="popup-circle" src="../assets/img/person_initial.png" alt="person_initial">
     </div>
     
     <div class="pop-bottom">
-        <div class="add-contact-box">
-            <form id="userForm">
-                <div>
-                    <label for="name">Name und Nachname:</label>
-                    <input type="text" id="nameLastName" placeholder="Name Nachname">
-                </div>    
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" placeholder="example@example.com">
-                </div>    
-                <div>
-                    <label for="phone">Telefon:</label>
-                    <input type="text" id="phone" placeholder="0123456789">
-                </div>
-            </form>    
-            <div class="btn-box">
-                <button onclick="addContactToArray()">Create Contact</button>
+    <div class="add-mob-form">
+        <form id="userForm">
+            <div class="add-mob-frame">
+                <input class="add-mob-input" type="text" id="nameLastName" placeholder="Name Nachname">
+                <img src="../assets/img/person_small.png" alt="name">
+            </div>    
+            <div class="add-mob-frame">
+                <input class="add-mob-input" type="text" id="email" placeholder="Email">
+                <img src="../assets/img/mail_small.png" alt="name">
+            </div>    
+            <div class="add-mob-frame">
+                <input class="add-mob-input" type="text" id="phone" placeholder="Phone">
+                <img src="../assets/img/call_small.png" alt="name">
             </div>
-        </div>
+        </form> 
     </div>
+
+    <div>
+        <button class="add-mob-btn" onclick="addContactToArray()">
+        Create Contact 
+        <img src="../assets/img/check_small.png" alt="name">
+        </button>
+    </div>
+</div>
         `;
 }
 

@@ -58,7 +58,6 @@
     margin: 0;
     box-sizing: border-box;
     font-family: "open-sans", sans-serif;
-    font-family: var(--ff-opensans);
 }
 
 a {
