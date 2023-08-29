@@ -1,4 +1,5 @@
-.add-btn {
+.add-btn,
+.more-btn {
     position: absolute;
     width: 64px;
     height: 64px;
@@ -11,11 +12,14 @@
     box-shadow: var(--shadow);
 }
 
-.add-btn img {
+.add-btn img,
+.more-btn img {
     z-index: 21;
 }
 
-.add-btn:hover {
+/*useless for mobile */
+.add-btn:hover,
+.more-btn:hover {
     background-color: var(--reg-blue);
     cursor: pointer;
 }
@@ -188,6 +192,51 @@ footer {
     display: flex;
     flex-direction: column;
 }
+
+/*=====================
+    POPOUP TOGGLE DRAWER AFTER MORE BTN
+    ====================*/
+
+#drawer {
+    position: absolute;
+    width: 120px;
+    height: 80px;
+    right: -130px;
+    bottom: 0;
+    background-color: #fff;
+    transition: right 0.3s;
+    z-index: 30;
+    border-radius: 20px 20px 0px 20px;
+    box-shadow: var(--shadow);
+}
+
+#drawer.open {
+    right: 8px;
+    bottom: 90px;
+    z-index: 30;
+    padding: 10px;
+    border-radius: 20px 20px 0px 20px;
+    box-shadow: var(--toggle-shadow);
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.drawer-item {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    cursor: pointer;
+    width: 29px;
+
+}
+
+.drawer-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+}
+
 
 /*=====================
     POPOUP SELECTORS

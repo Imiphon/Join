@@ -1,6 +1,6 @@
-
-
-
+//============================================================
+// SHOW NAME GROUP IN MOBILE
+//============================================================
 
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = window.location.pathname;
@@ -27,8 +27,6 @@ function showContacts() {
     createInitials();
     showNameGroup();
 }
-
-// showNameGroup with inside create initials
 
 function showNameGroup() {
     let content = document.getElementById('nameGroup');
@@ -78,16 +76,15 @@ function personDatas(initial) {
     return htmlContent;
 }
 
-
+//============================================================
+// SHOW DETAILS IN MOBILE
+//============================================================
 
 function showDetails(index) {
     let main = document.querySelector('main');
     main.innerHTML = '';
-    let person = contactArray[index];    
+    let person = contactArray[index];
     main.innerHTML += `
-    <button class="add-btn" id="addBtn" onclick="editUser()">
-                <img src="../assets/img/more_btn.svg" alt="">
-            </button>
             <!----------- DETAILS FRAME-------------------------->
             <div class="detail-frame">
                 <div class="detail-head">
@@ -120,10 +117,64 @@ function showDetails(index) {
                     </div>
                 </div>
             </div><!-- End detail-frame-->
+
+            <button class="more-btn" id="moreBtn" onclick="toggleDrawer()">
+                <img src="../assets/img/more_btn.svg" alt="">
+            </button>
+
+            <div id="drawer">
+              <div class="drawer-item" onclick="editMobContact()">
+                <img src="../assets/img/edit.png" alt="Edit">
+                <span>Edit</span>
+              </div>
+              <div class="drawer-item" onclick="deleteContact()">
+                <img src="../assets/img/delete.png" alt="Delete">
+                <span>Delete</span>
+              </div>
+            </div>
     `;
 }
 
+//============================================================
+// START TOGGLE DRAWER WITH MORE BTN
+//============================================================
 
+function toggleDrawer() {
+    const drawer = document.getElementById('drawer');
+    if (drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+    } else {
+        drawer.classList.add('open');
+    }
+}
+
+function closeDrawer() {
+    const drawer = document.getElementById('drawer');
+    drawer.classList.remove('open');
+}
+
+function editMobContact() {
+    console.log('Editing contact');
+    closeDrawer();
+}
+
+function deleteContact() {
+    console.log('Deleting contact');
+    closeDrawer();
+}
+
+// Schließen des Drawers, wenn man außerhalb klickt
+document.addEventListener('click', function (event) {
+    const drawer = document.getElementById('drawer');
+    const moreBtn = document.querySelector('.more-btn');
+    if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
+        closeDrawer();
+    }
+});
+
+//============================================================
+//SHOW EDITOR IN MOBILE
+//============================================================
 
 function showEditor() {
     let content = document.getElementById('popContent');
@@ -134,11 +185,36 @@ function showEditor() {
             <span class="pop-header">Edit contact</span> 
             <span class="pop-subtitle">Tasks are better with a team!</span>        
         </div>
-        <div class="popup-circle">
-
-        </div>
+        <div>
+        <img class="popup-circle" src="../assets/img/person_initial.png" alt="person_initial">
+        </div>        
         <div class="pop-bottom">
-        
+        <div class="add-mob-form">
+            <form id="userForm">
+                <div class="add-mob-frame">
+                    <input class="mob-input" type="text" id="nameLastName" placeholder="Name">
+                    <img src="../assets/img/person_small.png" alt="name">
+                </div>    
+                <div class="add-mob-frame">
+                    <input class="mob-input" type="text" id="email" placeholder="Email">
+                    <img src="../assets/img/mail_small.png" alt="name">
+                </div>    
+                <div class="add-mob-frame">
+                    <input class="mob-input" type="text" id="phone" placeholder="Phone">
+                    <img src="../assets/img/call_small.png" alt="name">
+                </div>
+            </form> 
+        </div>
+    
+        <div>
+        <button class="add-mob-btn" onclick="addContactToArray()">
+        Save
+        <img src="../assets/img/check_small.png" alt="name">
+        </button>
+            <button class="add-mob-btn" onclick="addContactToArray()">
+            Save
+            <img src="../assets/img/check_small.png" alt="name">
+            </button>
         </div>
                 `;
     return content;
@@ -151,7 +227,9 @@ function editUser() {
     document.getElementById("popupBackground").style.display = "block";
 }
 
-
+//============================================================
+// SHOW NEW CONTACT IN MOBILE 
+//============================================================
 
 // has send to global adress array
 let newContact = {};
