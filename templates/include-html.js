@@ -10,12 +10,20 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
-    setDefaultContentToSummary();
+
+    // ***** check footer btns state & display apropriate icon (clicked or default)
+    if (localStorage.getItem("allBtnState")) {
+        let state = JSON.parse(localStorage.getItem("allBtnState"));
+        updateBtnStyle(checkTrue(state));
+    }
 }
 
+function checkTrue(obj) {
+   return Object.entries(obj).filter(state => state[1])[0][0];
+}
 
 // ********************************************************************************
-// ************************************* Slidemenu ********************************
+// ****************************** header Slidemenu ********************************
 // ********************************************************************************
 let displayed = false;
 function showSubmenuMobile() {
@@ -35,21 +43,22 @@ function showSubmenuMobile() {
 
 
 // ********************************************************************************
-// This logic changes footerMenu icons when clicked & sets summary as default content
+// This logic changes footer icon btns when clicked & sets summary as default content
 // ********************************************************************************
-let buttonStates = {
-    summary: false,
-    add: false,
-    contacts: false,
-    board: false
-};
-
 function toggleButton(buttonName) {
-    for (let btn in buttonStates) {
-        if (btn !== buttonName) {
-            let img = document.getElementById(`img${btn.charAt(0).toUpperCase() + btn.slice(1)}FooterMenu`);
-            img.src = `../assets/img/${btn}_button_default.png`;
-            buttonStates[btn] = false;
+    let buttonStates = {
+        summary: false,
+        add: false,
+        contacts: false,
+        board: false
+    };
+    let newBtnState = Object.entries(buttonStates)
+    for (let btn of newBtnState) {
+        if (btn[0] !== buttonName) {
+            let img = document.getElementById(`img${btn[0].charAt(0).toUpperCase() + btn[0].slice(1)}FooterMenu`);
+            console.log(btn[0], btn);
+            img.src = `../assets/img/${btn[0]}_button_default.png`;
+            buttonStates[btn[0]] = false;
         }
     }
 
@@ -57,61 +66,64 @@ function toggleButton(buttonName) {
     
     if (!buttonStates[buttonName]) {
         imgFooterMenu.src = `../assets/img/${buttonName}_button_clicked.png`;
-        loadHTMLContent(buttonName);
+        navigateToPage(buttonName);
     } else {
         imgFooterMenu.src = `../assets/img/${buttonName}_button_default.png`;
     }
-    
     buttonStates[buttonName] = !buttonStates[buttonName];
+    localStorage.setItem("allBtnState", JSON.stringify(buttonStates));
 }
 
-function setDefaultContentToSummary() {
-    toggleButton('summary');
+
+function updateBtnStyle(buttonName) {
+    console.log(`../assets/img/${buttonName}_button_clicked.png`);
+    console.log(localStorage.getItem("allBtnState"))
+    console.log(document.getElementsByTagName("img"));
+    console.log(document.getElementById("imgSummaryFooterMenu"))
+    switch (buttonName) {
+        case 'summary':
+            document.getElementById("imgSummaryFooterMenu").src =  `../assets/img/${buttonName}_button_clicked.png`;
+            break;
+        case 'add':
+            let add = document.getElementById("imgAddFooterMenu");
+            console.log(add);
+            add.src = `../assets/img/${buttonName}_button_clicked.png`;
+            break;
+        case 'board':
+            document.getElementById("imgBoardFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+            break;
+        case 'contacts':
+            document.getElementById("imgContactsFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+            break;    
+        default:
+            break;
+    }
+    
 }
-// ********************************************************************************
-// ********************************************************************************
-// ********************************************************************************
 
 
-
-
-// ********************************************************************************
-// **************** fetches the clicked html file *********************************
-// ********************************************************************************
-async function loadHTMLContent(buttonName) {
-    let contentDiv = document.getElementById("mainTagSummaryHtml");
-
-    try {
-        let filePath = "";
-        switch (buttonName) {
-            case "contacts":
-                filePath = `../contacts/${buttonName.slice(0, -1)}_list.html`;
-                break;
-            case "summary":
-                filePath = `../summary/${buttonName}.html`; 
-                break;
-            case "add":
-                filePath = `../add_task/${buttonName}_task.html`;
-                break;
-            case "board":
-                filePath = `../board/${buttonName}.html`;
-                break;    
-            default:
-                filePath = `../templates/${buttonName}.html`;
-                break;
-        }
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch HTML (${response.status} ${response.statusText})`);
-        }
-
-        const data = await response.text();
-        contentDiv.innerHTML = data;
-    } catch (error) {
-        console.error("Error loading HTML:", error);
+function navigateToPage(buttonName) {
+    switch (buttonName) {
+        case 'summary':
+            window.location.href = '../summary/summary.html';
+            console.log('summary');
+            break;
+        case 'add':
+            window.location.href = '../add_task/add_task.html';
+            console.log('add');
+            break;
+        case 'board':
+            window.location.href = '../board/board.html';
+            console.log('board');
+            break;
+        case 'contacts':
+            window.location.href = '../contacts/contact_list.html';
+            console.log('contacts');
+            break;    
+        default:
+            break;
     }
 }
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
-
