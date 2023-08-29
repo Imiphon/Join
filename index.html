@@ -64,36 +64,6 @@
             </form>
         </div>
     
-        <div class="formDivNewUser">
-            <form class="newUser" onsubmit="newUser(); return false;">
-                <div class="inputDiv">
-                    <h1 class="loginHeadline">Sign up</h1>
-                    <div class="line-blue"></div>
-                </div>
-                <div class="inputDiv">
-                    <input style="background-image: url('./assets/img/login-person.svg')" class="loginInput" required id="Name" placeholder="Name">
-                    <div class="line"></div>
-                </div>                                
-                <div class="inputDiv">
-                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="newEmail" placeholder="Email">
-                    <div class="line"></div>
-                </div>
-                <div class="inputDiv">
-                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="newPassword" placeholder="Password">
-                    <div class="line"></div>
-                    </div>
-                <div class="inputDiv">
-                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="newConfirmPassword" placeholder="Confirm Password">
-                    <div class="line"></div>
-                </div>            
-                <div class="acceptPrivacy">
-                    <input type="checkbox" id="acceptPrivacy"> 
-                    <p>I accept the Privacy policy</p>
-                </div>
-                <button class="SignUpBtn btnBlue" id="newUserBtn">Sign up</button>
-            </form>
-        </div>
-
         <div class="formDivResetPwd">
             <form class="resetPwd" onsubmit="resetPwd(); return false;">
                 <div class="inputDiv">
@@ -113,7 +83,38 @@
             </form>
         </div>
     </div>
-    <div class="loginFooter">
+
+    <div class="formDivNewUser">
+        <form class="newUser" onsubmit="newUser(); return false;">
+            <div class="inputDiv">
+                <h1 class="loginHeadline">Sign up</h1>
+                <div class="line-blue"></div>
+            </div>
+            <div class="inputDiv">
+                <input style="background-image: url('./assets/img/login-person.svg')" class="loginInput" required id="newName" placeholder="Name">
+                <div class="line"></div>
+            </div>                                
+            <div class="inputDiv">
+                <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="newEmail" placeholder="Email">
+                <div class="line"></div>
+            </div>
+            <div class="inputDiv">
+                <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="newPassword" placeholder="Password">
+                <div class="line"></div>
+                </div>
+            <div class="inputDiv">
+                <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="newConfirmPassword" placeholder="Confirm Password">
+                <div class="line"></div>
+            </div>            
+            <div class="acceptPrivacy">
+                <input required type="checkbox" id="acceptPrivacy"> 
+                <p>I accept the Privacy policy</p>
+            </div>
+            <button class="SignUpBtn btnBlue" id="newUserBtn">Sign up</button>
+        </form>
+    </div>
+
+    <div class="loginFooter d-none">
         <a href="#">Privacy Policy</a>
         <a href="#">Legal Notice</a>
     </div>               
