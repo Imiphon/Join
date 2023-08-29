@@ -141,36 +141,36 @@ function showDetails(index) {
 
 function toggleDrawer() {
     const drawer = document.getElementById('drawer');
-    if (drawer.classList.contains('open')) {
-        drawer.classList.remove('open');
+    if (drawer.classList.toggle('open')) {
+      document.addEventListener('click', closeOnClick);
     } else {
-        drawer.classList.add('open');
+      document.removeEventListener('click', closeOnClick);
     }
-}
-
-function closeDrawer() {
-    const drawer = document.getElementById('drawer');
-    drawer.classList.remove('open');
-}
-
-function editMobContact() {
-    console.log('Editing contact');
-    closeDrawer();
-}
-
-function deleteContact() {
-    console.log('Deleting contact');
-    closeDrawer();
-}
-
-// Schließen des Drawers, wenn man außerhalb klickt
-document.addEventListener('click', function (event) {
+  }
+  
+  function closeOnClick(event) {
     const drawer = document.getElementById('drawer');
     const moreBtn = document.querySelector('.more-btn');
     if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
-        closeDrawer();
+      closeDrawer();
+      document.removeEventListener('click', closeOnClick);
     }
-});
+  }
+  
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+  }
+  
+  function editMobContact() {
+    console.log('Editing');
+    closeDrawer();
+  }
+  
+  function deleteContact() {
+    console.log('Deleting');
+    closeDrawer();
+  }
+  
 
 //============================================================
 //SHOW EDITOR IN MOBILE
