@@ -260,4 +260,15 @@ footer {
     SELECTORS FOR ADD CONTACT IN MOBILE
     ====================*/
 
+.add-contact-box {
+    width: 100%;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: Fixed (364px)
+height: 153px;
 
+left: 16px;
+gap: 15px;
+
+}

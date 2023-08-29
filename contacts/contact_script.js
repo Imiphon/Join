@@ -83,8 +83,7 @@ function personDatas(initial) {
 function showDetails(index) {
     let main = document.querySelector('main');
     main.innerHTML = '';
-    let person = contactArray[index];
-    
+    let person = contactArray[index];    
     main.innerHTML += `
     <button class="add-btn" id="addBtn" onclick="editUser()">
                 <img src="../assets/img/more_btn.svg" alt="">
