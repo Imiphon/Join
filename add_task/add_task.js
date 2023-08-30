@@ -1,4 +1,5 @@
 let prio;
+const assignedContacts = [];
 
 // Function to show or hide options
 function showOptions() {
@@ -7,6 +8,7 @@ function showOptions() {
     if (dropdown.classList.contains('d-none')) {
         // Rotate the caret icon
         document.getElementById('caret-down').style.transform = 'rotate(180deg)';
+        document.getElementById('selected-contact').classList.remove('d-none');
         // Remove 'd-none' class to show dropdown options
         dropdown.classList.remove('d-none');
         // Add a border to 'assigned-div'
@@ -20,6 +22,7 @@ function showOptions() {
         showedOptions = false;
         // Reset the caret icon rotation
         document.getElementById('caret-down').style.transform = 'rotate(0deg)';
+        document.getElementById('selected-contact').classList.add('d-none');
     }
 
     // Call the dropDownTemplates function
@@ -36,11 +39,11 @@ function dropDownTemplates() {
         <div class="options">
         <span class="profile" id="profile${index}">${showShortName(user.name, user.lastName)}</span>
         <label for="checkboc">${user.name}</label>
-        <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser(${index})">
+        <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser('${user.name}', '${user.lastName}','${user.color}')"} onclick>
         </div>
         `
         // Set a random background color for the profile
-        setRandomBackgroundColor(index);
+        setRandomBackgroundColor(user,index);
     });
 }
 
@@ -58,9 +61,9 @@ const colors = [
 ];
 
 // Function to set a random background color for a profile
-function setRandomBackgroundColor(index) {
+function setRandomBackgroundColor(user,index) {
     let userBackground = document.getElementById(`profile${index}`);
-    userBackground.style.backgroundColor = getRandomColor();
+    userBackground.style.backgroundColor = user.color;
 }
 
 // Function to get a random color from the colors array
@@ -154,5 +157,34 @@ prioBtns.forEach((btn, index)=>{
 // Function to update the value of priority
 function setPrio(value) {
     prio = value;
-    console.log(prio);
+}
+
+// Function to define the assigned user and push the name to the "assignedontacts"-Array to show them in the "selected-user" container
+
+function checkedUser(userName, userLastName, bColor){
+    assignedContacts.push(
+        {
+            'shortName': showShortName(userName, userLastName),
+            'bColor': bColor
+        });
+
+        console.log(assignedContacts)
+    showAssignedContactsInContainer();
+}
+
+
+function showAssignedContactsInContainer(){
+    selectedContainer = document.getElementById('selected-contact');
+    selectedContainer.innerHTML = "";
+
+    for(let i in assignedContacts){
+        profile = assignedContacts[i]['shortName'];
+        bColor = assignedContacts[i]['bColor']
+        selectedContainer.innerHTML += `
+        <span style="background-color:${bColor}; z-index:${i}" class="profile" id="selected-profile${i}">
+            ${profile}
+        </span>
+        `
+        
+    }
 }

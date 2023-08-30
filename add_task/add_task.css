@@ -356,6 +356,17 @@ form {
     }
 }
 
+.selected-contact{
+    display: flex;
+    flex-direction: row !important;
+    border-bottom: 1px solid var(--user-grey);
+}
+
+.selected-contact span{
+    margin: -8px;
+}
+
+
 
 
 /* There is the responsiveness for the Medium screen */
