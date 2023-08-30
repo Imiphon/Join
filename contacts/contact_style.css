@@ -373,6 +373,33 @@ position: relative;
     color: var(--light-grey);
 }
 
+.color-box {
+    width: 24px;
+    height: 24px;
+    background-color: var(--user-grey); /* standard */
+    border: 1px solid black;
+    cursor: pointer;
+    border: none;
+}
+
+.color-picker {
+    position: absolute; /* oder 'fixed' */
+    z-index: 1000; /* Über anderen Elementen */
+    width: 150px; /* Breite des Auswahlfensters */
+    display: flex;
+    flex-wrap: wrap;
+    border: none;
+    background-color: white;
+}
+
+.color-option {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border: none;
+}
+
+
 .add-mob-btn {
     width: 173px;
     height: 48px;

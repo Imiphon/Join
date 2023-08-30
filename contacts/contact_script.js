@@ -303,6 +303,7 @@ function showAddContact() {
         <form id="userForm">
             <div class="add-mob-frame">
                 <input class="add-mob-input" type="text" id="nameLastName" placeholder="Name Nachname">
+                <div id="colorBox" class="color-box" onclick="openColorPicker()"></div>
                 <img src="../assets/img/person_small.png" alt="name">
             </div>
             <div class="add-mob-frame">
@@ -331,6 +332,34 @@ function showAddContact() {
     </div>
 </div>
         `;
+}
+
+function openColorPicker() {
+    let pickerHtml = `<div id="colorPicker" class="color-picker">`;
+    for (let color in userColors) {
+        pickerHtml += `<div class="color-option" style="background-color: ${userColors[color]};" onclick="setColor('${color}')"></div>`;
+    }
+    pickerHtml += `</div>`;
+    document.body.insertAdjacentHTML('beforeend', pickerHtml);
+}
+
+function openColorPicker() {
+    let colorBox = document.getElementById('colorBox');
+    let rect = colorBox.getBoundingClientRect();
+    let pickerHtml = `<div id="colorPicker" class="color-picker" style="left:${rect.left}px; top:${rect.bottom + 5}px;">`;
+
+    for (let color in userColors) {
+        pickerHtml += `<div class="color-option" style="background-color: ${userColors[color]};" onclick="setColor('${color}')"></div>`;
+    }
+
+    pickerHtml += `</div>`;
+
+    document.body.insertAdjacentHTML('beforeend', pickerHtml);
+}
+
+function setColor(color) {
+    document.getElementById('colorBox').style.backgroundColor = userColors[color];
+    document.getElementById('colorPicker').remove();
 }
 
 function addContactToArray() {
