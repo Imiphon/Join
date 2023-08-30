@@ -1,7 +1,8 @@
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[include-html]');
-    for (let i = 0; i < includeElements.length; i++) {
-        const element = includeElements[i];
+    // for (let i = 0; i < includeElements.length; i++) {    // **** wollen wir die for of oder for loop haben ? 
+    //     const element = includeElements[i];
+    for (var element of includeElements) {
         file = element.getAttribute("include-html"); // "includes/header.html"
         let resp = await fetch(file);
         if (resp.ok) {
