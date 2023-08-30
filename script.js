@@ -33,7 +33,7 @@ function validateForm() {
     let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // email check
     let phonePattern = /^\+?\d{2,4}[-.\s]?\d{1,15}$/;
 
-    let nameInput = document.getElementById('nameLastName').value;
+    let nameInput = document.getElementById('fullName').value;
     let emailInput = document.getElementById('email').value;
     let phoneInput = document.getElementById('phone').value;
 
@@ -62,7 +62,7 @@ function validateEditForm() {
     let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // email check
     let phonePattern = /^\+?\d{2,4}[-.\s]?\d{1,15}$/;
 
-    let nameInputField = document.getElementById('nameLastName');
+    let nameInputField = document.getElementById('fullName');
     let emailInputField = document.getElementById('email');
     let phoneInputField = document.getElementById('phone');
 
