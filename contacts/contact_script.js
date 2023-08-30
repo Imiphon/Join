@@ -87,7 +87,7 @@ function showInfo(index) {
 function deleteContact(index) {
     contactArray.splice(index, 1);
     showContacts();
-    }
+}
 //============================================================
 // START TOGGLE DRAWER WITH MORE BTN
 //============================================================
@@ -103,8 +103,8 @@ function toggleDrawer() {
 
 function closeOnClick(event) {
     const drawer = document.getElementById('drawer');
-    const moreBtn = document.querySelector('.more-btn');    
-    if(drawer && moreBtn) {
+    const moreBtn = document.querySelector('.more-btn');
+    if (drawer && moreBtn) {
         if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
             closeDrawer();
             document.removeEventListener('click', closeOnClick);
@@ -141,22 +141,25 @@ function showEditContact(index) {
             <span class="pop-header">Edit contact</span> 
             <span class="pop-subtitle">Tasks are better with a team!</span>        
         </div>
-        <div>
-        <img class="popup-circle" src="../assets/img/person_initial.png" alt="person_initial">
-        </div>        
+
+        <div class="popup-circle detail-ellipse" style="background-color: ${person.color}"> 
+        ${person.initials}
+        </div>
+
+        <!-- <div> <img class="popup-circle" src="../assets/img/person_initial.png" alt="../assets/img/person_initial.png"> </div>   -->     
         <div class="pop-bottom">
         <div class="add-mob-form">
             <form id="userForm">
                 <div class="add-mob-frame">
-                    <input class="edit-mob-input" type="text" id="fullName" placeholder="${person.name + ' ' + person.lastName}">
+                    <input class="edit-mob-input" required type="text" id="fullName" placeholder="${person.name + ' ' + person.lastName}">
                     <img src="../assets/img/person_small.png" alt="name">
                 </div>    
                 <div class="add-mob-frame">
-                    <input class="edit-mob-input" type="text" id="email" placeholder="${person.mail}">
+                    <input class="edit-mob-input" required type="email" id="email" placeholder="${person.mail}">
                     <img src="../assets/img/mail_small.png" alt="name">
                 </div>    
                 <div class="add-mob-frame">
-                    <input class="edit-mob-input" type="text" id="phone" placeholder="${person.phone}">
+                    <input class="edit-mob-input" required type="tel" id="phone" placeholder="${person.phone}">
                     <img src="../assets/img/call_small.png" alt="name">
                 </div>
             </form> 
@@ -192,33 +195,32 @@ function changeEdits() {
 
 function editContactInArray(index) {
     changeEdits();
-        let name = document.getElementById('fullName').value.split(' ');
-        let mail = document.getElementById('email').value;
-        let tel = parseInt(document.getElementById('phone').value);
-        // check for TWO names
-        if (name.length !== 2) {
-            alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
-            return;
-        }
-        let preName = upperCase(name[0]);
-        let lastName = upperCase(name[1]);
+    if (!validateForm()) {
+        showEditContact(index);
+        return;
+    }
+    let name = document.getElementById('fullName').value.split(' ');
+    let mail = document.getElementById('email').value;
+    let phone = parseInt(document.getElementById('phone').value);
+    let preName = upperCase(name[0]);
+    let lastName = upperCase(name[1]);
 
-        contactArray[index].name = preName;
-        contactArray[index].lastName = lastName;
-        contactArray[index].mail = mail;
-        contactArray[index].phone = phone;
+    contactArray[index].name = preName;
+    contactArray[index].lastName = lastName;
+    contactArray[index].mail = mail;
+    contactArray[index].phone = phone;
 
-        document.getElementById('userForm').reset();
-        
+    document.getElementById('userForm').reset();
+
     closePopup();
     //finally it's goin to this contact in details
     showContacts();
 }
 
 function deleteInEditor(index) {
-contactArray.splice(index, 1);
-closePopup()
-showContacts();
+    contactArray.splice(index, 1);
+    closePopup()
+    showContacts();
 }
 //============================================================
 // ADD NEW CONTACT IN MOBILE 

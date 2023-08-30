@@ -37,17 +37,25 @@ function validateForm() {
     let emailInput = document.getElementById('email').value;
     let phoneInput = document.getElementById('phone').value;
 
-    if (!namePattern.test(nameInput)) {
+    let name = nameInput.split(' ');
+
+    if (name.length !== 2) {
+        alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
+        showEditContact(index);
+        return false;
+    } 
+
+    else if (!namePattern.test(nameInput)) {
         alert('Bitte geben Sie einen gültigen Name und Nachname ein.');
         return false;
     }
 
-    if (!emailPattern.test(emailInput)) {
+    else if (!emailPattern.test(emailInput)) {
         alert('Bitte geben Sie eine gültige Emailadresse ein.');
         return false;
     }
 
-    if (!phonePattern.test(phoneInput)) {
+    else if (!phonePattern.test(phoneInput)) {
         alert('Bitte geben Sie eine gültige Telefonnummer ein.');
         return false;
     }
