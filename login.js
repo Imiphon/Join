@@ -11,6 +11,7 @@ async function login(){
             console.log('Anmeldung erfolgreich');
         }else{
             console.log('Password falsch');
+            enableButtonLogin();
         }
     }else{
         console.log('E-Mail adresse nicht vorhanden!');
@@ -18,9 +19,71 @@ async function login(){
     
     /* 
         - Anmeldung merken?
-        - Weitergabe für add_Task / Contacts...
+        - Weitergabe Benutzer für add_Task / Contacts...
         - Meldung wenn E-Mail oder Password falsch
         - Weiterleitung auf Summary
+    */
+}
+
+async function newUser() {
+    disableButton('newUserBtn');
+    let name = getInput('newName');
+    let email = getInput('newEmail');
+    let password = getInput('newPassword');
+        
+    if(await checkUserExist(email)){
+        await registerUser(name,email,password);
+        showSignupMessage();
+        
+    }else{
+        enableButton('newUserBtn');
+        console.log('Bereits vorhanden!');
+    }
+
+    /*
+        - (Validierung der E-Mail Adresse per link?)
+        - Kontakt erstellen?
+        - Bestätigung zur anlage des Benutzers oder info schon vorhanden
+    */    
+}
+
+function guestLogin(){
+    disableButtonLogin();
+    console.log('guestLogin');
+    /*
+        - Gast Login (weiterleitung auf Summary schauen aber nicht anfassen?)
+    */
+}
+
+async function resetEmail() {
+    disableButton('resetEmailBtn');
+    let email = getInput('resetEmail');   
+    
+    if(!await checkUserExist(email)){
+        console.log('E-Mail mit Link zum zurücksetzen muss noch versendet werden!')
+        //ID = emailAdresses.indexOf(email)
+    }else{
+        console.log('E-Mail adresse nicht gefunden!');
+        enableButton('resetEmailBtn');
+    }
+    
+    /*
+    - E-Mail zum zurücksetzen versenden  
+    - E-Mail versendet anzeigen oder E-Mail adresse nicht gefunden
+    */
+}
+
+async function resetPwd(userId){
+    disableButton('resetPwdBtn');
+    let password = getInput('resetPassword');
+    
+    await loadUsers();
+    users[0]['password'] = password; //0 muss zu ID from Webadresse query
+    saveUsers();
+    console.log('password wurde geändert!');
+
+    /*
+        - Bestätigung Kennwort geändert anzeigen
     */
 }
 
@@ -50,35 +113,6 @@ function closeSignUp() {
     signUpPage.classList.add('d-none');
 }
 
-async function newUser() {
-    disableButton('newUserBtn');
-    let name = getInput('newName');
-    let email = getInput('newEmail');
-    let password = getInput('newPassword');
-        
-    if(await checkUserExist(email)){
-        await registerUser(name,email,password);
-        showSignupMessage();
-        
-    }else{
-        console.log('Bereits vorhanden!');
-    }
-
-    /*
-        - (Validierung der E-Mail Adresse per link?)
-        - Kontakt erstellen?
-        - Bestätigung zur anlage des Benutzers oder info schon vorhanden
-    */    
-}
-
-function guestLogin(){
-    disableButtonLogin();
-    console.log('guestLogin');
-    /*
-        - Gast Login (weiterleitung auf Summary schauen aber nicht anfassen?)
-    */
-}
-
 function openForgotPwd() {
     disableButtonLogin();
     let background = document.getElementById('background');
@@ -92,35 +126,17 @@ function openForgotPwd() {
     resetEmailPage.classList.remove('d-none');
 }
 
-async function resetEmail() {
-    disableButton('resetEmailBtn');
-    let email = getInput('resetEmail');   
-    
-    if(!await checkUserExist(email)){
-        console.log('E-Mail mit Link zum zurücksetzen versenden!')
-        //ID = emailAdresses.indexOf(email)
-    }else{
-        console.log('E-Mail adresse nicht gefunden!');
-    }
-    
-    /*
-    - E-Mail zum zurücksetzen versenden  
-    - E-Mail versendet anzeigen oder E-Mail adresse nicht gefunden
-    */
-}
+function closeForgotPwd() {
+    enableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let resetEmailPage = document.getElementById('formResetEmail');
+    let logInPage = document.getElementById('formLogin');
 
-async function resetPwd(userId){
-    disableButton('resetPwdBtn');
-    let password = getInput('resetPassword');
-    
-    await loadUsers();
-    users[0]['password'] = password; //0 muss zu ID from Webadresse query
-    saveUsers();
-    console.log('password wurde geändert!');
-
-    /*
-    - Bestätigung Kennwort geändert anzeigen
-    */
+    background.classList.remove('background')
+    joinLogo.classList.remove('joinLogoWhite')
+    logInPage.classList.remove('d-none');
+    resetEmailPage.classList.add('d-none');
 }
 
 function showSignupMessage(){
@@ -131,7 +147,6 @@ function showSignupMessage(){
         closeSignUp();
     },3000);
 }
-
 
 async function checkUserExist(email){
     emailAdresses = await getExistingEmailAdresses();
@@ -238,7 +253,7 @@ function validateresetPassword(){
     } else {
         resetConfirmPassword.setCustomValidity('');
     }
-  }
+}
 
 newPassword.onchange = validatenewPassword;
 newConfirmPassword.onkeyup = validatenewPassword;
