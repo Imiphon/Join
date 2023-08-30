@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentPage.includes('contact_list')) {
         showContacts();
     } else if (currentPage.includes('contact_details')) {
-        showDetails();
+        showInfo();
     }
 });
 
@@ -55,7 +55,7 @@ function personDatas(initial) {
             let person = thisPerson;
             htmlContent += `
                 <div class="name-frame">
-                    <div class="name-box" onclick="showDetails(${i})">
+                    <div class="name-box" onclick="showInfo(${i})">
                         <div class="side-circle" class="initials" style="background-color: ${person.color};">
                             ${person.initials}
                         </div>
@@ -80,13 +80,13 @@ function personDatas(initial) {
 // SHOW INFORMATIONS IN MOBILE
 //============================================================
 
-function showDetails(index) {
+function showInfo(index) {
     let main = document.querySelector('main');
     main.innerHTML = '';
     let person = contactArray[index];
     let indexNr = index; //Nr of contactArray
     main.innerHTML += `
-            <!----------- DETAILS FRAME-------------------------->
+            <!----------- INFO FRAME-------------------------->
             <div class="detail-frame">
                 <div class="detail-head">
                     <div>Contact Informations</div>
@@ -136,6 +136,10 @@ function showDetails(index) {
     `;
 }
 
+function deleteContact(index) {
+    contactArray.splice(index, 1);
+    showContacts();
+    }
 //============================================================
 // START TOGGLE DRAWER WITH MORE BTN
 //============================================================
@@ -151,22 +155,23 @@ function toggleDrawer() {
 
 function closeOnClick(event) {
     const drawer = document.getElementById('drawer');
-    const moreBtn = document.querySelector('.more-btn');
-    if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
-        closeDrawer();
+    const moreBtn = document.querySelector('.more-btn');    
+    if(drawer && moreBtn) {
+        if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
+            closeDrawer();
+            document.removeEventListener('click', closeOnClick);
+        }
+    }
+    else {
+        // Falls drawer oder moreBtn nicht existieren, dann fügen Sie hier den Code ein, der ausgeführt werden soll.
         document.removeEventListener('click', closeOnClick);
     }
 }
 
+
 function closeDrawer() {
     document.getElementById('drawer').classList.remove('open');
 }
-
-function deleteContact() {
-    console.log('Deleting');
-    closeDrawer();
-}
-
 
 //============================================================
 //EDIT CONTACT IN MOBILE
@@ -210,7 +215,7 @@ function showEditContact(index) {
         </div>
     
         <div>
-            <button class="add-mob-btn" onclick="deleteContact(${indexNr})">
+            <button class="add-mob-btn" onclick="deleteInEditor(${indexNr})">
                 Delete
                 <img src="../assets/img/check_small.png" alt="name">
             </button>
@@ -264,10 +269,15 @@ function editContactInArray(index) {
     //finally it's goin to this contact in details
     showContacts();
 }
+
+function deleteInEditor(index) {
+contactArray.splice(index, 1);
+closePopup()
+showContacts();
+}
 //============================================================
 // ADD NEW CONTACT IN MOBILE 
 //============================================================
-
 
 async function addNewContact() {
     await createMobilePopup();
