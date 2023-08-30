@@ -10,17 +10,15 @@ async function login(){
         if (password == users[emailAdresses.indexOf(email)]['password']){
             console.log('Anmeldung erfolgreich');
         }else{
-            console.log('Password falsch');
-            enableButtonLogin();
+            showPwdNotRightMessage();
         }
     }else{
-        console.log('E-Mail adresse nicht vorhanden!');
+        showEmailNotFoundMessage();
     }
-    
+    enableButtonLogin();    
     /* 
         - Anmeldung merken?
         - Weitergabe Benutzer für add_Task / Contacts...
-        - Meldung wenn E-Mail oder Password falsch
         - Weiterleitung auf Summary
     */
 }
@@ -33,17 +31,15 @@ async function newUser() {
         
     if(await checkUserExist(email)){
         await registerUser(name,email,password);
-        showSignupMessage();
-        
+        showSignUpMessage();
+        closeSignUp();        
     }else{
-        enableButton('newUserBtn');
-        console.log('Bereits vorhanden!');
-    }
-
+        showSignUpAlreadyExistMessage()
+    }    
+    enableButton('newUserBtn');
     /*
         - (Validierung der E-Mail Adresse per link?)
         - Kontakt erstellen?
-        - Bestätigung zur anlage des Benutzers oder info schon vorhanden
     */    
 }
 
@@ -60,16 +56,15 @@ async function resetEmail() {
     let email = getInput('resetEmail');   
     
     if(!await checkUserExist(email)){
-        console.log('E-Mail mit Link zum zurücksetzen muss noch versendet werden!')
         //ID = emailAdresses.indexOf(email)
+        showSendEmailMessage();
+        closeForgotPwd();
     }else{
-        console.log('E-Mail adresse nicht gefunden!');
-        enableButton('resetEmailBtn');
+        showEmailNotFoundMessage();        
     }
-    
+    enableButton('resetEmailBtn');
     /*
-    - E-Mail zum zurücksetzen versenden  
-    - E-Mail versendet anzeigen oder E-Mail adresse nicht gefunden
+    - E-Mail zum zurücksetzen versenden?  
     */
 }
 
@@ -78,13 +73,11 @@ async function resetPwd(userId){
     let password = getInput('resetPassword');
     
     await loadUsers();
-    users[0]['password'] = password; //0 muss zu ID from Webadresse query
+    users[0]['password'] = password; //0 muss zu ID from Webadresse query oder array Weblinktoken
     saveUsers();
-    console.log('password wurde geändert!');
-
-    /*
-        - Bestätigung Kennwort geändert anzeigen
-    */
+    showresetPwdMessage();
+    closeResetPwd();
+    enableButton('resetPwdBtn');
 }
 
 function openSignUp() {
@@ -93,10 +86,12 @@ function openSignUp() {
     let joinLogo = document.getElementById('joinLogo');
     let signUpPage = document.getElementById('formNewUser');
     let logInPage = document.getElementById('formLogin');
+    let loginFooter = document.getElementById('loginFooter');
 
     background.classList.add('background')
     joinLogo.classList.add('joinLogoWhite')
     logInPage.classList.add('d-none');
+    loginFooter.classList.add('loginFooterWhite');
     signUpPage.classList.remove('d-none');
 }
 
@@ -106,11 +101,14 @@ function closeSignUp() {
     let joinLogo = document.getElementById('joinLogo');
     let signUpPage = document.getElementById('formNewUser');
     let logInPage = document.getElementById('formLogin');
-        
+    let loginFooter = document.getElementById('loginFooter');
+
+    signUpPage.classList.add('d-none');
     background.classList.remove('background')
     joinLogo.classList.remove('joinLogoWhite')
     logInPage.classList.remove('d-none');
-    signUpPage.classList.add('d-none');
+    loginFooter.classList.remove('loginFooterWhite');
+    
 }
 
 function openForgotPwd() {
@@ -119,10 +117,12 @@ function openForgotPwd() {
     let joinLogo = document.getElementById('joinLogo');
     let resetEmailPage = document.getElementById('formResetEmail');
     let logInPage = document.getElementById('formLogin');
+    let loginFooter = document.getElementById('loginFooter');
 
     background.classList.add('background')
     joinLogo.classList.add('joinLogoWhite')
     logInPage.classList.add('d-none');
+    loginFooter.classList.add('d-none');
     resetEmailPage.classList.remove('d-none');
 }
 
@@ -132,20 +132,93 @@ function closeForgotPwd() {
     let joinLogo = document.getElementById('joinLogo');
     let resetEmailPage = document.getElementById('formResetEmail');
     let logInPage = document.getElementById('formLogin');
+    let loginFooter = document.getElementById('loginFooter');
 
+    resetEmailPage.classList.add('d-none');
     background.classList.remove('background')
     joinLogo.classList.remove('joinLogoWhite')
     logInPage.classList.remove('d-none');
-    resetEmailPage.classList.add('d-none');
+    loginFooter.classList.remove('d-none');
+    
 }
 
-function showSignupMessage(){
+function openResetPwd() {
+    enableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let resetPwdPage = document.getElementById('formResetPwd');
+    let logInPage = document.getElementById('formLogin');
+    let loginFooter = document.getElementById('loginFooter');   
+    
+    background.classList.add('background')
+    joinLogo.classList.add('joinLogoWhite')
+    logInPage.classList.add('d-none');
+    loginFooter.classList.add('d-none');
+    resetPwdPage.classList.remove('d-none');
+}
+
+
+function closeResetPwd() {
+    enableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let resetPwdPage = document.getElementById('formResetPwd');
+    let logInPage = document.getElementById('formLogin');
+    let loginFooter = document.getElementById('loginFooter');   
+    
+    resetPwdPage.classList.add('d-none');
+    background.classList.remove('background')
+    joinLogo.classList.remove('joinLogoWhite')
+    logInPage.classList.remove('d-none');
+    loginFooter.classList.remove('d-none');
+    
+}
+
+function showMessage(html){
     let msg = document.getElementById('message');
+    msg.innerHTML = html;
     msg.classList.remove('d-none');
     setTimeout(function(){
         msg.classList.add('d-none');
-        closeSignUp();
     },3000);
+}
+
+function showPwdNotRightMessage(){
+    let html =`
+        <p>Your Password are wrong</p> 
+    `
+    showMessage(html);
+}
+function showSendEmailMessage(){
+   let html = `
+        <img src="./assets/img/SendCheck.svg">
+        <p>An E-Mail has been send to you</p> 
+    `
+    showMessage(html);
+}
+function showEmailNotFoundMessage(){
+    let html =`
+        <p>Your email address was not found</p> 
+    `
+    showMessage(html);
+}
+function showSignUpMessage(){
+    let html = `
+        <p>You Signed Up successfully</p> 
+    `
+    showMessage(html);
+}
+function showSignUpAlreadyExistMessage(){
+    let html = `
+        <p>Your email already in use</p> 
+    `
+    showMessage(html);
+}
+function showresetPwdMessage(){
+    let html =`
+        <p>You reset your password</p> 
+    `
+    showMessage(html);
 }
 
 async function checkUserExist(email){
@@ -169,7 +242,7 @@ async function registerUser(name,email,password){
         email: email,
         password: password,
     });
-    await setItem('users', JSON.stringify(users));
+    saveUsers();
 }
 
 async function saveUsers(){
@@ -233,7 +306,7 @@ async function getItem(key) {
     });
 }
 
-/*Validate Password HTML5 newUser + resetPwd*/
+/*Validate Password Match HTML5 newUser + resetPwd*/
 let newPassword = document.getElementById("newPassword")
     , newConfirmPassword = document.getElementById("newConfirmPassword")
     , resetPassword = document.getElementById("resetPassword")
