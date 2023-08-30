@@ -1,3 +1,10 @@
+.summaryWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .summaryContainer {
     width: 400px;
     display: flex;
