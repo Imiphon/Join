@@ -334,13 +334,29 @@ footer {
 }
 
 .add-mob-frame {
-    /*height: 41px;*/
     padding: 13px 21px 13px 21px;
     border-bottom: 1px solid var(--user-grey);
     display: flex;
     justify-content: space-between;
-    /*gap: 10px;*/
 }
+
+.add-mob-frame img {
+    width: 24px;
+    height: 24px;
+}
+
+/*
+#country-code {
+position: relative;
+}
+.add-mob-frame  select{
+    position: relative;
+    width: 40px;
+    margin-right: 6px;
+    border: none;
+    color:var(--light-grey);
+}
+*/
 
 .add-mob-input {
     height: 24px;
@@ -348,17 +364,8 @@ footer {
     font-family: "open-sans", sans-serif;
     font-size: 19px;
     font-weight: 400;
-    /* line-height: 23px; */
     letter-spacing: 0em;
-    /* text-align: left; */
-    /* display: flex; */
-    /* justify-content: space-between; */
     border: 0;
-}
-
-.add-mob-frame img {
-    width: 24px;
-    height: 24px;
 }
 
 /* Style for placeholder text */
@@ -378,4 +385,18 @@ footer {
     text-align: center;
     background-color: var(--reg-blue);
     color: white;
+}
+
+/*=====================
+    SELECTORS FOR ADD CONTACT IN MOBILE
+    ====================*/
+
+.edit-mob-input {
+    height: 24px;
+    color: black;
+    font-family: "open-sans", sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    border: 0;
 }

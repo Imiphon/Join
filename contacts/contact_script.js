@@ -77,13 +77,14 @@ function personDatas(initial) {
 }
 
 //============================================================
-// SHOW DETAILS IN MOBILE
+// SHOW INFORMATIONS IN MOBILE
 //============================================================
 
 function showDetails(index) {
     let main = document.querySelector('main');
     main.innerHTML = '';
     let person = contactArray[index];
+    let indexNr = index; //Nr of contactArray
     main.innerHTML += `
             <!----------- DETAILS FRAME-------------------------->
             <div class="detail-frame">
@@ -123,11 +124,11 @@ function showDetails(index) {
             </button>
 
             <div id="drawer">
-              <div class="drawer-item" onclick="editMobContact()">
+              <div class="drawer-item" onclick="editMobContact(${indexNr})">
                 <img src="../assets/img/edit.png" alt="Edit">
                 <span>Edit</span>
               </div>
-              <div class="drawer-item" onclick="deleteContact()">
+              <div class="drawer-item" onclick="deleteContact(${indexNr})">
                 <img src="../assets/img/delete.png" alt="Delete">
                 <span>Delete</span>
               </div>
@@ -142,42 +143,44 @@ function showDetails(index) {
 function toggleDrawer() {
     const drawer = document.getElementById('drawer');
     if (drawer.classList.toggle('open')) {
-      document.addEventListener('click', closeOnClick);
+        document.addEventListener('click', closeOnClick);
     } else {
-      document.removeEventListener('click', closeOnClick);
+        document.removeEventListener('click', closeOnClick);
     }
-  }
-  
-  function closeOnClick(event) {
+}
+
+function closeOnClick(event) {
     const drawer = document.getElementById('drawer');
     const moreBtn = document.querySelector('.more-btn');
     if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
-      closeDrawer();
-      document.removeEventListener('click', closeOnClick);
+        closeDrawer();
+        document.removeEventListener('click', closeOnClick);
     }
-  }
-  
-  function closeDrawer() {
+}
+
+function closeDrawer() {
     document.getElementById('drawer').classList.remove('open');
-  }
-  
-  function editMobContact() {
-    console.log('Editing');
-    closeDrawer();
-  }
-  
-  function deleteContact() {
+}
+
+function deleteContact() {
     console.log('Deleting');
     closeDrawer();
-  }
-  
+}
+
 
 //============================================================
-//SHOW EDITOR IN MOBILE
+//EDIT CONTACT IN MOBILE
 //============================================================
+async function editMobContact(index) {
+    let indexNr = index; //Nr of contactArray
+    await createMobilePopup();
+    showEditContact(indexNr);
+}
 
-function showEditor() {
+function showEditContact(index) {
     let content = document.getElementById('popContent');
+    let person = contactArray[index];
+    let indexNr = index;
     content.innerHTML = '';
     content.innerHTML += `
         <div class="pop-top">                
@@ -192,47 +195,79 @@ function showEditor() {
         <div class="add-mob-form">
             <form id="userForm">
                 <div class="add-mob-frame">
-                    <input class="mob-input" type="text" id="nameLastName" placeholder="Name">
+                    <input class="edit-mob-input" type="text" id="nameLastName" placeholder="${person.name + ' ' + person.lastName}">
                     <img src="../assets/img/person_small.png" alt="name">
                 </div>    
                 <div class="add-mob-frame">
-                    <input class="mob-input" type="text" id="email" placeholder="Email">
+                    <input class="edit-mob-input" type="text" id="email" placeholder="${person.mail}">
                     <img src="../assets/img/mail_small.png" alt="name">
                 </div>    
                 <div class="add-mob-frame">
-                    <input class="mob-input" type="text" id="phone" placeholder="Phone">
+                    <input class="edit-mob-input" type="text" id="phone" placeholder="${person.phone}">
                     <img src="../assets/img/call_small.png" alt="name">
                 </div>
             </form> 
         </div>
     
         <div>
-        <button class="add-mob-btn" onclick="addContactToArray()">
-        Save
-        <img src="../assets/img/check_small.png" alt="name">
-        </button>
-            <button class="add-mob-btn" onclick="addContactToArray()">
-            Save
-            <img src="../assets/img/check_small.png" alt="name">
+            <button class="add-mob-btn" onclick="deleteContact(${indexNr})">
+                Delete
+                <img src="../assets/img/check_small.png" alt="name">
+            </button>
+            <button class="add-mob-btn" onclick="editContactInArray(${indexNr})">
+                Save
+                <img src="../assets/img/check_small.png" alt="name">
             </button>
         </div>
                 `;
     return content;
 }
 
-function editUser() {
-    if (!document.getElementById("popupBackground")) {
-        createMobilePopup();
-    }
-    document.getElementById("popupBackground").style.display = "block";
+function changeEdits() {
+    let nameLastNameInput = document.getElementById('nameLastName');
+    let emailInput = document.getElementById('email');
+    let phoneInput = document.getElementById('phone');
+
+    let nameLastNameValue = nameLastNameInput.value ? nameLastNameInput.value : nameLastNameInput.placeholder;
+    let emailValue = emailInput.value ? emailInput.value : emailInput.placeholder;
+    let phoneValue = phoneInput.value ? phoneInput.value : phoneInput.placeholder;
+
+    nameLastNameInput.value = nameLastNameValue;
+    emailInput.value = emailValue;
+    phoneInput.value = phoneValue;
 }
 
+function editContactInArray(index) {
+    changeEdits();
+    if (!validateForm()) {
+        return;
+    } else {
+        let name = document.getElementById('nameLastName').value.split(' ');
+        let mail = document.getElementById('email').value;
+        let tel = parseInt(document.getElementById('phone').value);
+        // check for TWO names
+        if (name.length !== 2) {
+            alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
+            return;
+        }
+        let preName = upperCase(name[0]);
+        let lastName = upperCase(name[1]);
+
+        contactArray[index].name = preName;
+        contactArray[index].lastName = lastName;
+        contactArray[index].mail = mail;
+        contactArray[index].phone = phone;
+
+        document.getElementById('userForm').reset();
+    }
+    closePopup();
+    //finally it's goin to this contact in details
+    showContacts();
+}
 //============================================================
-// SHOW NEW CONTACT IN MOBILE 
+// ADD NEW CONTACT IN MOBILE 
 //============================================================
 
-// has send to global adress array
-let newContact = {};
 
 async function addNewContact() {
     await createMobilePopup();
@@ -247,34 +282,41 @@ function showAddContact() {
     <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
     <span class="pop-header">Add contact</span>
     <span class="pop-subtitle">Tasks are better with a team!</span>
-    </div>
-    
-    <div>
+</div>
+
+<div>
     <img class="popup-circle" src="../assets/img/person_initial.png" alt="person_initial">
-    </div>
-    
-    <div class="pop-bottom">
+</div>
+
+<div class="pop-bottom">
     <div class="add-mob-form">
         <form id="userForm">
             <div class="add-mob-frame">
                 <input class="add-mob-input" type="text" id="nameLastName" placeholder="Name Nachname">
                 <img src="../assets/img/person_small.png" alt="name">
-            </div>    
-            <div class="add-mob-frame">
-                <input class="add-mob-input" type="text" id="email" placeholder="Email">
-                <img src="../assets/img/mail_small.png" alt="name">
-            </div>    
-            <div class="add-mob-frame">
-                <input class="add-mob-input" type="text" id="phone" placeholder="Phone">
-                <img src="../assets/img/call_small.png" alt="name">
             </div>
-        </form> 
+            <div class="add-mob-frame">
+                <input class="add-mob-input" type="email" id="email" placeholder="Email" required>
+                <img src="../assets/img/mail_small.png" alt="name">
+            </div>
+            <div class="add-mob-frame tel-box">
+                <input class="add-mob-input" type="tel" id="phone" name="phone" placeholder="Phone"
+                    pattern="\+?\d{2,4}[-.\s]?\d{1,15}" required>
+                <img src="../assets/img/call_small.png" alt="name">
+                <!-- ------------ number with country-code:                 
+            <select id="country-code" name="country_code">
+            <option value="+1">USA (+1)</option>
+            <option value="+49">Germany (+49)</option>
+            </select>
+            <input class="add-mob-input" type="tel" id="phone" pattern="\d{1,15}" placeholder="Phone" required> 
+            ------------------------------------------------ -->
+            </div>
+        </form>
     </div>
-
     <div>
         <button class="add-mob-btn" onclick="addContactToArray()">
-        Create Contact 
-        <img src="../assets/img/check_small.png" alt="name">
+            Create Contact
+            <img src="../assets/img/check_small.png" alt="name">
         </button>
     </div>
 </div>
@@ -294,7 +336,7 @@ function addContactToArray() {
             return;
         }
         let preName = upperCase(name[0]);
-        let lastName = upperCase(name[1]);
+        let lastName = upperCase(name[1]); //[0] is space
 
         //in templates/global_arrays.js
         contactArray.push({
@@ -317,9 +359,6 @@ function upperCase(name) {
     return formattedName;
 }
 
-
-
-
 function createMobilePopup() {
     return new Promise((resolve) => {
         let popupHTML = `
@@ -339,7 +378,6 @@ function createMobilePopup() {
         }, 0);
     });
 }
-
 
 function closePopup() {
     document.getElementById("popupBackground").style.display = "none";
