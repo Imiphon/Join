@@ -1,7 +1,8 @@
 let users = [];
 let emailAdresses = [];
+let resetId = [];
 
-async function login(){
+async function login() {
     disableButtonLogin();
     let email = getInput('loginEmail');
     let password = getInput('loginPassword');
@@ -43,7 +44,7 @@ async function newUser() {
     */    
 }
 
-function guestLogin(){
+function guestLogin() {
     disableButtonLogin();
     console.log('guestLogin');
     /*
@@ -56,24 +57,21 @@ async function resetEmail() {
     let email = getInput('resetEmail');   
     
     if(!await checkUserExist(email)){
-        //ID = emailAdresses.indexOf(email)
         showSendEmailMessage();
-        closeForgotPwd();
+        //openResetPwd(emailAdresses.indexOf(email));
+        //closeForgotPwd();
     }else{
         showEmailNotFoundMessage();        
     }
     enableButton('resetEmailBtn');
-    /*
-    - E-Mail zum zurücksetzen versenden?  
-    */
 }
 
-async function resetPwd(userId){
+async function resetPwd() {
     disableButton('resetPwdBtn');
     let password = getInput('resetPassword');
     
     await loadUsers();
-    users[0]['password'] = password; //0 muss zu ID from Webadresse query oder array Weblinktoken
+    users[resetId]['password'] = password; //0 muss zu ID from Webadresse query oder array Weblinktoken
     saveUsers();
     showresetPwdMessage();
     closeResetPwd();
@@ -107,8 +105,7 @@ function closeSignUp() {
     background.classList.remove('background')
     joinLogo.classList.remove('joinLogoWhite')
     logInPage.classList.remove('d-none');
-    loginFooter.classList.remove('loginFooterWhite');
-    
+    loginFooter.classList.remove('loginFooterWhite');    
 }
 
 function openForgotPwd() {
@@ -138,11 +135,11 @@ function closeForgotPwd() {
     background.classList.remove('background')
     joinLogo.classList.remove('joinLogoWhite')
     logInPage.classList.remove('d-none');
-    loginFooter.classList.remove('d-none');
-    
+    loginFooter.classList.remove('d-none');    
 }
 
-function openResetPwd() {
+function openResetPwd(id) {
+    resetId = id;
     enableButtonLogin();
     let background = document.getElementById('background');
     let joinLogo = document.getElementById('joinLogo');
@@ -170,11 +167,10 @@ function closeResetPwd() {
     background.classList.remove('background')
     joinLogo.classList.remove('joinLogoWhite')
     logInPage.classList.remove('d-none');
-    loginFooter.classList.remove('d-none');
-    
+    loginFooter.classList.remove('d-none');    
 }
 
-function showMessage(html){
+function showMessage(html) {
     let msg = document.getElementById('message');
     msg.innerHTML = html;
     msg.classList.remove('d-none');
@@ -183,50 +179,50 @@ function showMessage(html){
     },3000);
 }
 
-function showPwdNotRightMessage(){
+function showPwdNotRightMessage() {
     let html =`
         <p>Your Password are wrong</p> 
     `
     showMessage(html);
 }
-function showSendEmailMessage(){
+function showSendEmailMessage() {
    let html = `
         <img src="./assets/img/SendCheck.svg">
         <p>An E-Mail has been send to you</p> 
     `
     showMessage(html);
 }
-function showEmailNotFoundMessage(){
+function showEmailNotFoundMessage() {
     let html =`
         <p>Your email address was not found</p> 
     `
     showMessage(html);
 }
-function showSignUpMessage(){
+function showSignUpMessage() {
     let html = `
         <p>You Signed Up successfully</p> 
     `
     showMessage(html);
 }
-function showSignUpAlreadyExistMessage(){
+function showSignUpAlreadyExistMessage() {
     let html = `
         <p>Your email already in use</p> 
     `
     showMessage(html);
 }
-function showresetPwdMessage(){
+function showresetPwdMessage() {
     let html =`
         <p>You reset your password</p> 
     `
     showMessage(html);
 }
 
-async function checkUserExist(email){
+async function checkUserExist(email) {
     emailAdresses = await getExistingEmailAdresses();
     return !emailAdresses.includes(email);
 }
 
-async function getExistingEmailAdresses(){
+async function getExistingEmailAdresses() {
     await loadUsers();
     let emailAdresses= [];
     for (let i = 0; i < users.length; i++) {
@@ -236,7 +232,7 @@ async function getExistingEmailAdresses(){
     return emailAdresses;
 }
 
-async function registerUser(name,email,password){
+async function registerUser(name,email,password) {
     users.push({
         name: name,
         email: email,
@@ -245,15 +241,15 @@ async function registerUser(name,email,password){
     saveUsers();
 }
 
-async function saveUsers(){
+async function saveUsers() {
     await setItem('users', JSON.stringify(users));
 }
 
-function getInput(id){
+function getInput(id) {
     return document.getElementById(id).value;
 }
 
-function disableButtonLogin(){
+function disableButtonLogin() {
     disableButton('forgotPwd');
     disableButton('rememberMe');
     disableButton('userLoginBtn');
@@ -261,7 +257,7 @@ function disableButtonLogin(){
     disableButton('signUp');
 }
 
-function enableButtonLogin(){
+function enableButtonLogin() {
     enableButton('forgotPwd');
     enableButton('rememberMe');
     enableButton('userLoginBtn');
@@ -269,12 +265,12 @@ function enableButtonLogin(){
     enableButton('signUp');
 }
 
-function disableButton(buttonId){
+function disableButton(buttonId) {
     let button = document.getElementById(buttonId);
     button.disabled = true;
 }
 
-function enableButton(buttonId){
+function enableButton(buttonId) {
     let button = document.getElementById(buttonId);
     button.disabled = false;
 }
@@ -283,7 +279,7 @@ function enableButton(buttonId){
 const STORAGE_TOKEN = 'F4LGRNFMG9GWI4STVSTG89MGMCVVVRZDK3KPVIVF';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
-async function loadUsers(){
+async function loadUsers() {
     try {
         users = JSON.parse(await getItem('users'));
     } catch(e){
@@ -312,7 +308,7 @@ let newPassword = document.getElementById("newPassword")
     , resetPassword = document.getElementById("resetPassword")
     , resetConfirmPassword = document.getElementById("resetConfirmPassword");
 
-function validatenewPassword(){    
+function validatenewPassword() {    
   if(newPassword.value != newConfirmPassword.value) {
     newConfirmPassword.setCustomValidity("Passwords Don't Match");
   } else {
@@ -320,7 +316,7 @@ function validatenewPassword(){
   }
 }
 
-function validateresetPassword(){    
+function validateresetPassword() {    
     if(resetPassword.value != resetConfirmPassword.value) {
         resetConfirmPassword.setCustomValidity("Passwords Don't Match");
     } else {

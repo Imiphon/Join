@@ -6,11 +6,11 @@ body{
 }
 
 @keyframes changeBackground{
-    from{background-color: rgb(69,137,255);} to{background-color: white;};    
+    from{background-color: var(--reg-blue);} to{background-color: white;};    
 }
 
 .background{
-    background-color: rgb(69,137,255);
+    background-color: var(--reg-blue);
 }
 
 .logoDivHeaderMobile{    
@@ -111,7 +111,7 @@ body{
 
 .line-blue{
     margin: 12px 0;
-    background-color: rgb(69,137,255);
+    background-color: var(--reg-blue);
     width: 60px;
     height: 2px;
 }
@@ -243,13 +243,13 @@ body{
 }
 
 .btnTxtBlue{
-    color: rgb(69,137,255);
+    color: var(--reg-blue);
     background-color: white;
     width: unset;
 }
 
 #rememberMe {
-    accent-color: rgb(69,137,255);
+    accent-color: var(--reg-blue);
 }
 
 .message{
@@ -262,17 +262,17 @@ body{
     align-items: center;
     padding: 16px;
     border-radius: 8px;
-    background-color:rgb(69,137,255);
+    background-color:var(--reg-blue);
     color: white;
     animation: 450ms moveMessage ease-in-out;
 }
 
 @keyframes moveMessage{									
-	from{position: fixed;bottom: 0;left:calc(100vw / 2 - 115px)} to{position: fixed;bottom: calc(100vh / 2 + 60px);left:calc(100vw / 2 - 115px)};
+	from{bottom: 0;} to{bottom: calc(100vh / 2 + 60px);};
 }
 
 #acceptPrivacy {
-    accent-color: rgb(69,137,255);
+    accent-color: var(--reg-blue);
 }
 
 .d-none{
