@@ -42,7 +42,7 @@ footer {
     font-weight: 400;
     line-height: 21.6px;
     height: 56px;
-    padding: 17px 36px 17px 60px;
+    padding: 17px 36px 17px 32px;
     gap: 8px;
     display: flex;
     justify-content: space-between;
@@ -383,7 +383,7 @@ position: relative;
 }
 
 .color-picker {
-    position: absolute; /* oder 'fixed' */
+   /* position: fixed; */
     z-index: 1000; /* Über anderen Elementen */
     width: 150px; /* Breite des Auswahlfensters */
     display: flex;

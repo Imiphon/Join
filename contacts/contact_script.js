@@ -16,65 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
 function showContacts() {
     let content = document.querySelector('main');
     content.innerHTML = '';
-    content.innerHTML += `
-        <button class="add-btn" id="addBtn" onclick="addNewContact()">
-            <img src="../assets/img/person_add.png" alt="">
-        </button>
-        <div class="name-group" id="nameGroup">
-        </div> 
-    `;
+    content.innerHTML += showContactFrame();
     createInitalGroup(); //in script.js
     createInitials();
     showNameGroup();
 }
 
-function showNameGroup() {
-    let content = document.getElementById('nameGroup');
-    content.innerHTML = '';
 
-    for (let initial in initialGroups) {
-        content.innerHTML += `
-                <div class="letter-box">
-                    <span class="letterBox">${initial}</span>
-                </div>
-                <div class="line-box">
-                    <div class="line"> </div>
-                </div>
-            `;
-
-        content.innerHTML += personDatas(initial);
-    }
-}
-
-function personDatas(initial) {
-    let htmlContent = '';
-
-    for (let i = 0; i < contactArray.length; i++) {
-        let thisPerson = contactArray[i];
-        if (initialGroups[initial].includes(thisPerson)) {
-            let person = thisPerson;
-            htmlContent += `
-                <div class="name-frame">
-                    <div class="name-box" onclick="showInfo(${i})">
-                        <div class="side-circle" class="initials" style="background-color: ${person.color};">
-                            ${person.initials}
-                        </div>
-                        <div class="name-mail-frame">
-                            <div class="full-name">
-                                ${person.name} ${person.lastName}
-                            </div>
-                            <div class="mail">
-                                ${person.mail}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `;
-        }
-    }
-
-    return htmlContent;
-}
 
 //============================================================
 // SHOW INFORMATIONS IN MOBILE
@@ -200,7 +148,7 @@ function showEditContact(index) {
         <div class="add-mob-form">
             <form id="userForm">
                 <div class="add-mob-frame">
-                    <input class="edit-mob-input" type="text" id="nameLastName" placeholder="${person.name + ' ' + person.lastName}">
+                    <input class="edit-mob-input" type="text" id="fullName" placeholder="${person.name + ' ' + person.lastName}">
                     <img src="../assets/img/person_small.png" alt="name">
                 </div>    
                 <div class="add-mob-frame">
@@ -229,25 +177,22 @@ function showEditContact(index) {
 }
 
 function changeEdits() {
-    let nameLastNameInput = document.getElementById('nameLastName');
+    let fullNameInput = document.getElementById('fullName');
     let emailInput = document.getElementById('email');
     let phoneInput = document.getElementById('phone');
 
-    let nameLastNameValue = nameLastNameInput.value ? nameLastNameInput.value : nameLastNameInput.placeholder;
+    let fullNameValue = fullNameInput.value ? fullNameInput.value : fullNameInput.placeholder;
     let emailValue = emailInput.value ? emailInput.value : emailInput.placeholder;
     let phoneValue = phoneInput.value ? phoneInput.value : phoneInput.placeholder;
 
-    nameLastNameInput.value = nameLastNameValue;
+    fullNameInput.value = fullNameValue;
     emailInput.value = emailValue;
     phoneInput.value = phoneValue;
 }
 
 function editContactInArray(index) {
     changeEdits();
-    if (!validateForm()) {
-        return;
-    } else {
-        let name = document.getElementById('nameLastName').value.split(' ');
+        let name = document.getElementById('fullName').value.split(' ');
         let mail = document.getElementById('email').value;
         let tel = parseInt(document.getElementById('phone').value);
         // check for TWO names
@@ -264,7 +209,7 @@ function editContactInArray(index) {
         contactArray[index].phone = phone;
 
         document.getElementById('userForm').reset();
-    }
+        
     closePopup();
     //finally it's goin to this contact in details
     showContacts();
@@ -302,7 +247,7 @@ function showAddContact() {
     <div class="add-mob-form">
         <form id="userForm">
             <div class="add-mob-frame">
-                <input class="add-mob-input" type="text" id="nameLastName" placeholder="Name Nachname">
+                <input class="add-mob-input" type="text" id="fullName" placeholder="Name Nachname">
                 <div id="colorBox" class="color-box" onclick="openColorPicker()"></div>
                 <img src="../assets/img/person_small.png" alt="name">
             </div>
@@ -347,13 +292,10 @@ function openColorPicker() {
     let colorBox = document.getElementById('colorBox');
     let rect = colorBox.getBoundingClientRect();
     let pickerHtml = `<div id="colorPicker" class="color-picker" style="left:${rect.left}px; top:${rect.bottom + 5}px;">`;
-
     for (let color in userColors) {
         pickerHtml += `<div class="color-option" style="background-color: ${userColors[color]};" onclick="setColor('${color}')"></div>`;
     }
-
     pickerHtml += `</div>`;
-
     document.body.insertAdjacentHTML('beforeend', pickerHtml);
 }
 
@@ -366,7 +308,7 @@ function addContactToArray() {
     if (!validateForm()) {
         return;
     } else {
-        let name = document.getElementById('nameLastName').value.split(' ');
+        let name = document.getElementById('fullName').value.split(' ');
         let mail = document.getElementById('email').value;
         let tel = parseInt(document.getElementById('phone').value);
         // check for TWO names
@@ -376,14 +318,14 @@ function addContactToArray() {
         }
         let preName = upperCase(name[0]);
         let lastName = upperCase(name[1]); //[0] is space
-
+        let color = document.getElementById('colorBox').style.backgroundColor;
         //in templates/global_arrays.js
         contactArray.push({
             name: preName,
             lastName: lastName,
             mail: mail,
             tel: tel,
-            color: '--user-orange'
+            color: color,
         });
         document.getElementById('userForm').reset();
     }
@@ -397,6 +339,10 @@ function upperCase(name) {
     let formattedName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
     return formattedName;
 }
+
+//============================================================
+//  POPUP FUNCTIONS
+//============================================================
 
 function createMobilePopup() {
     return new Promise((resolve) => {
@@ -420,4 +366,66 @@ function createMobilePopup() {
 
 function closePopup() {
     document.getElementById("popupBackground").style.display = "none";
+}
+
+//============================================================
+//  HTML TEMPLATES
+//============================================================
+
+function showContactFrame() {
+    return `
+    <button class="add-btn" id="addBtn" onclick="addNewContact()">
+        <img src="../assets/img/person_add.png" alt="">
+    </button>
+    <div class="name-group" id="nameGroup">
+    </div> 
+`;
+}
+
+function showNameGroup() {
+    let content = document.getElementById('nameGroup');
+    content.innerHTML = '';
+
+    for (let initial in initialGroups) {
+        content.innerHTML += `
+                <div class="letter-box">
+                    <span class="letterBox">${initial}</span>
+                </div>
+                <div class="line-box">
+                    <div class="line"> </div>
+                </div>
+            `;
+
+        content.innerHTML += personDatas(initial);
+    }
+}
+
+function personDatas(initial) {
+    let htmlContent = '';
+
+    for (let i = 0; i < contactArray.length; i++) {
+        let thisPerson = contactArray[i];
+        if (initialGroups[initial].includes(thisPerson)) {
+            let person = thisPerson;
+            htmlContent += `
+                <div class="name-frame">
+                    <div class="name-box" onclick="showInfo(${i})">
+                        <div class="side-circle" class="initials" style="background-color: ${person.color};">
+                            ${person.initials}
+                        </div>
+                        <div class="name-mail-frame">
+                            <div class="full-name">
+                                ${person.name} ${person.lastName}
+                            </div>
+                            <div class="mail">
+                                ${person.mail}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+        }
+    }
+
+    return htmlContent;
 }
