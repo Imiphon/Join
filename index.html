@@ -11,13 +11,13 @@
     <script src="./login.js" defer></script>
 </head>
 
-<body class="bodyBackground">
+<body id="background">
 
     <div class="logoDivHeaderMobile">
-        <div class="joinLogo"></div>
+        <div class="joinLogo" id="joinLogo"></div>
     </div>
 
-    <div class="formDivLogin">
+    <div class="formDivLogin" id="formLogin">
         <form class="login" onsubmit="login(); return false;">
             <div class="inputDiv">
                 <h1 class="loginHeadline">Log in</h1>
@@ -51,7 +51,7 @@
         </div>
     </div>
     
-    <div class="formDivNewUser">
+    <div class="formDivNewUser d-none" id="formNewUser">
         <form class="newUser" onsubmit="newUser(); return false;">
             <div class="inputDiv">
                 <h1 class="loginHeadline">Sign up</h1>
@@ -82,7 +82,7 @@
     </div>
 
     
-    <div class="formDivResetPwd ">
+    <div class="formDivResetPwd d-none" id="formResetEmail">
         <form class="resetPwd" onsubmit="resetEmail(); return false;">
             <div class="inputDiv">
                 <h1 class="loginHeadline">I forgot my password</h1>
@@ -97,7 +97,7 @@
         </form>
     </div>
 
-    <div class="formDivResetPwd">
+    <div class="formDivResetPwd d-none" id="formResetPwd">
         <form class="resetPwd" onsubmit="resetPwd(); return false;">
             <div class="inputDiv">
                 <h1 class="loginHeadline">Reset your password</h1>
@@ -114,6 +114,10 @@
             </div>     
             <button type="submit" class="resetBtn btnBlue" id="resetPwdBtn">Continue</button>
         </form>
+    </div>
+
+    <div id="message" class="message d-none">
+        You Signed Up successfully
     </div>
 
     <div class="loginFooter d-none">

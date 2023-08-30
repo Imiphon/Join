@@ -18,6 +18,7 @@ async function login(){
     
     /* 
         - Anmeldung merken?
+        - Weitergabe für add_Task / Contacts...
         - Meldung wenn E-Mail oder Password falsch
         - Weiterleitung auf Summary
     */
@@ -25,9 +26,28 @@ async function login(){
 
 function openSignUp() {
     disableButtonLogin();
-    /*
-        - Sign up page anzeigen
-    */
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let signUpPage = document.getElementById('formNewUser');
+    let logInPage = document.getElementById('formLogin');
+
+    background.classList.add('background')
+    joinLogo.classList.add('joinLogoWhite')
+    logInPage.classList.add('d-none');
+    signUpPage.classList.remove('d-none');
+}
+
+function closeSignUp() {
+    enableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let signUpPage = document.getElementById('formNewUser');
+    let logInPage = document.getElementById('formLogin');
+        
+    background.classList.remove('background')
+    joinLogo.classList.remove('joinLogoWhite')
+    logInPage.classList.remove('d-none');
+    signUpPage.classList.add('d-none');
 }
 
 async function newUser() {
@@ -38,7 +58,8 @@ async function newUser() {
         
     if(await checkUserExist(email)){
         await registerUser(name,email,password);
-        console.log('Erfolgreich registriert!');
+        showSignupMessage();
+        
     }else{
         console.log('Bereits vorhanden!');
     }
@@ -60,9 +81,15 @@ function guestLogin(){
 
 function openForgotPwd() {
     disableButtonLogin();
-    /*
-        - resetEmail page anzeigen
-    */
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let resetEmailPage = document.getElementById('formResetEmail');
+    let logInPage = document.getElementById('formLogin');
+
+    background.classList.add('background')
+    joinLogo.classList.add('joinLogoWhite')
+    logInPage.classList.add('d-none');
+    resetEmailPage.classList.remove('d-none');
 }
 
 async function resetEmail() {
@@ -87,7 +114,7 @@ async function resetPwd(userId){
     let password = getInput('resetPassword');
     
     await loadUsers();
-    users[0]['password'] = password; 
+    users[0]['password'] = password; //0 muss zu ID from Webadresse query
     saveUsers();
     console.log('password wurde geändert!');
 
@@ -95,6 +122,16 @@ async function resetPwd(userId){
     - Bestätigung Kennwort geändert anzeigen
     */
 }
+
+function showSignupMessage(){
+    let msg = document.getElementById('message');
+    msg.classList.remove('d-none');
+    setTimeout(function(){
+        msg.classList.add('d-none');
+        closeSignUp();
+    },3000);
+}
+
 
 async function checkUserExist(email){
     emailAdresses = await getExistingEmailAdresses();
@@ -124,7 +161,6 @@ async function saveUsers(){
     await setItem('users', JSON.stringify(users));
 }
 
-
 function getInput(id){
     return document.getElementById(id).value;
 }
@@ -135,6 +171,14 @@ function disableButtonLogin(){
     disableButton('userLoginBtn');
     disableButton('guestLoginBtn');
     disableButton('signUp');
+}
+
+function enableButtonLogin(){
+    enableButton('forgotPwd');
+    enableButton('rememberMe');
+    enableButton('userLoginBtn');
+    enableButton('guestLoginBtn');
+    enableButton('signUp');
 }
 
 function disableButton(buttonId){
