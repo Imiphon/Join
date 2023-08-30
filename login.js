@@ -1,37 +1,49 @@
-function login(){
+let users = [];
+let emailAdresses = [];
+
+async function login(){
     disableButtonLogin();
     let email = getInput('loginEmail');
     let password = getInput('loginPassword');
-    console.log('login');
+    
+    if(!await checkUserExist(email)){
+        if (password == users[emailAdresses.indexOf(email)]['password']){
+            console.log('Anmeldung erfolgreich');
+        }else{
+            console.log('Password falsch');
+            enableButtonLogin();
+        }
+    }else{
+        console.log('E-Mail adresse nicht vorhanden!');
+    }
+    
     /* 
-        - Login Daten Validieren -> Meldung User nicht gefunden wenn nicht gefunden.
         - Anmeldung merken?
+        - Weitergabe Benutzer für add_Task / Contacts...
+        - Meldung wenn E-Mail oder Password falsch
         - Weiterleitung auf Summary
-       
     */
 }
 
-function openSignUp() {
-    disableButtonLogin();
-    /*
-        - Sign up page anzeigen
-    */
-}
-
-function newUser() {
+async function newUser() {
     disableButton('newUserBtn');
     let name = getInput('newName');
     let email = getInput('newEmail');
     let password = getInput('newPassword');
-    
-    console.log('newUser')
+        
+    if(await checkUserExist(email)){
+        await registerUser(name,email,password);
+        showSignupMessage();
+        
+    }else{
+        enableButton('newUserBtn');
+        console.log('Bereits vorhanden!');
+    }
 
     /*
-        - Validieren das es den User noch nicht gibt.
-        - Push zum array
-        - (Validierung der E-Mail Adresse)
+        - (Validierung der E-Mail Adresse per link?)
         - Kontakt erstellen?
-        - Bestätigung zur anlage des Benutzers
+        - Bestätigung zur anlage des Benutzers oder info schon vorhanden
     */    
 }
 
@@ -43,30 +55,125 @@ function guestLogin(){
     */
 }
 
+async function resetEmail() {
+    disableButton('resetEmailBtn');
+    let email = getInput('resetEmail');   
+    
+    if(!await checkUserExist(email)){
+        console.log('E-Mail mit Link zum zurücksetzen muss noch versendet werden!')
+        //ID = emailAdresses.indexOf(email)
+    }else{
+        console.log('E-Mail adresse nicht gefunden!');
+        enableButton('resetEmailBtn');
+    }
+    
+    /*
+    - E-Mail zum zurücksetzen versenden  
+    - E-Mail versendet anzeigen oder E-Mail adresse nicht gefunden
+    */
+}
+
+async function resetPwd(userId){
+    disableButton('resetPwdBtn');
+    let password = getInput('resetPassword');
+    
+    await loadUsers();
+    users[0]['password'] = password; //0 muss zu ID from Webadresse query
+    saveUsers();
+    console.log('password wurde geändert!');
+
+    /*
+        - Bestätigung Kennwort geändert anzeigen
+    */
+}
+
+function openSignUp() {
+    disableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let signUpPage = document.getElementById('formNewUser');
+    let logInPage = document.getElementById('formLogin');
+
+    background.classList.add('background')
+    joinLogo.classList.add('joinLogoWhite')
+    logInPage.classList.add('d-none');
+    signUpPage.classList.remove('d-none');
+}
+
+function closeSignUp() {
+    enableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let signUpPage = document.getElementById('formNewUser');
+    let logInPage = document.getElementById('formLogin');
+        
+    background.classList.remove('background')
+    joinLogo.classList.remove('joinLogoWhite')
+    logInPage.classList.remove('d-none');
+    signUpPage.classList.add('d-none');
+}
+
 function openForgotPwd() {
     disableButtonLogin();
-    /*
-        - resetEmail page anzeigen
-    */
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let resetEmailPage = document.getElementById('formResetEmail');
+    let logInPage = document.getElementById('formLogin');
+
+    background.classList.add('background')
+    joinLogo.classList.add('joinLogoWhite')
+    logInPage.classList.add('d-none');
+    resetEmailPage.classList.remove('d-none');
 }
 
-function resetEmail() {
-    let email = getInput('resetEmail');   
-    console.log('resetE-Mail');
-    /*
-    - Validierung E-Mail vorhanden
-    - E-Mail zum zurücksetzen versenden  
-    - Bestätigung Kennwort geändert anzeigen oder E-Mail nicht gefunden
-    */
+function closeForgotPwd() {
+    enableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo');
+    let resetEmailPage = document.getElementById('formResetEmail');
+    let logInPage = document.getElementById('formLogin');
+
+    background.classList.remove('background')
+    joinLogo.classList.remove('joinLogoWhite')
+    logInPage.classList.remove('d-none');
+    resetEmailPage.classList.add('d-none');
 }
 
-function resetPwd(userId){
-    let password = getInput('resetPassword');
-    console.log('resetPwd');
-    /*
-    - neues Kennwort in Datenbank hinterlegen
-    - Bestätigung Kennwort geändert anzeigen
-    */
+function showSignupMessage(){
+    let msg = document.getElementById('message');
+    msg.classList.remove('d-none');
+    setTimeout(function(){
+        msg.classList.add('d-none');
+        closeSignUp();
+    },3000);
+}
+
+async function checkUserExist(email){
+    emailAdresses = await getExistingEmailAdresses();
+    return !emailAdresses.includes(email);
+}
+
+async function getExistingEmailAdresses(){
+    await loadUsers();
+    let emailAdresses= [];
+    for (let i = 0; i < users.length; i++) {
+        const emailAdress = users[i]['email'];
+        emailAdresses.push(emailAdress);
+    }
+    return emailAdresses;
+}
+
+async function registerUser(name,email,password){
+    users.push({
+        name: name,
+        email: email,
+        password: password,
+    });
+    await setItem('users', JSON.stringify(users));
+}
+
+async function saveUsers(){
+    await setItem('users', JSON.stringify(users));
 }
 
 function getInput(id){
@@ -81,16 +188,50 @@ function disableButtonLogin(){
     disableButton('signUp');
 }
 
+function enableButtonLogin(){
+    enableButton('forgotPwd');
+    enableButton('rememberMe');
+    enableButton('userLoginBtn');
+    enableButton('guestLoginBtn');
+    enableButton('signUp');
+}
+
 function disableButton(buttonId){
-    button = document.getElementById(buttonId);
+    let button = document.getElementById(buttonId);
     button.disabled = true;
 }
 
 function enableButton(buttonId){
-    button = document.getElementById(buttonId);
+    let button = document.getElementById(buttonId);
     button.disabled = false;
 }
 
+/*Remote Storage Implementierung*/
+const STORAGE_TOKEN = 'F4LGRNFMG9GWI4STVSTG89MGMCVVVRZDK3KPVIVF';
+const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+
+async function loadUsers(){
+    try {
+        users = JSON.parse(await getItem('users'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+}
+
+async function setItem(key, value) {
+    const payload = {key, value, token: STORAGE_TOKEN};
+    return fetch(STORAGE_URL, { method: 'POST', body: JSON.stringify(payload)})
+    .then(res => res.json());
+}
+
+async function getItem(key) {
+    const url = `${STORAGE_URL}?key=${key}&token=${STORAGE_TOKEN}`;
+    return fetch(url).then(res => res.json()).then(res => {
+        if (res.data) { 
+            return res.data.value;
+        } throw `Could not find data with key "${key}".`;
+    });
+}
 
 /*Validate Password HTML5 newUser + resetPwd*/
 let newPassword = document.getElementById("newPassword")
@@ -112,7 +253,7 @@ function validateresetPassword(){
     } else {
         resetConfirmPassword.setCustomValidity('');
     }
-  }
+}
 
 newPassword.onchange = validatenewPassword;
 newConfirmPassword.onkeyup = validatenewPassword;

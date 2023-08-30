@@ -47,11 +47,7 @@
                             </span>
         
                             <div id="dropdown-options" class="dropdown-content d-none">
-                                <div class="options">
-                                    <span class="profile" id="profile">KL</span>
-                                    <label for="checkboc">Karwan</label>
-                                    <input type="checkbox" id="checkboc" value="KL">
-                                </div>
+            
                             </div>
                         </div>
         
@@ -77,9 +73,9 @@
                     <div class="prio">
                         <b>Prio</b>
                         <div class="prio-values">
-                            <span>Urgent <i class="bi bi-chevron-double-up" id="bi bi-chevron-double-up"></i></span>
-                            <span>Medium  <p class="bi equal-sign" id="equal-sign">=</p></span>
-                            <span>Low <i class="bi bi-chevron-double-down" id="bi-chevron-double-down"></i> </span>
+                            <span onclick="setPrio('urgent')">Urgent <i class="bi bi-chevron-double-up" id="bi bi-chevron-double-up"></i></span>
+                            <span onclick="setPrio('medium')">Medium<p class="bi equal-sign" id="equal-sign">=</p></span>
+                            <span onclick="setPrio('low')">Low <i class="bi bi-chevron-double-down" id="bi-chevron-double-down"></i> </span>
                         </div>
                     </div>
         
@@ -127,6 +123,7 @@
          <footer include-html="../templates/footer.html">
          </footer>
      </div> 
+     <script src="../templates/global_arrays.js"></script>
      <script src="add_task.js"></script>
      <script src="../templates/include-html.js"></script>
 <body>
