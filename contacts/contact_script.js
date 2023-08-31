@@ -118,19 +118,6 @@ async function openCreateContact() {
     showAddContact();
 }
 
-/*
-function openColorPicker() {
-    let colorBox = document.getElementById('colorBox');
-    let rect = colorBox.getBoundingClientRect();
-    let pickerHtml = `<div id="colorPicker" class="color-picker" style="left:${rect.left}px; top:${rect.bottom + 5}px;">`;
-    for (let color in userColors) {
-        pickerHtml += `<div class="color-option" style="background-color: ${userColors[color]};" onclick="setColor('${color}')"></div>`;
-    }
-    pickerHtml += `</div>`;
-    document.body.insertAdjacentHTML('beforeend', pickerHtml);
-}
-*/
-
 function openColorPicker() {
     let colorBox = document.getElementById('colorBox');
     let colorPicker = document.getElementById('colorPicker');
