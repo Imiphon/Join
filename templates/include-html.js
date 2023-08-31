@@ -41,6 +41,40 @@ function showSubmenuMobile() {
 // ********************************************************************************
 
 
+// ********************************************************************************
+// ********************* navigates to listed pages ********************************
+// ********************************************************************************
+function navigateToPage(buttonName) {
+    switch (buttonName) {
+        case 'summary':
+            window.location.href = '../summary/summary.html';
+            break;
+        case 'add':
+            window.location.href = '../add_task/add_task.html';
+            break;
+        case 'board':
+            window.location.href = '../board/board.html';
+            break;
+        case 'contacts':
+            window.location.href = '../contacts/contact_list.html';
+            break;
+        case 'help':
+            window.location.href = '../templates/help.html';
+            break;
+        case 'legal':
+            window.location.href = '../templates/imprint.html';
+            break;
+        case 'policy':
+            window.location.href = '../templates/privacy_policy.html';
+            break;                
+        default:
+            break;
+    }
+}
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
 
 
 // ********************************************************************************
@@ -77,17 +111,12 @@ function toggleButton(buttonName) {
 
 
 function updateBtnStyle(buttonName) {
-    console.log(`../assets/img/${buttonName}_button_clicked.png`);
-    console.log(localStorage.getItem("allBtnState"))
-    console.log(document.getElementsByTagName("img"));
-    console.log(document.getElementById("imgSummaryFooterMenu"))
     switch (buttonName) {
         case 'summary':
             document.getElementById("imgSummaryFooterMenu").src =  `../assets/img/${buttonName}_button_clicked.png`;
             break;
         case 'add':
             let add = document.getElementById("imgAddFooterMenu");
-            console.log(add);
             add.src = `../assets/img/${buttonName}_button_clicked.png`;
             break;
         case 'board':
@@ -102,29 +131,6 @@ function updateBtnStyle(buttonName) {
     
 }
 
-
-function navigateToPage(buttonName) {
-    switch (buttonName) {
-        case 'summary':
-            window.location.href = '../summary/summary.html';
-            console.log('summary');
-            break;
-        case 'add':
-            window.location.href = '../add_task/add_task.html';
-            console.log('add');
-            break;
-        case 'board':
-            window.location.href = '../board/board.html';
-            console.log('board');
-            break;
-        case 'contacts':
-            window.location.href = '../contacts/contact_list.html';
-            console.log('contacts');
-            break;    
-        default:
-            break;
-    }
-}
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
