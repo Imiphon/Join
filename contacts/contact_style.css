@@ -294,12 +294,13 @@ footer {
     border-radius: 50%;
     width: 90px;
     height: 90px;
-    /* border: 2px solid white; */
+    border: 2px solid white;
     /* z-index: 20; */
-    /* margin: 0; */
-    /* padding: 0;*/
 }
 
+.no-border {
+    border: none !important;
+}
 .pop-top {
     color: white;
     background-color: var(--reg-blue);
@@ -334,7 +335,7 @@ footer {
 }
 
 .add-mob-frame {
-    padding: 13px 21px 13px 21px;
+    padding: 13px 21px;
     border-bottom: 1px solid var(--user-grey);
     display: flex;
     justify-content: space-between;
@@ -345,24 +346,11 @@ footer {
     height: 24px;
 }
 
-/*
-#country-code {
-position: relative;
-}
-.add-mob-frame  select{
-    position: relative;
-    width: 40px;
-    margin-right: 6px;
-    border: none;
-    color:var(--light-grey);
-}
-*/
-
 .add-mob-input {
     height: 24px;
     color: black;
     font-family: "open-sans", sans-serif;
-    font-size: 19px;
+    font-size: 1.2rem;/*original:19px*/
     font-weight: 400;
     letter-spacing: 0em;
     border: 0;
@@ -376,17 +364,17 @@ position: relative;
 .color-box {
     width: 24px;
     height: 24px;
-    background-color: var(--user-grey); /* standard */
-    border: 1px solid black;
+    background-color: var(--user-grey); /* default */
+    border-radius: 4px;
     cursor: pointer;
     border: none;
 }
 
 .color-picker {
-   /* position: fixed; */
-    z-index: 1000; /* Über anderen Elementen */
-    width: 150px; /* Breite des Auswahlfensters */
-    display: flex;
+   position: fixed; 
+    z-index: 1000;    
+    
+    display: none; /*default*/
     flex-wrap: wrap;
     border: none;
     background-color: white;
@@ -397,6 +385,7 @@ position: relative;
     height: 24px;
     cursor: pointer;
     border: none;
+    z-index: 30;
 }
 
 
