@@ -302,6 +302,7 @@ body{
         width: 232px;
         height: 100%;
         position: absolute;
+        padding-right: 48px;
     }
 
     .footerMenuContainer {
@@ -326,6 +327,30 @@ body{
         margin-top: 84px;
         display: flex;
         height: 100%;
-
+    }
+    .btnFooterMenuDesktopVersion {
+        width: 186px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-radius: 8px;
+        padding: 8px 30px;
+        margin-bottom: 15px;
+        background: #FFFFFF;
+    }
+    .btnFooterMenuDesktopVersion img {
+        margin-right: 8px;
+        width: 24px;
+        height: 24px;
+    }
+    .btnFooterMenuDesktopVersionTextDiv {
+        font-size: var(--fs-16px);
+        font-weight: var(--fw-400);
+        font-style: normal;
+        color: #42526E;
+    }
+    .btnFooterMenuMobileVersion {
+        display: none;
     } 
 }

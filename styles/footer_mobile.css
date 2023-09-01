@@ -42,3 +42,15 @@ footer {
     font-size: var(--fs-16px);
     font-weight: var(--fw-400);
 }
+
+.btnFooterMenuDesktopVersion {
+    display: none;
+}
+
+.btnActiveFooterMenuDesktopVersion {
+    background: #D2E3FF;
+}
+
+.btnNotActiveFooterMenuDesktopVersion {
+    background: #FFFFFF;
+}

@@ -24,6 +24,23 @@ function checkTrue(obj) {
 }
 
 // ********************************************************************************
+// ******************* checks the windows width ***********************************
+// ********************************************************************************
+function handleWindowResize() {
+    var windowWidth = window.innerWidth;
+    if (windowWidth >= 1024) {
+      return true;
+    }
+  }
+  
+window.addEventListener("resize", handleWindowResize);
+  
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
+
+// ********************************************************************************
 // ****************************** header Slidemenu ********************************
 // ********************************************************************************
 let displayed = false;
@@ -87,23 +104,30 @@ function toggleButton(buttonName) {
         contacts: false,
         board: false
     };
-    let newBtnState = Object.entries(buttonStates)
-    for (let btn of newBtnState) {
-        if (btn[0] !== buttonName) {
-            let img = document.getElementById(`img${btn[0].charAt(0).toUpperCase() + btn[0].slice(1)}FooterMenu`);
-            console.log(btn[0], btn);
-            img.src = `../assets/img/${btn[0]}_button_default.png`;
-            buttonStates[btn[0]] = false;
-        }
-    }
 
-    let imgFooterMenu = document.getElementById(`img${buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}FooterMenu`);
+    if (!handleWindowResize()) {
+ 
+        let newBtnState = Object.entries(buttonStates)
+        for (let btn of newBtnState) {
+            if (btn[0] !== buttonName) {
+                let img = document.getElementById(`img${btn[0].charAt(0).toUpperCase() + btn[0].slice(1)}FooterMenu`);
+                img.src = `../assets/img/${btn[0]}_button_default.png`;
+                buttonStates[btn[0]] = false;
+            }
+        }
+
+        let imgFooterMenu = document.getElementById(`img${buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}FooterMenu`);
     
-    if (!buttonStates[buttonName]) {
-        imgFooterMenu.src = `../assets/img/${buttonName}_button_clicked.png`;
-        navigateToPage(buttonName);
+        if (!buttonStates[buttonName]) {
+            imgFooterMenu.src = `../assets/img/${buttonName}_button_clicked.png`;
+            navigateToPage(buttonName);
+        } else {
+            imgFooterMenu.src = `../assets/img/${buttonName}_button_default.png`;
+        }
     } else {
-        imgFooterMenu.src = `../assets/img/${buttonName}_button_default.png`;
+        if (!buttonStates[buttonName]) {
+            navigateToPage(buttonName);
+        }
     }
     buttonStates[buttonName] = !buttonStates[buttonName];
     localStorage.setItem("allBtnState", JSON.stringify(buttonStates));
@@ -111,26 +135,33 @@ function toggleButton(buttonName) {
 
 
 function updateBtnStyle(buttonName) {
-    switch (buttonName) {
-        case 'summary':
-            document.getElementById("imgSummaryFooterMenu").src =  `../assets/img/${buttonName}_button_clicked.png`;
-            break;
-        case 'add':
-            let add = document.getElementById("imgAddFooterMenu");
-            add.src = `../assets/img/${buttonName}_button_clicked.png`;
-            break;
-        case 'board':
-            document.getElementById("imgBoardFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
-            break;
-        case 'contacts':
-            document.getElementById("imgContactsFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
-            break;    
-        default:
-            break;
+    if (!handleWindowResize()) {
+        switch (buttonName) {
+            case 'summary':
+                document.getElementById("imgSummaryFooterMenu").src =  `../assets/img/${buttonName}_button_clicked.png`;
+                break;
+            case 'add':
+                document.getElementById("imgAddFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+                break;
+            case 'board':
+                document.getElementById("imgBoardFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+                break;
+            case 'contacts':
+                document.getElementById("imgContactsFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+                break;    
+            default:
+                break;
+        } 
+    } else {
+        switch (buttonName) {
+            case 'summary':
+                document.getElementById(`btn_${buttonName}_FooterMenuDesktopVersion`).classList.add("btnActiveFooterMenuDesktopVersion");
+                break;
+            default:
+                break;
+        } 
     }
-    
 }
-
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
