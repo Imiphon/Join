@@ -41,10 +41,12 @@ function widthForInfo(index) {
         showInfoDesk(index);
     }
 }
-function showInfoDesk(index) {
-    let mainFrame = document.getElementById('detailFrame'); 
-    let person = contactArray[index];
-    mainFrame.innerHTML = showInfoText(person, index);
+function showInfoDesk(index) { // ICH LÖSCHE HIER NOCH DIE SHOWCONTACTS!!!
+    let mainFrame = document.getElementById('mainFrame'); 
+    let person = contactArray[index];    
+    mainFrame.innerHTML = showMainFrame();
+    let infoBox = document.getElementById('infoBox'); 
+    infoBox.innerHTML = showInfoText(person, index);
 }
 
 function showInfoMobile(index) {
@@ -325,8 +327,20 @@ function closePopup() {
 
 
 //============================================================
-//  HTML TEMPLATES
+//  HTML TEMPLATES 
 //============================================================
+
+function showMainFrame() {
+    return `
+    <button class="add-btn" id="addBtn" onclick="openCreateContact()">
+        <img src="../assets/img/person_add.png" alt="">
+    </button>
+    <div class="main-frame" id="mainFrame">
+        <div class="name-group" id="nameGroup">    
+        </div>
+    </div> 
+`;
+}
 
 function showContactFrame() {
     return `
@@ -334,8 +348,10 @@ function showContactFrame() {
         <img src="../assets/img/person_add.png" alt="">
     </button>
     <div class="main-frame" id="mainFrame">
-    <div class="name-group" id="nameGroup">
-    </div> 
+        <div class="name-group" id="nameGroup">    
+        </div> 
+        <div class="info-box" id="infoBox"> 
+        </div> 
     </div> 
 `;
 }
