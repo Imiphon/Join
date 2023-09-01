@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function showContacts() {
     let content = document.querySelector('main');
     content.innerHTML = '';
-    content.innerHTML += showContactFrame();
+    content.innerHTML += showMainFrame();
     createInitalGroup(); 
     createInitials();
     showNameGroup();
@@ -42,14 +42,14 @@ function widthForInfo(index) {
     }
 }
 function showInfoDesk(index) { // ICH LÖSCHE HIER NOCH DIE SHOWCONTACTS!!!
-    let mainFrame = document.getElementById('mainFrame'); 
+    //let mainFrame = document.getElementById('mainFrame'); 
     let person = contactArray[index];    
-    mainFrame.innerHTML = showMainFrame();
+    //mainFrame.innerHTML = showMainFrame();
     let infoBox = document.getElementById('infoBox'); 
     infoBox.innerHTML = showInfoText(person, index);
 }
 
-function showInfoMobile(index) {
+function showInfoMobile(index) { //Hier die div#infoBox display:none setzen?
     let main = document.querySelector('main');
     main.innerHTML = '';
     let person = contactArray[index];
@@ -342,7 +342,7 @@ function showMainFrame() {
 `;
 }
 
-function showContactFrame() {
+function showMainFrame() {
     return `
     <button class="add-btn" id="addBtn" onclick="openCreateContact()">
         <img src="../assets/img/person_add.png" alt="">
