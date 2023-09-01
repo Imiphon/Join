@@ -8,6 +8,8 @@ let contactArray = [
     {name:'Cesar', lastName:'Anfang', mail:'cesar@mail.com', phone:'49176000', initials:'CA', color:'var(--user-red)'},
     {name:'Dora', lastName:'Berg', mail:'dora@mail.com', phone:'49176000', initials:'DB', color:'var(--user-rose)'},
     {name:'Emil', lastName:'Anfang', mail:'emil@mail.com', phone:'49176000', initials:'EA', color:'var(--user-turquoise)'},
+    {name:'Emil', lastName:'Berg', mail:'emil@mail.com', phone:'49176000', initials:'EB', color:'var(--user-green)'},
+    {name:'Fred', lastName:'Anfang', mail:'fred@mail.com', phone:'49176000', initials:'EA', color:'var(--user-orange)'},
 ]
 
 let initialGroups = [];

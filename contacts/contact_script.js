@@ -305,7 +305,9 @@ function showContactFrame() {
     <button class="add-btn" id="addBtn" onclick="openCreateContact()">
         <img src="../assets/img/person_add.png" alt="">
     </button>
+    <div class="main-frame">
     <div class="name-group" id="nameGroup">
+    </div> 
     </div> 
 `;
 }
