@@ -372,8 +372,7 @@ footer {
 
 .color-picker {
    position: fixed; 
-    z-index: 1000;    
-    
+    z-index: 1000;        
     display: none; /*default*/
     flex-wrap: wrap;
     border: none;

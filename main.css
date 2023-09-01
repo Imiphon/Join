@@ -93,6 +93,10 @@ button:hover {
     transform: scale(1.1);
 }
 
+h1, h2, h3 {
+    color: var(--reg-blue);
+}
+
 .jblue {
     color: var(--reg-blue);
 }
@@ -103,6 +107,10 @@ button:hover {
 
 .bold {
     font-weight: bold;
+}
+
+.no-deco {
+    text-decoration: none;
 }
 
 /*  ===========================================================
