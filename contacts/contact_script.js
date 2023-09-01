@@ -42,10 +42,9 @@ function widthForInfo(index) {
     }
 }
 function showInfoDesk(index) {
-    debugger;
-    let mainFrame = document.getElementById('mainFrame'); 
+    let mainFrame = document.getElementById('detailFrame'); 
     let person = contactArray[index];
-    mainFrame.innerHTML += showInfoText(person, index);
+    mainFrame.innerHTML = showInfoText(person, index);
 }
 
 function showInfoMobile(index) {

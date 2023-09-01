@@ -15,13 +15,6 @@
     cursor: pointer;
 }
 
-/*footer {
-    background-color: white;
-    width: 100%;
-    height: 80px;
-    z-index: 10;
-}*/
-
 .main-frame {
     width: 100%;
     position: relative;
@@ -465,11 +458,16 @@
         z-index: 20;
         border-width: 0;
         box-shadow: var(--shadow);
+        display: inline;
     }
 
     .add-btn img,
     .more-btn img {
         z-index: 21;
+    }
+
+    .detail-head a {
+        display: inline;
     }
 
     .detail-frame {
