@@ -324,7 +324,7 @@ body{
     }
     .footerWrapper {
         flex-direction: column;
-        margin-top: 84px;
+        margin-top: 114px;
         display: flex;
         height: 100%;
     }
