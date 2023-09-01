@@ -104,9 +104,9 @@ function toggleButton(buttonName) {
         contacts: false,
         board: false
     };
-
+    let btnFooterMenuDesktopVersion = buttonName
     if (!handleWindowResize()) {
- 
+        
         let newBtnState = Object.entries(buttonStates)
         for (let btn of newBtnState) {
             if (btn[0] !== buttonName) {
@@ -116,8 +116,11 @@ function toggleButton(buttonName) {
             }
         }
 
+
+        // let btnFooterMenuDesktopVersion = document.getElementById(`btn_${buttonName}_FooterMenuDesktopVersion`);
+        
         let imgFooterMenu = document.getElementById(`img${buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}FooterMenu`);
-    
+        
         if (!buttonStates[buttonName]) {
             imgFooterMenu.src = `../assets/img/${buttonName}_button_clicked.png`;
             navigateToPage(buttonName);
@@ -126,6 +129,7 @@ function toggleButton(buttonName) {
         }
     } else {
         if (!buttonStates[buttonName]) {
+            // btnFooterMenuDesktopVersion.classList.add("btnActiveFooterMenuDesktopVersion");
             navigateToPage(buttonName);
         }
     }
