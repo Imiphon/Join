@@ -26,6 +26,35 @@ function deleteContact(index) {
     contactArray.splice(index, 1);
     showContacts();
 }
+
+
+//============================================================
+// CHECK WIDTH TO CONTROL MOB OR DESK OPTIC
+//============================================================
+
+function widthForInfo(index) {
+    const width = window.innerWidth;
+    if (width <= 1024) {
+        showInfoMobile(index);  
+    } else {
+        console.log('more width than 1025px')
+        showInfoDesk(index);
+    }
+}
+function showInfoDesk(index) {
+    debugger;
+    let mainFrame = document.getElementById('mainFrame'); 
+    let person = contactArray[index];
+    mainFrame.innerHTML += showInfoText(person, index);
+}
+
+function showInfoMobile(index) {
+    let main = document.querySelector('main');
+    main.innerHTML = '';
+    let person = contactArray[index];
+    main.innerHTML += showInfoText(person, index);
+}
+
 //============================================================
 // START TOGGLE DRAWER WITH MORE BTN
 //============================================================
@@ -305,7 +334,7 @@ function showContactFrame() {
     <button class="add-btn" id="addBtn" onclick="openCreateContact()">
         <img src="../assets/img/person_add.png" alt="">
     </button>
-    <div class="main-frame">
+    <div class="main-frame" id="mainFrame">
     <div class="name-group" id="nameGroup">
     </div> 
     </div> 
@@ -336,7 +365,7 @@ function personDatas(initial) {
             let person = thisPerson;
             htmlContent += `
                 <div class="name-frame">
-                    <div class="name-box" onclick="showInfo(${i})">
+                    <div class="name-box" onclick="widthForInfo(${i})">
                         <div class="side-circle" class="initials" style="background-color: ${person.color};">
                             ${person.initials}
                         </div>
@@ -356,59 +385,51 @@ function personDatas(initial) {
     return htmlContent;
 }
 
-function showInfo(index) {
-    let main = document.querySelector('main');
-    main.innerHTML = '';
-    let person = contactArray[index];
-    let indexNr = index; //Nr of contactArray
-    main.innerHTML += `
-            <!----------- INFO FRAME-------------------------->
-            <div class="detail-frame">
-                <div class="detail-head">
-                    <div>Contact Informations</div>
-                    <a href="contact_list.html">
-                        <img src="../assets/img/arrow-left-line.svg" alt="back">
-                    </a>
-
-                </div>
-                <div class="detail-name-box">
-                    <div class="detail-ellipse" style="background-color: ${person.color}">
-                        ${person.initials}
-                    </div>
-                    <div class="detail-name">
-                    ${person.name} ${person.lastName}
-                    </div>
-                </div>
-                <div class="adr-box">
-                    <div class="detail-description bold">
-                        Email
-                    </div>
-                    <div class="mail">
-                    ${person.mail}
-                    </div>
-                    <div class="detail-description bold">
-                        Phone
-                    </div>
-                    <div class="info-text">
-                    ${person.phone}
-                    </div>
-                </div>
-            </div><!-- End detail-frame-->
-
-            <button class="more-btn" id="moreBtn" onclick="toggleDrawer()">
-                <img src="../assets/img/more_btn.svg" alt="">
-            </button>
-
-            <div id="drawer">
-              <div class="drawer-item" onclick="editMobContact(${indexNr})">
-                <img src="../assets/img/edit.png" alt="Edit">
-                <span>Edit</span>
-              </div>
-              <div class="drawer-item" onclick="deleteContact(${indexNr})">
-                <img src="../assets/img/delete.png" alt="Delete">
-                <span>Delete</span>
-              </div>
+function showInfoText(person, indexNr) {
+    return `
+        <div class="detail-frame" id="detailFrame">
+            <div class="detail-head">
+                <div>Contact Informations</div>
+                <a href="contact_list.html">
+                    <img src="../assets/img/arrow-left-line.svg" alt="back">
+                </a>
             </div>
+            <div class="detail-name-box">
+                <div class="detail-ellipse" style="background-color: ${person.color}">
+                    ${person.initials}
+                </div>
+                <div class="detail-name">
+                ${person.name} ${person.lastName}
+                </div>
+            </div>
+            <div class="adr-box">
+                <div class="detail-description bold">
+                    Email
+                </div>
+                <div class="mail">
+                ${person.mail}
+                </div>
+                <div class="detail-description bold">
+                    Phone
+                </div>
+                <div class="info-text">
+                ${person.phone}
+                </div>
+            </div>
+        </div>
+        <button class="more-btn" id="moreBtn" onclick="toggleDrawer()">
+            <img src="../assets/img/more_btn.svg" alt="">
+        </button>
+        <div id="drawer">
+          <div class="drawer-item" onclick="editMobContact(${indexNr})">
+            <img src="../assets/img/edit.png" alt="Edit">
+            <span>Edit</span>
+          </div>
+          <div class="drawer-item" onclick="deleteContact(${indexNr})">
+            <img src="../assets/img/delete.png" alt="Delete">
+            <span>Delete</span>
+          </div>
+        </div>
     `;
 }
 
