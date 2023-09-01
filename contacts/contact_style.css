@@ -464,6 +464,7 @@
     .add-btn img,
     .more-btn img {
         z-index: 21;
+        display: inline;
     }
 
     .detail-head a {
