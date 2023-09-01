@@ -260,5 +260,6 @@ footer {
         /* same height like header */
         padding-bottom: 80px;
         /* same height like footer */
+        padding-left: 0;
     }
 }

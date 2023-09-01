@@ -242,7 +242,6 @@ function validateForm() {
 
     if (name.length !== 2) {
         alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
-        showEditContact(index);
         return false;
     }
 
