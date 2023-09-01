@@ -113,6 +113,11 @@ h1, h2, h3 {
     text-decoration: none;
 }
 
+.sp-between{
+    display: flex;
+    justify-content: space-between;
+}
+
 /*  ===========================================================
     general styles for selectors: body, header, main and footer
     =========================================================== */

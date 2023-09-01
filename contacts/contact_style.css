@@ -301,6 +301,7 @@ footer {
 .no-border {
     border: none !important;
 }
+
 .pop-top {
     color: white;
     background-color: var(--reg-blue);
@@ -324,56 +325,59 @@ footer {
 }
 
 /*=====================
-    SELECTORS FOR ADD CONTACT IN MOBILE
+    SELECTORS FOR ADD & EDIT CONTACT IN MOBILE
     ====================*/
 
-.add-mob-form {
+.contact-form {
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
     height: 153px;
 }
 
-.add-mob-frame {
+.contact-frame {
     padding: 13px 21px;
     border-bottom: 1px solid var(--user-grey);
     display: flex;
     justify-content: space-between;
 }
 
-.add-mob-frame img {
+.contact-frame img {
     width: 24px;
     height: 24px;
 }
 
-.add-mob-input {
+.contact-input {
     height: 24px;
     color: black;
     font-family: "open-sans", sans-serif;
-    font-size: 1.2rem;/*original:19px*/
+    font-size: 1.2rem;
+    /*original:19px*/
     font-weight: 400;
     letter-spacing: 0em;
     border: 0;
 }
 
 /* Style for placeholder text */
-.add-mob-input::placeholder {
+.contact-input::placeholder {
     color: var(--light-grey);
 }
 
 .color-box {
     width: 24px;
     height: 24px;
-    background-color: var(--user-grey); /* default */
+    background-color: var(--user-grey);
+    /* default */
     border-radius: 4px;
     cursor: pointer;
     border: none;
 }
 
 .color-picker {
-   position: fixed; 
-    z-index: 1000;        
-    display: none; /*default*/
+    position: fixed;
+    z-index: 1000;
+    display: none;
+    /*default*/
     flex-wrap: wrap;
     border: none;
     background-color: white;
@@ -387,11 +391,8 @@ footer {
     z-index: 30;
 }
 
-
-.add-mob-btn {
-    width: 173px;
-    height: 48px;
-    padding: 12px 8px 12px 8px;
+.contact-btn {
+    padding: 12px 8px;
     border-radius: 10px;
     border: 0;
     font-size: 19px;
@@ -402,16 +403,33 @@ footer {
     color: white;
 }
 
-/*=====================
-    SELECTORS FOR ADD CONTACT IN MOBILE
-    ====================*/
-
-.edit-mob-input {
-    height: 24px;
-    color: black;
-    font-family: "open-sans", sans-serif;
-    font-size: 19px;
-    font-weight: 400;
-    letter-spacing: 0em;
+.blue-btn {
+    padding: 12px 8px;
+    border-radius: 10px;
     border: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 23px;
+    text-align: center;
+    background-color: var(--reg-blue);
+    color: white;
+}
+
+.white-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-grey);
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 23px;
+    text-align: center;
+    background-color: white;
+    color: var(--dark-grey);
+}
+
+.btn-box {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+
 }

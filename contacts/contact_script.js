@@ -426,10 +426,10 @@ function showAddContact() {
 </div>
 
 <div class="pop-bottom">
-    <div class="add-mob-form">
+    <div class="contact-form">
         <form id="userForm">
-            <div class="add-mob-frame">
-                <input class="add-mob-input" type="text" id="fullName" placeholder="Name Nachname">
+            <div class="contact-frame">
+                <input class="contact-input" type="text" id="fullName" placeholder="Name Nachname">
                 <div id="colorBox" class="color-box" onclick="openColorPicker()">
                     <div id="colorPicker" class="color-picker" style="display: none;">
                         <!-- colors -->
@@ -437,12 +437,12 @@ function showAddContact() {
                 </div>
                 <img src="../assets/img/person_small.png" alt="name">
             </div>
-            <div class="add-mob-frame">
-                <input class="add-mob-input" type="email" id="email" placeholder="Email" required>
+            <div class="contact-frame">
+                <input class="contact-input" type="email" id="email" placeholder="Email" required>
                 <img src="../assets/img/mail_small.png" alt="name">
             </div>
-            <div class="add-mob-frame tel-box">
-                <input class="add-mob-input" type="tel" id="phone" name="phone" placeholder="Phone"
+            <div class="contact-frame tel-box">
+                <input class="contact-input" type="tel" id="phone" name="phone" placeholder="Phone"
                     pattern="\+?\d{2,4}[-.\s]?\d{1,15}" required>
                 <img src="../assets/img/call_small.png" alt="name">
                 <!-- ------------ number with country-code:                 
@@ -450,13 +450,13 @@ function showAddContact() {
             <option value="+1">USA (+1)</option>
             <option value="+49">Germany (+49)</option>
             </select>
-            <input class="add-mob-input" type="tel" id="phone" pattern="\d{1,15}" placeholder="Phone" required> 
+            <input class="contact-input" type="tel" id="phone" pattern="\d{1,15}" placeholder="Phone" required> 
             ------------------------------------------------ -->
             </div>
         </form>
     </div>
     <div>
-        <button class="add-mob-btn" onclick="createContact()">
+        <button class="blue-btn" onclick="createContact()">
             Create Contact
             <img src="../assets/img/check_small.png" alt="name">
         </button>
@@ -483,29 +483,28 @@ function showEditContact(index) {
 
         <!-- <div> <img class="popup-circle" src="../assets/img/person_initial.png" alt="../assets/img/person_initial.png"> </div>   -->     
         <div class="pop-bottom">
-        <div class="add-mob-form">
+        <div class="contact-form">
             <form id="userForm">
-                <div class="add-mob-frame">
-                    <input class="edit-mob-input" required type="text" id="fullName" placeholder="${person.name + ' ' + person.lastName}">
+                <div class="contact-frame">
+                    <input class="contact-input" required type="text" id="fullName" placeholder="${person.name + ' ' + person.lastName}">
                     <img src="../assets/img/person_small.png" alt="name">
                 </div>    
-                <div class="add-mob-frame">
-                    <input class="edit-mob-input" required type="email" id="email" placeholder="${person.mail}">
+                <div class="contact-frame">
+                    <input class="contact-input" required type="email" id="email" placeholder="${person.mail}">
                     <img src="../assets/img/mail_small.png" alt="name">
                 </div>    
-                <div class="add-mob-frame">
-                    <input class="edit-mob-input" required type="tel" id="phone" placeholder="${person.phone}">
+                <div class="contact-frame">
+                    <input class="contact-input" required type="tel" id="phone" placeholder="${person.phone}">
                     <img src="../assets/img/call_small.png" alt="name">
                 </div>
             </form> 
         </div>
     
-        <div>
-            <button class="add-mob-btn" onclick="deleteInEditor(${indexNr})">
+        <div class="btn-box">
+            <button class="white-btn" onclick="deleteInEditor(${indexNr})">
                 Delete
-                <img src="../assets/img/check_small.png" alt="name">
             </button>
-            <button class="add-mob-btn" onclick="editContactInArray(${indexNr})">
+            <button class="blue-btn" onclick="editContactInArray(${indexNr})">
                 Save
                 <img src="../assets/img/check_small.png" alt="name">
             </button>
