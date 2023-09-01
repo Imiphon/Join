@@ -377,7 +377,6 @@
 }
 
 .color-picker {
-    width: 70px;
     position: fixed;
     z-index: 1000;
     display: none;
