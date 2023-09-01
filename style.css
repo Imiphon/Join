@@ -289,3 +289,43 @@ body{
         bottom: 32px;
     }
 }
+
+
+/***********************/
+@media(min-width: 1024px) {
+    .body-frame {
+        flex-direction: row-reverse;
+    }
+
+    footer {
+        z-index: 9;
+        width: 232px;
+        height: 100%;
+        position: absolute;
+    }
+
+    .footerMenuContainer {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .toolNameNav {
+        display: block;
+    }
+    .questionsNav {
+        display: block;
+    }
+    .helpAnchorSubMenuHeader {
+        display: none;
+    }
+    .privacyLegalContainer {
+        display: block;
+        margin-bottom: 200px;
+    }
+    .footerWrapper {
+        flex-direction: column;
+        margin-top: 84px;
+        display: flex;
+        height: 100%;
+
+    } 
+}

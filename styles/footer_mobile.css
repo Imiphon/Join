@@ -23,12 +23,22 @@ footer {
     cursor: pointer;
 }
 
-/* .footerMenuContainer {
-    background-image: url('../assets/img/summary_button_footer_mobile.png');
-    background-repeat: no-repeat;
+
+/******** deskto version *********/
+
+.privacyLegalContainer {
+    display: none;
 }
 
-.btnSummaryFooterMenu:active {
-    background-image: url('../assets/img/summary_icon_default_mobile.png');
-    background-repeat: no-repeat;
-} */
+.footerPolicyAnchor {
+    padding-bottom: 15px;
+    color: #42526E;
+    font-size: var(--fs-16px);
+    font-weight: var(--fw-400);
+}
+
+.footerLegalAnchor {
+    color: #42526E;
+    font-size: var(--fs-16px);
+    font-weight: var(--fw-400);
+}
