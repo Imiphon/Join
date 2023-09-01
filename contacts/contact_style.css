@@ -1,15 +1,6 @@
 .add-btn,
 .more-btn {
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    right: 16px;
-    bottom: 96px;
-    background-color: var(--reg-blue);
-    border-radius: 10px;
-    z-index: 20;
-    border-width: 0;
-    box-shadow: var(--shadow);
+    display: none;
 }
 
 .add-btn img,
@@ -34,13 +25,12 @@
 .main-frame {
     width: 100%;
     position: relative;
-left: 0;
+    left: 0;
+    display: flex;
 }
 
-
-
 .name-group {
-    width: 50%;
+    width: initial;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -60,7 +50,7 @@ left: 0;
 }
 
 .line-box {
-    Width: 352px;
+    Width: 90%;
     Height: 16px;
     Gap: 10px;
     margin-bottom: 32px;
@@ -92,6 +82,8 @@ left: 0;
     margin-bottom: 10px;
     gap: 35px;
     padding: 15px, 24px, 15px, 24px;
+
+    cursor: pointer;
 }
 
 .side-circle {
@@ -133,7 +125,6 @@ left: 0;
     ====================*/
 
 .detail-frame {
-    top: 144px;
     padding-left: 16px;
     padding-right: 16px;
     font-weight: 400;
@@ -143,8 +134,12 @@ left: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    /*changed in mobile*/
+    justify-content: flex-start;
+    width: 50%;
+    top: 0;
 }
+
 
 .detail-head {
     position: relative;
@@ -152,13 +147,17 @@ left: 0;
     margin-bottom: 20px;
     width: 100%;
     height: auto;
-    font-size: 19px;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: 23px;
     letter-spacing: 0em;
     text-align: left;
     display: flex;
     justify-content: space-between;
+}
+
+.detail-head a {
+    display: none;
 }
 
 .detail-name-box {
@@ -453,4 +452,41 @@ left: 0;
         overflow: auto;
         box-shadow: var(--shadow-right);
     }
+
+    .add-btn,
+    .more-btn {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        right: 16px;
+        bottom: 96px;
+        background-color: var(--reg-blue);
+        border-radius: 10px;
+        z-index: 20;
+        border-width: 0;
+        box-shadow: var(--shadow);
+    }
+
+    .add-btn img,
+    .more-btn img {
+        z-index: 21;
+    }
+
+    .detail-frame {
+
+        padding-left: 16px;
+        padding-right: 16px;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /*changed in mobile*/
+        justify-content: center;
+        width: 100%;
+        top: 144px;
+    }
 }
+
