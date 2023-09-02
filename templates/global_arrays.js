@@ -1,6 +1,6 @@
 //this array comes from server and has always to be updated
 
-let contactArray = [
+let contactArrayFolder = [
     {name:'Anton', lastName:'Anfang', mail:'anton@mail.com', phone:'49179111', initials:'', color:'var(--user-orange)'},
     {name:'Ali', lastName:'Berg', mail:'ali@mail.com', phone:'49176000', initials:'', color:'var(--user-blue)'},
     {name:'Berta', lastName:'Anfang', mail:'berta@mail.com', phone:'49176000', initials:'', color:'var(--user-yellow)'},

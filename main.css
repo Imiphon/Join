@@ -60,6 +60,10 @@
     font-family: "open-sans", sans-serif;
 }
 
+.d-none{
+    display: none;
+}
+
 a {
     cursor: pointer;
     transition: color 0.3s ease;
