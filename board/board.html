@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Board</title>
     <link rel="stylesheet" href="../styles/header_mobile.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../styles/footer_mobile.css">
+    <link rel="stylesheet" href="board.css">
     <link rel="stylesheet" href="../main.css">
 </head>
 
@@ -16,8 +18,45 @@
         <header include-html="../templates/header.html">
         </header>
         <main>
-            <!--------------- ------------------------->
-            <p>the board will live here</p>
+            <div class="search-bar" id="search-bar" >
+                <input type="search" name="search" id="search">
+                |
+                <i class="bi-search"></i>
+            </div>
+
+            <section class="tasks" id="tasks">
+
+                <div class="card-parent" id="to-do">
+                    <div class="row-title">
+                        <b>To do</b>
+                        <i class="bi bi-plus-lg"></i>
+                    </div>
+    
+                    <div class="empty-todo">
+                        <p>No tasks To do</p>
+                    </div>
+                </div>
+
+                <div class="card-parent" id="to-do">
+                    <div class="row-title">
+                        <b>in progress</b>
+                        <i class="bi bi-plus-lg"></i>
+                    </div>
+
+                    <div class="cards">
+                        
+                    </div>
+    
+                    <div class="empty-todo d-none">
+                        <p>No tasks To do</p>
+                    </div>
+                </div>
+
+
+            </section>
+
+
+            
             
         </main>
         <footer include-html="../templates/footer.html">
@@ -27,6 +66,7 @@
     
     
     <script src="../templates/include-html.js"></script>
+    <script src="board.js"></script>
 </body>
 
 </html>

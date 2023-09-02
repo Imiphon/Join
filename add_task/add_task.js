@@ -39,7 +39,7 @@ function dropDownTemplates() {
         <div class="options">
         <span class="profile" id="profile${index}">${showShortName(user.name, user.lastName)}</span>
         <label for="checkboc">${user.name}</label>
-        <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser('${user.name}', '${user.lastName}','${user.color}')"} onclick>
+        <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser('${user.name}', '${user.lastName}','${user.color}', ${index})"} onclick>
         </div>
         `
         // Set a random background color for the profile
@@ -161,14 +161,15 @@ function setPrio(value) {
 
 // Function to define the assigned user and push the name to the "assignedontacts"-Array to show them in the "selected-user" container
 
-function checkedUser(userName, userLastName, bColor){
+function checkedUser(userName, userLastName, bColor, index){
+    let chekBoxValue = document.getElementById(`checkbox${index}`).value + " "+userLastName;
     assignedContacts.push(
         {
             'shortName': showShortName(userName, userLastName),
             'bColor': bColor
         });
 
-        console.log(assignedContacts)
+        console.log(chekBoxValue)
     showAssignedContactsInContainer();
 }
 
