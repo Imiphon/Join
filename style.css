@@ -1,7 +1,7 @@
 body{
-    flex-direction: column;
+    /*flex-direction: column;
     padding: 32px;
-    overflow: auto;
+    overflow: auto;*/
     animation: 450ms changeBackground ease-in-out;
 }
 
@@ -288,4 +288,69 @@ body{
         position: fixed;
         bottom: 32px;
     }
+}
+
+
+/***********************/
+@media(min-width: 1024px) {
+    .body-frame {
+        flex-direction: row-reverse;
+    }
+
+    footer {
+        z-index: 9;
+        width: 232px;
+        height: 100%;
+        position: absolute;
+        padding-right: 48px;
+    }
+
+    .footerMenuContainer {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .toolNameNav {
+        display: block;
+    }
+    .questionsNav {
+        display: block;
+    }
+    .helpAnchorSubMenuHeader {
+        display: none;
+    }
+    .privacyLegalContainer {
+        display: block;
+        margin-bottom: 200px;
+    }
+    .footerWrapper {
+        flex-direction: column;
+        margin-top: 114px;
+        display: flex;
+        height: 100%;
+    }
+    .btnFooterMenuDesktopVersion {
+        width: 186px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-radius: 8px;
+        padding: 8px 30px;
+        margin-bottom: 15px;
+        background: #FFFFFF;
+    }
+    .btnFooterMenuDesktopVersion img {
+        margin-right: 8px;
+        width: 24px;
+        height: 24px;
+    }
+    .btnFooterMenuDesktopVersionTextDiv {
+        font-size: var(--fs-16px);
+        font-weight: var(--fw-400);
+        font-style: normal;
+        color: #42526E;
+    }
+    .btnFooterMenuMobileVersion {
+        display: none;
+    } 
 }

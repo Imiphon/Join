@@ -24,6 +24,23 @@ function checkTrue(obj) {
 }
 
 // ********************************************************************************
+// ******************* checks the windows width ***********************************
+// ********************************************************************************
+function handleWindowResize() {
+    var windowWidth = window.innerWidth;
+    if (windowWidth >= 1024) {
+      return true;
+    }
+  }
+  
+window.addEventListener("resize", handleWindowResize);
+  
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
+
+// ********************************************************************************
 // ****************************** header Slidemenu ********************************
 // ********************************************************************************
 let displayed = false;
@@ -41,6 +58,40 @@ function showSubmenuMobile() {
 // ********************************************************************************
 
 
+// ********************************************************************************
+// ********************* navigates to listed pages ********************************
+// ********************************************************************************
+function navigateToPage(buttonName) {
+    switch (buttonName) {
+        case 'summary':
+            window.location.href = '../summary/summary.html';
+            break;
+        case 'add':
+            window.location.href = '../add_task/add_task.html';
+            break;
+        case 'board':
+            window.location.href = '../board/board.html';
+            break;
+        case 'contacts':
+            window.location.href = '../contacts/contact_list.html';
+            break;
+        case 'help':
+            window.location.href = '../templates/help.html';
+            break;
+        case 'legal':
+            window.location.href = '../templates/imprint.html';
+            break;
+        case 'policy':
+            window.location.href = '../templates/privacy_policy.html';
+            break;                
+        default:
+            break;
+    }
+}
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
 
 
 // ********************************************************************************
@@ -53,23 +104,34 @@ function toggleButton(buttonName) {
         contacts: false,
         board: false
     };
-    let newBtnState = Object.entries(buttonStates)
-    for (let btn of newBtnState) {
-        if (btn[0] !== buttonName) {
-            let img = document.getElementById(`img${btn[0].charAt(0).toUpperCase() + btn[0].slice(1)}FooterMenu`);
-            console.log(btn[0], btn);
-            img.src = `../assets/img/${btn[0]}_button_default.png`;
-            buttonStates[btn[0]] = false;
+    let btnFooterMenuDesktopVersion = buttonName
+    if (!handleWindowResize()) {
+        
+        let newBtnState = Object.entries(buttonStates)
+        for (let btn of newBtnState) {
+            if (btn[0] !== buttonName) {
+                let img = document.getElementById(`img${btn[0].charAt(0).toUpperCase() + btn[0].slice(1)}FooterMenu`);
+                img.src = `../assets/img/${btn[0]}_button_default.png`;
+                buttonStates[btn[0]] = false;
+            }
         }
-    }
 
-    let imgFooterMenu = document.getElementById(`img${buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}FooterMenu`);
-    
-    if (!buttonStates[buttonName]) {
-        imgFooterMenu.src = `../assets/img/${buttonName}_button_clicked.png`;
-        navigateToPage(buttonName);
+
+        // let btnFooterMenuDesktopVersion = document.getElementById(`btn_${buttonName}_FooterMenuDesktopVersion`);
+        
+        let imgFooterMenu = document.getElementById(`img${buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}FooterMenu`);
+        
+        if (!buttonStates[buttonName]) {
+            imgFooterMenu.src = `../assets/img/${buttonName}_button_clicked.png`;
+            navigateToPage(buttonName);
+        } else {
+            imgFooterMenu.src = `../assets/img/${buttonName}_button_default.png`;
+        }
     } else {
-        imgFooterMenu.src = `../assets/img/${buttonName}_button_default.png`;
+        if (!buttonStates[buttonName]) {
+            // btnFooterMenuDesktopVersion.classList.add("btnActiveFooterMenuDesktopVersion");
+            navigateToPage(buttonName);
+        }
     }
     buttonStates[buttonName] = !buttonStates[buttonName];
     localStorage.setItem("allBtnState", JSON.stringify(buttonStates));
@@ -77,52 +139,31 @@ function toggleButton(buttonName) {
 
 
 function updateBtnStyle(buttonName) {
-    console.log(`../assets/img/${buttonName}_button_clicked.png`);
-    console.log(localStorage.getItem("allBtnState"))
-    console.log(document.getElementsByTagName("img"));
-    console.log(document.getElementById("imgSummaryFooterMenu"))
-    switch (buttonName) {
-        case 'summary':
-            document.getElementById("imgSummaryFooterMenu").src =  `../assets/img/${buttonName}_button_clicked.png`;
-            break;
-        case 'add':
-            let add = document.getElementById("imgAddFooterMenu");
-            console.log(add);
-            add.src = `../assets/img/${buttonName}_button_clicked.png`;
-            break;
-        case 'board':
-            document.getElementById("imgBoardFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
-            break;
-        case 'contacts':
-            document.getElementById("imgContactsFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
-            break;    
-        default:
-            break;
-    }
-    
-}
-
-
-function navigateToPage(buttonName) {
-    switch (buttonName) {
-        case 'summary':
-            window.location.href = '../summary/summary.html';
-            console.log('summary');
-            break;
-        case 'add':
-            window.location.href = '../add_task/add_task.html';
-            console.log('add');
-            break;
-        case 'board':
-            window.location.href = '../board/board.html';
-            console.log('board');
-            break;
-        case 'contacts':
-            window.location.href = '../contacts/contact_list.html';
-            console.log('contacts');
-            break;    
-        default:
-            break;
+    if (!handleWindowResize()) {
+        switch (buttonName) {
+            case 'summary':
+                document.getElementById("imgSummaryFooterMenu").src =  `../assets/img/${buttonName}_button_clicked.png`;
+                break;
+            case 'add':
+                document.getElementById("imgAddFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+                break;
+            case 'board':
+                document.getElementById("imgBoardFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+                break;
+            case 'contacts':
+                document.getElementById("imgContactsFooterMenu").src = `../assets/img/${buttonName}_button_clicked.png`;
+                break;    
+            default:
+                break;
+        } 
+    } else {
+        switch (buttonName) {
+            case 'summary':
+                document.getElementById(`btn_${buttonName}_FooterMenuDesktopVersion`).classList.add("btnActiveFooterMenuDesktopVersion");
+                break;
+            default:
+                break;
+        } 
     }
 }
 // ********************************************************************************
