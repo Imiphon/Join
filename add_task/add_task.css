@@ -272,7 +272,7 @@ form {
     color: var(--user-red);
 }
 
-.equal-sign {
+.fa-equals {
     color: var(--user-yellow)
 }
 
@@ -351,7 +351,7 @@ form {
         font-size: smaller;
     }
 
-    line{
+    .center-line{
         display: block !important;
     }
 }
@@ -379,7 +379,7 @@ form {
         justify-content: space-between;
     }
 
-    .line{
+    .center-line{
         background-color: var(--user-grey);
         width: 100px;
         padding: 1px !important;

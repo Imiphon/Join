@@ -353,4 +353,9 @@ body{
     .btnFooterMenuMobileVersion {
         display: none;
     } 
+
+    .borad-main{
+        flex: none;
+        width: calc(100% - 232px);        
+    }
 }

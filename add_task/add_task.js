@@ -34,7 +34,7 @@ function dropDownTemplates() {
     let dropdown = document.getElementById('dropdown-options');
     dropdown.innerHTML = '';
 
-    contactArrayFolder.forEach((user, index) => {
+    contactArray.forEach((user, index) => {
         dropdown.innerHTML += `
         <div class="options">
         <span class="profile" id="profile${index}">${showShortName(user.name, user.lastName)}</span>

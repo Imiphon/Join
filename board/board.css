@@ -161,5 +161,36 @@
 .assign-conatiner{
     display: flex;
     width: 100%;
+    align-items: center;
     justify-content: space-between;
+}
+
+.assigned-person{
+    display: flex;
+}
+
+.assigned-person span{
+    background-color: #726bd3;
+    display: flex;
+    width: 32px;
+    color: white;
+    font-weight: 400;
+    height: 32px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    outline: 1px #ffffff solid;
+}
+
+.bi-chevron-double-up{
+    color: var(--user-red);
+}
+
+.fa-equals {
+    color: var(--user-yellow)
+}
+
+.bi-chevron-double-down{
+    color: var(--user-green);
 }
