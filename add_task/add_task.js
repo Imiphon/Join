@@ -1,5 +1,6 @@
-let prio;
 const assignedContacts = [];
+
+
 
 // Function to show or hide options
 function showOptions() {
@@ -99,22 +100,38 @@ function openAddTask() {
     document.getElementById('subtask-value').focus();
 }
 
+//Remove the blue color of the subtask-wrapper
+
+let subtaskWrapper = document.getElementById('subtask-wrapper');
+let subsTaskDiv = document.getElementById('subtask-container');
+
+
+
+subsTaskDiv.addEventListener('click', (event) => {
+    event.stopPropagation(); // Stoppen Sie die Propagierung des Klickereignisses
+    subtaskWrapper.style.borderBottom = '1px solid var(--reg-blue)';
+});
+
+document.addEventListener('click', () => {
+    subtaskWrapper.style.borderBottom = '1px solid var(--user-grey)';
+});
+
 // Function to generate the HTML template for tasks
 function tasksTemplate() {
     return `
         <div class="subtask" id="subtask">
             <b>Subtasks</b>
             <div class="subtask-wrapper" id="subtask-wrapper">
-                <input type="text" id="subtask-value" placeholder="Add new subtask" required>  
+                <input type="text" id="subtask-value" placeholder="Add new subtask">  
                 <div id="subtask-icon-container" class="subtask-icon-conatiner">
                     <i class="bi bi-x" onclick="clearAddTask()"></i>
                     |
-                    <i class="bi bi-check-lg" onclick="addTask()"></i>
+                    <i class="bi bi-check-lg" onclick="addSubtask()"></i>
                 </div> 
             </div>
-            <div id="tasksarea">
+            <ul id="tasks-area" class="tasks-area">
 
-            </div>
+            </ul>
         </div>
     `;
 }
@@ -128,6 +145,10 @@ function activeCreateTaskBtn() {
 function activeClearTaskBtn() {
     document.getElementById('clear-task').click();
 }
+
+
+let prio; //To save the priority-value
+
 
 // Function to set priority and update it
 const boxShadowColors = [
@@ -148,9 +169,9 @@ prioBtns.forEach((btn, index)=>{
 
         const boxShadowColor = boxShadowColors[index + 1];
         btn.style.boxShadow = `0px 0px 4px 0px ${boxShadowColor}`;
+        console.log(btn)
         
         // Update the value of priority
-        setPrio(getPrioValue(index));
     })
 })
 
@@ -188,4 +209,65 @@ function showAssignedContactsInContainer(){
         `
         
     }
+}
+
+let editingIndex = -1;
+
+// function to add a subtasks;
+
+function addSubtask() {
+    let taskValue = document.getElementById('subtask-value').value.trim(); // Trim to remove leading/trailing spaces
+    
+    if (taskValue !== '') {
+        if (editingIndex !== -1) {
+            // If editingIndex is not -1, it means we are editing a task
+            tasksForSubtasks[editingIndex] = taskValue; // Update the task
+            editingIndex = -1; // Reset the index
+        } else {
+            // Otherwise, add a new task
+            tasksForSubtasks.push(taskValue);
+        }
+        
+        renderAddedTask();
+        document.getElementById('subtask-value').value = '';
+    }
+}
+
+function renderAddedTask() {
+    let tasksArea = document.getElementById('tasks-area');
+    tasksArea.innerHTML = '';
+
+    tasksForSubtasks.forEach((task, i) => {
+        tasksArea.innerHTML += `
+        <li>
+            <p>${task}</p>
+            <span>
+                <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
+                <i class="bi bi-trash" onclick="deleteTask(${i})"></i>
+            </span>
+        </li>
+        `;
+    });
+}
+
+function deleteTask(i){
+    tasksForSubtasks.splice(i, 1); 
+    renderAddedTask();
+}
+
+function editTask(i){
+    let taskValue = document.getElementById('subtask-value');
+    taskValue.value = tasksForSubtasks[i];
+    tasksForSubtasks.splice(i, 1);
+    editingIndex = i;
+    renderAddedTask();
+    taskValue.focus();
+}
+
+function addTask(){
+  let todo = addedTasks[0]['toDo'];
+  todo.push({
+    'name': 'Karo'
+  })
+  console.log(todo)
 }

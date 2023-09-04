@@ -14,6 +14,16 @@ let contactArray = [
 
 let initialGroups = [];
 
+let tasksForSubtasks = [];
+
+let addedTasks = [
+    {
+        'toDo':[],
+        'inProgress':[],
+        'awaitFeedBack':[]
+    }
+];
+
 
 /**
  * ein Gedanke: wir schreiben hier eine fetch-Funktion, 

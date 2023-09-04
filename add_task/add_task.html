@@ -89,18 +89,20 @@
                             <div class="subtask" id="subtask">
                                 <b>Subtasks</b>
                                 <div class="subtask-wrapper" id="subtask-wrapper">
-                                    <input onclick="openAddTask()" type="text" id="subtask-value" placeholder="Add new subtask" required>  
+                                    <input onclick="openAddTask()" type="text" id="subtask-value" placeholder="Add new subtask">  
                                 </div>
                             </div>
+
+                            <ul class="tasks-wrapper" id="tasks-wrapper">
+                            </ul>
                         </div>
 
                         
                         <div class="btns-container form-btns">
-                            <button id="create-task" class="create-task" onclick="addAnTask()">
+                            <button id="create-task" class="create-task">
                                 <span>Create Task</span>
                                 <i class="bi bi-check-lg"></i>
                             </button>
-
                             <button id="clear-task" class="create-task clear-btn" onclick="clearAnTask()">
                                 <span>Clear</span>
                                 <i class="bi bi-x-lg"></i>
