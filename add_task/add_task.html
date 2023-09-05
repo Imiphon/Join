@@ -21,7 +21,7 @@
          <main class="add-task-main">
              <!--------------- ------------------------->
              <section class="add_task_section">
-                <form onsubmit="addTask(); return false;">
+                <form onsubmit="addTask(event)">
                 <div class="first-div">
                     <div class="title-div">
                         <input type="text" id="title" class="title" placeholder="Enter a title" required>
@@ -103,7 +103,7 @@
                                 <span>Create Task</span>
                                 <i class="bi bi-check-lg"></i>
                             </button>
-                            <button id="clear-task" class="create-task clear-btn" onclick="clearAnTask()">
+                            <button id="clear-task" class="create-task clear-btn" >
                                 <span>Clear</span>
                                 <i class="bi bi-x-lg"></i>
                             </button>
@@ -112,6 +112,8 @@
                     </div>
                 </form>
             </section>
+
+            <div id="notification" class="notification"></div>
 
             <div class="btns-container main-btns-container">
                 <button class="create-task" onclick="activeCreateTaskBtn()">
