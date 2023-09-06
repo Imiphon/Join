@@ -43,8 +43,8 @@
         
         
                         <div class="assigned-div">
-                            <span id="assigned-div">Select contact to assign
-                                <i class="bi bi-caret-down-fill" id="caret-down" onclick="showOptions()"></i>
+                            <span id="assigned-div" onclick="showOptions(event)">Select contact to assign
+                                <i class="bi bi-caret-down-fill" id="caret-down"></i>
                             </span>
         
                             <div id="dropdown-options" class="dropdown-content d-none">
@@ -61,7 +61,7 @@
                     <div class="category-div" id="category-div">
                         <b>Category</b>
                         <div class="select-container">
-                            <select name="Select" id="category" required onclick="rotateIcon()">
+                            <select name="Select" id="category" required>
                                 <option disabled selected>Select task Category</option>
                                 <option value="design">Design</option>
                                 <option value="programming">Programming</option>
@@ -103,7 +103,7 @@
                                 <span>Create Task</span>
                                 <i class="bi bi-check-lg"></i>
                             </button>
-                            <button id="clear-task" class="create-task clear-btn" >
+                            <button id="clear-task" class="create-task clear-btn" onclick="clearForm(event)">
                                 <span>Clear</span>
                                 <i class="bi bi-x-lg"></i>
                             </button>

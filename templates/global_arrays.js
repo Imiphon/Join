@@ -14,7 +14,6 @@ let contactArray = [
 
 let initialGroups = [];
 
-let tasksForSubtasks = [];
 
 let addedTasks = [
     {
