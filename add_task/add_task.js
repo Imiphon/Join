@@ -300,6 +300,10 @@
         renderAddedTask();
     }
 
+    function clearAddTask() {
+        document.getElementById('subtask-value').value = '';
+    }
+
     function collectTaskData() {
         const title = document.getElementById('title').value;
         const description = document.getElementById('description').value;
