@@ -115,7 +115,7 @@ async function editDeskContact(index) {
     let indexNr = index; //Nr of contactArray
     await deskEditPopup();
     document.getElementById('popupLeft').innerHTML = showEditContact(indexNr);
-    document.getElementById('popTop').style.borderTopRightRadius = '0px';
+    document.getElementById('popTop').style.borderTopLeftRadius = '0px';
 }
 
 function changeEdits() {

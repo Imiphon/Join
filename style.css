@@ -1,7 +1,8 @@
-body{
-    /*flex-direction: column;
+.mainDiv{
+    width: 100%;
+    flex-direction: column;
     padding: 32px;
-    overflow: auto;*/
+    overflow: auto;
     animation: 450ms changeBackground ease-in-out;
 }
 

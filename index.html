@@ -12,113 +12,116 @@
 </head>
 
 <body id="background">
-    <div class="logoDivHeaderMobile">
-        <div class="joinLogo" id="joinLogo"></div>
-    </div>
-
-    <div class="formDivLogin" id="formLogin">
-        <form class="login" onsubmit="login(); return false;">
-            <div class="inputDiv">
-                <h1 class="loginHeadline">Log in</h1>
-                <div class="line-blue"></div>
-            </div>                
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="loginEmail" placeholder="Email">
-                <div class="line"></div>
-            </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="loginPassword" placeholder="Password">
-                <div class="line"></div>
-            </div>
-            <div class="loginOptions">
-                <div>
-                    <button type="button" onclick="openForgotPwd()" id="forgotPwd" class="loginBtn btnTxtBlue">Forgot my password</button>
-                </div>
-                <div class="rememberMe">
-                    <input type="checkbox" id="rememberMe"> 
-                    <p>Remember me</p>
-                </div>
-            </div>
-            <div class="loginButtons">
-                <button class="loginBtn btnBlue" id="userLoginBtn">Log in</button>
-                <button type="button" onclick="guestLogin()" class="loginBtn btnWhite" id="guestLoginBtn">Guest Log in</button>
-            </div>
-        </form>
-        <div class="signupDiv">
-            <p>Not a Join user?</p> 
-            <button type="submit" id="signUp" onclick="openSignUp();" class="loginBtn btnBlue">Sign up</button>
+    <div class="mainDiv">
+    
+        <div class="logoDivHeaderMobile">
+            <div class="joinLogo" id="joinLogo"></div>
         </div>
-    </div>
-    
-    <div class="formDivNewUser d-none" id="formNewUser">
-        <form class="newUser" onsubmit="newUser(); return false;">
-            <div class="inputDiv">
-                <h1 class="loginHeadline">Sign up</h1>
-                <div class="line-blue"></div>
-            </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-person.svg')" class="loginInput" required id="newName" placeholder="Name">
-                <div class="line"></div>
-            </div>                                
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="newEmail" placeholder="Email">
-                <div class="line"></div>
-            </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-lock.svg')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="loginInput" required type="password" id="newPassword" placeholder="Password">
-                <div class="line"></div>
+
+        <div class="formDivLogin" id="formLogin">
+            <form class="login" onsubmit="login(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">Log in</h1>
+                    <div class="line-blue"></div>
+                </div>                
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="loginEmail" placeholder="Email">
+                    <div class="line"></div>
                 </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-lock.svg')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="loginInput" required type="password" id="newConfirmPassword" placeholder="Confirm Password">
-                <div class="line"></div>
-            </div>            
-            <div class="acceptPrivacy">
-                <input required type="checkbox" id="acceptPrivacy"> 
-                <p>I accept the Privacy policy</p>
-            </div>
-            <button type="submit" class="SignUpBtn btnBlue" id="newUserBtn">Sign up</button>
-        </form>
-    </div>
-    
-    <div class="formDivResetPwd d-none" id="formResetEmail">
-        <form class="resetPwd" onsubmit="resetEmail(); return false;">
-            <div class="inputDiv">
-                <h1 class="loginHeadline">I forgot my password</h1>
-                <div class="line-blue"></div>
-                <p>Don't worry! We will send you an email with the instructions to reset your password.</p>
-            </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="resetEmail" placeholder="Email">
-                <div class="line"></div>
-            </div>
-            <button type="submit" class="resetBtn btnBlue" id="resetEmailBtn">Send me the email</button>
-        </form>
-    </div>
-
-    <div class="formDivResetPwd d-none" id="formResetPwd">
-        <form class="resetPwd" onsubmit="resetPwd(); return false;">
-            <div class="inputDiv">
-                <h1 class="loginHeadline">Reset your password</h1>
-                <div class="line-blue"></div>
-                <p>Change your account password here.</p>
-            </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required type="password" id="resetPassword" placeholder="New Password">
-                <div class="line"></div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" required type="password" id="loginPassword" placeholder="Password">
+                    <div class="line"></div>
                 </div>
-            <div class="inputDiv">
-                <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required type="password" id="resetConfirmPassword" placeholder="Confirm Password">
-                <div class="line"></div>
-            </div>     
-            <button type="submit" class="resetBtn btnBlue" id="resetPwdBtn">Continue</button>
-        </form>
-    </div>
+                <div class="loginOptions">
+                    <div>
+                        <button type="button" onclick="openForgotPwd()" id="forgotPwd" class="loginBtn btnTxtBlue">Forgot my password</button>
+                    </div>
+                    <div class="rememberMe">
+                        <input type="checkbox" id="rememberMe"> 
+                        <p>Remember me</p>
+                    </div>
+                </div>
+                <div class="loginButtons">
+                    <button class="loginBtn btnBlue" id="userLoginBtn">Log in</button>
+                    <button type="button" onclick="guestLogin()" class="loginBtn btnWhite" id="guestLoginBtn">Guest Log in</button>
+                </div>
+            </form>
+            <div class="signupDiv">
+                <p>Not a Join user?</p> 
+                <button type="submit" id="signUp" onclick="openSignUp();" class="loginBtn btnBlue">Sign up</button>
+            </div>
+        </div>
+        
+        <div class="formDivNewUser d-none" id="formNewUser">
+            <form class="newUser" onsubmit="newUser(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">Sign up</h1>
+                    <div class="line-blue"></div>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-person.svg')" class="loginInput" required id="newName" placeholder="Name">
+                    <div class="line"></div>
+                </div>                                
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="newEmail" placeholder="Email">
+                    <div class="line"></div>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="loginInput" required type="password" id="newPassword" placeholder="Password">
+                    <div class="line"></div>
+                    </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="loginInput" required type="password" id="newConfirmPassword" placeholder="Confirm Password">
+                    <div class="line"></div>
+                </div>            
+                <div class="acceptPrivacy">
+                    <input required type="checkbox" id="acceptPrivacy"> 
+                    <p>I accept the Privacy policy</p>
+                </div>
+                <button type="submit" class="SignUpBtn btnBlue" id="newUserBtn">Sign up</button>
+            </form>
+        </div>
+        
+        <div class="formDivResetPwd d-none" id="formResetEmail">
+            <form class="resetPwd" onsubmit="resetEmail(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">I forgot my password</h1>
+                    <div class="line-blue"></div>
+                    <p>Don't worry! We will send you an email with the instructions to reset your password.</p>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-mail.svg')" class="loginInput" required type="email" id="resetEmail" placeholder="Email">
+                    <div class="line"></div>
+                </div>
+                <button type="submit" class="resetBtn btnBlue" id="resetEmailBtn">Send me the email</button>
+            </form>
+        </div>
 
-    <div id="message" class="message d-none"></div>
+        <div class="formDivResetPwd d-none" id="formResetPwd">
+            <form class="resetPwd" onsubmit="resetPwd(); return false;">
+                <div class="inputDiv">
+                    <h1 class="loginHeadline">Reset your password</h1>
+                    <div class="line-blue"></div>
+                    <p>Change your account password here.</p>
+                </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required type="password" id="resetPassword" placeholder="New Password">
+                    <div class="line"></div>
+                    </div>
+                <div class="inputDiv">
+                    <input style="background-image: url('./assets/img/login-lock.svg')" class="loginInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required type="password" id="resetConfirmPassword" placeholder="Confirm Password">
+                    <div class="line"></div>
+                </div>     
+                <button type="submit" class="resetBtn btnBlue" id="resetPwdBtn">Continue</button>
+            </form>
+        </div>
 
-    <div id="loginFooter" class="loginFooter">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Legal Notice</a>
-    </div>               
+        <div id="message" class="message d-none"></div>
+
+        <div id="loginFooter" class="loginFooter">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Legal Notice</a>
+        </div>  
+    </div>             
 </body>
 </html>
