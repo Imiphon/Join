@@ -9,7 +9,7 @@ async function login() {
     
     if(!await checkUserExist(email)){
         if (password == users[emailAdresses.indexOf(email)]['password']){
-            console.log('Anmeldung erfolgreich');
+            window.location = "./summary/summary.html";
         }else{
             showPwdNotRightMessage();
         }
@@ -46,10 +46,8 @@ async function newUser() {
 
 function guestLogin() {
     disableButtonLogin();
-    console.log('guestLogin');
-    /*
-        - Gast Login (weiterleitung auf Summary schauen aber nicht anfassen?)
-    */
+    console.log("Test");
+    window.location = "./summary/summary.html";
 }
 
 async function resetEmail() {
@@ -78,96 +76,72 @@ async function resetPwd() {
     enableButton('resetPwdBtn');
 }
 
-function openSignUp() {
-    disableButtonLogin();
+function openLogin() {
+    enableButtonLogin();
     let background = document.getElementById('background');
     let joinLogo = document.getElementById('joinLogo');
-    let signUpPage = document.getElementById('formNewUser');
+    let logInPage = document.getElementById('formLogin');
+    let loginFooter = document.getElementById('loginFooter');
+    
+    background.classList.remove('background');
+    joinLogo.classList.remove('joinLogoWhite');
+    loginFooter.classList.remove('d-none');    
+    logInPage.classList.remove('d-none');
+}
+
+function closeLogin() {
+    disableButtonLogin();
+    let background = document.getElementById('background');
+    let joinLogo = document.getElementById('joinLogo'); 
     let logInPage = document.getElementById('formLogin');
     let loginFooter = document.getElementById('loginFooter');
 
     background.classList.add('background')
     joinLogo.classList.add('joinLogoWhite')
     logInPage.classList.add('d-none');
+    loginFooter.classList.add('d-none');
+}
+
+function openSignUp() {
+    closeLogin();
+    let signUpPage = document.getElementById('formNewUser');
+    let loginFooter = document.getElementById('loginFooter');
+    signUpPage.classList.remove('d-none');    
     loginFooter.classList.add('loginFooterWhite');
-    signUpPage.classList.remove('d-none');
 }
 
 function closeSignUp() {
-    enableButtonLogin();
-    let background = document.getElementById('background');
-    let joinLogo = document.getElementById('joinLogo');
     let signUpPage = document.getElementById('formNewUser');
-    let logInPage = document.getElementById('formLogin');
     let loginFooter = document.getElementById('loginFooter');
-
     signUpPage.classList.add('d-none');
-    background.classList.remove('background')
-    joinLogo.classList.remove('joinLogoWhite')
-    logInPage.classList.remove('d-none');
-    loginFooter.classList.remove('loginFooterWhite');    
+    loginFooter.classList.remove('loginFooterWhite');
+    openLogin();
 }
 
 function openForgotPwd() {
-    disableButtonLogin();
-    let background = document.getElementById('background');
-    let joinLogo = document.getElementById('joinLogo');
+    closeLogin();
     let resetEmailPage = document.getElementById('formResetEmail');
-    let logInPage = document.getElementById('formLogin');
-    let loginFooter = document.getElementById('loginFooter');
-
-    background.classList.add('background')
-    joinLogo.classList.add('joinLogoWhite')
-    logInPage.classList.add('d-none');
-    loginFooter.classList.add('d-none');
-    resetEmailPage.classList.remove('d-none');
+    resetEmailPage.classList.remove('d-none');    
 }
 
 function closeForgotPwd() {
-    enableButtonLogin();
-    let background = document.getElementById('background');
-    let joinLogo = document.getElementById('joinLogo');
     let resetEmailPage = document.getElementById('formResetEmail');
-    let logInPage = document.getElementById('formLogin');
-    let loginFooter = document.getElementById('loginFooter');
-
     resetEmailPage.classList.add('d-none');
-    background.classList.remove('background')
-    joinLogo.classList.remove('joinLogoWhite')
-    logInPage.classList.remove('d-none');
-    loginFooter.classList.remove('d-none');    
+    openLogin();    
 }
 
 function openResetPwd(id) {
-    resetId = id;
-    enableButtonLogin();
-    let background = document.getElementById('background');
-    let joinLogo = document.getElementById('joinLogo');
+    resetId = id;    
+    closeLogin();
     let resetPwdPage = document.getElementById('formResetPwd');
-    let logInPage = document.getElementById('formLogin');
-    let loginFooter = document.getElementById('loginFooter');   
-    
-    background.classList.add('background')
-    joinLogo.classList.add('joinLogoWhite')
-    logInPage.classList.add('d-none');
-    loginFooter.classList.add('d-none');
     resetPwdPage.classList.remove('d-none');
 }
 
 
-function closeResetPwd() {
-    enableButtonLogin();
-    let background = document.getElementById('background');
-    let joinLogo = document.getElementById('joinLogo');
+function closeResetPwd() {    
     let resetPwdPage = document.getElementById('formResetPwd');
-    let logInPage = document.getElementById('formLogin');
-    let loginFooter = document.getElementById('loginFooter');   
-    
     resetPwdPage.classList.add('d-none');
-    background.classList.remove('background')
-    joinLogo.classList.remove('joinLogoWhite')
-    logInPage.classList.remove('d-none');
-    loginFooter.classList.remove('d-none');    
+    openLogin();
 }
 
 function showMessage(html) {
