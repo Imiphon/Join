@@ -1,5 +1,5 @@
 //============================================================
-// SHOW NAME GROUP IN MOBILE
+// Start Contacts
 //============================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -13,7 +13,7 @@ function showContacts() {
     let content = document.querySelector('main');
     content.innerHTML = '';
     content.innerHTML += showMainFrame();
-    createInitalGroup(); 
+    createInitalGroup();
     createInitials();
     showNameGroup();
 }
@@ -35,25 +35,38 @@ function deleteContact(index) {
 function widthForInfo(index) {
     const width = window.innerWidth;
     if (width <= 1024) {
-        showInfoMobile(index);  
+        showInfoMobile(index);
     } else {
         console.log('more width than 1025px')
         showInfoDesk(index);
     }
 }
-function showInfoDesk(index) { // ICH LÖSCHE HIER NOCH DIE SHOWCONTACTS!!!
-    //let mainFrame = document.getElementById('mainFrame'); 
-    let person = contactArray[index];    
-    //mainFrame.innerHTML = showMainFrame();
-    let infoBox = document.getElementById('infoBox'); 
-    infoBox.innerHTML = showInfoText(person, index);
+function showInfoDesk(index) {
+    let person = contactArray[index];
+    let popupBox = document.getElementById('popupBox');
+    popupBox.innerHTML = showInfoText(person, index);
 }
 
-function showInfoMobile(index) { //Hier die div#infoBox display:none setzen?
+function showInfoMobile(index) {
     let main = document.querySelector('main');
     main.innerHTML = '';
     let person = contactArray[index];
     main.innerHTML += showInfoText(person, index);
+    document.getElementById('moreRow').style.display = 'none';
+}
+
+async function widthForAdd() {
+    const width = window.innerWidth;
+    if (width <= 1024) {
+        await mobilePopup();
+        let content = document.getElementById('popContent');
+        content.innerHTML = showAddContact();
+    } else {
+        await deskAddPopup();
+        let content = document.getElementById('popupRight');
+        content.innerHTML = showAddContact();
+        document.getElementById('popTop').style.borderTopRightRadius = '0px';
+    }
 }
 
 //============================================================
@@ -84,18 +97,25 @@ function closeOnClick(event) {
     }
 }
 
-
 function closeDrawer() {
     document.getElementById('drawer').classList.remove('open');
 }
 
 //============================================================
-//EDIT CONTACT IN MOBILE
+//EDIT CONTACT 
 //============================================================
 async function editMobContact(index) {
     let indexNr = index; //Nr of contactArray
     await mobilePopup();
-    showEditContact(indexNr);
+    let content = document.getElementById('popContent');
+    content.innerHTML = showEditContact(indexNr);
+}
+
+async function editDeskContact(index) {
+    let indexNr = index; //Nr of contactArray
+    await deskEditPopup();
+    document.getElementById('popupLeft').innerHTML = showEditContact(indexNr);
+    document.getElementById('popTop').style.borderTopRightRadius = '0px';
 }
 
 function changeEdits() {
@@ -142,27 +162,26 @@ function deleteInEditor(index) {
 //============================================================
 // CREATE NEW CONTACT IN MOBILE 
 //============================================================
-
+/**
 async function openCreateContact() {
-    await mobilePopup();
-    showAddContact();
-}
+    widthForAdd();
+} */
 
 function openColorPicker() {
     let colorBox = document.getElementById('colorBox');
     let colorPicker = document.getElementById('colorPicker');
 
     if (colorPicker.style.display === 'none') {
-        colorPicker.style.display = 'block'; 
+        colorPicker.style.display = 'flex';
     } else {
-        colorPicker.style.display = 'none'; 
+        colorPicker.style.display = 'none';
     }
     updateColors();
 }
 
 function updateColors() {
     let colorPicker = document.getElementById('colorPicker');
-    colorPicker.innerHTML = colorsInPicker(); 
+    colorPicker.innerHTML = colorsInPicker();
 }
 
 function colorsInPicker() {
@@ -194,8 +213,8 @@ function createContact() {
     let mail = document.getElementById('email').value;
     let phone = parseInt(document.getElementById('phone').value);
     let color = document.getElementById('colorBox').style.backgroundColor;
-    
-    let { preName, lastName } = splitName(name); 
+
+    let { preName, lastName } = splitName(name);
 
     contactArray.push({
         name: preName,
@@ -214,7 +233,7 @@ function splitName(name) {
     let nameParts = name.split(' ');
     let preName = upperCaseFirstLetter(nameParts[0]);
     let lastName = upperCaseFirstLetter(nameParts[1]);
-    return { preName, lastName }; 
+    return { preName, lastName };
 }
 
 function upperCaseFirstLetter(str) {
@@ -299,15 +318,7 @@ function validateForm() {
 
 function mobilePopup() {
     return new Promise((resolve) => {
-        let popupHTML = `
-        <div class="popup-background" id="popupBackground">
-            <div class="popup">            
-                <div class="popup-content" id="popContent">
-
-                </div>
-            </div>
-        </div>
-        `;
+        let popupHTML = popupBack();
         document.body.innerHTML += popupHTML;
         let popupBg = document.getElementById('popupBackground');
         popupBg.style.display = 'block';
@@ -317,14 +328,54 @@ function mobilePopup() {
     });
 }
 
+function deskEditPopup() {
+    return new Promise((resolve) => {
+        /*get popupackground */
+        let popupHTML = popupBack();
+        /*put Background in popupBox in mainFrame */
+        document.getElementById('popupBox').innerHTML += popupHTML;
+        let popupBg = document.getElementById('popupBackground');
+        popupBg.style.display = 'block';
+        setTimeout(() => {
+            resolve();
+        }, 0);
+    });
+}
+
+function deskAddPopup() {
+    return new Promise((resolve) => {
+        let popupHTML = popupBack();
+        document.getElementById('popupBox').innerHTML += popupHTML;
+        let popupBg = document.getElementById('popupBackground');
+        popupBg.style.display = 'block';
+        setTimeout(() => {
+            resolve();
+        }, 0);
+    });
+}
+
+function popupBack() {
+    return `
+    <div class="popup-background" id="popupBackground">
+        <div class="popup" id="popup">  
+            <div class="popup-content" id="popContent">
+            </div>          
+            <div class="pop-add-content" id="popupRight">
+            </div>
+            <div class="pop-edit-content" id="popupLeft">
+            </div>
+        </div>
+    </div>
+    `;
+}
+
 function closePopup() {
-    let colorPicker = document.getElementById('colorPicker'); 
+    let colorPicker = document.getElementById('colorPicker');
     if (colorPicker) {
-        colorPicker.remove(); 
+        colorPicker.remove();
     }
     document.getElementById("popupBackground").style.display = "none";
 }
-
 
 //============================================================
 //  HTML TEMPLATES 
@@ -332,25 +383,15 @@ function closePopup() {
 
 function showMainFrame() {
     return `
-    <button class="add-btn" id="addBtn" onclick="openCreateContact()">
-        <img src="../assets/img/person_add.png" alt="">
-    </button>
-    <div class="main-frame" id="mainFrame">
-        <div class="name-group" id="nameGroup">    
-        </div>
+    <div class="add-btn-frame">
     </div> 
-`;
-}
-
-function showMainFrame() {
-    return `
-    <button class="add-btn" id="addBtn" onclick="openCreateContact()">
-        <img src="../assets/img/person_add.png" alt="">
-    </button>
+    <button class="add-btn" id="addBtn" onclick="widthForAdd();">
+    <img src="../assets/img/person_add.png" alt="">
+    </button> 
     <div class="main-frame" id="mainFrame">
         <div class="name-group" id="nameGroup">    
         </div> 
-        <div class="info-box" id="infoBox"> 
+        <div class="popup-box" id="popupBox"> 
         </div> 
     </div> 
 `;
@@ -403,7 +444,7 @@ function personDatas(initial) {
 function showInfoText(person, indexNr) {
     return `
         <div class="detail-frame" id="detailFrame">
-            <div class="detail-head">
+            <div class="detail-top-head">
                 <div>Contact Informations</div>
                 <a href="contact_list.html">
                     <img src="../assets/img/arrow-left-line.svg" alt="back">
@@ -413,9 +454,21 @@ function showInfoText(person, indexNr) {
                 <div class="detail-ellipse" style="background-color: ${person.color}">
                     ${person.initials}
                 </div>
-                <div class="detail-name">
-                ${person.name} ${person.lastName}
-                </div>
+                    <div class="column">    
+                        <div class="detail-name">
+                        ${person.name} ${person.lastName}
+                        </div>
+                        <div class="more-row" id="moreRow">
+                            <div onclick="editDeskContact(${indexNr})">
+                                <img src="../assets/img/edit.png" alt="Edit">
+                                <span>Edit</span>
+                            </div>
+                            <div  onclick="deleteContact(${indexNr})">
+                                <img src="../assets/img/delete.png" alt="Delete">
+                                <span>Delete</span>
+                            </div>
+                        </div>
+                    </div>    
             </div>
             <div class="adr-box">
                 <div class="detail-description bold">
@@ -449,10 +502,8 @@ function showInfoText(person, indexNr) {
 }
 
 function showAddContact() {
-    let content = document.getElementById('popContent');
-    content.innerHTML = '';
-    content.innerHTML += `
-    <div class="pop-top">
+    return `
+    <div class="pop-top" id="popTop">
     <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
     <span class="pop-header">Add contact</span>
     <span class="pop-subtitle">Tasks are better with a team!</span>
@@ -467,12 +518,16 @@ function showAddContact() {
         <form id="userForm">
             <div class="contact-frame">
                 <input class="contact-input" type="text" id="fullName" placeholder="Name Nachname">
-                <div id="colorBox" class="color-box" onclick="openColorPicker()">
-                    <div id="colorPicker" class="color-picker" style="display: none;">
-                        <!-- colors -->
+                <div class="color-img-box">
+                    <div class="color-frame">
+                        <div id="colorBox" class="color-box" onclick="openColorPicker()">
+                            <div id="colorPicker" class="color-picker" style="display: none;">
+                                <!-- colors -->
+                            </div>
+                        </div>
                     </div>
+                    <img src="../assets/img/person_small.png" alt="name">
                 </div>
-                <img src="../assets/img/person_small.png" alt="name">
             </div>
             <div class="contact-frame">
                 <input class="contact-input" type="email" id="email" placeholder="Email" required>
@@ -503,21 +558,21 @@ function showAddContact() {
 }
 
 function showEditContact(index) {
-    let content = document.getElementById('popContent');
+    
     let person = contactArray[index];
     let indexNr = index;
-    content.innerHTML = '';
-    content.innerHTML += `
-        <div class="pop-top">                
+    return `
+        <div class="pop-top" id="popTop">                
             <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
             <span class="pop-header">Edit contact</span> 
             <span class="pop-subtitle">Tasks are better with a team!</span>        
         </div>
-
-        <div class="popup-circle detail-ellipse" style="background-color: ${person.color}"> 
-        ${person.initials}
+        <div>
+            <div class="popup-circle detail-ellipse" style="background-color: ${person.color}"> 
+            ${person.initials}
+            </div>
         </div>
-
+        
         <!-- <div> <img class="popup-circle" src="../assets/img/person_initial.png" alt="../assets/img/person_initial.png"> </div>   -->     
         <div class="pop-bottom">
         <div class="contact-form">

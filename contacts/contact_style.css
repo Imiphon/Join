@@ -1,18 +1,42 @@
-.add-btn,
-.more-btn {
-    display: none;
-}
 
+
+.add-btn-frame{
+    position: absolute;
+    width: 335px;
+    height: 74px;
+    left: 235px;
+    top: 80px;
+    display: block;
+    background-color: #fff;
+    z-index: 19;
+}
+.add-btn {
+    position: absolute;
+    width: 300px;
+    height: 50px;
+    left: 256px;
+    top: 90px;
+    right: unset;
+    bottom: unset;
+    background-color: var(--reg-blue);
+    border-radius: 10px;
+    z-index: 20;
+    border-width: 0;
+    box-shadow: var(--shadow);
+    display: inline;
+}
 .add-btn img,
 .more-btn img {
     z-index: 21;
 }
-
 /*useless for mobile */
 .add-btn:hover,
 .more-btn:hover {
     background-color: var(--reg-blue);
     cursor: pointer;
+}
+.more-btn {
+    display: none;
 }
 
 .main-frame {
@@ -23,7 +47,8 @@
 }
 
 .name-group {
-    width: initial;
+    padding-top: 80px;
+    min-width: 338px;
     display: flex;
     flex-direction: column;
     overflow: auto;
@@ -70,13 +95,19 @@
     border-radius: 10px;
     display: flex;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: row;
     margin-bottom: 10px;
     gap: 35px;
-    padding: 15px, 24px, 15px, 24px;
-
+    padding: 15px, 24px;
     cursor: pointer;
+}
+
+.color-img-box {
+display: flex;
+}
+.color-frame {
+margin-right: 10px;
 }
 
 .side-circle {
@@ -113,6 +144,10 @@
     color: var(--mail-blue);
 }
 
+.popup-box {
+    display: inline;
+}
+
 /*=====================
     CONTACT DETAIL SELECTORS
     ====================*/
@@ -134,7 +169,14 @@
 }
 
 
-.detail-head {
+.detail-top-head {
+display: none;
+}
+
+.detail-top-head a {
+    display: none;
+}
+.detail-bottom-head {
     position: relative;
     top: 40px;
     margin-bottom: 20px;
@@ -149,11 +191,8 @@
     justify-content: space-between;
 }
 
-.detail-head a {
-    display: none;
-}
-
 .detail-name-box {
+    width: max-content;
     position: inherit;
     display: flex;
     align-items: center;
@@ -162,13 +201,13 @@
 }
 
 .detail-ellipse {
-    width: 80px;
-    height: 80px;
+    width: 180px;
+    height: 180px;
     position: relative;
     left: 0;
     color: white;
     font-family: var(--ff-inter);
-    font-size: 24px;
+    font-size: 4rem;
     background-color: var(--user-yellow);
     border: 2px;
     margin-right: 16px;
@@ -178,14 +217,23 @@
 }
 
 .detail-name {
-    width: 199px;
+    width: 300px;
     height: 40px;
-    gap: 13px;
-    font-size: 33px;
+    font-size: 3rem;
     font-weight: 400;
     line-height: 40px;
     letter-spacing: 0em;
     text-align: left;
+    margin-bottom: 10px;
+}
+.more-row {
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
 }
 
 .adr-box {
@@ -270,7 +318,7 @@
     right: 10px;
     cursor: pointer;
 }
-
+/*for mobile*/
 .popup-content {
     position: relative;
     height: 100%;
@@ -278,6 +326,28 @@
     flex-direction: column;
     box-shadow: var(--shadow);
     border-radius: 20px;
+}
+
+/*changed in mobile*/
+.pop-add-content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+}
+.pop-edit-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
 }
 
 .pop-top,
@@ -376,17 +446,20 @@
     border: none;
 }
 
+
 .color-picker {
-    position: fixed;
-    z-index: 1000;
-    display: none;
-    /*default*/
+    position: absolute;
+    z-index: 23;
+    /* display: flex ; is comming from openColorPicker() */
     flex-wrap: wrap;
     border: none;
-    background-color: white;
+    background-color: rgb(97, 54, 54);
+    width: 72px; /* 3 .color-option à 24px */
+    height: 72px;
 }
 
 .color-option {
+    position: relative;
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -439,6 +512,7 @@
 
 @media (max-width: 1025px) {
     .name-group {
+        padding-top: 0;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -453,6 +527,9 @@
         height: 64px;
         right: 16px;
         bottom: 96px;
+        top: unset;
+        left: unset;
+
         background-color: var(--reg-blue);
         border-radius: 10px;
         z-index: 20;
@@ -466,11 +543,29 @@
         z-index: 21;
         display: inline;
     }
+    .add-btn-frame{
+        display: none;
+    }
 
-    .detail-head a {
+    .detail-top-head a {
         display: inline;
     }
 
+    .detail-top-head {
+        position: relative;
+        top: 40px;
+        margin-bottom: 20px;
+        width: 100%;
+        height: auto;
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 23px;
+        letter-spacing: 0em;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+    }
+    
     .detail-frame {
 
         padding-left: 16px;
@@ -487,5 +582,54 @@
         width: 100%;
         top: 144px;
     }
+
+    .popup-box {
+        display: block;
+    }
+
+
+    .pop-add-content,
+    .pop-edit-content {
+        position: relative;
+        width: auto;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        box-shadow: var(--shadow);
+        border-radius: 20px;
+    }
+
+    .pop-top {
+        color: white;
+        background-color: var(--reg-blue);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    .detail-ellipse {
+        width: 80px;
+        height: 80px;
+
+        color: white;
+        font-family: var(--ff-inter);
+        font-size: 24px;
+        background-color: var(--user-yellow);
+        border: 2px;
+        margin-right: 16px;
+        border-radius: 100%;
+        display: grid;
+        place-items: center;
+    }
+
+    .detail-name {
+        width: 199px;
+        height: 40px;
+        gap: 13px;
+        font-size: 33px;
+        font-weight: 400;
+        line-height: 40px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
 }
 
