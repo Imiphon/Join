@@ -39,6 +39,23 @@
     display: none;
 }
 
+#success-info {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 80px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 80px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
 .main-frame {
     width: 100%;
     position: relative;

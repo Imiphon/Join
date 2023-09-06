@@ -162,10 +162,6 @@ function deleteInEditor(index) {
 //============================================================
 // CREATE NEW CONTACT IN MOBILE 
 //============================================================
-/**
-async function openCreateContact() {
-    widthForAdd();
-} */
 
 function openColorPicker() {
     let colorBox = document.getElementById('colorBox');
@@ -226,8 +222,34 @@ function createContact() {
     document.getElementById('userForm').reset();
 
     closePopup();
+    
     showContacts();
+    successInfo();
 }
+
+function successInfo() {
+    const infoDiv = document.getElementById("success-info");
+    // Set initial position to bottom
+    infoDiv.style.bottom = "0";
+    infoDiv.style.opacity = "1";
+    infoDiv.style.visibility = "visible";
+
+    // Animate to middle of the screen
+    setTimeout(() => {
+      infoDiv.style.bottom = "50%";
+    }, 0);
+
+    // Stay in the middle for 2 seconds
+    setTimeout(() => {
+      infoDiv.style.bottom = "0";
+    }, 2000);
+
+    // Hide after animation completes
+    setTimeout(() => {
+      infoDiv.style.opacity = "0";
+      infoDiv.style.visibility = "hidden";
+    }, 2500);
+  }
 
 function splitName(name) {
     let nameParts = name.split(' ');
@@ -393,6 +415,7 @@ function showMainFrame() {
         </div> 
         <div class="popup-box" id="popupBox"> 
         </div> 
+        <div id="success-info">Contact successfully created</div>        
     </div> 
 `;
 }
