@@ -147,24 +147,13 @@ function setInitialValues() {
 
 
 /**
- * function changeEdits() {
-    let fullNameInput = document.getElementById('fullName');
-    let emailInput = document.getElementById('email');
-    let phoneInput = document.getElementById('phone');
-
-    let fullNameValue = fullNameInput.value ? fullNameInput.value : fullNameInput.placeholder;
-    let emailValue = emailInput.value ? emailInput.value : emailInput.placeholder;
-    let phoneValue = phoneInput.value ? phoneInput.value : phoneInput.placeholder;
-
-    fullNameInput.value = fullNameValue;
-    emailInput.value = emailValue;
-    phoneInput.value = phoneValue;
+ * doesn't work
+ * function toggleBlue(element) {
+    element.classList.toggle('active');
 }
  */
 
 function editContactInArray(index) {
-    // changeEdits();
-
     let name = document.getElementById('fullName').value; //.split(' ') in splitName()
     let mail = document.getElementById('email').value;
     let phone = parseInt(document.getElementById('phone').value);
@@ -433,16 +422,17 @@ function showInfoText(person, indexNr) {
                 <div class="detail-ellipse" style="background-color: ${person.color}">
                     ${person.initials}
                 </div>
-                    <div class="column">    
+                
+                    <div class="column">                      
                         <div class="detail-name">
                         ${person.name} ${person.lastName}
                         </div>
                         <div class="more-row" id="moreRow">
-                            <div onclick="editDeskContact(${indexNr})">
+                            <div class="more-row-box" onclick="editDeskContact(${indexNr}); toggleBlue(this)">
                                 <img src="../assets/img/edit.png" alt="Edit">
                                 <span>Edit</span>
                             </div>
-                            <div  onclick="deleteContact(${indexNr})">
+                            <div class="more-row-box" onclick="deleteContact(${indexNr}); toggleBlue(this)">
                                 <img src="../assets/img/delete.png" alt="Delete">
                                 <span>Delete</span>
                             </div>
@@ -450,6 +440,7 @@ function showInfoText(person, indexNr) {
                     </div>    
             </div>
             <div class="adr-box">
+            <div class="desk-header">Contact Informations</div>
                 <div class="detail-description bold">
                     Email
                 </div>
@@ -499,6 +490,7 @@ function showAddContact() {
     return `
     <div class="pop-top" id="popTop">
         <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+        <img class="pop-logo" src="../assets/img/logo_mobile_white.svg">
         <span class="pop-header">Add contact</span>
         <span class="pop-subtitle">Tasks are better with a team!</span>
     </div>
@@ -506,7 +498,7 @@ function showAddContact() {
         <img class="popup-circle no-border detail-ellipse" src="../assets/img/person_initial.png" alt="person_initial">
     </div>
     <div class="pop-bottom">
-        <div class="form_frame">
+        <div class="form-frame">
             <form id="userForm" class="user-form" onsubmit="createContact()">
                 <div class="contact-frame">
                 <input 
@@ -560,6 +552,7 @@ function showEditContact(index) {
     return `
         <div class="pop-top" id="popTop">
         <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+        <img class="pop-logo" src="../assets/img/logo_mobile_white.svg">
         <span class="pop-header">Edit contact</span>
         <span class="pop-subtitle">Tasks are better with a team!</span>
     </div>
@@ -569,8 +562,9 @@ function showEditContact(index) {
         </div>
     </div>
     <div class="pop-bottom">
+    <div class="form-frame">
         <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr})">
-            <div class="form_frame">
+            
                 <div class="contact-frame">
                     <input class="contact-input" type="text" id="fullName"
                         placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"
@@ -587,7 +581,7 @@ function showEditContact(index) {
                         pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein.">    
                     <img src="../assets/img/call_small.png" alt="phone">
                 </div>
-            </div>
+            
             <div class="btn-box">
                 <button class="white-btn" onclick="deleteInEditor(${indexNr})">
                     Delete
@@ -598,6 +592,7 @@ function showEditContact(index) {
                 </button>
             </div>
         </form>
+        </div>
     </div>
     `;
 }
