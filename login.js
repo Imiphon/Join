@@ -10,7 +10,7 @@ let resetId;
 async function login() {
     disableButtonLogin();
     let email = getInput('loginEmail'); 
-       
+
     if(await checkUserExist(email)){
         let password = getInput('loginPassword');
         if (checkPwdCorrect(password)){
@@ -275,7 +275,7 @@ function showresetPwdMessage() {
  * This function is use to check if the email adress of an user exist.
  * 
  * @param {string} email - email adress of the user to check if exist.
- * @returns - true if user exist, false if user not exist.
+ * @returns true if user exist, false if user not exist.
  */
 async function checkUserExist(email) {
     emailAdresses = await getExistingEmailAdresses();
@@ -285,7 +285,7 @@ async function checkUserExist(email) {
 /**
  * This function is use to check if the is correct.
  * @param {string} password - password to check if is correct.
- * @returns - true if password correct, false if password not correct.
+ * @returns true if password correct, false if password not correct.
  */
 function checkPwdCorrect(password) {    
     return password == users[emailAdresses.indexOf(email)]['password'];
@@ -294,7 +294,7 @@ function checkPwdCorrect(password) {
 /**
  * This function is use to load the existing email adresses to an array.  
  * 
- * @returns - email adresses from all users
+ * @returns email adresses from all users
  */
 async function getExistingEmailAdresses() {
     await loadUsers();
@@ -326,7 +326,7 @@ async function registerUser(name,email,password) {
  * This function is use to get the value of an html tag
  * 
  * @param {string} id - id of the html tag to get the value.
- * @returns - value of the html tag.
+ * @returns value of the html tag.
  */
 function getInput(id) {
     return document.getElementById(id).value;
