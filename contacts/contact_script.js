@@ -506,8 +506,8 @@ function showAddContact() {
         <img class="popup-circle no-border detail-ellipse" src="../assets/img/person_initial.png" alt="person_initial">
     </div>
     <div class="pop-bottom">
-        <div class="contact-form">
-            <form id="userForm" onsubmit="createContact()">
+        <div class="form_frame">
+            <form id="userForm" class="user-form" onsubmit="createContact()">
                 <div class="contact-frame">
                 <input 
                 class="contact-input" 
@@ -538,10 +538,16 @@ function showAddContact() {
                     pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein.">
                     <img src="../assets/img/call_small.png" alt="phone">
                 </div>
+                <div class="btn-box">
+                <button class="white-btn" onclick="closePopup()">
+                    Cancel
+                    <img src="../assets/img/close_dark-grey.png">
+                </button>
                 <button type="submit" class="blue-btn">
                     Create Contact
                     <img src="../assets/img/check_small.png">
                 </button>
+            </div>
             </form>
         </div>
     </div>
@@ -563,8 +569,8 @@ function showEditContact(index) {
         </div>
     </div>
     <div class="pop-bottom">
-        <form id="userForm" onsubmit="editContactInArray(${indexNr})">
-            <div class="contact-form">
+        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr})">
+            <div class="form_frame">
                 <div class="contact-frame">
                     <input class="contact-input" type="text" id="fullName"
                         placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"
