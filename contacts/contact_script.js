@@ -580,8 +580,7 @@ function showAddContact() {
         `;
 }
 
-function showEditContact(index) {
-    
+function showEditContact(index) {    
     let person = contactArray[index];
     let indexNr = index;
     return `
