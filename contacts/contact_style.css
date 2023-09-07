@@ -1,6 +1,4 @@
-
-
-.add-btn-frame{
+.add-btn-frame {
     position: absolute;
     width: 335px;
     height: 74px;
@@ -10,6 +8,7 @@
     background-color: #fff;
     z-index: 19;
 }
+
 .add-btn {
     position: absolute;
     width: 300px;
@@ -25,16 +24,19 @@
     box-shadow: var(--shadow);
     display: inline;
 }
+
 .add-btn img,
 .more-btn img {
     z-index: 21;
 }
+
 /*useless for mobile */
 .add-btn:hover,
 .more-btn:hover {
     background-color: var(--reg-blue);
     cursor: pointer;
 }
+
 .more-btn {
     display: none;
 }
@@ -44,16 +46,21 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
+    width: max-content;
     height: 80px;
-    background-color: blue;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--reg-blue);
     color: white;
     text-align: center;
     vertical-align: middle;
-    line-height: 80px;
     visibility: hidden;
     opacity: 0;
     transition: all 0.5s ease-in-out;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-frame {
@@ -123,10 +130,11 @@
 }
 
 .color-img-box {
-display: flex;
+    display: flex;
 }
+
 .color-frame {
-margin-right: 10px;
+    margin-right: 10px;
 }
 
 .side-circle {
@@ -188,8 +196,9 @@ margin-right: 10px;
 }
 
 .detail-top-head {
-display: none;
+    display: none;
 }
+
 /*.detail-top-head a {
     display: none;
 }*/
@@ -198,6 +207,7 @@ display: none;
     font-size: 1.5rem;
     font-weight: 700;
 }
+
 .detail-bottom-head {
     position: relative;
     top: 40px;
@@ -247,14 +257,16 @@ display: none;
     text-align: left;
     margin-bottom: 10px;
 }
+
 .more-row {
     width: 50%;
     height: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center;
 }
+
 .more-row-box {
     width: 80px;
     margin: 0 10px;
@@ -263,12 +275,15 @@ display: none;
     justify-content: space-around;
     cursor: pointer;
 }
+
 .more-row-box img {
     margin-right: 12px;
 }
+
 .more-row-box:hover {
-color: var(--reg-blue);
+    color: var(--reg-blue);
 }
+
 /*.more-row-box.active {
     color: var(--reg-blue);
 }*/
@@ -355,6 +370,7 @@ color: var(--reg-blue);
     right: 10px;
     cursor: pointer;
 }
+
 /*for mobile*/
 .popup-content {
     position: relative;
@@ -374,8 +390,10 @@ color: var(--reg-blue);
     height: 100%;
     display: flex;
     flex-direction: column;
-    box-shadow: none; /* insted var(--shadow);*/
+    box-shadow: none;
+    /* insted var(--shadow);*/
 }
+
 .pop-edit-content {
     position: fixed;
     top: 0;
@@ -504,7 +522,8 @@ color: var(--reg-blue);
     flex-wrap: wrap;
     border: none;
     background-color: rgb(97, 54, 54);
-    width: 72px; /* 3 .color-option à 24px */
+    width: 72px;
+    /* 3 .color-option à 24px */
     height: 72px;
 }
 
@@ -557,6 +576,7 @@ color: var(--reg-blue);
     display: flex;
     align-items: center;
 }
+
 .white-btn img {
     height: 1.2rem;
     margin-left: 5px;
@@ -602,7 +622,8 @@ color: var(--reg-blue);
         z-index: 21;
         display: inline;
     }
-    .add-btn-frame{
+
+    .add-btn-frame {
         display: none;
     }
 
@@ -624,10 +645,11 @@ color: var(--reg-blue);
         display: flex;
         justify-content: space-between;
     }
+
     .desk-header {
         display: none;
     }
-    
+
     .detail-frame {
         padding-left: 16px;
         padding-right: 16px;
@@ -669,6 +691,7 @@ color: var(--reg-blue);
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
     }
+
     .detail-ellipse {
         width: 80px !important;
         height: 80px !important;
@@ -695,4 +718,3 @@ color: var(--reg-blue);
     }
 
 }
-
