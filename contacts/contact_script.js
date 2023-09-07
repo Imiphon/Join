@@ -18,6 +18,15 @@ function showContacts() {
     showNameGroup();
 }
 
+function showNameGroup() {
+    let content = document.getElementById('nameGroup');
+    content.innerHTML = '';
+    for (let initial in initialGroups) {
+        content.innerHTML += GroupName(initial);
+        content.innerHTML += personDatas(initial);
+    }
+}
+
 //============================================================
 // SHOW INFORMATIONS IN MOBILE
 //============================================================
@@ -26,7 +35,6 @@ function deleteContact(index) {
     contactArray.splice(index, 1);
     showContacts();
 }
-
 
 //============================================================
 // CHECK WIDTH TO CONTROL MOB OR DESK OPTIC
@@ -37,7 +45,6 @@ function widthForInfo(index) {
     if (width <= 1024) {
         showInfoMobile(index);
     } else {
-        console.log('more width than 1025px')
         showInfoDesk(index);
     }
 }
@@ -46,7 +53,6 @@ function showInfoDesk(index) {
     let popupBox = document.getElementById('popupBox');
     popupBox.innerHTML = showInfoText(person, index);
 }
-
 function showInfoMobile(index) {
     let main = document.querySelector('main');
     main.innerHTML = '';
@@ -104,11 +110,13 @@ function closeDrawer() {
 //============================================================
 //EDIT CONTACT 
 //============================================================
+
 async function editMobContact(index) {
     let indexNr = index; //Nr of contactArray
     await mobilePopup();
     let content = document.getElementById('popContent');
     content.innerHTML = showEditContact(indexNr);
+    setInitialValues();
 }
 
 async function editDeskContact(index) {
@@ -116,9 +124,30 @@ async function editDeskContact(index) {
     await deskEditPopup();
     document.getElementById('popupLeft').innerHTML = showEditContact(indexNr);
     document.getElementById('popTop').style.borderTopLeftRadius = '0px';
+    setInitialValues();
 }
 
-function changeEdits() {
+function setInitialValues() {
+    const fullNameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    
+    if (!fullNameInput.value) {
+        fullNameInput.value = fullNameInput.placeholder;
+    }
+
+    if (!emailInput.value) {
+        emailInput.value = emailInput.placeholder;
+    }
+
+    if (!phoneInput.value) {
+        phoneInput.value = phoneInput.placeholder;
+    }
+}
+
+
+/**
+ * function changeEdits() {
     let fullNameInput = document.getElementById('fullName');
     let emailInput = document.getElementById('email');
     let phoneInput = document.getElementById('phone');
@@ -131,18 +160,16 @@ function changeEdits() {
     emailInput.value = emailValue;
     phoneInput.value = phoneValue;
 }
+ */
 
 function editContactInArray(index) {
-    changeEdits();
-    if (!validateForm()) {
-        showEditContact(index);
-        return;
-    }
-    let name = document.getElementById('fullName').value.split(' ');
+    // changeEdits();
+
+    let name = document.getElementById('fullName').value; //.split(' ') in splitName()
     let mail = document.getElementById('email').value;
     let phone = parseInt(document.getElementById('phone').value);
-    let preName = upperCase(name[0]);
-    let lastName = upperCase(name[1]);
+
+    let { preName, lastName } = splitName(name);
 
     contactArray[index].name = preName;
     contactArray[index].lastName = lastName;
@@ -164,7 +191,7 @@ function deleteInEditor(index) {
 //============================================================
 
 function openColorPicker() {
-    let colorBox = document.getElementById('colorBox');
+    //let colorBox = document.getElementById('colorBox');
     let colorPicker = document.getElementById('colorPicker');
 
     if (colorPicker.style.display === 'none') {
@@ -197,20 +224,14 @@ function setColor(color, event) {
     event.stopPropagation();
 }
 
-function closeColorPicker() {
-
-}
-
 function createContact() {
-    if (!validateForm()) {
-        return;
-    }
-    let name = document.getElementById('fullName').value;
+
+    let fullName = document.getElementById('fullName').value;
     let mail = document.getElementById('email').value;
     let phone = parseInt(document.getElementById('phone').value);
     let color = document.getElementById('colorBox').style.backgroundColor;
 
-    let { preName, lastName } = splitName(name);
+    let { preName, lastName } = splitName(fullName);
 
     contactArray.push({
         name: preName,
@@ -221,8 +242,7 @@ function createContact() {
     });
     document.getElementById('userForm').reset();
 
-    closePopup();
-    
+    closePopup();    
     showContacts();
     successInfo();
 }
@@ -251,8 +271,8 @@ function successInfo() {
     }, 2500);
   }
 
-function splitName(name) {
-    let nameParts = name.split(' ');
+function splitName(fullName) {
+    let nameParts = fullName.split(' ');
     let preName = upperCaseFirstLetter(nameParts[0]);
     let lastName = upperCaseFirstLetter(nameParts[1]);
     return { preName, lastName };
@@ -260,13 +280,6 @@ function splitName(name) {
 
 function upperCaseFirstLetter(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-
-function upperCase(name) {
-    let inputName = name;
-    let formattedName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
-    return formattedName;
 }
 
 //=============================================
@@ -294,44 +307,6 @@ function createInitalGroup() {
         acc[initial].push(current);
         return acc;
     }, {});
-}
-
-//=============================================
-//CHECK VALIDATION
-//=============================================
-
-function validateForm() {
-    let namePattern = /^[a-zA-Z]+\s[a-zA-Z]+$/; // accept two words
-    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // email check
-    let phonePattern = /^\+?\d{2,4}[-.\s]?\d{1,15}$/;
-
-    let nameInput = document.getElementById('fullName').value;
-    let emailInput = document.getElementById('email').value;
-    let phoneInput = document.getElementById('phone').value;
-
-    let name = nameInput.split(' ');
-
-    if (name.length !== 2) {
-        alert('Bitte geben Sie Vor- und Nachnamen getrennt durch ein Leerzeichen ein.');
-        return false;
-    }
-
-    else if (!namePattern.test(nameInput)) {
-        alert('Bitte geben Sie einen gültigen Name und Nachname ein.');
-        return false;
-    }
-
-    else if (!emailPattern.test(emailInput)) {
-        alert('Bitte geben Sie eine gültige Emailadresse ein.');
-        return false;
-    }
-
-    else if (!phonePattern.test(phoneInput)) {
-        alert('Bitte geben Sie eine gültige Telefonnummer ein.');
-        return false;
-    }
-    // if all right:
-    return true;
 }
 
 //============================================================
@@ -376,27 +351,14 @@ function deskAddPopup() {
     });
 }
 
-function popupBack() {
-    return `
-    <div class="popup-background" id="popupBackground">
-        <div class="popup" id="popup">  
-            <div class="popup-content" id="popContent">
-            </div>          
-            <div class="pop-add-content" id="popupRight">
-            </div>
-            <div class="pop-edit-content" id="popupLeft">
-            </div>
-        </div>
-    </div>
-    `;
-}
-
 function closePopup() {
     let colorPicker = document.getElementById('colorPicker');
+    let popBg = document.getElementById('popupBackground');
     if (colorPicker) {
         colorPicker.remove();
     }
-    document.getElementById("popupBackground").style.display = "none";
+    popBg.remove();
+    //document.getElementById("popupBackground").style.display = "none";
 }
 
 //============================================================
@@ -406,36 +368,30 @@ function closePopup() {
 function showMainFrame() {
     return `
     <div class="add-btn-frame">
-    </div> 
+    </div>
     <button class="add-btn" id="addBtn" onclick="widthForAdd();">
-    <img src="../assets/img/person_add.png" alt="">
-    </button> 
+        <img src="../assets/img/person_add.png" alt="">
+    </button>
     <div class="main-frame" id="mainFrame">
-        <div class="name-group" id="nameGroup">    
-        </div> 
-        <div class="popup-box" id="popupBox"> 
-        </div> 
-        <div id="success-info">Contact successfully created</div>        
-    </div> 
+        <div class="name-group" id="nameGroup">
+        </div>
+        <div class="popup-box" id="popupBox">
+        </div>
+        <div id="success-info">Contact successfully created</div>
+    </div>
+    `;
+}
+
+function GroupName(initial) {
+    return `
+    <div class="letter-box">
+        <span class="letterBox">${initial}</span>
+    </div>
+    <div class="line-box">
+        <div class="line"> </div>
+    </div>
 `;
 }
-
-function showNameGroup() {
-    let content = document.getElementById('nameGroup');
-    content.innerHTML = '';
-    for (let initial in initialGroups) {
-        content.innerHTML += `
-                <div class="letter-box">
-                    <span class="letterBox">${initial}</span>
-                </div>
-                <div class="line-box">
-                    <div class="line"> </div>
-                </div>
-            `;
-        content.innerHTML += personDatas(initial);
-    }
-}
-
 function personDatas(initial) {
     let htmlContent = '';
     for (let i = 0; i < contactArray.length; i++) {
@@ -524,59 +480,71 @@ function showInfoText(person, indexNr) {
     `;
 }
 
+function popupBack() {
+    return `
+    <div class="popup-background" id="popupBackground">
+        <div class="popup" id="popup">  
+            <div class="popup-content" id="popContent">
+            </div>          
+            <div class="pop-add-content" id="popupRight">
+            </div>
+            <div class="pop-edit-content" id="popupLeft">
+            </div>
+        </div>
+    </div>
+    `;
+}
+
 function showAddContact() {
     return `
     <div class="pop-top" id="popTop">
-    <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
-    <span class="pop-header">Add contact</span>
-    <span class="pop-subtitle">Tasks are better with a team!</span>
-</div>
-
-<div>
-    <img class="popup-circle no-border" src="../assets/img/person_initial.png" alt="person_initial">
-</div>
-
-<div class="pop-bottom">
-    <div class="contact-form">
-        <form id="userForm">
-            <div class="contact-frame">
-                <input class="contact-input" type="text" id="fullName" placeholder="Name Nachname">
-                <div class="color-img-box">
-                    <div class="color-frame">
-                        <div id="colorBox" class="color-box" onclick="openColorPicker()">
-                            <div id="colorPicker" class="color-picker" style="display: none;">
-                                <!-- colors -->
-                            </div>
-                        </div>
-                    </div>
-                    <img src="../assets/img/person_small.png" alt="name">
-                </div>
-            </div>
-            <div class="contact-frame">
-                <input class="contact-input" type="email" id="email" placeholder="Email" required>
-                <img src="../assets/img/mail_small.png" alt="name">
-            </div>
-            <div class="contact-frame tel-box">
-                <input class="contact-input" type="tel" id="phone" name="phone" placeholder="Phone"
-                    pattern="\+?\d{2,4}[-.\s]?\d{1,15}" required>
-                <img src="../assets/img/call_small.png" alt="name">
-                <!-- ------------ number with country-code:                 
-            <select id="country-code" name="country_code">
-            <option value="+1">USA (+1)</option>
-            <option value="+49">Germany (+49)</option>
-            </select>
-            <input class="contact-input" type="tel" id="phone" pattern="\d{1,15}" placeholder="Phone" required> 
-            ------------------------------------------------ -->
-            </div>
-        </form>
+        <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+        <span class="pop-header">Add contact</span>
+        <span class="pop-subtitle">Tasks are better with a team!</span>
     </div>
     <div>
-        <button class="blue-btn" onclick="createContact()">
-            Create Contact
-            <img src="../assets/img/check_small.png" alt="name">
-        </button>
+        <img class="popup-circle no-border detail-ellipse" src="../assets/img/person_initial.png" alt="person_initial">
     </div>
-</div>
+    <div class="pop-bottom">
+        <div class="contact-form">
+            <form id="userForm" onsubmit="createContact()">
+                <div class="contact-frame">
+                <input 
+                class="contact-input" 
+                type="text" 
+                id="fullName" 
+                placeholder="Name Nachname" 
+                required 
+                pattern="^[a-zA-Z]+ [a-zA-Z]+$" 
+                title="Bitte geben Sie einen Vor- und Nachnamen ein.">
+            
+                    <div class="color-img-box">
+                        <div class="color-frame">
+                            <div id="colorBox" class="color-box" onclick="openColorPicker()">
+                                <div id="colorPicker" class="color-picker" style="display: none;">
+                                    <!-- colors -->
+                                </div>
+                            </div>
+                        </div>
+                        <img src="../assets/img/person_small.png" alt="name">
+                    </div>
+                </div>
+                <div class="contact-frame">
+                    <input class="contact-input" type="email" required id="email" placeholder="Email">
+                    <img src="../assets/img/mail_small.png" alt="name">
+                </div>
+                <div class="contact-frame tel-box">
+                    <input class="contact-input" required type="tel" id="phone" placeholder="Phone"
+                    pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein.">
+                    <img src="../assets/img/call_small.png" alt="phone">
+                </div>
+                <button type="submit" class="blue-btn">
+                    Create Contact
+                    <img src="../assets/img/check_small.png">
+                </button>
+            </form>
+        </div>
+    </div>
         `;
 }
 
@@ -584,46 +552,46 @@ function showEditContact(index) {
     let person = contactArray[index];
     let indexNr = index;
     return `
-        <div class="pop-top" id="popTop">                
-            <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
-            <span class="pop-header">Edit contact</span> 
-            <span class="pop-subtitle">Tasks are better with a team!</span>        
-        </div>
-        <div>
-            <div class="popup-circle detail-ellipse" style="background-color: ${person.color}"> 
+        <div class="pop-top" id="popTop">
+        <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
+        <span class="pop-header">Edit contact</span>
+        <span class="pop-subtitle">Tasks are better with a team!</span>
+    </div>
+    <div>
+        <div class="popup-circle detail-ellipse" style="background-color: ${person.color}">
             ${person.initials}
-            </div>
         </div>
-        
-        <!-- <div> <img class="popup-circle" src="../assets/img/person_initial.png" alt="../assets/img/person_initial.png"> </div>   -->     
-        <div class="pop-bottom">
-        <div class="contact-form">
-            <form id="userForm">
+    </div>
+    <div class="pop-bottom">
+        <form id="userForm" onsubmit="editContactInArray(${indexNr})">
+            <div class="contact-form">
                 <div class="contact-frame">
-                    <input class="contact-input" required type="text" id="fullName" placeholder="${person.name + ' ' + person.lastName}">
+                    <input class="contact-input" type="text" id="fullName"
+                        placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"
+                        title="Bitte geben Sie einen Vor- und Nachnamen ein.">
+
                     <img src="../assets/img/person_small.png" alt="name">
-                </div>    
+                </div>
                 <div class="contact-frame">
                     <input class="contact-input" required type="email" id="email" placeholder="${person.mail}">
                     <img src="../assets/img/mail_small.png" alt="name">
-                </div>    
-                <div class="contact-frame">
-                    <input class="contact-input" required type="tel" id="phone" placeholder="${person.phone}">
-                    <img src="../assets/img/call_small.png" alt="name">
                 </div>
-            </form> 
-        </div>
-    
-        <div class="btn-box">
-            <button class="white-btn" onclick="deleteInEditor(${indexNr})">
-                Delete
-            </button>
-            <button class="blue-btn" onclick="editContactInArray(${indexNr})">
-                Save
-                <img src="../assets/img/check_small.png" alt="name">
-            </button>
-        </div>
-                `;
-    return content;
+                <div class="contact-frame">
+                    <input class="contact-input" required type="tel" id="phone" placeholder="${person.phone}"
+                        pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein.">    
+                    <img src="../assets/img/call_small.png" alt="phone">
+                </div>
+            </div>
+            <div class="btn-box">
+                <button class="white-btn" onclick="deleteInEditor(${indexNr})">
+                    Delete
+                </button>
+                <button class="blue-btn" type="submit">
+                    Save
+                    <img src="../assets/img/check_small.png">
+                </button>
+            </div>
+        </form>
+    </div>
+    `;
 }
-
