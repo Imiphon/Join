@@ -10,10 +10,9 @@ let resetId;
 async function login() {
     disableButtonLogin();
     let email = getInput('loginEmail'); 
-
-    if(await checkUserExist(email)){
-        let password = getInput('loginPassword');
-        if (checkPwdCorrect(password)){
+    let password = getInput('loginPassword');
+    if(await checkUserExist(email)){        
+        if (checkPwdCorrect(email, password)){
             window.location = "./templates/welcome_message.html";
         }else{
             showPwdNotRightMessage();
@@ -279,7 +278,7 @@ function showresetPwdMessage() {
  */
 async function checkUserExist(email) {
     emailAdresses = await getExistingEmailAdresses();
-    return !emailAdresses.includes(email);
+    return emailAdresses.includes(email);
 }
 
 /**
@@ -287,7 +286,7 @@ async function checkUserExist(email) {
  * @param {string} password - password to check if is correct.
  * @returns true if password correct, false if password not correct.
  */
-function checkPwdCorrect(password) {    
+function checkPwdCorrect(email, password) {    
     return password == users[emailAdresses.indexOf(email)]['password'];
 }
 
