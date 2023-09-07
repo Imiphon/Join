@@ -428,11 +428,11 @@ function showInfoText(person, indexNr) {
                         ${person.name} ${person.lastName}
                         </div>
                         <div class="more-row" id="moreRow">
-                            <div class="more-row-box" onclick="editDeskContact(${indexNr}); toggleBlue(this)">
+                            <div class="more-row-box" onclick="editDeskContact(${indexNr})">
                                 <img src="../assets/img/edit.png" alt="Edit">
                                 <span>Edit</span>
                             </div>
-                            <div class="more-row-box" onclick="deleteContact(${indexNr}); toggleBlue(this)">
+                            <div class="more-row-box" onclick="deleteContact(${indexNr})">
                                 <img src="../assets/img/delete.png" alt="Delete">
                                 <span>Delete</span>
                             </div>
