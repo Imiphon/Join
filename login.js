@@ -9,7 +9,7 @@ async function login() {
     
     if(!await checkUserExist(email)){
         if (password == users[emailAdresses.indexOf(email)]['password']){
-            window.location = "./summary/summary.html";
+            window.location = "./templates/welcome_message.html";
         }else{
             showPwdNotRightMessage();
         }
@@ -47,17 +47,19 @@ async function newUser() {
 function guestLogin() {
     disableButtonLogin();
     console.log("Test");
-    window.location = "./summary/summary.html";
+    window.location = "./templates/welcome_message.html";
 }
 
-async function resetEmail() {
+async function sendResetEmail() {
     disableButton('resetEmailBtn');
     let email = getInput('resetEmail');   
     
     if(!await checkUserExist(email)){
         showSendEmailMessage();
-        //openResetPwd(emailAdresses.indexOf(email));
-        //closeForgotPwd();
+        resetId = emailAdresses.indexOf(email);
+        closeForgotPwd();
+        openResetPwd();
+        
     }else{
         showEmailNotFoundMessage();        
     }

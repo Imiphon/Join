@@ -2,7 +2,6 @@
     width: 100%;
     flex-direction: column;
     padding: 32px;
-    overflow: auto;
     animation: 450ms changeBackground ease-in-out;
 }
 
@@ -14,7 +13,7 @@
     background-color: var(--reg-blue);
 }
 
-.logoDivHeaderMobile{    
+.logoDivHeaderMobile1{    
     width: 100%;
     animation: 450ms moveLogo ease-in-out;
     top: 32px;
