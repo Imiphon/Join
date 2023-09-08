@@ -1,14 +1,16 @@
-//============================================================
-// Start Contacts
-//============================================================
-
+/**
+ * eventListener to check if its the right side
+ */
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = window.location.pathname;
     if (currentPage.includes('contact_list')) {
         showContacts();
     }
 });
-
+/**
+ * this starts a frame in the main area with #nameGroup, #popup and successInfo divs
+ * calling functions to build initial groups, inner content and show all names 
+ */
 function showContacts() {
     let content = document.querySelector('main');
     content.innerHTML = '';
@@ -17,7 +19,9 @@ function showContacts() {
     createInitials();
     showNameGroup();
 }
-
+/**
+ * put all names in right initialGroup
+ */
 function showNameGroup() {
     let content = document.getElementById('nameGroup');
     content.innerHTML = '';
@@ -26,10 +30,6 @@ function showNameGroup() {
         content.innerHTML += personDatas(initial);
     }
 }
-
-//============================================================
-// SHOW INFORMATIONS IN MOBILE
-//============================================================
 
 function deleteContact(index) {
     contactArray.splice(index, 1);
@@ -111,7 +111,7 @@ function closeDrawer() {
 //EDIT CONTACT 
 //============================================================
 
-async function editMobContact(index) {
+async function openEditMobile(index) {
     let indexNr = index; //Nr of contactArray
     await mobilePopup();
     let content = document.getElementById('popContent');
@@ -119,7 +119,7 @@ async function editMobContact(index) {
     setInitialValues();
 }
 
-async function editDeskContact(index) {
+async function openEditDesk(index) {
     let indexNr = index; //Nr of contactArray
     await deskEditPopup();
     document.getElementById('popupLeft').innerHTML = showEditContact(indexNr);
@@ -145,18 +145,11 @@ function setInitialValues() {
     }
 }
 
-
-/**
- * doesn't work
- * function toggleBlue(element) {
-    element.classList.toggle('active');
-}
- */
-
 function editContactInArray(index) {
     let name = document.getElementById('fullName').value; //.split(' ') in splitName()
     let mail = document.getElementById('email').value;
     let phone = parseInt(document.getElementById('phone').value);
+    let color = document.getElementById('colorBox').style.backgroundColor;
 
     let { preName, lastName } = splitName(name);
 
@@ -164,6 +157,7 @@ function editContactInArray(index) {
     contactArray[index].lastName = lastName;
     contactArray[index].mail = mail;
     contactArray[index].phone = phone;
+    contactArray[index].color = color;
 
     document.getElementById('userForm').reset();
     closePopup();
@@ -180,7 +174,6 @@ function deleteInEditor(index) {
 //============================================================
 
 function openColorPicker() {
-    //let colorBox = document.getElementById('colorBox');
     let colorPicker = document.getElementById('colorPicker');
 
     if (colorPicker.style.display === 'none') {
@@ -197,20 +190,29 @@ function updateColors() {
 }
 
 function colorsInPicker() {
-    let pickerHtml = '';
+    let pickerBox = '';
     for (let color in userColors) {
-        pickerHtml += `
-        <div class="color-option" style="background-color: ${userColors[color]};" onclick="setColor('${color}', event)"></div>
+        pickerBox += `
+        <div class="color-option" 
+        style="background-color: ${userColors[color]};" 
+        onclick="setColor('${color}', event)"></div>
         `;
     }
-    return pickerHtml;
+    return pickerBox;
 }
 
 function setColor(color, event) {
     document.getElementById('colorBox').style.backgroundColor = userColors[color];
+
     let colorPicker = document.getElementById('colorPicker');
     colorPicker.style.display = 'none';
     event.stopPropagation();
+    if (document.querySelector('.editor')){
+        //without space between the 2 classes to select exactly this element 
+        //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
+        let detailEllipse = document.querySelector('.popup-circle.detail-ellipse');
+        detailEllipse.style.backgroundColor = userColors[color];
+    }
 }
 
 function createContact() {
@@ -316,9 +318,9 @@ function mobilePopup() {
 
 function deskEditPopup() {
     return new Promise((resolve) => {
-        /*get popupackground */
+        //get popupBackground 
         let popupHTML = popupBack();
-        /*put Background in popupBox in mainFrame */
+        //set Background in popupBox in mainFrame 
         document.getElementById('popupBox').innerHTML += popupHTML;
         let popupBg = document.getElementById('popupBackground');
         popupBg.style.display = 'block';
@@ -428,7 +430,7 @@ function showInfoText(person, indexNr) {
                         ${person.name} ${person.lastName}
                         </div>
                         <div class="more-row" id="moreRow">
-                            <div class="more-row-box" onclick="editDeskContact(${indexNr})">
+                            <div class="more-row-box" onclick="openEditDesk(${indexNr})">
                                 <img src="../assets/img/edit.png" alt="Edit">
                                 <span>Edit</span>
                             </div>
@@ -459,7 +461,7 @@ function showInfoText(person, indexNr) {
             <img src="../assets/img/more_btn.svg" alt="">
         </button>
         <div id="drawer">
-          <div class="drawer-item" onclick="editMobContact(${indexNr})">
+          <div class="drawer-item" onclick="openEditMobile(${indexNr})">
             <img src="../assets/img/edit.png" alt="Edit">
             <span>Edit</span>
           </div>
@@ -563,14 +565,22 @@ function showEditContact(index) {
     </div>
     <div class="pop-bottom">
     <div class="form-frame">
-        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr})">
-            
+        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr})">            
                 <div class="contact-frame">
                     <input class="contact-input" type="text" id="fullName"
                         placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"
                         title="Bitte geben Sie einen Vor- und Nachnamen ein.">
 
-                    <img src="../assets/img/person_small.png" alt="name">
+                        <div class="color-img-box">
+                        <div class="color-frame">
+                            <div id="colorBox" class="color-box editor" onclick="openColorPicker()" style="background-color: ${person.color}">
+                                <div id="colorPicker" class="color-picker" style="display: none;">
+                                    <!-- colors -->
+                                </div>
+                            </div>
+                        </div>
+                        <img src="../assets/img/person_small.png" alt="name">
+                    </div>
                 </div>
                 <div class="contact-frame">
                     <input class="contact-input" required type="email" id="email" placeholder="${person.mail}">
