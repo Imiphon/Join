@@ -1,5 +1,4 @@
-//this array comes from server and has always to be updated
-
+//this array stores all contact informations
 let contactArray = [
     {name:'Anton', lastName:'Anfang', mail:'anton@mail.com', phone:'49179111', initials:'AA', color:'var(--user-orange)'},
     {name:'Ali', lastName:'Berg', mail:'ali@mail.com', phone:'49176000', initials:'AB', color:'var(--user-blue)'},
@@ -42,14 +41,3 @@ async function getItem(key) {
         } throw `Could not find data with key "${key}".`;
     });
 }
-
-/**
- * ein Gedanke: wir schreiben hier eine fetch-Funktion, 
- * die alle auf dem server gespeicherten daten des Users herunterlädt, 
- * und in unseren globalen Arrays speichert. 
- * Wenn neue Informationen vom User hinzugefügt werden, 
- * und sich ein globales array in seiner Größe verändert, startet dieses
- * event eine Funktion, die den server updatet.
- * 
- * P.S. hier würde ich auch gerne ALLE globalen Arrays speichern.
- */

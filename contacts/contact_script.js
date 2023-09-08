@@ -216,7 +216,6 @@ function setColor(color, event) {
 }
 
 function createContact() {
-
     let fullName = document.getElementById('fullName').value;
     let mail = document.getElementById('email').value;
     let phone = parseInt(document.getElementById('phone').value);
