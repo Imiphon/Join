@@ -1,23 +1,21 @@
-    const assignedContacts = [];
-    const selectedContacts = [];
+    let assignedContacts = [];
+    let selectedContacts = [];
     let tasksForSubtasks = [];
 
 
 
     // Function to show or hide options
     // Function to show or hide options
-    function showOptions(event) {
-        event.preventDefault();
+    function showOptions() {
         let dropdown = document.getElementById('dropdown-options');
 
-        if (dropdown.classList.contains('d-none')) {
+        if (dropdown.classList.contains('dropdown-content')) {
             showDropdownOptions();
         } else {
             hideDropdownOptions();
         }
-
-        dropDownTemplates();
     }
+
 
     let dropdown = document.getElementById('dropdown-options');
 
@@ -26,14 +24,15 @@
         document.getElementById('caret-down').style.transform = 'rotate(180deg)';
         document.getElementById('selected-contact').classList.remove('d-none');
         document.getElementById('assigned-div').style.borderBottom = 'solid 1px var(--reg-blue)';
-        dropdown.classList.remove('d-none');
+        dropdown.classList.remove('dropdown-content');
+        dropdown.classList.add('hidden')
     }
 
     function hideDropdownOptions() {
         document.getElementById('caret-down').style.transform = 'rotate(0deg)';
-        document.getElementById('selected-contact').classList.add('d-none');
         document.getElementById('assigned-div').style.borderBottom = '';
-        dropdown.classList.add('d-none');
+        dropdown.classList.add('dropdown-content');
+        dropdown.classList.remove('hidden')
     }
 
 
@@ -55,6 +54,10 @@
         });
     }
 
+    document.addEventListener('DOMContentLoaded', ()=>{
+        dropDownTemplates();
+    })
+
 
 
     // Function to set a  background color for a profile
@@ -62,17 +65,6 @@
         let userBackground = document.getElementById(`profile${index}`);
         userBackground.style.backgroundColor = user.color;
     }
-
-
-    // Function to rotate the category icon
-    // Initialize flags to track categoryIcon
-
-    // let showCategory = false;
-    // function rotateIcon() {    
-    //     const categoryIcon = document.getElementById('category-caret-down');
-    //     showCategory = !showCategory;
-    //     categoryIcon.style.transform = showCategory ? 'rotate(180deg)' : 'rotate(0deg)';
-    // }
 
     // Function to open the add task section
     function openAddTask() {
@@ -191,32 +183,13 @@
                 selectedContacts.splice(indexToRemove, 1);
             }
         }
-            showAssignedContactsInContainer()
-                console.log(selectedContacts)
+        
+                showAssignedContactsInContainer()
+                console.log(selectedContacts);
 
     }
 
-    function selectedContact(userInitials,bColor, index) {
-        const checkbox = document.getElementById(`checkbox${index}`);
-        const userName = checkbox.value;
-
-        if (checkbox.checked) {
-            // Wenn das Kontrollkästchen ausgewählt ist, fügen Sie den Benutzernamen hinzu
-            selectedContacts.push({
-                initials: userInitials,
-                color: bColor,
-                name: userName
-            });
-        } else {
-            // Wenn das Kontrollkästchen abgewählt ist, entfernen Sie den Benutzernamen
-            const indexToRemove = selectedContacts.findIndex(contact => contact.name === userName);
-            if (indexToRemove !== -1) {
-                selectedContacts.splice(indexToRemove, 1);
-                showAssignedContactsInContainer();
-            }
-        }
-
-    }
+   
 
 
     function showAssignedContactsInContainer(){
@@ -295,9 +268,16 @@
         const taskData = collectTaskData();
         const task = createTaskObject(taskData);
         saveTask(task);
-        clearForm();
-        showAssignedContactsInContainer();
+        clearForm(event);
         renderAddedTask();
+        showAddedTas();
+    }
+
+    
+
+    function changeLocation(){
+       let boradPage  = 'http://127.0.0.1:5501/board/board.html'; 
+       window.location.href = boradPage;
     }
 
     function clearAddTask() {
@@ -311,7 +291,7 @@
         const category = document.getElementById('category').value;
         const priority = prio;
         const subtasks = tasksForSubtasks;
-        const assignedContacts = assignedContacts.map(contact => contact.name);
+        const selectedContact = selectedContacts.map(contact => contact.shortName);
 
         return {
             title,
@@ -320,7 +300,7 @@
             category,
             priority,
             subtasks,
-            assignedContacts
+            selectedContact
         };
     }
 
@@ -329,16 +309,17 @@
             'title': taskData.title,
             'description': taskData.description,
             'date': taskData.date,
+            'selectedContacts': taskData.selectedContact,
             'category': taskData.category,
             'priority': taskData.priority,
             'subTask': taskData.subtasks,
-            'assignedContacts': taskData.assignedContacts
         };
         return task;
     }
 
     function saveTask(task) {
         addedTasks[0]['toDo'].push(task);
+        console.log(addedTasks[0]['toDo'])
     }
 
     function clearForm(event) {
@@ -348,7 +329,12 @@
         document.getElementById('date').value = '';
         document.getElementById('category').value = 'Select task Category';
         tasksForSubtasks = [];
+        selectedContacts = [];
+        assignedContacts = [];
+        showAssignedContactsInContainer();
+        dropDownTemplates();
         resetPriorityButtons();
+        
 
     }
 
@@ -359,13 +345,23 @@
     }
 
 
-    function showNotification(message) {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 2000);
+    function showMessage(html) {
+        let msg = document.getElementById('message');
+        msg.innerHTML = html;
+        msg.classList.remove('d-none');
+        setTimeout(function(){
+            msg.classList.add('d-none');
+        },3000);
+        // setTimeout(()=>{
+        //     toggleButton('board');
+        //     changeLocation();
+        // }, 3500)
     }
-
+    
+    function showAddedTas() {
+        let html =`
+            <p>Task added</p> 
+         `
+        showMessage(html);
+    }
 

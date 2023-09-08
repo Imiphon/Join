@@ -12,11 +12,20 @@ let contactArray = [
 ]
 
 let initialGroups = [];
-
-
 let addedTasks = [
     {
-        'toDo':[],
+        'toDo':[
+            {
+                title : "Kochwelt",
+                description : 'Build start page with recipe recommendation.',
+                date : "2023-09-16",
+                category : 'kochen',
+                priority : "low",
+                subtasks : "schnell",
+                assignedContacts : "AA"
+            }
+
+        ],
         'inProgress':[],
         'awaitFeedBack':[]
     }

@@ -43,11 +43,11 @@
         
         
                         <div class="assigned-div">
-                            <span id="assigned-div" onclick="showOptions(event)">Select contact to assign
+                            <span onclick="showOptions()" id="assigned-div">Select contact to assign
                                 <i class="bi bi-caret-down-fill" id="caret-down"></i>
                             </span>
         
-                            <div id="dropdown-options" class="dropdown-content d-none">
+                            <div id="dropdown-options" class="dropdown-content">
             
                             </div>
 
@@ -113,7 +113,7 @@
                 </form>
             </section>
 
-            <div id="notification" class="notification"></div>
+            <div id="message" class="message d-none"></div>
 
             <div class="btns-container main-btns-container">
                 <button class="create-task" onclick="activeCreateTaskBtn()">
