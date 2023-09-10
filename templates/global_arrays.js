@@ -83,25 +83,111 @@ let addedTasks = [
         description: "Build start page with recipe recommendation.",
         date: "2023-09-16",
         category: "kochen",
+        priority: "urgent",
+        subtasks: ["schnell", "love", "was geehet"],
+        progresWidth: 0,
+        selectedContacts: [
+          {
+            shortName: "AA",
+            bColor: "var(--user-orange)",
+            name: "Anton",
+            lastName: "Anfang",
+          },
+          {
+            shortName: "AB",
+            bColor: "var(--user-blue)",
+            name: "Ali",
+            lastName: "Berg",
+          },
+          {
+            shortName: "BA",
+            bColor: "var(--user-yellow)",
+            name: "Berta",
+            lastName: "Anfang",
+          },
+          {
+            shortName: "BB",
+            bColor: "var(--user-lila)",
+            name: "Bert",
+            lastName: "Berg",
+          },
+        ],
+      },
+    ],
+    inProgress: [
+      {
+        title: "Kochwelt",
+        description: "Build start page with recipe recommendation.",
+        date: "2023-09-16",
+        category: "kochen",
         priority: "medium",
         subtasks: ["schnell", "love", "was geehet"],
         progresWidth: 0,
-        selectedContacts: ["AA", "KL", "be", "Da"],
-      },
-
-      {
-        category: "design",
-        date: "2023-09-24",
-        description: "ddd",
-        priority: "low",
-        progressWidth: 0,
-        selectedContacts: [("AA", "AB", "BA", "BB")],
-        subTask: ["was"],
-        title: "ddd",
+        selectedContacts: [
+          {
+            shortName: "AA",
+            bColor: "var(--user-orange)",
+            name: "Anton",
+            lastName: "Anfang",
+          },
+          {
+            shortName: "AB",
+            bColor: "var(--user-blue)",
+            name: "Ali",
+            lastName: "Berg",
+          },
+          {
+            shortName: "BA",
+            bColor: "var(--user-yellow)",
+            name: "Berta",
+            lastName: "Anfang",
+          },
+          {
+            shortName: "BB",
+            bColor: "var(--user-lila)",
+            name: "Bert",
+            lastName: "Berg",
+          },
+        ],
       },
     ],
-    inProgress: [],
-    awaitFeedBack: [],
+    awaitFeedback: [
+      {
+        title: "Kochwelt",
+        description: "Build start page with recipe recommendation.",
+        date: "2023-09-16",
+        category: "kochen",
+        priority: "low",
+        subtasks: ["schnell", "love", "was geehet"],
+        progresWidth: 0,
+        selectedContacts: [
+          {
+            shortName: "AA",
+            bColor: "var(--user-orange)",
+            name: "Anton",
+            lastName: "Anfang",
+          },
+          {
+            shortName: "AB",
+            bColor: "var(--user-blue)",
+            name: "Ali",
+            lastName: "Berg",
+          },
+          {
+            shortName: "BA",
+            bColor: "var(--user-yellow)",
+            name: "Berta",
+            lastName: "Anfang",
+          },
+          {
+            shortName: "BB",
+            bColor: "var(--user-lila)",
+            name: "Bert",
+            lastName: "Berg",
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -128,3 +214,5 @@ async function getItem(key) {
       throw `Could not find data with key "${key}".`;
     });
 }
+ 
+

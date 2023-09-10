@@ -42,8 +42,8 @@ function dropDownTemplates() {
     const userHtml = `
                     <div class="options">
                     <span class="profile" id="profile${index}">${user.initials}</span>
-                    <label for="checkbox">${user.name}</label>
-                    <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser('${user.initials}','${user.color}', ${index})">
+                    <label for="checkbox">${user.name} ${user.lastName}</label>
+                    <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser('${user.initials}','${user.lastName}','${user.color}', ${index})">
                     </div>
                     `;
     dropdown.innerHTML += userHtml;
@@ -165,15 +165,21 @@ function setPrio(value) {
 
 // Function to define the assigned user and push the name to the "assignedontacts"-Array to show them in the "selected-user" container and push also the selected contacts to the 'selectedContacts'
 
-function checkedUser(userInitials, bColor, index) {
+function checkedUser(userInitials,userLastName , bColor, index) {
   const checkbox = document.getElementById(`checkbox${index}`);
   const userName = checkbox.value;
   if (checkbox.checked) {
-    assignedContacts.push({ shortName: userInitials, bColor: bColor });
+    assignedContacts.push({
+      shortName: userInitials,
+      bColor: bColor,
+      name: userName,
+      lastName: userLastName
+    });
     selectedContacts.push({
       shortName: userInitials,
       bColor: bColor,
       name: userName,
+      lastName: userLastName,
     });
   } else {
     const indexToRemove = assignedContacts.findIndex(

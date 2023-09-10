@@ -1,3 +1,7 @@
+.board-main::-webkit-scrollbar{
+  display: none;
+}
+
 .board-frame {
   margin-top: 100px;
 }
@@ -6,6 +10,7 @@
   padding: 12px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 100px;
   align-items: center;
   gap: 12px;
 }
@@ -52,6 +57,13 @@
   align-items: flex-start;
   min-height: 100px;
   width: 100%;
+}
+
+.allsTsks{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .row-title {
