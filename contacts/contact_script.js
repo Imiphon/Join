@@ -2,38 +2,38 @@
  * eventListener to check if its the right side
  */
 document.addEventListener("DOMContentLoaded", function () {
-    let currentPage = window.location.pathname;
-    if (currentPage.includes('contact_list')) {
-        showContacts();
-    }
+  let currentPage = window.location.pathname;
+  if (currentPage.includes("contact_list")) {
+    showContacts();
+  }
 });
 /**
  * this starts a frame in the main area with #nameGroup, #popup and successInfo divs
- * calling functions to build initial groups, inner content and show all names 
+ * calling functions to build initial groups, inner content and show all names
  */
 function showContacts() {
-    let content = document.querySelector('main');
-    content.innerHTML = '';
-    content.innerHTML += showMainFrame();
-    createInitalGroup();
-    createInitials();
-    showNameGroup();
+  let content = document.querySelector("main");
+  content.innerHTML = "";
+  content.innerHTML += showMainFrame();
+  createInitalGroup();
+  createInitials();
+  showNameGroup();
 }
 /**
  * put all names in right initialGroup
  */
 function showNameGroup() {
-    let content = document.getElementById('nameGroup');
-    content.innerHTML = '';
-    for (let initial in initialGroups) {
-        content.innerHTML += GroupName(initial);
-        content.innerHTML += personDatas(initial);
-    }
+  let content = document.getElementById("nameGroup");
+  content.innerHTML = "";
+  for (let initial in initialGroups) {
+    content.innerHTML += GroupName(initial);
+    content.innerHTML += personDatas(initial);
+  }
 }
 
 function deleteContact(index) {
-    contactArray.splice(index, 1);
-    showContacts();
+  contactArray.splice(index, 1);
+  showContacts();
 }
 
 //============================================================
@@ -41,38 +41,38 @@ function deleteContact(index) {
 //============================================================
 
 function widthForInfo(index) {
-    const width = window.innerWidth;
-    if (width <= 1024) {
-        showInfoMobile(index);
-    } else {
-        showInfoDesk(index);
-    }
+  const width = window.innerWidth;
+  if (width <= 1024) {
+    showInfoMobile(index);
+  } else {
+    showInfoDesk(index);
+  }
 }
 function showInfoDesk(index) {
-    let person = contactArray[index];
-    let popupBox = document.getElementById('popupBox');
-    popupBox.innerHTML = showInfoText(person, index);
+  let person = contactArray[index];
+  let popupBox = document.getElementById("popupBox");
+  popupBox.innerHTML = showInfoText(person, index);
 }
 function showInfoMobile(index) {
-    let main = document.querySelector('main');
-    main.innerHTML = '';
-    let person = contactArray[index];
-    main.innerHTML += showInfoText(person, index);
-    document.getElementById('moreRow').style.display = 'none';
+  let main = document.querySelector("main");
+  main.innerHTML = "";
+  let person = contactArray[index];
+  main.innerHTML += showInfoText(person, index);
+  document.getElementById("moreRow").style.display = "none";
 }
 
 async function widthForAdd() {
-    const width = window.innerWidth;
-    if (width <= 1024) {
-        await mobilePopup();
-        let content = document.getElementById('popContent');
-        content.innerHTML = showAddContact();
-    } else {
-        await deskAddPopup();
-        let content = document.getElementById('popupRight');
-        content.innerHTML = showAddContact();
-        document.getElementById('popTop').style.borderTopRightRadius = '0px';
-    }
+  const width = window.innerWidth;
+  if (width <= 1024) {
+    await mobilePopup();
+    let content = document.getElementById("popContent");
+    content.innerHTML = showAddContact();
+  } else {
+    await deskAddPopup();
+    let content = document.getElementById("popupRight");
+    content.innerHTML = showAddContact();
+    document.getElementById("popTop").style.borderTopRightRadius = "0px";
+  }
 }
 
 //============================================================
@@ -80,196 +80,195 @@ async function widthForAdd() {
 //============================================================
 
 function toggleDrawer() {
-    let drawer = document.getElementById('drawer');
-    if (drawer.classList.toggle('open')) {
-        document.addEventListener('click', closeOnClick);
-    } else {
-        document.removeEventListener('click', closeOnClick);
-    }
+  let drawer = document.getElementById("drawer");
+  if (drawer.classList.toggle("open")) {
+    document.addEventListener("click", closeOnClick);
+  } else {
+    document.removeEventListener("click", closeOnClick);
+  }
 }
 
 function closeOnClick(event) {
-    let drawer = document.getElementById('drawer');
-    let moreBtn = document.querySelector('.more-btn');
-    if (drawer && moreBtn) {
-        if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
-            closeDrawer();
-            document.removeEventListener('click', closeOnClick);
-        }
+  let drawer = document.getElementById("drawer");
+  let moreBtn = document.querySelector(".more-btn");
+  if (drawer && moreBtn) {
+    if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
+      closeDrawer();
+      document.removeEventListener("click", closeOnClick);
     }
-    else {
-        // if drawer or moreBtn doesn't exists
-        document.removeEventListener('click', closeOnClick);
-    }
+  } else {
+    // if drawer or moreBtn doesn't exists
+    document.removeEventListener("click", closeOnClick);
+  }
 }
 
 function closeDrawer() {
-    document.getElementById('drawer').classList.remove('open');
+  document.getElementById("drawer").classList.remove("open");
 }
 
 //============================================================
-//EDIT CONTACT 
+//EDIT CONTACT
 //============================================================
 
 async function openEditMobile(index) {
-    let indexNr = index; //Nr of contactArray
-    await mobilePopup();
-    let content = document.getElementById('popContent');
-    content.innerHTML = showEditContact(indexNr);
-    setInitialValues();
+  let indexNr = index; //Nr of contactArray
+  await mobilePopup();
+  let content = document.getElementById("popContent");
+  content.innerHTML = showEditContact(indexNr);
+  setInitialValues();
 }
 
 async function openEditDesk(index) {
-    let indexNr = index; //Nr of contactArray
-    await deskEditPopup();
-    document.getElementById('popupLeft').innerHTML = showEditContact(indexNr);
-    document.getElementById('popTop').style.borderTopLeftRadius = '0px';
-    setInitialValues();
+  let indexNr = index; //Nr of contactArray
+  await deskEditPopup();
+  document.getElementById("popupLeft").innerHTML = showEditContact(indexNr);
+  document.getElementById("popTop").style.borderTopLeftRadius = "0px";
+  setInitialValues();
 }
 
 function setInitialValues() {
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    
-    if (!fullNameInput.value) {
-        fullNameInput.value = fullNameInput.placeholder;
-    }
+  const fullNameInput = document.getElementById("fullName");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
 
-    if (!emailInput.value) {
-        emailInput.value = emailInput.placeholder;
-    }
+  if (!fullNameInput.value) {
+    fullNameInput.value = fullNameInput.placeholder;
+  }
 
-    if (!phoneInput.value) {
-        phoneInput.value = phoneInput.placeholder;
-    }
+  if (!emailInput.value) {
+    emailInput.value = emailInput.placeholder;
+  }
+
+  if (!phoneInput.value) {
+    phoneInput.value = phoneInput.placeholder;
+  }
 }
 
 function editContactInArray(index) {
-    let name = document.getElementById('fullName').value; //.split(' ') in splitName()
-    let mail = document.getElementById('email').value;
-    let phone = parseInt(document.getElementById('phone').value);
-    let color = document.getElementById('colorBox').style.backgroundColor;
+  let name = document.getElementById("fullName").value; //.split(' ') in splitName()
+  let mail = document.getElementById("email").value;
+  let phone = parseInt(document.getElementById("phone").value);
+  let color = document.getElementById("colorBox").style.backgroundColor;
 
-    let { preName, lastName } = splitName(name);
+  let { preName, lastName } = splitName(name);
 
-    contactArray[index].name = preName;
-    contactArray[index].lastName = lastName;
-    contactArray[index].mail = mail;
-    contactArray[index].phone = phone;
-    contactArray[index].color = color;
+  contactArray[index].name = preName;
+  contactArray[index].lastName = lastName;
+  contactArray[index].mail = mail;
+  contactArray[index].phone = phone;
+  contactArray[index].color = color;
 
-    document.getElementById('userForm').reset();
-    closePopup();
-    showContacts();
+  document.getElementById("userForm").reset();
+  closePopup();
+  showContacts();
 }
 
 function deleteInEditor(index) {
-    contactArray.splice(index, 1);
-    closePopup()
-    showContacts();
+  contactArray.splice(index, 1);
+  closePopup();
+  showContacts();
 }
 //============================================================
-// CREATE NEW CONTACT IN MOBILE 
+// CREATE NEW CONTACT IN MOBILE
 //============================================================
 
 function openColorPicker() {
-    let colorPicker = document.getElementById('colorPicker');
+  let colorPicker = document.getElementById("colorPicker");
 
-    if (colorPicker.style.display === 'none') {
-        colorPicker.style.display = 'flex';
-    } else {
-        colorPicker.style.display = 'none';
-    }
-    updateColors();
+  if (colorPicker.style.display === "none") {
+    colorPicker.style.display = "flex";
+  } else {
+    colorPicker.style.display = "none";
+  }
+  updateColors();
 }
 
 function updateColors() {
-    let colorPicker = document.getElementById('colorPicker');
-    colorPicker.innerHTML = colorsInPicker();
+  let colorPicker = document.getElementById("colorPicker");
+  colorPicker.innerHTML = colorsInPicker();
 }
 
 function colorsInPicker() {
-    let pickerBox = '';
-    for (let color in userColors) {
-        pickerBox += `
+  let pickerBox = "";
+  for (let color in userColors) {
+    pickerBox += `
         <div class="color-option" 
         style="background-color: ${userColors[color]};" 
         onclick="setColor('${color}', event)"></div>
         `;
-    }
-    return pickerBox;
+  }
+  return pickerBox;
 }
 
 function setColor(color, event) {
-    document.getElementById('colorBox').style.backgroundColor = userColors[color];
+  document.getElementById("colorBox").style.backgroundColor = userColors[color];
 
-    let colorPicker = document.getElementById('colorPicker');
-    colorPicker.style.display = 'none';
-    event.stopPropagation();
-    if (document.querySelector('.editor')){
-        //without space between the 2 classes to select exactly this element 
-        //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
-        let detailEllipse = document.querySelector('.popup-circle.detail-ellipse');
-        detailEllipse.style.backgroundColor = userColors[color];
-    }
+  let colorPicker = document.getElementById("colorPicker");
+  colorPicker.style.display = "none";
+  event.stopPropagation();
+  if (document.querySelector(".editor")) {
+    //without space between the 2 classes to select exactly this element
+    //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
+    let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
+    detailEllipse.style.backgroundColor = userColors[color];
+  }
 }
 
 function createContact() {
-    let fullName = document.getElementById('fullName').value;
-    let mail = document.getElementById('email').value;
-    let phone = parseInt(document.getElementById('phone').value);
-    let color = document.getElementById('colorBox').style.backgroundColor;
+  let fullName = document.getElementById("fullName").value;
+  let mail = document.getElementById("email").value;
+  let phone = parseInt(document.getElementById("phone").value);
+  let color = document.getElementById("colorBox").style.backgroundColor;
 
-    let { preName, lastName } = splitName(fullName);
+  let { preName, lastName } = splitName(fullName);
 
-    contactArray.push({
-        name: preName,
-        lastName: lastName,
-        mail: mail,
-        phone: phone,
-        color: color,
-    });
-    document.getElementById('userForm').reset();
+  contactArray.push({
+    name: preName,
+    lastName: lastName,
+    mail: mail,
+    phone: phone,
+    color: color,
+  });
+  document.getElementById("userForm").reset();
 
-    closePopup();    
-    showContacts();
-    successInfo();
+  closePopup();
+  showContacts();
+  successInfo();
 }
 
 function successInfo() {
-    const infoDiv = document.getElementById("success-info");
-    // Set initial position to bottom
+  const infoDiv = document.getElementById("success-info");
+  // Set initial position to bottom
+  infoDiv.style.bottom = "0";
+  infoDiv.style.opacity = "1";
+  infoDiv.style.visibility = "visible";
+
+  // Animate to middle of the screen
+  setTimeout(() => {
+    infoDiv.style.bottom = "50%";
+  }, 0);
+
+  // Stay in the middle for 2 seconds
+  setTimeout(() => {
     infoDiv.style.bottom = "0";
-    infoDiv.style.opacity = "1";
-    infoDiv.style.visibility = "visible";
+  }, 2000);
 
-    // Animate to middle of the screen
-    setTimeout(() => {
-      infoDiv.style.bottom = "50%";
-    }, 0);
-
-    // Stay in the middle for 2 seconds
-    setTimeout(() => {
-      infoDiv.style.bottom = "0";
-    }, 2000);
-
-    // Hide after animation completes
-    setTimeout(() => {
-      infoDiv.style.opacity = "0";
-      infoDiv.style.visibility = "hidden";
-    }, 2500);
-  }
+  // Hide after animation completes
+  setTimeout(() => {
+    infoDiv.style.opacity = "0";
+    infoDiv.style.visibility = "hidden";
+  }, 2500);
+}
 
 function splitName(fullName) {
-    let nameParts = fullName.split(' ');
-    let preName = upperCaseFirstLetter(nameParts[0]);
-    let lastName = upperCaseFirstLetter(nameParts[1]);
-    return { preName, lastName };
+  let nameParts = fullName.split(" ");
+  let preName = upperCaseFirstLetter(nameParts[0]);
+  let lastName = upperCaseFirstLetter(nameParts[1]);
+  return { preName, lastName };
 }
 
 function upperCaseFirstLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 //=============================================
@@ -278,25 +277,25 @@ function upperCaseFirstLetter(str) {
 
 //they will pushed in contactArrays
 function createInitials() {
-    for (let i = 0; i < contactArray.length; i++) {
-        let person = contactArray[i];
-        let initials = person.name[0] + person.lastName[0];
-        contactArray[i].initials = initials;
-    }
+  for (let i = 0; i < contactArray.length; i++) {
+    let person = contactArray[i];
+    let initials = person.name[0] + person.lastName[0];
+    contactArray[i].initials = initials;
+  }
 }
 
 // initialGroups are in templates/global_arrays.js
 function createInitalGroup() {
-    initialGroups = contactArray.reduce((acc, current) => {
-        let initial = current.name[0].toUpperCase();
-        // if key not exist as a letter in the accumulator, push it
-        if (!acc[initial]) {
-            acc[initial] = [];
-        }
-        // push current name to acc
-        acc[initial].push(current);
-        return acc;
-    }, {});
+  initialGroups = contactArray.reduce((acc, current) => {
+    let initial = current.name[0].toUpperCase();
+    // if key not exist as a letter in the accumulator, push it
+    if (!acc[initial]) {
+      acc[initial] = [];
+    }
+    // push current name to acc
+    acc[initial].push(current);
+    return acc;
+  }, {});
 }
 
 //============================================================
@@ -304,59 +303,59 @@ function createInitalGroup() {
 //============================================================
 
 function mobilePopup() {
-    return new Promise((resolve) => {
-        let popupHTML = popupBack();
-        document.body.innerHTML += popupHTML;
-        let popupBg = document.getElementById('popupBackground');
-        popupBg.style.display = 'block';
-        setTimeout(() => {
-            resolve();
-        }, 0);
-    });
+  return new Promise((resolve) => {
+    let popupHTML = popupBack();
+    document.body.innerHTML += popupHTML;
+    let popupBg = document.getElementById("popupBackground");
+    popupBg.style.display = "block";
+    setTimeout(() => {
+      resolve();
+    }, 0);
+  });
 }
 
 function deskEditPopup() {
-    return new Promise((resolve) => {
-        //get popupBackground 
-        let popupHTML = popupBack();
-        //set Background in popupBox in mainFrame 
-        document.getElementById('popupBox').innerHTML += popupHTML;
-        let popupBg = document.getElementById('popupBackground');
-        popupBg.style.display = 'block';
-        setTimeout(() => {
-            resolve();
-        }, 0);
-    });
+  return new Promise((resolve) => {
+    //get popupBackground
+    let popupHTML = popupBack();
+    //set Background in popupBox in mainFrame
+    document.getElementById("popupBox").innerHTML += popupHTML;
+    let popupBg = document.getElementById("popupBackground");
+    popupBg.style.display = "block";
+    setTimeout(() => {
+      resolve();
+    }, 0);
+  });
 }
 
 function deskAddPopup() {
-    return new Promise((resolve) => {
-        let popupHTML = popupBack();
-        document.getElementById('popupBox').innerHTML += popupHTML;
-        let popupBg = document.getElementById('popupBackground');
-        popupBg.style.display = 'block';
-        setTimeout(() => {
-            resolve();
-        }, 0);
-    });
+  return new Promise((resolve) => {
+    let popupHTML = popupBack();
+    document.getElementById("popupBox").innerHTML += popupHTML;
+    let popupBg = document.getElementById("popupBackground");
+    popupBg.style.display = "block";
+    setTimeout(() => {
+      resolve();
+    }, 0);
+  });
 }
 
 function closePopup() {
-    let colorPicker = document.getElementById('colorPicker');
-    let popBg = document.getElementById('popupBackground');
-    if (colorPicker) {
-        colorPicker.remove();
-    }
-    popBg.remove();
-    //document.getElementById("popupBackground").style.display = "none";
+  let colorPicker = document.getElementById("colorPicker");
+  let popBg = document.getElementById("popupBackground");
+  if (colorPicker) {
+    colorPicker.remove();
+  }
+  popBg.remove();
+  //document.getElementById("popupBackground").style.display = "none";
 }
 
 //============================================================
-//  HTML TEMPLATES 
+//  HTML TEMPLATES
 //============================================================
 
 function showMainFrame() {
-    return `
+  return `
     <div class="add-btn-frame">
     </div>
     <button class="add-btn" id="addBtn" onclick="widthForAdd();">
@@ -373,7 +372,7 @@ function showMainFrame() {
 }
 
 function GroupName(initial) {
-    return `
+  return `
     <div class="letter-box">
         <span class="letterBox">${initial}</span>
     </div>
@@ -383,12 +382,12 @@ function GroupName(initial) {
 `;
 }
 function personDatas(initial) {
-    let htmlContent = '';
-    for (let i = 0; i < contactArray.length; i++) {
-        let thisPerson = contactArray[i];
-        if (initialGroups[initial].includes(thisPerson)) {
-            let person = thisPerson;
-            htmlContent += `
+  let htmlContent = "";
+  for (let i = 0; i < contactArray.length; i++) {
+    let thisPerson = contactArray[i];
+    if (initialGroups[initial].includes(thisPerson)) {
+      let person = thisPerson;
+      htmlContent += `
                 <div class="name-frame">
                     <div class="name-box" onclick="widthForInfo(${i})">
                         <div class="side-circle" class="initials" style="background-color: ${person.color};">
@@ -405,13 +404,13 @@ function personDatas(initial) {
                     </div>
                 </div>
                 `;
-        }
     }
-    return htmlContent;
+  }
+  return htmlContent;
 }
 
 function showInfoText(person, indexNr) {
-    return `
+  return `
         <div class="detail-frame" id="detailFrame">
             <div class="detail-top-head">
                 <div>Contact Informations</div>
@@ -473,7 +472,7 @@ function showInfoText(person, indexNr) {
 }
 
 function popupBack() {
-    return `
+  return `
     <div class="popup-background" id="popupBackground">
         <div class="popup" id="popup">  
             <div class="popup-content" id="popContent">
@@ -488,7 +487,7 @@ function popupBack() {
 }
 
 function showAddContact() {
-    return `
+  return `
     <div class="pop-top" id="popTop">
         <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
         <img class="pop-logo" src="../assets/img/logo_mobile_white.svg">
@@ -547,10 +546,10 @@ function showAddContact() {
         `;
 }
 
-function showEditContact(index) {    
-    let person = contactArray[index];
-    let indexNr = index;
-    return `
+function showEditContact(index) {
+  let person = contactArray[index];
+  let indexNr = index;
+  return `
         <div class="pop-top" id="popTop">
         <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
         <img class="pop-logo" src="../assets/img/logo_mobile_white.svg">

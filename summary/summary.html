@@ -1,100 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Summary2</title>
-    <link rel="stylesheet" href="../styles/footer_mobile.css">
-    <link rel="stylesheet" href="../styles/header_mobile.css">
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="summary.css">
-    <link rel="stylesheet" href="../style.css">
-</head>
+    <link rel="stylesheet" href="../styles/footer_mobile.css" />
+    <link rel="stylesheet" href="../styles/header_mobile.css" />
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="summary.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
 
-<body onload="includeHTML()">
-
+  <body onload="includeHTML()">
     <div class="body-frame">
+      <header include-html="../templates/header.html"></header>
 
-        <header include-html="../templates/header.html"></header>
-
-        <main>
-
-            <div class="summaryWrapper">
-
-            <div class="summaryContainer" id="summaryContainer">
-
-                <button class="clockAndDateDiv">
-                    <div class="clockAndTextDiv">
-                        <div class="clockAndTaskNrDiv">
-                            <img src="../assets/img/summary_mobile_clock_icon.png" alt="clock icon">
-                            <div class="taskNrDiv">125</div>
-                        </div>
-                        <div class="taskUrgentDiv">Tasks Urgent</div>
-                    </div>
-            
-                    <div class="lineClockAndDateDiv"></div>
-            
-                    <div class="dateDiv">
-                        <div class="date">October 16, 2022</div>
-                        <div class="deadlineText">Upcoming Deadline</div>
-                    </div>
-                </button>
-
-                <button class="tasksToDoDiv">
-                    <img src="../assets/img/to-do_icon_task_mobile.png" alt="icon task to-do">
-                    <div class="tasksToDoDivNr">100</div>
-                    <div class="tasksToDoDivText">Tasks To-do</div>
-                </button>
-            
-                <div class="tasksDiv">
-
-                    <button class="taskDiv">
-                        <div class="taskDivImgAndNr">
-                            <img class="imgTaskDiv" src="../assets/img/task-on-board_icon_mobile.png" alt="icon tasks on board">
-                            <div class="tasksDivNr">5</div>
-                        </div>
-                        <div class="taskDivText">Tasks on Board</div>
-                    </dbutton>
-
-                    <button class="taskDiv">
-                        <div class="taskDivImgAndNr">
-                            <img class="imgTaskDiv" src="../assets/img/task-in-progress_icon_mobile.png" alt="icon tasks on board">
-                            <div class="tasksDivNr">1</div>
-                        </div>
-                        <div class="taskDivText">Tasks in Progress</div>
-                    </button>
-
+      <main>
+        <div class="summaryWrapper">
+          <div class="summaryContainer" id="summaryContainer">
+            <button class="clockAndDateDiv">
+              <div class="clockAndTextDiv">
+                <div class="clockAndTaskNrDiv">
+                  <img
+                    src="../assets/img/summary_mobile_clock_icon.png"
+                    alt="clock icon"
+                  />
+                  <div class="taskNrDiv">125</div>
                 </div>
+                <div class="taskUrgentDiv">Tasks Urgent</div>
+              </div>
 
-                <div class="tasksDiv">
+              <div class="lineClockAndDateDiv"></div>
 
-                    <button class="taskDiv">
-                        <div class="taskDivImgAndNr">
-                            <img class="imgTaskDiv" src="../assets/img/awaiting-feedback_icon_mobile.png" alt="icon tasks on board">
-                            <div class="tasksDivNr">3</div>
-                        </div>
-                        <div class="taskDivText">Awaiting feedback</div>
-                    </button>
+              <div class="dateDiv">
+                <div class="date">October 16, 2022</div>
+                <div class="deadlineText">Upcoming Deadline</div>
+              </div>
+            </button>
 
-                    <button class="taskDiv">
-                        <div class="taskDivImgAndNr">
-                            <img class="imgTaskDiv" src="../assets/img/tasks-done_icon_mobile.png" alt="icon tasks on board">
-                            <div class="tasksDivNr">4</div>
-                        </div>
-                        <div class="taskDivText">Tasks Done</div>
-                    </dbutton>
+            <button class="tasksToDoDiv">
+              <img
+                src="../assets/img/to-do_icon_task_mobile.png"
+                alt="icon task to-do"
+              />
+              <div class="tasksToDoDivNr">100</div>
+              <div class="tasksToDoDivText">Tasks To-do</div>
+            </button>
 
+            <div class="tasksDiv">
+              <button class="taskDiv">
+                <div class="taskDivImgAndNr">
+                  <img
+                    class="imgTaskDiv"
+                    src="../assets/img/task-on-board_icon_mobile.png"
+                    alt="icon tasks on board"
+                  />
+                  <div class="tasksDivNr">5</div>
                 </div>
+                <div class="taskDivText">Tasks on Board</div>
+              </button>
 
+              <button class="taskDiv">
+                <div class="taskDivImgAndNr">
+                  <img
+                    class="imgTaskDiv"
+                    src="../assets/img/task-in-progress_icon_mobile.png"
+                    alt="icon tasks on board"
+                  />
+                  <div class="tasksDivNr">1</div>
+                </div>
+                <div class="taskDivText">Tasks in Progress</div>
+              </button>
             </div>
 
+            <div class="tasksDiv">
+              <button class="taskDiv">
+                <div class="taskDivImgAndNr">
+                  <img
+                    class="imgTaskDiv"
+                    src="../assets/img/awaiting-feedback_icon_mobile.png"
+                    alt="icon tasks on board"
+                  />
+                  <div class="tasksDivNr">3</div>
+                </div>
+                <div class="taskDivText">Awaiting feedback</div>
+              </button>
+
+              <button class="taskDiv">
+                <div class="taskDivImgAndNr">
+                  <img
+                    class="imgTaskDiv"
+                    src="../assets/img/tasks-done_icon_mobile.png"
+                    alt="icon tasks on board"
+                  />
+                  <div class="tasksDivNr">4</div>
+                </div>
+                <div class="taskDivText">Tasks Done</div>
+              </button>
             </div>
+          </div>
+        </div>
+      </main>
 
-        </main>
-        
-        <footer include-html="../templates/footer.html"></footer>
-
+      <footer include-html="../templates/footer.html"></footer>
     </div>
     <script src="../templates/include-html.js" defer></script>
-</body>
+  </body>
 </html>

@@ -1,24 +1,24 @@
 .d-none-welcome_message_html {
-    display: none;
+  display: none;
 }
 
 .welcomeMsgDiv {
-    width: 80vw;
-    height: 40px;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 34vh;
+  width: 80vw;
+  height: 40px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 34vh;
 }
 
 .welcomeText {
-    font-family: var(--ff-reg-mob);
-    font-weight: var(--fw-reg-mob);
-    font-size: var(--fs-welcome-msg);
-    color: var(--user-black-welcome-message);
+  font-family: var(--ff-reg-mob);
+  font-weight: var(--fw-reg-mob);
+  font-size: var(--fs-welcome-msg);
+  color: var(--user-black-welcome-message);
 }
 
 .welcomeTextuserName {
-    font-family: var(--ff-reg-mob);
-    font-size: var(--fs-welcome-msg-user-name);
-    color: var(--user-blue-welcome-message-name);
+  font-family: var(--ff-reg-mob);
+  font-size: var(--fs-welcome-msg-user-name);
+  color: var(--user-blue-welcome-message-name);
 }

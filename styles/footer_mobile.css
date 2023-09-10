@@ -1,56 +1,55 @@
 footer {
-    position: fixed;
-    bottom: 0;
-    height: 76px;
-    background-color: #FFFFFF;
-    padding: 0px 16px 0px 16px;
-    box-shadow: 0 0 5px #0000001A;
-    width: 100%;
-    user-select: none;
+  position: fixed;
+  bottom: 0;
+  height: 76px;
+  background-color: #ffffff;
+  padding: 0px 16px 0px 16px;
+  box-shadow: 0 0 5px #0000001a;
+  width: 100%;
+  user-select: none;
 }
 
 .footerMenuContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    gap: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  gap: 4px;
 }
 
 .footerMenuContainer button {
-    background-color: unset;
-    border: none;
-    cursor: pointer;
+  background-color: unset;
+  border: none;
+  cursor: pointer;
 }
-
 
 /******** deskto version *********/
 
 .privacyLegalContainer {
-    display: none;
+  display: none;
 }
 
 .footerPolicyAnchor {
-    padding-bottom: 15px;
-    color: #42526E;
-    font-size: var(--fs-16px);
-    font-weight: var(--fw-400);
+  padding-bottom: 15px;
+  color: #42526e;
+  font-size: var(--fs-16px);
+  font-weight: var(--fw-400);
 }
 
 .footerLegalAnchor {
-    color: #42526E;
-    font-size: var(--fs-16px);
-    font-weight: var(--fw-400);
+  color: #42526e;
+  font-size: var(--fs-16px);
+  font-weight: var(--fw-400);
 }
 
 .btnFooterMenuDesktopVersion {
-    display: none;
+  display: none;
 }
 
 .btnActiveFooterMenuDesktopVersion {
-    background: #D2E3FF;
+  background: #d2e3ff;
 }
 
 .btnNotActiveFooterMenuDesktopVersion {
-    background: #FFFFFF;
+  background: #ffffff;
 }

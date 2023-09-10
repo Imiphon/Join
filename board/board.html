@@ -1,149 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Board</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
-    <link rel="stylesheet" href="../styles/header_mobile.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../styles/footer_mobile.css">
-    <link rel="stylesheet" href="board.css">
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="../style.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"
+    />
+    <link rel="stylesheet" href="../styles/header_mobile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../styles/footer_mobile.css" />
+    <link rel="stylesheet" href="board.css" />
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
 
-<body onload="includeHTML()">
-    
+  <body onload="includeHTML()">
     <div class="body-frame board-frame">
-        <header include-html="../templates/header.html">
-        </header>
-        <main class="borad-main">
-            <div class="search-bar" id="search-bar" >
-                <input type="search" name="search" id="search">
-                |
-                <i class="bi-search"></i>
+      <header include-html="../templates/header.html"></header>
+      <main class="borad-main">
+        <div class="search-bar" id="search-bar">
+          <input type="search" name="search" id="search" />
+          |
+          <i class="bi-search"></i>
+        </div>
+
+        <section class="tasks" id="tasks">
+          <div class="card-parent">
+            <div class="row-title">
+              <b>To do</b>
+              <i class="bi bi-plus-lg"></i>
             </div>
 
-            <section class="tasks" id="tasks">
+            <div id="to-do"></div>
+          </div>
 
-                <div class="card-parent" id="to-do">
-                    <div class="row-title">
-                        <b>To do</b>
-                        <i class="bi bi-plus-lg"></i>
-                    </div>
+          <div class="card-parent">
+            <div class="row-title">
+              <b>In progress</b>
+              <i class="bi bi-plus-lg"></i>
+            </div>
 
-                    <div id="to-do">
-                        
-                    </div>
-                </div>
+            <div id="to-do"></div>
+          </div>
 
-                <div class="card-parent">
-                    <div class="row-title">
-                        <b>in progress</b>
-                        <i class="bi bi-plus-lg"></i>
-                    </div>
+          <div class="card-parent">
+            <div class="row-title">
+              <b>Await feedback</b>
+              <i class="bi bi-plus-lg"></i>
+            </div>
 
-                    <div id="in-progress">
-                        <div class="cards">
-                            <span class="topic">User Story</span>
-    
-                            <div class="frame">
-                                <h4 class="title">
-                                    Kochwelt Page & Recipe
-                                    Recommender
-                                </h4>
-        
-                                <p class="content">
-                                    Build start page with recipe recommendation...
-                                </p>
-                            </div>
-    
-                            <div class="progress-bar">
-                                <progress max="100" value="50"></progress>
-                                <div class="subtask-amount"><span>1/2</span> Subtasks</div>
-                            </div>
-    
-                            <div class="assign-conatiner">
-                                <div class="assigned-person">
-                                    <span class="profile">kl</span>
-                                    <span  class="profile">kl</span>
-                                    <span class="profile">kl</span>
-                                </div>
-                                <i class="fa-solid fa-equals"></i>
-                            </div>
-                        </div>
-        
-                        <div class="empty-todo d-none">
-                            <p>No tasks To do</p>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="card-parent" >
-                    <div class="row-title">
-                        <b>Await feedback</b>
-                        <i class="bi bi-plus-lg"></i>
-                    </div>
-
-                    <div id="await-feedback">
-                        <div class="cards">
-                            <span class="topic">User Story</span>
-    
-                            <div class="frame">
-                                <h4 class="title">
-                                    Kochwelt Page & Recipe
-                                    Recommender
-                                </h4>
-        
-                                <p class="content">
-                                    Build start page with recipe recommendation...
-                                </p>
-                            </div>
-    
-                            <div class="progress-bar">
-                                <progress max="100" value="50"></progress>
-                                <div class="subtask-amount"><span>1/2</span> Subtasks</div>
-                            </div>
-    
-                            <div class="assign-conatiner">
-                                <div class="assigned-person">
-                                    <span class="profile">kl</span>
-                                    <span  class="profile">kl</span>
-                                    <span class="profile">kl</span>
-                                </div>
-                                <i class="fa-solid fa-equals"></i>
-                            </div>
-                        </div>
-        
-                        <div class="empty-todo">
-                            <p>No tasks To do</p>
-                        </div>
-                        
-                    </div>
-
-        
-                </div>
-
-
-            </section>
-
-
-            
-            
-        </main>
-        <footer include-html="../templates/footer.html">
-            
-        </footer>
+            <div id="await-feedback"></div>
+          </div>
+        </section>
+      </main>
+      <footer include-html="../templates/footer.html"></footer>
     </div>
-    
-    
+
     <script src="../templates/include-html.js"></script>
     <script src="../templates/global_arrays.js"></script>
     <script src="board.js"></script>
-</body>
-
+  </body>
 </html>

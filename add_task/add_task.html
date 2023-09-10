@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,81 +16,86 @@
 </head>
 
 <body onload="includeHTML()">
-    
+
     <div class="body-frame">
         <header include-html="../templates/header.html"></header>
-         <main class="add-task-main">
-             <!--------------- ------------------------->
-             <section class="add_task_section">
+        <main class="add-task-main">
+            <!--------------- ------------------------->
+            <section class="add_task_section">
                 <form onsubmit="addTask(event)">
-                <div class="first-div">
-                    <div class="title-div">
-                        <input type="text" id="title" class="title" placeholder="Enter a title" required>
-                    </div>
-        
-                    <div class="description-div">
-                        <b>Description</b>
-                        <input type="text" id="description" class="description" placeholder="Enter Description" required>
-                    </div>
-        
-                    <div class="date-container">
-                        <b>Due date</b>
-                        <div class="date-div">
-                          <input type="date" name="Date" id="date" required>
-                          <i for="date" class="bi bi-calendar"></i>
+                    <div class="first-div">
+                        <div class="title-div">
+                            <input type="text" id="title" class="title" placeholder="Enter a title" required>
                         </div>
-                       </div>
-        
-        
-        
+
+                        <div class="description-div">
+                            <b>Description</b>
+                            <input type="text" id="description" class="description" placeholder="Enter Description"
+                                required>
+                        </div>
+
+                        <div class="date-container">
+                            <b>Due date</b>
+                            <div class="date-div">
+                                <input type="date" name="Date" id="date" required>
+                                <i for="date" class="bi bi-calendar"></i>
+                            </div>
+                        </div>
+
+
+
                         <div class="assigned-div">
                             <span onclick="showOptions()" id="assigned-div">Select contact to assign
                                 <i class="bi bi-caret-down-fill" id="caret-down"></i>
                             </span>
-        
+
                             <div id="dropdown-options" class="dropdown-content">
-            
+
                             </div>
 
                             <div class="selected-contact d-none" id="selected-contact">
-                                
+
                             </div>
                         </div>
-        
-        
-                    
-                    <div class="category-div" id="category-div">
-                        <b>Category</b>
-                        <div class="select-container">
-                            <select name="Select" id="category" required>
-                                <option disabled selected>Select task Category</option>
-                                <option value="design">Design</option>
-                                <option value="programming">Programming</option>
-                                <option value="marketing">Marketing</option> <!-- Du hattest einen Tippfehler in "Marketinf" -->
-                            </select>
-                            <i class="bi bi-caret-down-fill" id="category-caret-down"></i>
+
+
+
+                        <div class="category-div" id="category-div">
+                            <b>Category</b>
+                            <div class="select-container">
+                                <select name="Select" id="category" required>
+                                    <option disabled selected>Select task Category</option>
+                                    <option value="design">Design</option>
+                                    <option value="programming">Programming</option>
+                                    <option value="marketing">Marketing</option>
+                                    <!-- Du hattest einen Tippfehler in "Marketinf" -->
+                                </select>
+                                <i class="bi bi-caret-down-fill" id="category-caret-down"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
 
                     <div class="center-line"></div>
-                        
-                <div class="second-div">
-                    <div class="prio">
-                        <b>Prio</b>
-                        <div class="prio-values">
-                            <span onclick="setPrio('urgent')">Urgent <i class="bi bi-chevron-double-up" id="bi bi-chevron-double-up"></i></span>
-                            <span onclick="setPrio('medium')">Medium<i class="fa-solid fa-equals"></i></span>
-                            <span onclick="setPrio('low')">Low <i class="bi bi-chevron-double-down" id="bi-chevron-double-down"></i> </span>
+
+                    <div class="second-div">
+                        <div class="prio">
+                            <b>Prio</b>
+                            <div class="prio-values">
+                                <span onclick="setPrio('urgent')">Urgent <i class="bi bi-chevron-double-up"
+                                        id="bi bi-chevron-double-up"></i></span>
+                                <span onclick="setPrio('medium')">Medium<i class="fa-solid fa-equals"></i></span>
+                                <span onclick="setPrio('low')">Low <i class="bi bi-chevron-double-down"
+                                        id="bi-chevron-double-down"></i> </span>
+                            </div>
                         </div>
-                    </div>
-        
-                    
+
+
                         <div style="padding: 0;" class="subtask-container" id="subtask-container">
                             <div class="subtask" id="subtask">
                                 <b>Subtasks</b>
                                 <div class="subtask-wrapper" id="subtask-wrapper">
-                                    <input onclick="openAddTask()" type="text" id="subtask-value" placeholder="Add new subtask">  
+                                    <input onclick="openAddTask()" type="text" id="subtask-value"
+                                        placeholder="Add new subtask">
                                 </div>
                             </div>
 
@@ -97,7 +103,7 @@
                             </ul>
                         </div>
 
-                        
+
                         <div class="btns-container form-btns">
                             <button id="create-task" class="create-task">
                                 <span>Create Task</span>
@@ -108,7 +114,7 @@
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </div>
-                      
+
                     </div>
                 </form>
             </section>
@@ -126,16 +132,15 @@
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-           </main>
-           <footer include-html="../templates/footer.html">
-           </footer>
-        </div>
-                    
-     </div> 
-     <script src="../templates/global_arrays.js"></script>
-     <script src="add_task.js"></script>
-     <script src="../templates/include-html.js"></script>
-<body>
+        </main>
+        <footer include-html="../templates/footer.html">
+        </footer>
+    </div>
+    <script src="../templates/global_arrays.js"></script>
+    <script src="add_task.js"></script>
+    <script src="../templates/include-html.js"></script>
+
+    <body>
 
 
 </html>
