@@ -225,7 +225,7 @@ function showPwdNotRightMessage() {
  */
 function showSendEmailMessage() {
   let html = `
-        <img src="./assets/img/SendCheck.svg">
+        <img class="messageImg" src="./assets/img/SendCheck.svg">
         <p>An E-Mail has been send to you</p> 
     `;
   showMessage(html);
