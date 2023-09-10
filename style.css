@@ -355,13 +355,15 @@ h1{
   .formDivLogin, .formDivNewUser, .formDivResetPwd {
     width: 60%;
   }
-
   .signupDiv {
     position: absolute;
     top: 32px;
     right: 32px;
   }
-
+  .joinLogo {
+    width: 101px;
+    height: 122px;
+  }
 }
 
 
