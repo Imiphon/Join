@@ -220,13 +220,12 @@ h1{
   flex-direction: column;
   gap: 16px;
   width: 85%;
+  padding-bottom: 16px;
 }
 
 .rememberMe {
   display: flex;
-  width: 100%;
   gap: 16px;
-  padding-bottom: 16px;
 }
 
 .acceptPrivacy {
@@ -390,6 +389,25 @@ h1{
   .logoDiv {
     height: 122px;
   }
+  .loginOptions{
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+  }
+  .rememberMe{
+    align-items: center;
+  }
+
+  .loginButtons{
+    flex-direction: row;
+  }
+
+  #userLoginBtn{
+    width: 120px;
+    height: 40px;
+  }
+
 }
 
 
