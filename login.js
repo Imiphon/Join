@@ -12,10 +12,12 @@ async function login() {
   let email = getInput("loginEmail");
   let password = getInput("loginPassword");
   let form = document.getElementById('formLogin');
+  
 
   if (await checkUserExist(email)) {
-    if (checkPwdCorrect(email, password)) {
-      window.location = "./templates/welcome_message.html";
+    let userid = emailAdresses.indexOf(email);
+    if (checkPwdCorrect(userid, password)) {
+      window.location = `./templates/welcome_message.html?id=${userid}`; //or name=${users[userid]['name'] 
     } else {
       showPwdNotRightMessage();
     }
@@ -295,8 +297,8 @@ async function checkUserExist(email) {
  * @param {string} password - password to check if is correct.
  * @returns true if password correct, false if password not correct.
  */
-function checkPwdCorrect(email, password) {
-  return password == users[emailAdresses.indexOf(email)]["password"];
+function checkPwdCorrect(userid, password) {
+  return password == users[userid]["password"];
 }
 
 /**
