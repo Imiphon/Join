@@ -1,3 +1,7 @@
+.contact-body {
+  overflow: hidden;
+}
+
 .add-btn-frame {
   position: absolute;
   width: 335px;
