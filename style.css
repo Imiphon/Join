@@ -365,7 +365,7 @@ h1{
   display: flex;
 }
 
-@media (min-height: 747px) {
+@media (min-height: 866px) {
   .loginFooter {
     position: fixed;
     bottom: 32px;
@@ -407,7 +407,14 @@ h1{
     width: 120px;
     height: 40px;
   }
-
+  
+  @media (min-height: 747px) {
+    .loginFooter {
+      position: fixed;
+      bottom: 32px;
+      left: 0;
+    }
+  }
 }
 
 
