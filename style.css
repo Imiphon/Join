@@ -193,6 +193,15 @@ h1{
   outline: unset;
 }
 
+.loginInputPwd{
+  background-image: url('./assets/img/login-lock.svg')
+}
+
+.loginInputPwd:focus-visible {
+  background-image: none;
+}
+
+
 .line {
   margin-top: 4px;
   background-color: rgb(220, 220, 220);
