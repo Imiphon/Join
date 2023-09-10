@@ -1,6 +1,8 @@
 .mainDiv {
   width: 100%;
+  display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 32px;
   animation: 450ms changeBackground ease-in-out;
 }
@@ -42,8 +44,8 @@
   animation: 450ms changeLogo ease-in-out;
   background-image: url("./assets/img/logo_mobile_blue.svg");
   background-size: cover;
-  width: 99px;
-  height: 120px;
+  width: 65px;
+  height: 79px;
 }
 @keyframes changeLogo {
   from {
@@ -144,6 +146,7 @@
 }
 
 .inputDiv {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,6 +157,27 @@
 
 .inputDiv p {
   padding: 16px 32px;
+}
+
+.backArrow {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+}
+
+h1{
+  padding: 0 70px;
+}
+
+img{
+  padding-right: 16px;
+
+}
+
+.backArrow:hover {
+  cursor: pointer;
+  width: calc(40px);
+  height: calc(40px);
 }
 
 .loginInput {
@@ -243,10 +267,11 @@
 .loginFooter {
   animation: 450ms showFooter ease-in-out;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: end;
   width: 100%;
   padding: 32px 0;
+  gap: 64px;
 }
 
 @keyframes showFooter {
@@ -322,12 +347,27 @@
   display: flex;
 }
 
-@media (min-height: 900px) {
+@media (min-height: 865px) {
   .loginFooter {
     position: fixed;
     bottom: 32px;
+    left: 0;
   }
 }
+
+@media (min-width:800px){
+  .formDivLogin, .formDivNewUser, .formDivResetPwd {
+    width: 60%;
+  }
+
+  .signupDiv {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+  }
+
+}
+
 
 /***********************/
 @media (min-width: 1024px) {
