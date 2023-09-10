@@ -219,7 +219,6 @@ function createContact() {
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
-
   let { preName, lastName } = splitName(fullName);
 
   contactArray.push({
@@ -229,9 +228,14 @@ function createContact() {
     phone: phone,
     color: color,
   });
-  document.getElementById("userForm").reset();
 
+  completeCreation();
+}
+
+function completeCreation() {
+  document.getElementById("userForm").reset();
   closePopup();
+  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
   successInfo();
 }
