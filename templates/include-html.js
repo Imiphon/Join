@@ -17,8 +17,7 @@ async function includeHTML() {
         let state = JSON.parse(localStorage.getItem("allBtnState"));
         updateBtnStyle(checkTrue(state));
     }
-    displayWelcomeMsg();
-    welcomeMsgAnimation(); 
+    displayWelcomeMsg(); 
 }
 
 function checkTrue(obj) {
@@ -204,20 +203,8 @@ document.getElementById("welcomeText").innerHTML = welcomeMessage;
 // ********************************************************************************
 // ********************************************************************************
 
-function welcomeMsgAnimation() {
-    const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
-    const summaryWrapper = document.querySelector('.summaryWrapper');
-    setTimeout( function toggleAnimation() {
-        welcomeMsgDiv.style.marginBottom = '-45vh';
-        summaryWrapper.style.transform = 'translateY(0)';
-        setTimeout( () => {
-            welcomeMsgDiv.style.opacity = "0"; 
-        }, 700)
-        setTimeout( () => {
-            welcomeMsgDiv.style.display = "none";
-        }, 1000)
-    }, 2000) 
-}
+
+
 
 
     
