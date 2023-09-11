@@ -307,14 +307,33 @@ h1{
 }
 
 .btnBlue {
-  background-color: rgb(69, 137, 255);
+  background-color: var(--reg-blue);
+  border-radius: 10px;
+  border-width: 0;
+  box-shadow: var(--shadow);
+  display: inline;
   color: white;
 }
 
+.btnBlue:hover {
+  background-color: var(--strong-blue);
+  cursor: pointer;
+  transform: none;
+  box-shadow: var(--bottom-shadow);
+}
+
 .btnWhite {
+  border: 1px solid var(--dark-grey);
+  text-align: center;
   background-color: white;
-  color: rgb(160, 168, 182);
-  border: 2px solid rgb(160, 168, 182);
+  color: var(--dark-grey);
+}
+
+.btnWhite:hover{
+  box-shadow: var(--bottom-shadow);
+  color: var(--reg-blue);
+  transform: none;
+  border-color: var(--reg-blue);
 }
 
 .btnTxtBlue {
