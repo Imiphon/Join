@@ -2,6 +2,10 @@ let assignedContacts = [];
 let selectedContacts = [];
 let tasksForSubtasks = [];
 
+document.addEventListener('DOMContentLoaded', async()=>{
+  await loadTasks();
+})
+
 // Function to show or hide options
 // Function to show or hide options
 function showOptions() {
@@ -43,7 +47,7 @@ function dropDownTemplates() {
                     <div class="options">
                     <span class="profile" id="profile${index}">${user.initials}</span>
                     <label for="checkbox">${user.name} ${user.lastName}</label>
-                    <input type="checkbox" id="checkbox${index}" value="${user.name}" onclick="checkedUser('${user.initials}','${user.lastName}','${user.color}', ${index})">
+                    <input type="checkbox" id="checkbox${index}" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
                     </div>
                     `;
     dropdown.innerHTML += userHtml;
@@ -165,21 +169,20 @@ function setPrio(value) {
 
 // Function to define the assigned user and push the name to the "assignedontacts"-Array to show them in the "selected-user" container and push also the selected contacts to the 'selectedContacts'
 
-function checkedUser(userInitials,userLastName , bColor, index) {
+function checkedUser(userInitials, userName, userLastName, bColor, index) {
   const checkbox = document.getElementById(`checkbox${index}`);
-  const userName = checkbox.value;
   if (checkbox.checked) {
     assignedContacts.push({
       shortName: userInitials,
       bColor: bColor,
       name: userName,
-      lastName: userLastName
+      lastName: userLastName,
     });
     selectedContacts.push({
       shortName: userInitials,
       bColor: bColor,
       name: userName,
-      lastName: userLastName,
+      lastName: userLastName
     });
   } else {
     const indexToRemove = assignedContacts.findIndex(
@@ -266,13 +269,11 @@ function editTask(i) {
 
 function addTask(event) {
   event.preventDefault();
-
   const taskData = collectTaskData();
   const task = createTaskObject(taskData);
-  saveTask(task);
+  pushTask(task);
   clearForm(event);
-  renderAddedTask();
-  showAddedTas();
+  showAddedTask();
 }
 
 function changeLocation() {
@@ -291,7 +292,7 @@ function collectTaskData() {
   const category = document.getElementById("category").value;
   const priority = prio;
   const subtasks = tasksForSubtasks;
-  const selectedContact = selectedContacts.map((contact) => contact.shortName);
+  const selectedContact = selectedContacts;
   const progressWidth = 0;
 
   return {
@@ -320,9 +321,10 @@ function createTaskObject(taskData) {
   return task;
 }
 
-function saveTask(task) {
+function pushTask(task) {
   addedTasks[0]["toDo"].push(task);
   console.log(addedTasks[0]["toDo"]);
+  saveTasks();
 }
 
 function clearForm(event) {
@@ -352,15 +354,16 @@ function showMessage(html) {
   setTimeout(function () {
     msg.classList.add("d-none");
   }, 3000);
-  // setTimeout(()=>{
-  //     toggleButton('board');
-  //     changeLocation();
-  // }, 3500)
+  setTimeout(()=>{
+      toggleButton('board');
+      changeLocation();
+  }, 3500)
 }
 
-function showAddedTas() {
+function showAddedTask() {
   let html = `
-                    <p>Task added</p> 
-                    `;
+           <p>Task added</p> 
+            `;
   showMessage(html);
 }
+

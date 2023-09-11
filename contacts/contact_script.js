@@ -1,12 +1,28 @@
 /**
- * eventListener to check if its the right side
+ * eventListener instead of onload-function to check if its the right side 
+ * cause:
+ * It separates the JavaScript logic from the HTML, making the code cleaner and more maintainable.
+ * The same JavaScript code can (actually) be used for multiple HTML pages without having to modify the HTML code.
  */
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
   if (currentPage.includes("contact_list")) {
-    showContacts();
+    getContactsFromServer();
   }
 });
+
+/**
+ * load contacts from server
+ */
+async function getContactsFromServer() {
+  try {
+    contactArray = JSON.parse(await getItem('contacts'));
+  } catch (e) {
+    console.info('could not find contacts')
+  }
+  showContacts();
+}
+
 /**
  * this starts a frame in the main area with #nameGroup, #popup and successInfo divs
  * calling functions to build initial groups, inner content and show all names
@@ -16,9 +32,10 @@ function showContacts() {
   content.innerHTML = "";
   content.innerHTML += showMainFrame();
   createInitalGroup();
-  createInitials();
+  //createInitials();
   showNameGroup();
 }
+
 /**
  * put all names in right initialGroup
  */
@@ -31,8 +48,14 @@ function showNameGroup() {
   }
 }
 
+/**
+ * takes index from personDatas(), over widthForInfo(), 
+ * showInfoDesk() / showInfoMobile() and delete the contact 
+ * @param {number} index 
+ */
 function deleteContact(index) {
   contactArray.splice(index, 1);
+  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
 }
 
@@ -40,27 +63,40 @@ function deleteContact(index) {
 // CHECK WIDTH TO CONTROL MOB OR DESK OPTIC
 //============================================================
 
+/**
+ * takes index from personDatas()
+ * open mob or desk optic
+ * @param {number} index 
+ */
 function widthForInfo(index) {
   const width = window.innerWidth;
   if (width <= 1024) {
     showInfoMobile(index);
   } else {
     showInfoDesk(index);
+    showNameGroup();
   }
 }
-function showInfoDesk(index) {
-  let person = contactArray[index];
-  let popupBox = document.getElementById("popupBox");
-  popupBox.innerHTML = showInfoText(person, index);
-}
-function showInfoMobile(index) {
-  let main = document.querySelector("main");
-  main.innerHTML = "";
-  let person = contactArray[index];
-  main.innerHTML += showInfoText(person, index);
-  document.getElementById("moreRow").style.display = "none";
+
+/**
+ * takes index from personDatas()
+ * open mob or desk optic
+ * @param {number} index 
+ */
+function widthForEdit(index) {
+  const width = window.innerWidth;
+  if (width <= 1024) {
+    openEditMobile(index);
+  } else {
+    openEditDesk(index);
+  }
 }
 
+/**
+ * takes index from personDatas()
+ * open mob or desk optic
+ * @param {number} index 
+ */
 async function widthForAdd() {
   const width = window.innerWidth;
   if (width <= 1024) {
@@ -76,7 +112,24 @@ async function widthForAdd() {
 }
 
 //============================================================
-// START TOGGLE DRAWER WITH MORE BTN
+// INFO AREA
+//============================================================
+
+function showInfoDesk(index) {
+  let person = contactArray[index];
+  let popupBox = document.getElementById("popupBox");
+  popupBox.innerHTML = showInfoText(person, index);
+}
+function showInfoMobile(index) {
+  let main = document.querySelector("main");
+  main.innerHTML = "";
+  let person = contactArray[index];
+  main.innerHTML += showInfoText(person, index);
+  document.getElementById("moreRow").style.display = "none";
+}
+
+//============================================================
+// TOGGLE DRAWER WITH MORE BTN IN INFO AREA
 //============================================================
 
 function toggleDrawer() {
@@ -115,7 +168,7 @@ async function openEditMobile(index) {
   await mobilePopup();
   let content = document.getElementById("popContent");
   content.innerHTML = showEditContact(indexNr);
-  setInitialValues();
+  checkOldValues();
 }
 
 async function openEditDesk(index) {
@@ -123,10 +176,10 @@ async function openEditDesk(index) {
   await deskEditPopup();
   document.getElementById("popupLeft").innerHTML = showEditContact(indexNr);
   document.getElementById("popTop").style.borderTopLeftRadius = "0px";
-  setInitialValues();
+  checkOldValues();
 }
 
-function setInitialValues() {
+function checkOldValues() {
   const fullNameInput = document.getElementById("fullName");
   const emailInput = document.getElementById("email");
   const phoneInput = document.getElementById("phone");
@@ -134,11 +187,9 @@ function setInitialValues() {
   if (!fullNameInput.value) {
     fullNameInput.value = fullNameInput.placeholder;
   }
-
   if (!emailInput.value) {
     emailInput.value = emailInput.placeholder;
   }
-
   if (!phoneInput.value) {
     phoneInput.value = phoneInput.placeholder;
   }
@@ -149,47 +200,60 @@ function editContactInArray(index) {
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
-
   let { preName, lastName } = splitName(name);
+  let initials = preName[0] + lastName[0];
 
   contactArray[index].name = preName;
   contactArray[index].lastName = lastName;
   contactArray[index].mail = mail;
   contactArray[index].phone = phone;
+  contactArray[index].initials = initials;
   contactArray[index].color = color;
 
-  document.getElementById("userForm").reset();
-  closePopup();
-  showContacts();
+  completeEdition(index);
 }
 
+function completeEdition(index) {
+  document.getElementById("userForm").reset();
+  closePopup();
+  setItem('contacts', JSON.stringify(contactArray));
+  widthForInfo(index);
+}
+
+/**
+ * takes index from personDatas(), over widthForInfo(), 
+ * showEditContact() and delete the contact 
+ * @param {number} index 
+ */
 function deleteInEditor(index) {
   contactArray.splice(index, 1);
   closePopup();
+  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
 }
+
 //============================================================
-// CREATE NEW CONTACT IN MOBILE
+// CREATE NEW CONTACT 
 //============================================================
+
 
 function openColorPicker() {
-  let colorPicker = document.getElementById("colorPicker");
-
-  if (colorPicker.style.display === "none") {
-    colorPicker.style.display = "flex";
+  let colorPicker = document.getElementById('colorPicker');
+  if (colorPicker.style.display === 'none') {
+    colorPicker.style.display = 'flex';
   } else {
-    colorPicker.style.display = "none";
+    colorPicker.style.display = 'none';
   }
   updateColors();
 }
 
 function updateColors() {
-  let colorPicker = document.getElementById("colorPicker");
+  let colorPicker = document.getElementById('colorPicker');
   colorPicker.innerHTML = colorsInPicker();
 }
 
 function colorsInPicker() {
-  let pickerBox = "";
+  let pickerBox = '';
   for (let color in userColors) {
     pickerBox += `
         <div class="color-option" 
@@ -215,24 +279,36 @@ function setColor(color, event) {
 }
 
 function createContact() {
+  let createBtn = document.getElementById('createBtn');
+  createBtn.disabled = true;
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
-
   let { preName, lastName } = splitName(fullName);
+  let initials = preName[0] + lastName[0];
 
   contactArray.push({
     name: preName,
     lastName: lastName,
     mail: mail,
     phone: phone,
+    initials: initials,
     color: color,
   });
-  document.getElementById("userForm").reset();
 
+  completeCreation();
+}
+
+function completeCreation() {
+  let createBtn = document.getElementById('createBtn');
+  createBtn.disabled = false;
+  document.getElementById("userForm").reset();
   closePopup();
+  setItem('contacts', JSON.stringify(contactArray));
+  let index = contactArray.length - 1;
   showContacts();
+  widthForInfo(index);
   successInfo();
 }
 
@@ -275,24 +351,18 @@ function upperCaseFirstLetter(str) {
 // FUNCTIONS TO CREATE INITIALS (IN CIRCLE)
 //=============================================
 
-//they will pushed in contactArrays
-function createInitials() {
-  for (let i = 0; i < contactArray.length; i++) {
-    let person = contactArray[i];
-    let initials = person.name[0] + person.lastName[0];
-    contactArray[i].initials = initials;
-  }
-}
-
-// initialGroups are in templates/global_arrays.js
+/**
+ * Creates initialGroups from contactArray in templates/global_arrays.js 
+ * and gives it back to showContacts()
+ * if key is not exist as a letter in the accumulator,it push a new one
+ * push current name to acc
+ */
 function createInitalGroup() {
   initialGroups = contactArray.reduce((acc, current) => {
-    let initial = current.name[0].toUpperCase();
-    // if key not exist as a letter in the accumulator, push it
+    let initial = current.name[0].toUpperCase();   
     if (!acc[initial]) {
       acc[initial] = [];
     }
-    // push current name to acc
     acc[initial].push(current);
     return acc;
   }, {});
@@ -302,6 +372,11 @@ function createInitalGroup() {
 //  POPUP FUNCTIONS
 //============================================================
 
+/**
+ * Displays a mobile popup by appending it to the body and making it visible.
+ * Resolves the promise immediately after displaying the popup. 
+ * @returns {Promise<void>} A promise that resolves once the popup is displayed.
+ */
 function mobilePopup() {
   return new Promise((resolve) => {
     let popupHTML = popupBack();
@@ -382,7 +457,7 @@ function GroupName(initial) {
 `;
 }
 function personDatas(initial) {
-  let htmlContent = "";
+  let htmlContent = '';
   for (let i = 0; i < contactArray.length; i++) {
     let thisPerson = contactArray[i];
     if (initialGroups[initial].includes(thisPerson)) {
@@ -428,7 +503,7 @@ function showInfoText(person, indexNr) {
                         ${person.name} ${person.lastName}
                         </div>
                         <div class="more-row" id="moreRow">
-                            <div class="more-row-box" onclick="openEditDesk(${indexNr})">
+                            <div class="more-row-box" onclick="widthForEdit(${indexNr})">
                                 <img src="../assets/img/edit.png" alt="Edit">
                                 <span>Edit</span>
                             </div>
@@ -459,7 +534,7 @@ function showInfoText(person, indexNr) {
             <img src="../assets/img/more_btn.svg" alt="">
         </button>
         <div id="drawer">
-          <div class="drawer-item" onclick="openEditMobile(${indexNr})">
+          <div class="drawer-item" onclick="widthForEdit(${indexNr})">
             <img src="../assets/img/edit.png" alt="Edit">
             <span>Edit</span>
           </div>
@@ -499,7 +574,7 @@ function showAddContact() {
     </div>
     <div class="pop-bottom">
         <div class="form-frame">
-            <form id="userForm" class="user-form" onsubmit="createContact()">
+            <form id="userForm" class="user-form" onsubmit="createContact(); return false;">
                 <div class="contact-frame">
                 <input 
                 class="contact-input" 
@@ -531,11 +606,11 @@ function showAddContact() {
                     <img src="../assets/img/call_small.png" alt="phone">
                 </div>
                 <div class="btn-box">
-                <button class="white-btn" onclick="closePopup()">
+                <button class="white-btn" onclick="closePopup(); return false;">
                     Cancel
                     <img src="../assets/img/close_dark-grey.png">
                 </button>
-                <button type="submit" class="blue-btn">
+                <button id="createBtn" type="submit" class="blue-btn">
                     Create Contact
                     <img src="../assets/img/check_small.png">
                 </button>
@@ -563,7 +638,7 @@ function showEditContact(index) {
     </div>
     <div class="pop-bottom">
     <div class="form-frame">
-        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr})">            
+        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr}); return false;">            
                 <div class="contact-frame">
                     <input class="contact-input" type="text" id="fullName"
                         placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"

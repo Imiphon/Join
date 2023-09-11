@@ -1,10 +1,14 @@
+:root {
+  --animation-timer: 350ms;
+}
+
 .mainDiv {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 32px;
-  animation: 450ms changeBackground ease-in-out;
+  animation: var(--animation-timer) changeBackground ease-in-out;
 }
 
 @keyframes changeBackground {
@@ -16,32 +20,37 @@
   }
 }
 
+.logoDiv {
+  display: flex;
+  width: 100%;
+  height: 79px;
+}
+
 .background {
   background-color: var(--reg-blue);
 }
 
-.logoDivHeaderMobile1 {
-  width: 100%;
-  animation: 450ms moveLogo ease-in-out;
+.logoDivHeaderMobile1 {  
+  animation: var(--animation-timer) moveLogo ease-in-out;
   top: 32px;
   left: 32px;
 }
 
 @keyframes moveLogo {
   from {
-    position: fixed;
+    position: absolute;
     top: calc(100vh / 2 - 60px);
     left: calc(100vw / 2 - 49.5px);
   }
   to {
-    position: fixed;
+    position: absolute;
     top: 32px;
     left: 32px;
   }
 }
 
 .joinLogo {
-  animation: 450ms changeLogo ease-in-out;
+  animation: var(--animation-timer) changeLogo ease-in-out;
   background-image: url("./assets/img/logo_mobile_blue.svg");
   background-size: cover;
   width: 65px;
@@ -62,7 +71,7 @@
 
 .formDivLogin {
   width: 100%;
-  animation: 450ms showForm ease-in-out;
+  animation: var(--animation-timer) showForm ease-in-out;
   display: flex;
   flex-direction: column;
   padding-top: 64px;
@@ -73,12 +82,10 @@
   from {
     display: none;
     opacity: 0;
-    padding-top: 184px;
   }
   to {
     display: flex;
-    opacity: 1;
-    padding-top: 184px;
+    opacity: 1;    
   }
 }
 
@@ -161,13 +168,13 @@
 
 .backArrow {
   position: absolute;
-  padding-right: 16px;
   top: 32px;
   left: 32px;
 }
 
 h1{
   padding: 0 70px;
+  color: black;
 }
 
 .backArrow:hover {
@@ -193,6 +200,14 @@ h1{
   outline: unset;
 }
 
+.loginInputPwd{
+  background-image: url('./assets/img/login-lock.svg')
+}
+
+.loginInputPwd:focus-visible {
+  background-image: none;
+}
+
 .line {
   margin-top: 4px;
   background-color: rgb(220, 220, 220);
@@ -205,14 +220,14 @@ h1{
   flex-direction: column;
   gap: 16px;
   width: 85%;
+  padding-bottom: 16px;
 }
 
 .rememberMe {
   display: flex;
-  width: 100%;
   gap: 16px;
-  padding-bottom: 16px;
 }
+
 .acceptPrivacy {
   display: flex;
   justify-content: center;
@@ -233,6 +248,11 @@ h1{
   border-radius: 8px;
   border: none;
   color: white;
+}
+
+#signUp{
+  width: 64px;
+  height: 40px;
 }
 
 .resetBtn {
@@ -261,7 +281,7 @@ h1{
 }
 
 .loginFooter {
-  animation: 450ms showFooter ease-in-out;
+  animation: var(--animation-timer) showFooter ease-in-out;
   display: flex;
   justify-content: center;
   align-items: end;
@@ -312,14 +332,16 @@ h1{
   position: fixed;
   bottom: calc(100vh / 2 + 60px);
   left: calc(100vw / 2 - 115px);
-  width: 230px;
   justify-content: center;
   align-items: center;
   padding: 16px;
   border-radius: 8px;
   background-color: var(--reg-blue);
   color: white;
-  animation: 450ms moveMessage ease-in-out;
+  animation: var(--animation-timer) moveMessage ease-in-out;
+}
+.messageImg{
+  padding-right: 16px;
 }
 
 @keyframes moveMessage {
@@ -343,7 +365,7 @@ h1{
   display: flex;
 }
 
-@media (min-height: 865px) {
+@media (min-height: 866px) {
   .loginFooter {
     position: fixed;
     bottom: 32px;
@@ -355,13 +377,44 @@ h1{
   .formDivLogin, .formDivNewUser, .formDivResetPwd {
     width: 60%;
   }
-
   .signupDiv {
     position: absolute;
     top: 32px;
     right: 32px;
   }
+  .joinLogo {
+    width: 101px;
+    height: 122px;
+  }
+  .logoDiv {
+    height: 122px;
+  }
+  .loginOptions{
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+  }
+  .rememberMe{
+    align-items: center;
+  }
 
+  .loginButtons{
+    flex-direction: row;
+  }
+
+  #userLoginBtn{
+    width: 120px;
+    height: 40px;
+  }
+  
+  @media (min-height: 747px) {
+    .loginFooter {
+      position: fixed;
+      bottom: 32px;
+      left: 0;
+    }
+  }
 }
 
 

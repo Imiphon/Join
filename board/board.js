@@ -1,8 +1,15 @@
-function init() {
+document.addEventListener('DOMContentLoaded', async ()=>{
+  await loadTasks();
+  await init();
+})
+
+  function init() {
   renderTaskList("toDo", addedTasks);
   renderTaskList("inProgress", addedTasks);
   renderTaskList("awaitFeedback", addedTasks);
 }
+
+
 
 // Function to render tasks in a specified container
 function renderTaskList(containerId, tasks) {
@@ -11,10 +18,10 @@ function renderTaskList(containerId, tasks) {
 
   for (let i = 0; i < tasks.length; i++) {
     const taskList = tasks[i][containerId]; // Get the specific task list (e.g., "to-do", "in-progress", "await-feedback")
-    if (taskList && taskList.length > 0) {
+    if (taskList || taskList.length > 0) {
       for (let j = 0; j < taskList.length; j++) {
         const task = taskList[j];
-        container.innerHTML += createTaskElement(task, j);
+        container.innerHTML += createTaskElement(task, j, containerId);
         // Optional: Call functions to create subtasks, etc.
       }
     } else {
@@ -31,13 +38,25 @@ function emptyTaskArea() {
   `;
 }
 
-function createTaskElement(task, index) {
+
+// Function that the search-baer should get a border-color blue, when the sarch-inout is clicked
+let searchBar = document.getElementById("search-bar");
+
+document.addEventListener("click", (event) => {
+  if (!searchBar.contains(event.target)) {
+    searchBar.style.borderColor = "var(--user-grey)";
+  } else {
+    searchBar.style.borderColor = "var(--reg-blue)";
+  }
+});
+
+function createTaskElement(task, index, section ) {
   return /*html */ `
-    <div class="cards" id="card${index}">
-      <span class="topic">${task.title}</span>
+    <div class="cards" id="card${index}" onclick="popUpTask(${section}, ${index})">
+      <span class="topic">${task.category}</span>
       <div class="frame">
-        <h4 class="title">${task.description}</h4>
-        <p class="content">Build start page with recipe recommendation...</p>
+        <h4 class="title">${task.title}</h4>
+        <p class="content">${task.description}</p>
       </div>
       ${createProgressBar(task)}
       ${createSelectedContacts(task, index)}
@@ -46,13 +65,12 @@ function createTaskElement(task, index) {
 }
 
 function createProgressBar(task) {
-  const progressBar = task.progresWidth;
-  const finishedSubTasks = 0; // You may need to calculate this
-  const lengthOfSubs = task.subtasks.length;
+  const finishedSubTasks = 0; // Check if task and task.subtasks are defined
+  const lengthOfSubs = task.subTask ? task.subTask.length : 0; // Check if task and task.subtasks are defin
 
   return /*html */ `
     <div class="progress-bar">
-      <progress max="100" value="${progressBar}"></progress>
+      <progress max="100" value="${lengthOfSubs}"></progress>
       <div class="subtask-amount"><span>${finishedSubTasks}/${lengthOfSubs}</span> Subtasks</div>
     </div>
   `;
@@ -64,7 +82,6 @@ function createSelectedContacts(task, index) {
       return `<span style="background-color: ${contact.bColor}" class="profile" style="z-index:${subIndex}">${contact.shortName}</span>`;
     })
     .join("");
-
 
   return /*html */ `
     <div class="assign-conatiner" id="assign-container${index}">
@@ -89,3 +106,11 @@ function createPriorityIcon(task) {
 
   return icon;
 }
+
+
+function popUpTask(section, index) {
+  const selectedTask = addedTasks[0][section.id][index];
+  
+}
+
+
