@@ -17,7 +17,7 @@ async function login() {
   if (await checkUserExist(email)) {
     let userid = emailAdresses.indexOf(email);
     if (checkPwdCorrect(userid, password)) {
-      window.location = `./templates/welcome_message.html?id=${userid}`; //or name=${users[userid]['name'] 
+      window.location = `./summary/summary.html?id=${userid}`; //or name=${users[userid]['name'] 
     } else {
       showPwdNotRightMessage();
     }
@@ -59,7 +59,7 @@ async function newUser() {
 function guestLogin() {
   disableButtonLogin();
   console.log("Test");
-  window.location = "./templates/welcome_message.html";
+  window.location = "./summary/summary.html";
 }
 
 /**
