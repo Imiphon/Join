@@ -115,48 +115,69 @@ async function widthForAdd() {
 // INFO AREA
 //============================================================
 
+/**
+ * takes index from widthForInfo(), find person in (global) contactArray
+ * get id from (desk-) popup and set content from showInfoText() 
+ * @param {number} index 
+ */
 function showInfoDesk(index) {
   let person = contactArray[index];
-  let popupBox = document.getElementById("popupBox");
+  let popupBox = document.getElementById('popupBox');
   popupBox.innerHTML = showInfoText(person, index);
 }
+
+/**
+ * takes index from widthForInfo(), find person in (global) contactArray
+ * get id from (mobile-)popup and set content from showInfoText() 
+ * @param {number} index 
+ */
 function showInfoMobile(index) {
-  let main = document.querySelector("main");
+  let main = document.querySelector('main');
   main.innerHTML = "";
   let person = contactArray[index];
   main.innerHTML += showInfoText(person, index);
-  document.getElementById("moreRow").style.display = "none";
+  document.getElementById('moreRow').style.display = "none";
 }
 
 //============================================================
 // TOGGLE DRAWER WITH MORE BTN IN INFO AREA
 //============================================================
 
+/**
+ * get id from drawer in showInfoText()
+ * Toggles the 'open' class for the drawer element. 
+ * When opened, adds an event listener to close the drawer on outside click.
+ * 
+ * @description
+ * - Retrieves the drawer element using its ID (assumed to be set in showInfoText()).
+ * - Utilizes closeOnClick as an event callback (not invoked directly as a function). 
+ * - If the drawer is open, allows the user to click outside to close it.
+ */
 function toggleDrawer() {
-  let drawer = document.getElementById("drawer");
-  if (drawer.classList.toggle("open")) {
-    document.addEventListener("click", closeOnClick);
+  let drawer = document.getElementById('drawer');
+  if (drawer.classList.toggle('open')) {
+    document.addEventListener('click', closeOnClick);
   } else {
-    document.removeEventListener("click", closeOnClick);
+    document.removeEventListener('click', closeOnClick);
   }
 }
 
 function closeOnClick(event) {
-  let drawer = document.getElementById("drawer");
-  let moreBtn = document.querySelector(".more-btn");
+  let drawer = document.getElementById('drawer');
+  let moreBtn = document.querySelector('.more-btn');
   if (drawer && moreBtn) {
     if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
       closeDrawer();
-      document.removeEventListener("click", closeOnClick);
+      document.removeEventListener('click', closeOnClick);
     }
   } else {
     // if drawer or moreBtn doesn't exists
-    document.removeEventListener("click", closeOnClick);
+    document.removeEventListener('click', closeOnClick);
   }
 }
 
 function closeDrawer() {
-  document.getElementById("drawer").classList.remove("open");
+  document.getElementById('drawer').classList.remove('open');
 }
 
 //============================================================

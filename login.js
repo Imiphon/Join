@@ -1,4 +1,3 @@
-let users = [];
 let emailAdresses = [];
 let resetId;
 
@@ -13,7 +12,6 @@ async function login() {
   let password = getInput("loginPassword");
   let form = document.getElementById('formLogin');
   
-
   if (await checkUserExist(email)) {
     let userid = emailAdresses.indexOf(email);
     if (checkPwdCorrect(userid, password)) {
