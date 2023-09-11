@@ -162,28 +162,44 @@ function toggleDrawer() {
   }
 }
 
+/**
+ * Event handler that closes the drawer when a click occurs outside of the drawer and moreBtn elements.
+ * Also removes the click event listener if either drawer or moreBtn elements do not exist.
+ *
+ * @param {Event} event - The triggered click event.
+ */
 function closeOnClick(event) {
   let drawer = document.getElementById('drawer');
   let moreBtn = document.querySelector('.more-btn');
   if (drawer && moreBtn) {
-    if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
-      closeDrawer();
-      document.removeEventListener('click', closeOnClick);
-    }
+      if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
+          closeDrawer();
+          document.removeEventListener('click', closeOnClick);
+      }
   } else {
-    // if drawer or moreBtn doesn't exists
-    document.removeEventListener('click', closeOnClick);
+      // if drawer or moreBtn doesn't exist
+      document.removeEventListener('click', closeOnClick);
   }
 }
 
+/**
+* Closes the drawer by removing the 'open' class from the drawer element.
+*/
 function closeDrawer() {
   document.getElementById('drawer').classList.remove('open');
 }
+
 
 //============================================================
 //EDIT CONTACT
 //============================================================
 
+/**
+ * takes index from widthForEdit(index)
+ * add contact from showEditContact() into mobilePopup
+ * starts checkOldValues()
+ * @param {number} index 
+ */
 async function openEditMobile(index) {
   let indexNr = index; //Nr of contactArray
   await mobilePopup();
@@ -192,6 +208,12 @@ async function openEditMobile(index) {
   checkOldValues();
 }
 
+/**
+ * takes index from widthForEdit(index)
+ * add contact from showEditContact() into deskEditPopup()
+ * starts checkOldValues()
+ * @param {number} index 
+ */
 async function openEditDesk(index) {
   let indexNr = index; //Nr of contactArray
   await deskEditPopup();
@@ -200,6 +222,9 @@ async function openEditDesk(index) {
   checkOldValues();
 }
 
+/**
+ * if user doesn'edit new info take old Infos
+ */
 function checkOldValues() {
   const fullNameInput = document.getElementById("fullName");
   const emailInput = document.getElementById("email");
@@ -216,12 +241,18 @@ function checkOldValues() {
   }
 }
 
+/**
+ * takes index from showEditContact(index)
+ * Takes elements from inputfields and push it into contactArray()
+ * starts comleteEdition()
+ * @param {number} index from personDatas
+ */
 function editContactInArray(index) {
-  let name = document.getElementById("fullName").value; //.split(' ') in splitName()
+  let fullName = document.getElementById("fullName").value; //.split(' ') in splitName()
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
-  let { preName, lastName } = splitName(name);
+  let { preName, lastName } = splitName(fullName);
   let initials = preName[0] + lastName[0];
 
   contactArray[index].name = preName;
@@ -234,6 +265,11 @@ function editContactInArray(index) {
   completeEdition(index);
 }
 
+/**
+ * takes index from editContactInArray(index)
+ * close the popup, loadup infos to server and starts widthForInfo(index)
+ * @param {number} index 
+ */
 function completeEdition(index) {
   document.getElementById("userForm").reset();
   closePopup();
@@ -258,33 +294,51 @@ function deleteInEditor(index) {
 //============================================================
 
 
+/**
+ * Toggles the visibility of the color picker and updates its content.
+ */
 function openColorPicker() {
   let colorPicker = document.getElementById('colorPicker');
   if (colorPicker.style.display === 'none') {
-    colorPicker.style.display = 'flex';
+      colorPicker.style.display = 'flex';
   } else {
-    colorPicker.style.display = 'none';
+      colorPicker.style.display = 'none';
   }
   updateColors();
 }
 
+/**
+* Updates the content of the color picker with available user colors.
+*/
 function updateColors() {
   let colorPicker = document.getElementById('colorPicker');
   colorPicker.innerHTML = colorsInPicker();
 }
 
+/**
+* Constructs the inner HTML for the color picker based on available user colors.
+*
+* @returns {string} The HTML string representing color options for the picker.
+*/
 function colorsInPicker() {
   let pickerBox = '';
   for (let color in userColors) {
-    pickerBox += `
-        <div class="color-option" 
-        style="background-color: ${userColors[color]};" 
-        onclick="setColor('${color}', event)"></div>
-        `;
+      pickerBox += `
+          <div class="color-option" 
+          style="background-color: ${userColors[color]};" 
+          onclick="setColor('${color}', event)"></div>
+          `;
   }
   return pickerBox;
 }
 
+/**
+* Sets the background color of the specified element based on the selected user color.
+* Hides the color picker and updates the background color of the editor's detail ellipse if it exists.
+*
+* @param {string} color - The key representing the user color.
+* @param {Event} event - The click event triggering this function.
+*/
 function setColor(color, event) {
   document.getElementById("colorBox").style.backgroundColor = userColors[color];
 
@@ -294,11 +348,15 @@ function setColor(color, event) {
   if (document.querySelector(".editor")) {
     //without space between the 2 classes to select exactly this element
     //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
-    let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
-    detailEllipse.style.backgroundColor = userColors[color];
+      let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
+      detailEllipse.style.backgroundColor = userColors[color];
   }
 }
 
+/**
+ * Creates a new contact entry based on the user input from the form. After the contact
+ * is created, the contact creation process is finalized by calling the completeCreation function.
+ */
 function createContact() {
   let createBtn = document.getElementById('createBtn');
   createBtn.disabled = true;
@@ -321,6 +379,11 @@ function createContact() {
   completeCreation();
 }
 
+/**
+ * Completes the contact creation process by re-enabling the create button, resetting 
+ * the form, and saving the new contact to storage. Also, triggers a visual feedback for 
+ * a successful operation.
+ */
 function completeCreation() {
   let createBtn = document.getElementById('createBtn');
   createBtn.disabled = false;
@@ -333,6 +396,11 @@ function completeCreation() {
   successInfo();
 }
 
+/**
+ * Shows a visual feedback to inform the user about a successful operation. 
+ * The information message animates from the bottom to the middle of the screen 
+ * and hides itself after a short duration.
+ */
 function successInfo() {
   const infoDiv = document.getElementById("success-info");
   // Set initial position to bottom
@@ -357,13 +425,25 @@ function successInfo() {
   }, 2500);
 }
 
+/**
+ * split the entry from the user into pre- and lastname
+ * 
+ * @param {string} fullName 
+ * @returns 
+ */
 function splitName(fullName) {
-  let nameParts = fullName.split(" ");
+  let nameParts = fullName.split('');
   let preName = upperCaseFirstLetter(nameParts[0]);
   let lastName = upperCaseFirstLetter(nameParts[1]);
   return { preName, lastName };
 }
 
+/**
+ * set first character big and slice the 'old' first letter
+ * 
+ * @param {string} str 
+ * @returns 
+ */
 function upperCaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -410,6 +490,12 @@ function mobilePopup() {
   });
 }
 
+/**
+ * Displays an editing popup for the desktop view. Initializes the popup background
+ * and sets its visibility. Resolves immediately after the popup is set to be displayed.
+ *
+ * @returns {Promise} A promise that resolves when the popup is displayed.
+ */
 function deskEditPopup() {
   return new Promise((resolve) => {
     //get popupBackground
@@ -424,6 +510,12 @@ function deskEditPopup() {
   });
 }
 
+/**
+ * Displays a popup to create new contact for the desktop view. Initializes the popup background
+ * and sets its visibility. Resolves immediately after the popup is set to be displayed.
+ *
+ * @returns {Promise} A promise that resolves when the popup is displayed.
+ */
 function deskAddPopup() {
   return new Promise((resolve) => {
     let popupHTML = popupBack();
@@ -436,6 +528,9 @@ function deskAddPopup() {
   });
 }
 
+/**
+ * removing colorpicker if visible and closes the Popup
+ */
 function closePopup() {
   let colorPicker = document.getElementById("colorPicker");
   let popBg = document.getElementById("popupBackground");
@@ -443,13 +538,18 @@ function closePopup() {
     colorPicker.remove();
   }
   popBg.remove();
-  //document.getElementById("popupBackground").style.display = "none";
 }
 
 //============================================================
 //  HTML TEMPLATES
 //============================================================
 
+/**
+ * Constructs and returns the main frame HTML string. This frame includes
+ * an add button, name group, popup box, and a success info message.
+ *
+ * @returns {string} The HTML string representing the main frame.
+ */
 function showMainFrame() {
   return `
     <div class="add-btn-frame">
@@ -467,6 +567,13 @@ function showMainFrame() {
     `;
 }
 
+/**
+ * Constructs and returns the HTML string for a name group based on the given initial.
+ * The returned structure contains a letter box displaying the initial and a line box.
+ *
+ * @param {string} initial - The initial letter for the name group.
+ * @returns {string} The HTML string representing the name group.
+ */
 function GroupName(initial) {
   return `
     <div class="letter-box">
@@ -477,6 +584,15 @@ function GroupName(initial) {
     </div>
 `;
 }
+
+/**
+ * Constructs and returns the HTML content for displaying the data of persons
+ * belonging to a specific initial group. It iterates over the contactArray and
+ * appends the appropriate HTML content for each person with the specified initial.
+ *
+ * @param {string} initial - The initial letter for filtering the persons in contactArray.
+ * @returns {string} The HTML content representing persons of the specified initial group.
+ */
 function personDatas(initial) {
   let htmlContent = '';
   for (let i = 0; i < contactArray.length; i++) {
@@ -505,6 +621,17 @@ function personDatas(initial) {
   return htmlContent;
 }
 
+/**
+ * Constructs and returns the HTML content for displaying detailed information
+ * of a given person. The function renders the person's name, initials, email, and phone
+ * along with options to edit or delete the contact. Additional UI elements like a drawer 
+ * with edit and delete options are also included.
+ *
+ * @param {Object} person - The object representing the person's data. The object should have
+ * properties: name, lastName, mail, phone, initials, and color.
+ * @param {number} indexNr - The index number of the person in the contactArray or a similar array.
+ * @returns {string} The HTML content representing the detailed information of the specified person.
+ */
 function showInfoText(person, indexNr) {
   return `
         <div class="detail-frame" id="detailFrame">
@@ -567,6 +694,13 @@ function showInfoText(person, indexNr) {
     `;
 }
 
+/**
+ * Constructs and returns the HTML content for a generic popup background.
+ * This function creates a popup layout with separate sections for different
+ * content, namely general content, add content, and edit content.
+ *
+ * @returns {string} The HTML content representing the structure of the popup background.
+ */
 function popupBack() {
   return `
     <div class="popup-background" id="popupBackground">
@@ -582,6 +716,14 @@ function popupBack() {
     `;
 }
 
+/**
+ * Constructs and returns the HTML content for the "Add Contact" popup form.
+ * This function creates a form that allows the user to input details for a new contact,
+ * including name, email, and phone number. The form also includes options for choosing 
+ * a contact color and avatar, as well as actions for creating the contact or canceling the process.
+ *
+ * @returns {string} The HTML content representing the "Add Contact" form layout.
+ */
 function showAddContact() {
   return `
     <div class="pop-top" id="popTop">
@@ -642,6 +784,15 @@ function showAddContact() {
         `;
 }
 
+/**
+ * Constructs and returns the HTML content for the "Edit Contact" popup form.
+ * This function creates a form that allows the user to edit the details of an existing contact,
+ * including name, email, phone number, and contact color. The form also includes options 
+ * for deleting the contact or saving the changes.
+ *
+ * @param {number} index - The index of the contact in the contactArray to be edited.
+ * @returns {string} The HTML content representing the "Edit Contact" form layout.
+ */
 function showEditContact(index) {
   let person = contactArray[index];
   let indexNr = index;
