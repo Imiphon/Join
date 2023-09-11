@@ -1,10 +1,10 @@
 let createBtn = document.getElementById('createBtn');
 
 /**
- * eventListener to check if its the right side instead of onload-function
+ * eventListener instead of onload-function to check if its the right side 
  * cause:
  * It separates the JavaScript logic from the HTML, making the code cleaner and more maintainable.
- * The same JavaScript code can be used for multiple HTML pages without having to modify the HTML code.
+ * The same JavaScript code can (actually) be used for multiple HTML pages without having to modify the HTML code.
  */
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
@@ -13,15 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+/**
+ * load contacts from server
+ */
 async function getContactsFromServer() {
   try {
     contactArray = JSON.parse(await getItem('contacts'));
-  } catch(e) {
+  } catch (e) {
     console.info('could not find contacts')
   }
-
   showContacts();
 }
+
 /**
  * this starts a frame in the main area with #nameGroup, #popup and successInfo divs
  * calling functions to build initial groups, inner content and show all names
@@ -34,6 +37,7 @@ function showContacts() {
   //createInitials();
   showNameGroup();
 }
+
 /**
  * put all names in right initialGroup
  */
@@ -46,8 +50,14 @@ function showNameGroup() {
   }
 }
 
+/**
+ * takes index from personDatas(), over widthForInfo(), 
+ * showInfoDesk() / showInfoMobile() and delete the contact 
+ * @param {number} index 
+ */
 function deleteContact(index) {
   contactArray.splice(index, 1);
+  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
 }
 
@@ -55,6 +65,11 @@ function deleteContact(index) {
 // CHECK WIDTH TO CONTROL MOB OR DESK OPTIC
 //============================================================
 
+/**
+ * takes index from personDatas()
+ * open mob or desk optic
+ * @param {number} index 
+ */
 function widthForInfo(index) {
   const width = window.innerWidth;
   if (width <= 1024) {
@@ -64,19 +79,26 @@ function widthForInfo(index) {
     showNameGroup();
   }
 }
-function showInfoDesk(index) {
-  let person = contactArray[index];
-  let popupBox = document.getElementById("popupBox");
-  popupBox.innerHTML = showInfoText(person, index);
-}
-function showInfoMobile(index) {
-  let main = document.querySelector("main");
-  main.innerHTML = "";
-  let person = contactArray[index];
-  main.innerHTML += showInfoText(person, index);
-  document.getElementById("moreRow").style.display = "none";
+
+/**
+ * takes index from personDatas()
+ * open mob or desk optic
+ * @param {number} index 
+ */
+function widthForEdit(index) {
+  const width = window.innerWidth;
+  if (width <= 1024) {
+    openEditMobile(index);
+  } else {
+    openEditDesk(index);
+  }
 }
 
+/**
+ * takes index from personDatas()
+ * open mob or desk optic
+ * @param {number} index 
+ */
 async function widthForAdd() {
   const width = window.innerWidth;
   if (width <= 1024) {
@@ -92,7 +114,24 @@ async function widthForAdd() {
 }
 
 //============================================================
-// START TOGGLE DRAWER WITH MORE BTN
+// INFO AREA
+//============================================================
+
+function showInfoDesk(index) {
+  let person = contactArray[index];
+  let popupBox = document.getElementById("popupBox");
+  popupBox.innerHTML = showInfoText(person, index);
+}
+function showInfoMobile(index) {
+  let main = document.querySelector("main");
+  main.innerHTML = "";
+  let person = contactArray[index];
+  main.innerHTML += showInfoText(person, index);
+  document.getElementById("moreRow").style.display = "none";
+}
+
+//============================================================
+// TOGGLE DRAWER WITH MORE BTN IN INFO AREA
 //============================================================
 
 function toggleDrawer() {
@@ -126,21 +165,12 @@ function closeDrawer() {
 //EDIT CONTACT
 //============================================================
 
-function widthForEdit(index) {
-  const width = window.innerWidth;
-  if (width <= 1024) {
-    openEditMobile(index);
-  } else {
-    openEditDesk(index);
-  }
-}
-
 async function openEditMobile(index) {
   let indexNr = index; //Nr of contactArray
   await mobilePopup();
   let content = document.getElementById("popContent");
   content.innerHTML = showEditContact(indexNr);
-  setInitialValues();
+  checkOldValues();
 }
 
 async function openEditDesk(index) {
@@ -148,10 +178,10 @@ async function openEditDesk(index) {
   await deskEditPopup();
   document.getElementById("popupLeft").innerHTML = showEditContact(indexNr);
   document.getElementById("popTop").style.borderTopLeftRadius = "0px";
-  setInitialValues();
+  checkOldValues();
 }
 
-function setInitialValues() {
+function checkOldValues() {
   const fullNameInput = document.getElementById("fullName");
   const emailInput = document.getElementById("email");
   const phoneInput = document.getElementById("phone");
@@ -159,11 +189,9 @@ function setInitialValues() {
   if (!fullNameInput.value) {
     fullNameInput.value = fullNameInput.placeholder;
   }
-
   if (!emailInput.value) {
     emailInput.value = emailInput.placeholder;
   }
-
   if (!phoneInput.value) {
     phoneInput.value = phoneInput.placeholder;
   }
@@ -180,7 +208,7 @@ function editContactInArray(index) {
   contactArray[index].name = preName;
   contactArray[index].lastName = lastName;
   contactArray[index].mail = mail;
-  contactArray[index].phone = phone;  
+  contactArray[index].phone = phone;
   contactArray[index].initials = initials;
   contactArray[index].color = color;
 
@@ -194,33 +222,40 @@ function completeEdition(index) {
   widthForInfo(index);
 }
 
+/**
+ * takes index from personDatas(), over widthForInfo(), 
+ * showEditContact() and delete the contact 
+ * @param {number} index 
+ */
 function deleteInEditor(index) {
   contactArray.splice(index, 1);
   closePopup();
+  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
 }
+
 //============================================================
-// CREATE NEW CONTACT IN MOBILE
+// CREATE NEW CONTACT 
 //============================================================
+
 
 function openColorPicker() {
-  let colorPicker = document.getElementById("colorPicker");
-
-  if (colorPicker.style.display === "none") {
-    colorPicker.style.display = "flex";
+  let colorPicker = document.getElementById('colorPicker');
+  if (colorPicker.style.display === 'none') {
+    colorPicker.style.display = 'flex';
   } else {
-    colorPicker.style.display = "none";
+    colorPicker.style.display = 'none';
   }
   updateColors();
 }
 
 function updateColors() {
-  let colorPicker = document.getElementById("colorPicker");
+  let colorPicker = document.getElementById('colorPicker');
   colorPicker.innerHTML = colorsInPicker();
 }
 
 function colorsInPicker() {
-  let pickerBox = "";
+  let pickerBox = '';
   for (let color in userColors) {
     pickerBox += `
         <div class="color-option" 
@@ -246,7 +281,7 @@ function setColor(color, event) {
 }
 
 function createContact() {
-  createBtn.disabled = true; 
+  createBtn.disabled = true;
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
@@ -267,11 +302,11 @@ function createContact() {
 }
 
 function completeCreation() {
-  createBtn.disabled = false; 
+  createBtn.disabled = false;
   document.getElementById("userForm").reset();
   closePopup();
   setItem('contacts', JSON.stringify(contactArray));
-  let index = contactArray.length -1;
+  let index = contactArray.length - 1;
   widthForInfo(index);
   successInfo();
 }
@@ -315,26 +350,18 @@ function upperCaseFirstLetter(str) {
 // FUNCTIONS TO CREATE INITIALS (IN CIRCLE)
 //=============================================
 
-//they will pushed in contactArrays
-/*
-function createInitials() {
-  for (let i = 0; i < contactArray.length; i++) {
-    let person = contactArray[i];
-    let initials = person.name[0] + person.lastName[0];
-    contactArray[i].initials = initials;
-  }
-}
-*/
-
-// initialGroups are in templates/global_arrays.js
+/**
+ * Creates initialGroups from contactArray in templates/global_arrays.js 
+ * and gives it back to showContacts()
+ * if key is not exist as a letter in the accumulator,it push a new one
+ * push current name to acc
+ */
 function createInitalGroup() {
   initialGroups = contactArray.reduce((acc, current) => {
-    let initial = current.name[0].toUpperCase();
-    // if key not exist as a letter in the accumulator, push it
+    let initial = current.name[0].toUpperCase();   
     if (!acc[initial]) {
       acc[initial] = [];
     }
-    // push current name to acc
     acc[initial].push(current);
     return acc;
   }, {});
@@ -344,6 +371,11 @@ function createInitalGroup() {
 //  POPUP FUNCTIONS
 //============================================================
 
+/**
+ * Displays a mobile popup by appending it to the body and making it visible.
+ * Resolves the promise immediately after displaying the popup. 
+ * @returns {Promise<void>} A promise that resolves once the popup is displayed.
+ */
 function mobilePopup() {
   return new Promise((resolve) => {
     let popupHTML = popupBack();

@@ -133,9 +133,10 @@
   margin-bottom: 10px;
   gap: 35px;
   padding: 15px, 24px;
-  cursor: pointer;
+  
 }
 .name-box:hover {
+  cursor: pointer;
   background-color: var(--toggle-blue);
 }
 
