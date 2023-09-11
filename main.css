@@ -12,6 +12,8 @@
   --light-grey: #e7e7e7;
   --light-blue: #d2e3ff;
   --dark-blue: #0038ff;
+  --strong-blue: #095dff;
+  /* hover a button, popup-top*/
   /* for buttons and descriptions*/
   --user-grey: #d1d1d1;
   /* also for lines*/
@@ -45,9 +47,10 @@
 
   /*ATTENTION: not yet evaluated!*/
   /* X=0, Y=4, Blur=8, Color=#000000 mit % Opazität */
-  --shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+  --shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   --toggle-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   --shadow-right: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  --bottom-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
 }
 
 /*  ================
@@ -83,12 +86,12 @@ a:hover {
 
 button {
   cursor: pointer;
-  transition: color 0.3s ease;
   /* smooth change of color */
-  transform: 0.3s ease;
+  transition: color 0.3s ease;
   /* time to transform */
-  display: inline-block;
+  transform: 0.3s ease;
   /* to get transform working */
+  display: inline-block;
 }
 
 button:hover {
@@ -96,6 +99,7 @@ button:hover {
   /* soft color-change */
   color: var(--mail-blue);
   transform: scale(1.1);
+  box-shadow: var(--shadow);
 }
 
 h1,

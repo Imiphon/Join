@@ -37,8 +37,10 @@
 /*useless for mobile */
 .add-btn:hover,
 .more-btn:hover {
-  background-color: var(--reg-blue);
+  background-color: var(--strong-blue);
   cursor: pointer;
+  transform: none;
+  box-shadow: var(--bottom-shadow);
 }
 
 .more-btn {
@@ -149,6 +151,7 @@
   position: relative;
   left: 0;
   color: white;
+  border: 2px solid white;
   font-family: "inter-regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -156,7 +159,6 @@
   background-color: gray;
   width: 42px;
   height: 42px;
-  border: 2px;
   margin-left: 16px;
   margin-right: 16px;
   border-radius: 100%;
@@ -248,7 +250,7 @@
   color: white;
   font-family: var(--ff-inter);
   font-size: 3rem;
-  border: 2px;
+  border: 2px solid white;
   margin-right: 16px;
   border-radius: 100%;
   display: grid;
@@ -413,8 +415,7 @@
 
 .pop-top,
 .pop-bottom {
-  display: flex;
-  flex: 1;
+
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -437,8 +438,10 @@
 }
 
 .pop-top {
+  display: flex;
+  flex: 1;
   color: white;
-  background-color: var(--reg-blue);
+  background-color: var(--dark-blue);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -455,6 +458,9 @@
 }
 
 .pop-bottom {
+  display: flex;
+  padding-top: 30%;
+  flex: 2;
   background-color: white;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -565,6 +571,10 @@
   background-color: var(--reg-blue);
   color: white;
 }
+.blue-btn:hover {
+background-color: var(--strong-blue);
+color: white;
+}
 
 .white-btn {
   padding: 12px 18px;
@@ -580,10 +590,19 @@
   display: flex;
   align-items: center;
 }
-
+.white-btn:hover {
+color: var(--reg-blue);
+border-color: var(--reg-blue);
+}
 .white-btn img {
   height: 1.2rem;
   margin-left: 5px;
+}
+
+.blue-btn:hover,
+.white-btn:hover {
+  box-shadow: var(--bottom-shadow);
+transform: none !important;
 }
 
 .btn-box {
@@ -613,7 +632,6 @@
     bottom: 96px;
     top: unset;
     left: unset;
-
     background-color: var(--reg-blue);
     border-radius: 10px;
     z-index: 20;
@@ -621,6 +639,7 @@
     box-shadow: var(--shadow);
     display: inline;
   }
+
 
   .add-btn img,
   .more-btn img {
@@ -690,11 +709,11 @@
     border-radius: 20px;
   }
 
-  .pop-top {
-    color: white;
-    background-color: var(--reg-blue);
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+ 
+  .pop-bottom {
+    display: flex;
+    padding-top: 0;
+    flex: 1;
   }
 
   .detail-ellipse {

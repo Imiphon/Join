@@ -573,7 +573,7 @@ function showAddContact() {
                     <img src="../assets/img/call_small.png" alt="phone">
                 </div>
                 <div class="btn-box">
-                <button class="white-btn" onclick="closePopup()">
+                <button class="white-btn" onclick="closePopup(); return false;">
                     Cancel
                     <img src="../assets/img/close_dark-grey.png">
                 </button>
