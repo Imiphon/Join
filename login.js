@@ -23,7 +23,7 @@ async function login() {
     showEmailNotFoundMessage();
   }
   form.reset();
-  enableButtonLogin();
+  enableButtonLogin();  
 }
 
 /**
@@ -56,7 +56,6 @@ async function newUser() {
  */
 function guestLogin() {
   disableButtonLogin();
-  console.log("Test");
   window.location = "./summary/summary.html";
 }
 

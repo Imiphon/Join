@@ -84,23 +84,22 @@ a:hover {
   transform: scale(1.1);
 }
 
+
+
+/*
 button {
   cursor: pointer;
-  /* smooth change of color */
   transition: color 0.3s ease;
-  /* time to transform */
   transform: 0.3s ease;
-  /* to get transform working */
   display: inline-block;
 }
-
 button:hover {
-  color: rgba(255, 255, 255, 0.9);
-  /* soft color-change */
-  color: var(--mail-blue);
+  color: rgba(255, 255, 255, 0.9);  
+  color: white;
   transform: scale(1.1);
   box-shadow: var(--shadow);
 }
+*/
 
 h1,
 h2,
