@@ -1,4 +1,6 @@
 //this array stores all contact informations
+let users = [];
+
 let contactArray = [
   {
     name: "Anton",

@@ -1,4 +1,3 @@
-let users = [];
 let emailAdresses = [];
 let resetId;
 
