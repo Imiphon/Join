@@ -11,15 +11,20 @@ async function login() {
   disableButtonLogin();
   let email = getInput("loginEmail");
   let password = getInput("loginPassword");
+  let form = document.getElementById('formLogin');
+  
+
   if (await checkUserExist(email)) {
-    if (checkPwdCorrect(email, password)) {
-      window.location = "./templates/welcome_message.html";
+    let userid = emailAdresses.indexOf(email);
+    if (checkPwdCorrect(userid, password)) {
+      window.location = `./templates/welcome_message.html?id=${userid}`; //or name=${users[userid]['name'] 
     } else {
       showPwdNotRightMessage();
     }
   } else {
     showEmailNotFoundMessage();
   }
+  form.reset();
   enableButtonLogin();
 }
 
@@ -33,6 +38,7 @@ async function newUser() {
   let name = getInput("newName");
   let email = getInput("newEmail");
   let password = getInput("newPassword");
+  let form = document.getElementById("formNewUser");
 
   if (!(await checkUserExist(email))) {
     await registerUser(name, email, password);
@@ -41,6 +47,7 @@ async function newUser() {
   } else {
     showSignUpAlreadyExistMessage();
   }
+  form.reset();
   enableButton("newUserBtn");
 }
 
@@ -63,6 +70,7 @@ function guestLogin() {
 async function sendResetEmail() {
   disableButton("resetEmailBtn");
   let email = getInput("resetEmail");
+  let form = document.getElementById("formResetEmail");
 
   if (await checkUserExist(email)) {
     showSendEmailMessage();
@@ -72,6 +80,7 @@ async function sendResetEmail() {
   } else {
     showEmailNotFoundMessage();
   }
+  form.reset();
   enableButton("resetEmailBtn");
 }
 
@@ -82,11 +91,13 @@ async function sendResetEmail() {
 async function resetPwd() {
   disableButton("resetPwdBtn");
   let password = getInput("resetPassword");
+  let form = document.getElementById("formResetPwd");
   await loadUsers();
   users[resetId]["password"] = password;
   saveUsers();
   showresetPwdMessage();
   closeResetPwd();
+  form.reset();
   enableButton("resetPwdBtn");
 }
 
@@ -98,7 +109,7 @@ function openLogin() {
   enableButtonLogin();
   let background = document.getElementById("background");
   let joinLogo = document.getElementById("joinLogo");
-  let logInPage = document.getElementById("formLogin");
+  let logInPage = document.getElementById("formLoginDiv");
   let loginFooter = document.getElementById("loginFooter");
 
   background.classList.remove("background");
@@ -115,7 +126,7 @@ function closeLogin() {
   disableButtonLogin();
   let background = document.getElementById("background");
   let joinLogo = document.getElementById("joinLogo");
-  let logInPage = document.getElementById("formLogin");
+  let logInPage = document.getElementById("formLoginDiv");
   let loginFooter = document.getElementById("loginFooter");
 
   background.classList.add("background");
@@ -130,7 +141,7 @@ function closeLogin() {
  */
 function openSignUp() {
   closeLogin();
-  let signUpPage = document.getElementById("formNewUser");
+  let signUpPage = document.getElementById("formNewUserDiv");
   let loginFooter = document.getElementById("loginFooter");
   signUpPage.classList.remove("d-none");
   loginFooter.classList.add("loginFooterWhite");
@@ -141,7 +152,7 @@ function openSignUp() {
  *
  */
 function closeSignUp() {
-  let signUpPage = document.getElementById("formNewUser");
+  let signUpPage = document.getElementById("formNewUserDiv");
   let loginFooter = document.getElementById("loginFooter");
   signUpPage.classList.add("d-none");
   loginFooter.classList.remove("loginFooterWhite");
@@ -154,7 +165,7 @@ function closeSignUp() {
  */
 function openForgotPwd() {
   closeLogin();
-  let resetEmailPage = document.getElementById("formResetEmail");
+  let resetEmailPage = document.getElementById("formResetEmailDiv");
   resetEmailPage.classList.remove("d-none");
 }
 
@@ -163,7 +174,7 @@ function openForgotPwd() {
  *
  */
 function closeForgotPwd() {
-  let resetEmailPage = document.getElementById("formResetEmail");
+  let resetEmailPage = document.getElementById("formResetEmailDiv");
   resetEmailPage.classList.add("d-none");
   openLogin();
 }
@@ -174,12 +185,12 @@ function closeForgotPwd() {
  */
 function openResetPwd() {
   closeLogin();
-  let resetPwdPage = document.getElementById("formResetPwd");
+  let resetPwdPage = document.getElementById("formResetPwdDiv");
   resetPwdPage.classList.remove("d-none");
 }
 
 function closeResetPwd() {
-  let resetPwdPage = document.getElementById("formResetPwd");
+  let resetPwdPage = document.getElementById("formResetPwdDiv");
   resetPwdPage.classList.add("d-none");
   openLogin();
 }
@@ -216,7 +227,7 @@ function showPwdNotRightMessage() {
  */
 function showSendEmailMessage() {
   let html = `
-        <img src="./assets/img/SendCheck.svg">
+        <img class="messageImg" src="./assets/img/SendCheck.svg">
         <p>An E-Mail has been send to you</p> 
     `;
   showMessage(html);
@@ -286,8 +297,8 @@ async function checkUserExist(email) {
  * @param {string} password - password to check if is correct.
  * @returns true if password correct, false if password not correct.
  */
-function checkPwdCorrect(email, password) {
-  return password == users[emailAdresses.indexOf(email)]["password"];
+function checkPwdCorrect(userid, password) {
+  return password == users[userid]["password"];
 }
 
 /**
