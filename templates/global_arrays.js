@@ -83,7 +83,7 @@ let addedTasks = [
         description: "Build start page with recipe recommendation.",
         date: "2023-09-16",
         category: "kochen",
-        priority: "urgent",
+        priority: "medium",
         subtasks: ["schnell", "love", "was geehet"],
         progresWidth: 0,
         selectedContacts: [
@@ -157,7 +157,7 @@ let addedTasks = [
         description: "Build start page with recipe recommendation.",
         date: "2023-09-16",
         category: "kochen",
-        priority: "low",
+        priority: "medium",
         subtasks: ["schnell", "love", "was geehet"],
         progresWidth: 0,
         selectedContacts: [
@@ -191,6 +191,21 @@ let addedTasks = [
   },
 ];
 
+async function saveTasks() {
+  await setItem("storedTasks", JSON.stringify(addedTasks));
+}
+
+async function loadTasks() {
+  try {
+    const loadedTasks = await getItem("storedTasks");
+    if (loadedTasks) {
+      addedTasks = JSON.parse(loadedTasks);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 /*Remote Storage Implementierung*/
 const STORAGE_TOKEN = "F4LGRNFMG9GWI4STVSTG89MGMCVVVRZDK3KPVIVF";
 const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
@@ -214,5 +229,3 @@ async function getItem(key) {
       throw `Could not find data with key "${key}".`;
     });
 }
- 
-
