@@ -1,5 +1,3 @@
-let createBtn = document.getElementById('createBtn');
-
 /**
  * eventListener instead of onload-function to check if its the right side 
  * cause:
@@ -281,13 +279,14 @@ function setColor(color, event) {
 }
 
 function createContact() {
+  let createBtn = document.getElementById('createBtn');
   createBtn.disabled = true;
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
   let { preName, lastName } = splitName(fullName);
-  let initials = person.name[0] + person.lastName[0];
+  let initials = preName[0] + lastName[0];
 
   contactArray.push({
     name: preName,
@@ -302,11 +301,13 @@ function createContact() {
 }
 
 function completeCreation() {
+  let createBtn = document.getElementById('createBtn');
   createBtn.disabled = false;
   document.getElementById("userForm").reset();
   closePopup();
   setItem('contacts', JSON.stringify(contactArray));
   let index = contactArray.length - 1;
+  showContacts();
   widthForInfo(index);
   successInfo();
 }
