@@ -442,7 +442,6 @@ h1{
   .body-frame {
     flex-direction: row-reverse;
   }
-
   footer {
     z-index: 9;
     width: 232px;
@@ -450,7 +449,6 @@ h1{
     position: absolute;
     padding-right: 48px;
   }
-
   .footerMenuContainer {
     flex-direction: column;
     justify-content: flex-start;
@@ -467,6 +465,7 @@ h1{
   .privacyLegalContainer {
     display: block;
     margin-bottom: 200px;
+    margin-left: 30px;
   }
   .footerWrapper {
     flex-direction: column;
@@ -499,9 +498,82 @@ h1{
   .btnFooterMenuMobileVersion {
     display: none;
   }
-
   .borad-main {
     flex: none;
     width: calc(100% - 232px);
+  }
+  .welcomeText {
+    font-size: var(--fs-48px);
+    font-weight: var(--fw-400);
+  }
+  .welcomeTextuserName {
+    font-size: var(--fs-64px);
+  }
+  .summaryContainer {
+    width: 912px;
+    height: 442px;
+  }
+  .tasksDivContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .clockAndTaskContainer {
+    display: flex;
+  }
+  .clockAndDateDiv {
+    width: 672px;
+    height: 191px;
+  }
+  .imgAndNrTasksToDoDiv {
+    display: flex;
+  }
+  .tasksToDoDiv {
+    display: flex;
+    flex-direction: column;
+    width: 208px;
+    height: 191px;
+    margin-left: 16px;
+  }
+  .taskDiv {
+    height: 219px;
+    width: 204px;
+  }
+  .tasksDiv {
+    gap: 18px;
+  }
+  .tasksToDoDivNr {
+    display: flex;
+    align-items: center;
+  }
+  .tasksToDoDivText {
+    font-size: var(--fs-23px);
+  }
+  .taskDivText {
+    width: 75px;
+    height: 56px;
+    font-size: var(--fs-23px);
+    margin: 0 auto;
+    margin-top: 7px;
+  }
+  .tasksDivNr {
+    font-size: var(--fs-48px);
+    margin-left: 20px;
+  }
+  .date {
+    font-size: var(--fs-33px);
+  }
+  .deadlineText, .taskUrgentDiv {
+    font-size: var(--fs-23px);
+  }
+  .deadlineText {
+    text-align: start;
+    width: 100%;
+  }
+  .taskNrDiv {
+    font-size: var(--fs-48px);
+  }
+  .clockAndDateDiv {
+    justify-content: center;
+    gap: 35px;
   }
 }

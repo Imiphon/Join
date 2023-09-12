@@ -16,6 +16,11 @@
   gap: 24px;
   user-select: none;
   padding: 20px;
+  background-color: #ffffff;
+}
+
+.clockAndDateDiv {
+  margin-bottom: 12px;
 }
 
 .clockAndDateDiv {
@@ -79,6 +84,11 @@
 
 /******************************** Task To-do **************************************/
 /*********************************************************************************/
+.imgAndNrTasksToDoDiv {
+  display: flex;
+  align-items: center;
+}
+
 
 .tasksToDoDiv {
   font-family: var(--ff-reg-mob);
@@ -111,6 +121,7 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  margin-bottom: 12px;
   font-family: var(--ff-reg-mob);
   cursor: pointer;
 }

@@ -46,6 +46,10 @@ footer {
   display: none;
 }
 
+.btnFooterMenuDesktopVersion:hover {
+  background-color: var(--toggle-blue);
+}
+
 .btnActiveFooterMenuDesktopVersion {
   background: #d2e3ff;
 }
@@ -53,3 +57,5 @@ footer {
 .btnNotActiveFooterMenuDesktopVersion {
   background: #ffffff;
 }
+
+
