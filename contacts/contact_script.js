@@ -552,17 +552,22 @@ function closePopup() {
  */
 function showMainFrame() {
   return `
-    <div class="add-btn-frame">
-    </div>
-    <button class="add-btn" id="addBtn" onclick="widthForAdd();">
-        <img src="../assets/img/person_add.png" alt="">
-    </button>
     <div class="main-frame" id="mainFrame">
+      <div class="group-frame" id="groupFrame">
+          <div class="arrow-div-up"><img class="scroll-arrow" id="arrow-up" src="../assets/img/arrow-up.png" alt="arrow-up"></div>          
+        <div class="add-btn-frame">
+          <button class="add-btn" id="addBtn" onclick="widthForAdd();">
+            <img src="../assets/img/person_add.png" alt="">
+          </button>
+        </div>
         <div class="name-group" id="nameGroup">
         </div>
-        <div class="popup-box" id="popupBox">
-        </div>
-        <div id="success-info">Contact successfully created</div>
+          <div class="arrow-div-down"><img class="scroll-arrow" id="arrow-down" src="../assets/img/arrow-down.png" alt="arrow-down"></div>
+      </div>
+        
+      <div class="popup-box" id="popupBox">
+      </div>
+      <div id="success-info">Contact successfully created</div>
     </div>
     `;
 }

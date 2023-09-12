@@ -2,23 +2,75 @@
   overflow: hidden;
 }
 
-.add-btn-frame {
+.main-frame {
+  width: 100%;
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.group-frame {
+  /* for set arrow up/down absolute*/
+  position: relative;
+  min-width: 456px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-right);
+}
+
+.arrow-div-up {
   position: absolute;
-  width: 335px;
-  height: 74px;
-  left: 235px;
-  top: 80px;
+  top: 0;
+  right: 5px;
+}
+
+.arrow-div-down {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+}
+
+.scroll-arrow img {
+  width: 25px;
+}
+
+#arrow-up {
+  position: relative;
+  width: 10px;
+  height: 4px;
+  z-index: 30;
+}
+
+#arrow-down {
+  position: relative;
+  width: 10px;
+  height: 4px;
+  bottom: 5px;
+}
+
+.add-btn-frame {
+  position: relative;
+  left: 4px;
+  right: 4px;
+  width: 448px;
+  height: 104px;
+  padding: 32px 24px 16px 24px;
+  gap: 10px;
+  top: 0;
   display: block;
   background-color: #fff;
   z-index: 19;
 }
 
 .add-btn {
-  position: absolute;
-  width: 300px;
+  position: relative;
+  width: 100%;
   height: 50px;
-  left: 256px;
-  top: 90px;
+  /*  left: 256px;
+  top: 90px;*/
   right: unset;
   bottom: unset;
   background-color: var(--reg-blue);
@@ -34,7 +86,7 @@
   z-index: 21;
 }
 
-/*useless for mobile */
+/* useless for mobile */
 .add-btn:hover,
 .more-btn:hover {
   background-color: var(--strong-blue);
@@ -43,48 +95,21 @@
   box-shadow: var(--bottom-shadow);
 }
 
+/* only in mobile */
 .more-btn {
   display: none;
 }
 
-#success-info {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  height: 80px;
-  padding: 10px;
-  border-radius: 20px;
-  background-color: var(--reg-blue);
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s ease-in-out;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-frame {
-  width: 100%;
-  position: relative;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-}
-
 .name-group {
-  padding-top: 80px;
+  /* to set scroll-bar EXACTLY in same line with arrows*/
+  margin-right: 3px;
+  margin-bottom: 15px;
+  padding-top: 0;
+  padding-left: 16px;
   min-width: 338px;
   display: flex;
   flex-direction: column;
   overflow: auto;
-  box-shadow: var(--shadow-right);
 }
 
 .letter-box {
@@ -133,8 +158,9 @@
   margin-bottom: 10px;
   gap: 35px;
   padding: 15px, 24px;
-  
+
 }
+
 .name-box:hover {
   cursor: pointer;
   background-color: var(--toggle-blue);
@@ -184,6 +210,28 @@
 
 .popup-box {
   display: inline;
+}
+
+#success-info {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  height: 80px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: var(--reg-blue);
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*=====================
@@ -572,9 +620,10 @@
   background-color: var(--reg-blue);
   color: white;
 }
+
 .blue-btn:hover {
-background-color: var(--strong-blue);
-color: white;
+  background-color: var(--strong-blue);
+  color: white;
 }
 
 .white-btn {
@@ -591,10 +640,12 @@ color: white;
   display: flex;
   align-items: center;
 }
+
 .white-btn:hover {
-color: var(--reg-blue);
-border-color: var(--reg-blue);
+  color: var(--reg-blue);
+  border-color: var(--reg-blue);
 }
+
 .white-btn img {
   height: 1.2rem;
   margin-left: 5px;
@@ -603,7 +654,7 @@ border-color: var(--reg-blue);
 .blue-btn:hover,
 .white-btn:hover {
   box-shadow: var(--bottom-shadow);
-transform: none !important;
+  transform: none !important;
 }
 
 .btn-box {
@@ -710,7 +761,7 @@ transform: none !important;
     border-radius: 20px;
   }
 
- 
+
   .pop-bottom {
     display: flex;
     padding-top: 0;
@@ -748,17 +799,19 @@ transform: none !important;
   }
 
   .pop-subtitle {
-    font-size: 16px!important;
+    font-size: 16px !important;
   }
 
   .user-form {
-    gap:0 !important;    
+    gap: 0 !important;
   }
+
   .contact-frame {
-    color:var(--dark-grey) !important;
+    color: var(--dark-grey) !important;
   }
+
   .contact-input {
-    font-size: revert !important;    
+    font-size: revert !important;
   }
 
   .white-btn,
