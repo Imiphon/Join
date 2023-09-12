@@ -57,25 +57,29 @@ function createTaskElement(task, index, section) {
         <h4 class="title">${task.title}</h4>
         <p class="content">${task.description}</p>
       </div>
-      ${createProgressBar(task)}
+      ${createProgressBar(task, index)}
       ${createSelectedContacts(task, index)}
     </div>
   `;
 }
 
-function createProgressBar(task) {
-  let finishedSubTasks = 0;
+function createProgressBar(task, index) {
+  const checkedSubTasks = task.subTask
+    ? task.subTask.filter((subtask) => subtask.checked == true)
+    : [];
+
+  const finishedSubTasks = checkedSubTasks.length;
   let lengthOfSubs =
     task.subTask && task.subTask.length ? task.subTask.length : 0;
-
   return /*html */ `
     <div class="progress-bar">
-      <progress max="100" value="${lengthOfSubs}"></progress>
+      <progress max="100" value="${
+        (finishedSubTasks / lengthOfSubs) * 100
+      }"></progress>
       <div class="subtask-amount"><span>${finishedSubTasks}/${lengthOfSubs}</span> Subtasks</div>
     </div>
   `;
 }
-
 function createSelectedContacts(task, index) {
   const profile = task.selectedContacts
     .map((contact, subIndex) => {
@@ -113,8 +117,7 @@ function popUpTask(section, index) {
   const selectedContainer = addedTasks[0][section.id];
   let showTaskContainer = document.getElementById("show-task-container");
   showTaskContainer.style.display = "flex";
-  showTaskContainer.innerHTML = taskPopUpTemplate(selectedTask, index, selectedContainer);
-  
+  showTaskContainer.innerHTML = taskPopUpTemplate(selectedTask, index, section);
 }
 
 function taskPopUp(event) {
@@ -126,7 +129,7 @@ function closeTaskContainer(event) {
   showTaskContainer.style.display = "none";
 }
 
-function taskPopUpTemplate(selectedTask, taskIndex, selectedContainer) {
+function taskPopUpTemplate(selectedTask, taskIndex, section) {
   let date = selectedTask.date.split("-").join("/");
 
   return `
@@ -151,7 +154,7 @@ function taskPopUpTemplate(selectedTask, taskIndex, selectedContainer) {
 
           ${assignToTemplate(selectedTask, taskIndex)}
 
-          ${subtasksTemplates(selectedTask, taskIndex)}
+          ${subtasksTemplates(selectedTask, taskIndex, section)}
 
           <div class="edit-div">
             <span onclick="deleteTask()">
@@ -232,26 +235,31 @@ function assignToTemplate(task) {
   `;
 }
 
-function subtasksTemplates(task, taskIndex) {
+function subtasksTemplates(task, taskIndex, section) {
   let subNames = [];
   let subHtml = "";
-
+  sectionId = section.id;
   task.subTask.forEach((sub, index) => {
     subNames.push(sub.name);
   });
 
   for (let i = 0; i < subNames.length; i++) {
     const subtaskID = `subtask${i}`;
+    const checkedValue = task.subTask[i].checked;
     subHtml += `
       <div class="subtask">
         <label for="${subtaskID}">
-          <input type="checkbox" name="subtaskName" id="${subtaskID}" onclick="updateSubtask(${taskIndex}, ${i}"/>
+          <input type="checkbox" ${
+            checkedValue ? "checked" : ""
+          } name="${sectionId}" id="${subtaskID}" onclick="updateSubtask(${taskIndex}, ${i}, '${sectionId}')"/>
           <span style="border-radius: 5px" class="costum-checkbox"></span>
         </label>
         <p class="subtask-text">${subNames[i]}</p>
       </div>
     `;
+
   }
+
 
   return `
     <div class="subtasks-div assign-to info-div">
@@ -263,7 +271,11 @@ function subtasksTemplates(task, taskIndex) {
   `;
 }
 
-function updateSubtask(taskIndex) {
-   addedTasks[taskIndex].toDo[subtaskIndex].subTask.checked = true;
+function updateSubtask(taskIndex, subtaskIndex, sectionId) {
+  let task = addedTasks[0][sectionId][taskIndex];
+  let subtask = task.subTask[subtaskIndex];
+  subtask.checked = !subtask.checked;
+  saveTasks();
+  renderTaskList(sectionId, addedTasks);
 }
 

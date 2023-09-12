@@ -126,7 +126,7 @@ let addedTasks = [
         ],
         category: "marketing",
         priority: "medium",
-        subTask: [{ name: "test", checked: false }],
+        subTask: [{ name: "test", checked: true }],
         progressWidth: 0,
       },
     ],
