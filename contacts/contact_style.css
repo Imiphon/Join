@@ -55,7 +55,8 @@
   position: relative;
   left: 4px;
   right: 4px;
-  width: 448px;
+  margin-right: 5px;
+/*  width: 448px;*/
   height: 104px;
   padding: 32px 24px 16px 24px;
   gap: 10px;
@@ -665,7 +666,37 @@
   font-size: 1.2rem;
 }
 
+@media (max-width:1210px){
+  .group-frame{
+min-width: 50%;
+  }
+
+  .detail-frame{
+    font-size: smaller;
+  }
+  .detail-name{
+    font-size: 2rem;
+  }
+
+element.style {
+  background-color: var(--user-orange);
+}
+.detail-ellipse {
+  width: 90px !important;
+  height: 90px !important;
+  font-size: 2.3rem;
+}
+}
+
 @media (max-width: 1025px) {
+  .group-frame {
+    min-width: 100%;
+  }
+
+  .arrow-div-up,
+  .arrow-div-down {
+    display: none;
+  }
   .name-group {
     padding-top: 0;
     width: 100%;
@@ -681,7 +712,7 @@
     width: 64px;
     height: 64px;
     right: 16px;
-    bottom: 96px;
+    bottom: 32px;
     top: unset;
     left: unset;
     background-color: var(--reg-blue);
