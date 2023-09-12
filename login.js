@@ -56,7 +56,7 @@ function checkInput(){
   let newConfirmPassword = document.getElementById("newConfirmPassword");
   let acceptPrivacy = document.getElementById("acceptPrivacy");
 
-  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 || acceptPrivacy == 0){
+  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0){
     disableButton("newUserBtn");    
   }else{
     enableButton("newUserBtn");
@@ -159,6 +159,7 @@ function openSignUp() {
   let loginFooter = document.getElementById("loginFooter");
   signUpPage.classList.remove("d-none");
   loginFooter.classList.add("loginFooterWhite");
+  disableButton("newUserBtn");
 }
 
 /**
