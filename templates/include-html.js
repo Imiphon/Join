@@ -17,6 +17,7 @@ async function includeHTML() {
         let state = JSON.parse(localStorage.getItem("allBtnState"));
         updateBtnStyle(checkTrue(state));
     }
+    displayWelcomeMsg(); 
 }
 
 function checkTrue(obj) {
@@ -169,3 +170,64 @@ function updateBtnStyle(buttonName) {
 // ********************************************************************************
 // ********************************************************************************
 // ********************************************************************************
+
+
+
+
+// ********************************************************************************
+// ***************** Welcome Msg based on the day time ****************************
+// ********************************************************************************
+function displayWelcomeMsg() {
+const date = new Date();
+const currentHour = date.getHours();
+let welcomeMessage;
+
+if (currentHour < 12){
+    welcomeMessage = "Good Morning";
+    icon = "coffee";
+}
+else if (currentHour < 20){
+    welcomeMessage = 'Good afternoon!';
+    icon = "sun-o";
+}
+else if (currentHour < 24){
+    welcomeMessage = "Good evening"
+    icon = "moon-o";
+}
+else {
+    welcomeMessage = "Welcome";
+}
+document.getElementById("welcomeText").innerHTML = welcomeMessage;
+}
+// ********************************************************************************
+// ********************************************************************************
+// ********************************************************************************
+
+
+// ********************************************************************************
+// ***************** Welcome Msg based on the day time ****************************
+// ********************************************************************************
+function welcomeMsgAnimation() {
+    const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
+    const summaryWrapper = document.querySelector('.summaryWrapper');
+    setTimeout( function toggleAnimation() {
+        welcomeMsgDiv.style.marginBottom = '-45vh';
+        summaryWrapper.style.transform = 'translateY(0)';
+        setTimeout( () => {
+            welcomeMsgDiv.style.opacity = "0"; 
+        }, 700)
+        setTimeout( () => {
+            welcomeMsgDiv.style.display = "none";
+        }, 1000)
+    }, 2000) 
+  }
+  // ********************************************************************************
+  // ********************************************************************************
+  // ********************************************************************************
+
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get('id');
+  console.log(myParam);
+    
+     
