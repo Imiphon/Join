@@ -14,11 +14,17 @@
 .group-frame {
   /* for set arrow up/down absolute*/
   position: relative;
-  min-width: 456px;
+  width: 456px;
   height: 100%;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-right);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 5px;
+  width: 10px;
 }
 
 .arrow-div-up {
@@ -56,7 +62,7 @@
   left: 4px;
   right: 4px;
   margin-right: 5px;
-/*  width: 448px;*/
+  /*  width: 448px;*/
   height: 104px;
   padding: 32px 24px 16px 24px;
   gap: 10px;
@@ -666,37 +672,52 @@
   font-size: 1.2rem;
 }
 
-@media (max-width:1210px){
-  .group-frame{
-min-width: 50%;
+@media (max-width:1210px) {
+  .group-frame {
+    width: 50%;
   }
 
-  .detail-frame{
+  .detail-frame {
     font-size: smaller;
   }
-  .detail-name{
+
+  .detail-name {
     font-size: 2rem;
   }
 
-element.style {
-  background-color: var(--user-orange);
-}
-.detail-ellipse {
-  width: 90px !important;
-  height: 90px !important;
-  font-size: 2.3rem;
-}
+  element.style {
+    background-color: var(--user-orange);
+  }
+
+  .detail-ellipse {
+    width: 90px !important;
+    height: 90px !important;
+    font-size: 2.3rem;
+  }
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
   .group-frame {
-    min-width: 100%;
+    width: 100%;
+  }
+
+  ::-webkit-scrollbar-thumb,
+  .name-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .name-group {
+    -ms-overflow-style: none;
+    /* Internet Explorer und Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 
   .arrow-div-up,
   .arrow-div-down {
     display: none;
   }
+
   .name-group {
     padding-top: 0;
     width: 100%;
@@ -722,7 +743,6 @@ element.style {
     box-shadow: var(--shadow);
     display: inline;
   }
-
 
   .add-btn img,
   .more-btn img {
