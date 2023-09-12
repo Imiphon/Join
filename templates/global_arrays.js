@@ -79,59 +79,13 @@ let contactArray = [
 let initialGroups = [];
 let addedTasks = [
   {
-    toDo: [
-      {
-        title: "Kochwelt",
-        description: "Build start page with recipe recommendation.",
-        date: "2023-09-16",
-        category: "kochen",
-        priority: "medium",
-        subtasks: ["schnell", "love", "was geehet"],
-        progresWidth: 0,
-        selectedContacts: [
-          {
-            shortName: "AA",
-            bColor: "var(--user-orange)",
-            name: "Anton",
-            lastName: "Anfang",
-          },
-          {
-            shortName: "AB",
-            bColor: "var(--user-blue)",
-            name: "Ali",
-            lastName: "Berg",
-          },
-          {
-            shortName: "BA",
-            bColor: "var(--user-yellow)",
-            name: "Berta",
-            lastName: "Anfang",
-          },
-          {
-            shortName: "BB",
-            bColor: "var(--user-lila)",
-            name: "Bert",
-            lastName: "Berg",
-          },
-        ],
-      },
-    ],
+    toDo: [],
     inProgress: [
       {
-        title: "Kochwelt",
-        description: "Build start page with recipe recommendation.",
+        title: "Test",
+        description: "Test",
         date: "2023-09-16",
-        category: "kochen",
-        priority: "medium",
-        subtasks: ["schnell", "love", "was geehet"],
-        progresWidth: 0,
         selectedContacts: [
-          {
-            shortName: "AA",
-            bColor: "var(--user-orange)",
-            name: "Anton",
-            lastName: "Anfang",
-          },
           {
             shortName: "AB",
             bColor: "var(--user-blue)",
@@ -144,31 +98,19 @@ let addedTasks = [
             name: "Berta",
             lastName: "Anfang",
           },
-          {
-            shortName: "BB",
-            bColor: "var(--user-lila)",
-            name: "Bert",
-            lastName: "Berg",
-          },
         ],
+        category: "marketing",
+        priority: "medium",
+        subTask: [{ name: "test", checked: false }],
+        progressWidth: 0,
       },
     ],
     awaitFeedback: [
       {
-        title: "Kochwelt",
-        description: "Build start page with recipe recommendation.",
+        title: "Test",
+        description: "Test",
         date: "2023-09-16",
-        category: "kochen",
-        priority: "medium",
-        subtasks: ["schnell", "love", "was geehet"],
-        progresWidth: 0,
         selectedContacts: [
-          {
-            shortName: "AA",
-            bColor: "var(--user-orange)",
-            name: "Anton",
-            lastName: "Anfang",
-          },
           {
             shortName: "AB",
             bColor: "var(--user-blue)",
@@ -181,13 +123,11 @@ let addedTasks = [
             name: "Berta",
             lastName: "Anfang",
           },
-          {
-            shortName: "BB",
-            bColor: "var(--user-lila)",
-            name: "Bert",
-            lastName: "Berg",
-          },
         ],
+        category: "marketing",
+        priority: "medium",
+        subTask: [{ name: "test", checked: false }],
+        progressWidth: 0,
       },
     ],
   },

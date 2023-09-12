@@ -58,8 +58,12 @@
           </div>
         </section>
       </main>
-      <section id="show-task-container" class="show-task-container">
-        <div class="taskpoUp" id="taskpoUp"></div>
+      <section
+        id="show-task-container"
+        class="show-task-container"
+        onclick="closeTaskContainer(event)"
+      >
+  
       </section>
       <footer include-html="../templates/footer.html"></footer>
     </div>
@@ -67,5 +71,6 @@
     <script src="../templates/include-html.js"></script>
     <script src="../templates/global_arrays.js"></script>
     <script src="board.js"></script>
+    <script src="../script.js"></script>
   </body>
 </html>
