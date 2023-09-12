@@ -56,10 +56,10 @@ function checkInput(){
   let newConfirmPassword = document.getElementById("newConfirmPassword");
   let acceptPrivacy = document.getElementById("acceptPrivacy");
 
-  if (name.length > 0 && email.length > 0 && password.length > 0 && newConfirmPassword.length > 0 && acceptPrivacy == 1){
-    enableButton("newUserBtn");
+  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 || acceptPrivacy == 0){
+    disableButton("newUserBtn");    
   }else{
-    disableButton("newUserBtn");
+    enableButton("newUserBtn");
   }
 }
 
