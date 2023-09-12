@@ -49,6 +49,20 @@ async function newUser() {
   enableButton("newUserBtn");
 }
 
+function checkInput(){
+  let name = getInput("newName");
+  let email = getInput("newEmail");
+  let password = getInput("newPassword");
+  let newConfirmPassword = document.getElementById("newConfirmPassword");
+  let acceptPrivacy = document.getElementById("acceptPrivacy");
+
+  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 || acceptPrivacy == 0){
+    disableButton("newUserBtn");    
+  }else{
+    enableButton("newUserBtn");
+  }
+}
+
 /**
  * This function is use to login as quest user.
  * Redirect to wellcome message.
@@ -57,6 +71,7 @@ async function newUser() {
 function guestLogin() {
   disableButtonLogin();
   window.location = "./summary/summary.html";
+  
 }
 
 /**
@@ -121,11 +136,13 @@ function openLogin() {
  */
 function closeLogin() {
   disableButtonLogin();
+  let form = document.getElementById('formLogin');
   let background = document.getElementById("background");
   let joinLogo = document.getElementById("joinLogo");
   let logInPage = document.getElementById("formLoginDiv");
   let loginFooter = document.getElementById("loginFooter");
 
+  form.reset();
   background.classList.add("background");
   joinLogo.classList.add("joinLogoWhite");
   logInPage.classList.add("d-none");
@@ -149,8 +166,11 @@ function openSignUp() {
  *
  */
 function closeSignUp() {
+  let form = document.getElementById("formNewUser");
   let signUpPage = document.getElementById("formNewUserDiv");
   let loginFooter = document.getElementById("loginFooter");
+
+  form.reset();
   signUpPage.classList.add("d-none");
   loginFooter.classList.remove("loginFooterWhite");
   openLogin();
@@ -171,7 +191,9 @@ function openForgotPwd() {
  *
  */
 function closeForgotPwd() {
+  let form = document.getElementById("formResetEmail");
   let resetEmailPage = document.getElementById("formResetEmailDiv");
+  form.reset();
   resetEmailPage.classList.add("d-none");
   openLogin();
 }
@@ -187,7 +209,10 @@ function openResetPwd() {
 }
 
 function closeResetPwd() {
+  let form = document.getElementById("formResetPwd");
   let resetPwdPage = document.getElementById("formResetPwdDiv");
+  
+  form.reset();
   resetPwdPage.classList.add("d-none");
   openLogin();
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
+    <link rel="icon" href="./assets/img/favicon.svg" type="image/png" />
     <link rel="stylesheet" href="./main.css" />
     <link rel="stylesheet" href="./fonts.css" />
     <link rel="stylesheet" href="./style.css" />
@@ -105,6 +106,7 @@
               required
               id="newName"
               placeholder="Name"
+              onchange="checkInput()"
             />
             <div class="line"></div>
           </div>
@@ -116,6 +118,7 @@
               type="email"
               id="newEmail"
               placeholder="Email"
+              onchange="checkInput()"
             />
             <div class="line"></div>
           </div>
@@ -128,6 +131,7 @@
               type="password"
               id="newPassword"
               placeholder="Password"
+              onchange="checkInput()"
             />
             <div class="line"></div>
           </div>
@@ -139,12 +143,13 @@
               type="password"
               id="newConfirmPassword"
               placeholder="Confirm Password"
+              onchange="checkInput()"
             />
             <div class="line"></div>
           </div>
           <div class="acceptPrivacy">
-            <input required type="checkbox" id="acceptPrivacy" />
-            <p>I accept the Privacy policy</p>
+            <input required type="checkbox" id="acceptPrivacy" onchange="checkInput()" />
+            <p>I accept the <p><a class="btnTxtBlue" href="./templates/privacy_policy.html" target="_blank">Privacy policy</a></p></p>
           </div>
           <button type="submit" class="SignUpBtn btnBlue" id="newUserBtn">
             Sign up
