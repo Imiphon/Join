@@ -17,7 +17,8 @@ async function includeHTML() {
         let state = JSON.parse(localStorage.getItem("allBtnState"));
         updateBtnStyle(checkTrue(state));
     }
-    displayWelcomeMsg(); 
+    displayWelcomeMsg();
+    checkStrValueQueryParam(); 
 }
 
 function checkTrue(obj) {
@@ -225,9 +226,16 @@ function welcomeMsgAnimation() {
   // ********************************************************************************
   // ********************************************************************************
 
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get('id');
-  console.log(myParam);
+  function checkStrValueQueryParam() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('id');
+    console.log(myParam);
+    if (myParam) {
+        welcomeMsgAnimation();
+    } else {
+        return;
+    }
+  }
+  
     
      
