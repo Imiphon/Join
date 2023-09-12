@@ -1,4 +1,4 @@
-.board-main::-webkit-scrollbar{
+.board-main::-webkit-scrollbar {
   display: none;
 }
 
@@ -59,7 +59,7 @@
   width: 100%;
 }
 
-.allsTsks{
+.allsTsks {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -205,4 +205,259 @@
 
 .bi-chevron-double-down {
   color: var(--user-green);
+}
+
+.show-task-container {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffffb0;
+}
+
+.taskpoUp {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  width: 450px;
+  min-height: 60vh;
+  padding: 32px 24px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  border-radius: 30px;
+  /* nuevo */
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.topic-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.topic {
+  display: flex;
+  padding: 4px 16px;
+  align-items: flex-start;
+  gap: 10px;
+  color: white;
+  border-radius: 8px;
+  background: #ff7a00;
+}
+
+.bi-x {
+  cursor: pointer;
+  font-size: 35px;
+  transition: all 0.125s ease-in;
+  color: var(--reg-blue);
+}
+
+.bi-x:hover {
+  transform: scale(1.1);
+}
+
+.title {
+  align-self: stretch;
+  color: var(--black, #000);
+  font-family: Open Sans;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 43.2px */
+}
+
+.description {
+  align-self: stretch;
+  color: var(--black, #000);
+  font-family: Open Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.info-div {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  align-self: stretch;
+}
+
+.info-div span:nth-child(1) {
+  color: #42526e;
+  font-weight: var(--fw-700);
+  line-height: 120%; /* 19.2px */
+}
+
+.date-div span:nth-child(2) {
+  font-weight: var(--fw-400);
+  line-height: 120%;
+}
+
+.prio-sign {
+  display: flex;
+  padding: 4px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+}
+
+.prio-sign span:nth-child(1) {
+  color: black;
+  font-weight: var(--fw-400);
+}
+
+.prio-sign span:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.assign-to {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.profiles-div {
+  width: 100% !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  align-self: stretch;
+  border-radius: 10px;
+}
+
+.profiles {
+  width: 100%;
+  padding: 7px 16px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  gap: 16px;
+}
+
+.profiles span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  font-size: 13px;
+  border-radius: 50%;
+  color: black;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.subasks {
+  flex-direction: column;
+  gap: 0;
+}
+
+.subtask {
+  width: 100%;
+  padding: 6px 16px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  gap: 16px;
+}
+
+.subtask label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+}
+
+.subtask label input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.subtask label input[type="checkbox"] {
+  background-color: var(--reg-blue);
+}
+
+.subtask label .costum-checkbox {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  border: 1px solid var(--reg-blue);
+}
+
+.subtask label .costum-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 4px;
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  border: solid 1px var(--reg-blue);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.subtask label input {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.subtask label input:checked + .costum-checkbox::after {
+  width: 8px;
+  height: 15px;
+  opacity: 1; /* Das Pseudo-Element wird ausgeblendet, wenn das input ausgewählt ist */
+}
+
+.edit-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-div span {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.edit-div span .bi {
+  font-weight: 400;
+  font-size: larger;
+  color: var(--reg-blue);
+  transition: all 0.125s ease-in;
+  color: var(--reg-blue);
+}
+
+
+.edit-div span .bi:hover  {
+  transform: scale(1.1);
 }

@@ -228,7 +228,10 @@ function addSubtask() {
       editingIndex = -1; // Reset the index
     } else {
       // Otherwise, add a new task
-      tasksForSubtasks.push(taskValue);
+      tasksForSubtasks.push({
+        name: taskValue,
+        checked: false,
+      });
     }
 
     renderAddedTask();
@@ -243,7 +246,7 @@ function renderAddedTask() {
   tasksForSubtasks.forEach((task, i) => {
     tasksArea.innerHTML += `
                     <li>
-                    <p>${task}</p>
+                    <p>${task.name}</p>
                     <span>
                     <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
                     <i class="bi bi-trash" onclick="deleteTask(${i})"></i>
@@ -339,6 +342,7 @@ function clearForm(event) {
   showAssignedContactsInContainer();
   dropDownTemplates();
   resetPriorityButtons();
+  
 }
 
 function resetPriorityButtons() {
