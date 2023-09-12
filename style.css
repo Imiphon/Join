@@ -354,6 +354,10 @@ h1{
   accent-color: var(--reg-blue);
 }
 
+#rememberMe:hover {
+  cursor: pointer;
+}
+
 .message {
   display: flex;
   position: fixed;
