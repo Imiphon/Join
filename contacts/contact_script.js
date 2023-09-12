@@ -1,3 +1,14 @@
+let userView = window.innerWidth > 1024;
+
+window.addEventListener('resize', function() {
+  let deskWidth = window.innerWidth > 1024;
+
+  if (userView !== deskWidth) {
+    location.reload(); 
+  }
+  userView = deskWidth; // Aktualisiert den Status für das nächste Mal
+});
+
 /**
  * eventListener instead of onload-function to check if its the right side 
  * cause:
