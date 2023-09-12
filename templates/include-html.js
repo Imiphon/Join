@@ -1,9 +1,7 @@
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[include-html]');
-    // for (let i = 0; i < includeElements.length; i++) {    // **** wollen wir die for of oder for loop haben ? 
-    //     const element = includeElements[i];
     for (var element of includeElements) {
-        file = element.getAttribute("include-html"); // "includes/header.html"
+        file = element.getAttribute("include-html");
         let resp = await fetch(file);
         if (resp.ok) {
             element.innerHTML = await resp.text();
@@ -117,10 +115,7 @@ function toggleButton(buttonName) {
                 buttonStates[btn[0]] = false;
             }
         }
-
-
-        // let btnFooterMenuDesktopVersion = document.getElementById(`btn_${buttonName}_FooterMenuDesktopVersion`);
-        
+ 
         let imgFooterMenu = document.getElementById(`img${buttonName.charAt(0).toUpperCase() + buttonName.slice(1)}FooterMenu`);
         
         if (!buttonStates[buttonName]) {
@@ -131,7 +126,6 @@ function toggleButton(buttonName) {
         }
     } else {
         if (!buttonStates[buttonName]) {
-            // btnFooterMenuDesktopVersion.classList.add("btnActiveFooterMenuDesktopVersion");
             navigateToPage(buttonName);
         }
     }
@@ -175,10 +169,9 @@ function updateBtnStyle(buttonName) {
 
 
 
-// ********************************************************************************
 // ***************** Welcome Msg based on the day time ****************************
 // ********************************************************************************
-function displayWelcomeMsg() {
+async function displayWelcomeMsg() {
 const date = new Date();
 const currentHour = date.getHours();
 let welcomeMessage;
@@ -199,13 +192,13 @@ else {
     welcomeMessage = "Welcome";
 }
 document.getElementById("welcomeText").innerHTML = welcomeMessage;
+document.getElementById("welcomeTextuserName").innerHTML = await checkStrValueQueryParam();
+
 }
 // ********************************************************************************
 // ********************************************************************************
-// ********************************************************************************
 
 
-// ********************************************************************************
 // ***************** Welcome Msg based on the day time ****************************
 // ********************************************************************************
 function welcomeMsgAnimation() {
@@ -224,11 +217,8 @@ function welcomeMsgAnimation() {
 }
 // ********************************************************************************
 // ********************************************************************************
-// ********************************************************************************
 
 
-
-// ********************************************************************************
 // ***************** Welcome Msg based on the day time ****************************
 // ********************************************************************************
 function removeWelcomeMsgAnimation() {
@@ -241,24 +231,37 @@ function removeWelcomeMsgAnimation() {
 
 // ********************************************************************************
 // ********************************************************************************
-// ********************************************************************************
 
 
-// ********************************************************************************
 // ***************** Welcome Msg based on the day time ****************************
 // ********************************************************************************
-  function checkStrValueQueryParam() {
+  async function checkStrValueQueryParam() {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('id');
-    console.log(myParam);
     if (myParam) {
         welcomeMsgAnimation();
+        return await findUserId(myParam);
     } else {
         removeWelcomeMsgAnimation();
     }
   }
   // ********************************************************************************
   // ********************************************************************************
-  // ********************************************************************************
-    
+  
+  async function findUserId(userId) {
+    await loadUsers();
+    return users[userId]['name'];
+}
+
+
+  async function loadUsers() {
+    try {
+      users = JSON.parse(await getItem("users"));
+    } catch (e) {
+      console.error("Loading error:", e);
+    }
+  }
+  
+  
+  
      

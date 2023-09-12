@@ -1,5 +1,6 @@
 //this array stores all contact informations
-let users = [];
+let users;
+window.users = [];
 
 let contactArray = [
   {
