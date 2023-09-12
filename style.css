@@ -332,6 +332,7 @@ h1{
 .btnWhite:hover{
   box-shadow: var(--bottom-shadow);
   color: var(--reg-blue);
+  cursor: pointer;
   transform: none;
   border-color: var(--reg-blue);
 }
@@ -340,6 +341,13 @@ h1{
   color: var(--reg-blue);
   background-color: white;
   width: unset;
+}
+
+.btnTxtBlue:hover {
+  cursor: pointer;
+  color: var(--strong-blue);
+  text-decoration: underline;
+  font-size: 14px;
 }
 
 #rememberMe {
