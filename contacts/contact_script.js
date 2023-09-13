@@ -1,16 +1,17 @@
 /**
  * checks innerWidth to control zoom-situation
  */
+
 let userView = window.innerWidth > 1024;
 
 window.addEventListener('resize', function() {
-  let deskWidth = window.innerWidth > 1024;
+  let deskWidth = window.innerWidth;
 
   if (userView !== deskWidth) {
-    location.reload(); 
-  }
-  userView = deskWidth; 
+    //location.reload(); 
+  } 
 });
+
 
 /**
  * eventListener to check if its the right side instead of onload-function
