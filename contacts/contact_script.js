@@ -22,6 +22,7 @@ window.addEventListener('resize', function() {
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
   if (currentPage.includes("contact_list")) {
+    
     getContactsFromServer();
   }
 });
@@ -30,8 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
  * load contacts from server
  */
 async function getContactsFromServer() {
+  let userId = localStorage.getItem('userId');
   try {
-    contactArray = JSON.parse(await getItem('contacts'));
+    contactArray = await JSON.parse(await getItem('contacts' + userId));
   } catch(e) {
     console.info('could not find contacts')
   }
@@ -269,7 +271,7 @@ function setInitialValues() {
  * starts comleteEdition()
  * @param {number} index from personDatas
  */
-function editContactInArray(index) {
+async function editContactInArray(index) {
   let name = document.getElementById("fullName").value; //.split(' ') in splitName()
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
@@ -284,7 +286,7 @@ function editContactInArray(index) {
   contactArray[index].initials = initials;
   contactArray[index].color = color;
 
-  completeEdition(index);
+  await completeEdition(index);
 }
 
 /**
@@ -292,10 +294,11 @@ function editContactInArray(index) {
  * close the popup, loadup infos to server and starts widthForInfo(index)
  * @param {number} index 
  */
-function completeEdition(index) {
+async function completeEdition(index) {
   document.getElementById("userForm").reset();
   closePopup();
-  setItem('contacts', JSON.stringify(contactArray));
+  let userId = localStorage.getItem('userId');		
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
   widthForInfo(index);
 }
 
@@ -377,7 +380,7 @@ function setColor(color, event) {
  * Creates a new contact entry based on the user input from the form. After the contact
  * is created, the contact creation process is finalized by calling the completeCreation function.
  */
-function createContact() {
+async function createContact() {
   let createBtn = document.getElementById('createBtn');
   createBtn.disabled = true; 
   let fullName = document.getElementById("fullName").value;
@@ -399,7 +402,7 @@ function createContact() {
     color: color,
   });
 
-  completeCreation();
+  await completeCreation();
 }
 
 /**
@@ -407,11 +410,12 @@ function createContact() {
  * the form, and saving the new contact to storage. Also, triggers a visual feedback for 
  * a successful operation.
  */
-function completeCreation() {
+async function completeCreation() {
   createBtn.disabled = false; 
   document.getElementById("userForm").reset();
   closePopup();
-  setItem('contacts', JSON.stringify(contactArray));
+  let userId = localStorage.getItem('userId');		
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
   let index = contactArray.length -1;
   widthForInfo(index);
   showContacts();
@@ -773,7 +777,7 @@ function showAddContact() {
     </div>
     <div class="pop-bottom">
         <div class="form-frame">
-            <form id="userForm" class="user-form" onsubmit="createContact(); return false;">
+            <form id="userForm" class="user-form" onsubmit="await createContact(); return false;">
                 <div class="contact-frame">
                 <input 
                 class="contact-input" 
@@ -846,7 +850,7 @@ function showEditContact(index) {
     </div>
     <div class="pop-bottom">
     <div class="form-frame">
-        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr}); return false;">            
+        <form id="userForm" class="user-form" onsubmit="await editContactInArray(${indexNr}); return false;">            
                 <div class="contact-frame">
                     <input class="contact-input" type="text" id="fullName"
                         placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"

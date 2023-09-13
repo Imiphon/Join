@@ -74,7 +74,7 @@ let contactArray = [
     phone: "49176000",
     initials: "EA",
     color: "var(--user-orange)",
-  },
+  }
 ];
 
 let initialGroups = [];

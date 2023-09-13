@@ -42,6 +42,7 @@ async function newUser() {
 
   if (!(await checkUserExist(email))) {
     await registerUser(name, email, password);
+    await createContactsRemoteStorage(name, email);
     showSignUpMessage();
     closeSignUp();
   } else {
@@ -51,6 +52,35 @@ async function newUser() {
   enableButton("newUserBtn");
 }
 
+/**
+ * This function is to create the contact array on the remote storage.
+ * 
+ * @param {int} userId - Id of the new User to create the contact array 
+ */
+
+async function createContactsRemoteStorage(name, email){
+  emailAdresses = await getExistingEmailAdresses();
+  let userId = emailAdresses.indexOf(email);
+  let longname = name.split(" ");
+  let firstname = longname[0];
+  let lastname = longname[1];
+  
+  let array = [
+    {
+      color: "var(--user-rose)",
+      initials: "AA",
+      lastName: "Anders",
+      mail: "anton@mail.com",
+      name: "Ali",
+      phone: 49179111666
+    }
+  ]
+
+
+  //Initialien funktion hier einfügen
+  console.log(array);
+  await setItem('contacts' + userId, JSON.stringify(array));
+}
 
 /**
  *  This function is to check if the SignUp can be activatet.
@@ -78,6 +108,7 @@ function checkInput(){
  */
 function guestLogin() {
   disableButtonLogin();
+  localStorage.setItem('userId', '');
   window.location = "./summary/summary.html";
   
 }
