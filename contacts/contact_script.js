@@ -1,19 +1,4 @@
 /**
- * checks innerWidth to control zoom-situation
- */
-
-let userView = window.innerWidth > 1024;
-
-window.addEventListener('resize', function() {
-  let deskWidth = window.innerWidth;
-
-  if (userView !== deskWidth) {
-    //location.reload(); 
-  } 
-});
-
-
-/**
  * eventListener to check if its the right side instead of onload-function
  * cause:
  * It separates the JavaScript logic from the HTML, making the code cleaner and more maintainable.
@@ -22,7 +7,7 @@ window.addEventListener('resize', function() {
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
   if (currentPage.includes("contact_list")) {
-    
+
     getContactsFromServer();
   }
 });
@@ -34,7 +19,7 @@ async function getContactsFromServer() {
   let userId = localStorage.getItem('userId');
   try {
     contactArray = await JSON.parse(await getItem('contacts' + userId));
-  } catch(e) {
+  } catch (e) {
     console.info('could not find contacts')
   }
 
@@ -50,7 +35,6 @@ function showContacts() {
   content.innerHTML = "";
   content.innerHTML += showMainFrame();
   createInitalGroup();
-  //createInitials();
   showNameGroup();
 }
 /**
@@ -68,7 +52,7 @@ function showNameGroup() {
 /**
  * takes index from personDatas(), over widthForInfo(), 
  * showInfoDesk() / showInfoMobile() and delete the contact 
- * @param {number} index 
+ * @param {int} index 
  */
 function deleteContact(index) {
   contactArray.splice(index, 1);
@@ -94,10 +78,31 @@ function widthForInfo(index) {
   }
 }
 
+/*
+function widthForInfo(index) {
+  // Listener hinzufügen
+  window.addEventListener('resize', handleResize);
+  updateView(index);
+}
+
+function handleResize() {
+  updateView();
+}
+
+function updateView(index) {
+  const width = window.innerWidth;
+  if (width <= 1024) {
+    showInfoMobile(index);
+  } else {
+    showInfoDesk(index);
+    showNameGroup();
+  }
+}
+*/
 /**
  * takes index from personDatas()
  * open mob or desk optic
- * @param {number} index 
+ * @param {int} index 
  */
 function widthForEdit(index) {
   const width = window.innerWidth;
@@ -111,7 +116,7 @@ function widthForEdit(index) {
 /**
  * takes index from personDatas()
  * open mob or desk optic
- * @param {number} index 
+ * @param {int} index 
  */
 async function widthForAdd() {
   const width = window.innerWidth;
@@ -134,24 +139,18 @@ async function widthForAdd() {
 /**
  * takes index from widthForInfo(), find person in (global) contactArray
  * get id from (desk-) popup and set content from showInfoText() 
- * @param {number} index 
+ * @param {int} index 
  */
 function showInfoDesk(index) {
   let person = contactArray[index];
   let popupBox = document.getElementById("popupBox");
   popupBox.innerHTML = showInfoText(person, index);
-  /*  
-    let rightDesk = document.getElementById('rightDesk');
-  rightDesk.innerHTML = showInfoText(person, index);
-
-   */
-
 }
 
 /**
  * takes index from widthForInfo(), find person in (global) contactArray
  * get id from (mobile-)popup and set content from showInfoText() 
- * @param {number} index 
+ * @param {int} index 
  */
 function showInfoMobile(index) {
   let main = document.querySelector("main");
@@ -219,7 +218,7 @@ function closeDrawer() {
  * takes index from widthForEdit(index)
  * add contact from showEditContact() into mobilePopup
  * starts checkOldValues()
- * @param {number} index 
+ * @param {int} index 
  */
 async function openEditMobile(index) {
   let indexNr = index; //Nr of contactArray
@@ -233,7 +232,7 @@ async function openEditMobile(index) {
  * takes index from widthForEdit(index)
  * add contact from showEditContact() into deskEditPopup()
  * starts checkOldValues()
- * @param {number} index 
+ * @param {int} index 
  */
 async function openEditDesk(index) {
   let indexNr = index; //Nr of contactArray
@@ -269,7 +268,7 @@ function setInitialValues() {
  * takes index from showEditContact(index)
  * Takes elements from inputfields and push it into contactArray()
  * starts comleteEdition()
- * @param {number} index from personDatas
+ * @param {int} index from personDatas
  */
 async function editContactInArray(index) {
   let name = document.getElementById("fullName").value; //.split(' ') in splitName()
@@ -282,7 +281,7 @@ async function editContactInArray(index) {
   contactArray[index].name = preName;
   contactArray[index].lastName = lastName;
   contactArray[index].mail = mail;
-  contactArray[index].phone = phone;  
+  contactArray[index].phone = phone;
   contactArray[index].initials = initials;
   contactArray[index].color = color;
 
@@ -292,12 +291,12 @@ async function editContactInArray(index) {
 /**
  * takes index from editContactInArray(index)
  * close the popup, loadup infos to server and starts widthForInfo(index)
- * @param {number} index 
+ * @param {int} index 
  */
 async function completeEdition(index) {
   document.getElementById("userForm").reset();
   closePopup();
-  let userId = localStorage.getItem('userId');		
+  let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
   widthForInfo(index);
 }
@@ -305,7 +304,7 @@ async function completeEdition(index) {
 /**
  * takes index from personDatas(), over widthForInfo(), 
  * showEditContact() and delete the contact 
- * @param {number} index 
+ * @param {int} index 
  */
 function deleteInEditor(index) {
   contactArray.splice(index, 1);
@@ -382,12 +381,12 @@ function setColor(color, event) {
  */
 async function createContact() {
   let createBtn = document.getElementById('createBtn');
-  createBtn.disabled = true; 
+  createBtn.disabled = true;
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
-  if(color == ''){
+  if (color == '') {
     color = 'var(--user-grey)';
   }
   let { preName, lastName } = splitName(fullName);
@@ -411,12 +410,12 @@ async function createContact() {
  * a successful operation.
  */
 async function completeCreation() {
-  createBtn.disabled = false; 
+  createBtn.disabled = false;
   document.getElementById("userForm").reset();
   closePopup();
-  let userId = localStorage.getItem('userId');		
+  let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
-  let index = contactArray.length -1;
+  let index = contactArray.length - 1;
   widthForInfo(index);
   showContacts();
   successInfo();
@@ -583,8 +582,7 @@ function closePopup() {
 function showMainFrame() {
   return `
 <div class="main-frame" id="mainFrame">
-  <div class="group-frame" id="groupFrame">
-      <div class="arrow-div-up"><img class="scroll-arrow" id="arrow-up" src="../assets/img/arrow-up.png" alt="arrow-up"></div>          
+  <div class="group-frame" id="groupFrame">        
     <div class="add-btn-frame">
       <button class="add-btn" id="addBtn" onclick="widthForAdd();">
         <img src="../assets/img/person_add.png" alt="">
@@ -592,10 +590,8 @@ function showMainFrame() {
     </div>
     <div class="name-group" id="nameGroup">
     </div>
-      <div class="arrow-div-down"><img class="scroll-arrow" id="arrow-down" src="../assets/img/arrow-down.png" alt="arrow-down"></div>
   </div>
 
-  <div id="rightDesk" class"right-desk"></div>
   <button class="add-mob-btn" id="addBtn" onclick="widthForAdd();">
     <img src="../assets/img/person_add.png" alt="">
   </button>      
@@ -669,7 +665,7 @@ function personDatas(initial) {
  *
  * @param {Object} person - The object representing the person's data. The object should have
  * properties: name, lastName, mail, phone, initials, and color.
- * @param {number} indexNr - The index number of the person in the contactArray or a similar array.
+ * @param {int} indexNr - The index number of the person in the contactArray or a similar array.
  * @returns {string} The HTML content representing the detailed information of the specified person.
  */
 function showInfoText(person, indexNr) {
@@ -830,7 +826,7 @@ function showAddContact() {
  * including name, email, phone number, and contact color. The form also includes options 
  * for deleting the contact or saving the changes.
  *
- * @param {number} index - The index of the contact in the contactArray to be edited.
+ * @param {int} index - The index of the contact in the contactArray to be edited.
  * @returns {string} The HTML content representing the "Edit Contact" form layout.
  */
 function showEditContact(index) {
