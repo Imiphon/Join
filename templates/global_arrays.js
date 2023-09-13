@@ -203,6 +203,15 @@ async function loadTasks() {
   }
 }
 
+async function getContactsFromServer() {
+  try {
+    contactArray = JSON.parse(await getItem("contacts"));
+  } catch (e) {
+    console.info("could not find contacts");
+  }
+
+}
+
  
 //=============================================
 // COLORS

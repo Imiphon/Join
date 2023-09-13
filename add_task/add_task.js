@@ -3,7 +3,9 @@ let selectedContacts = [];
 let tasksForSubtasks = [];
 
 document.addEventListener('DOMContentLoaded', async()=>{
+  await getContactsFromServer();
   await loadTasks();
+  dropDownTemplates();
 })
 
 // Function to show or hide options
