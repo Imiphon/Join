@@ -71,7 +71,7 @@ async function createContactsRemoteStorage(name, email){
     {
       color: "var(--user-rose)",
       initials: "JK",
-      lastName: longname,
+      lastName: lastname,
       mail: email,
       name: firstname,
       phone: 49179111666
