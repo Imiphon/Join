@@ -65,20 +65,19 @@ async function createContactsRemoteStorage(name, email){
   let firstname = longname[0];
   let lastname = longname[1];
   
+  //Initialien funktion hier einfügen
+
   let array = [
     {
       color: "var(--user-rose)",
-      initials: "AA",
-      lastName: "Anders",
-      mail: "anton@mail.com",
-      name: "Ali",
+      initials: "JK",
+      lastName: longname,
+      mail: email,
+      name: firstname,
       phone: 49179111666
     }
   ]
-
-
-  //Initialien funktion hier einfügen
-  console.log(array);
+  
   await setItem('contacts' + userId, JSON.stringify(array));
 }
 
