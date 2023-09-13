@@ -74,7 +74,7 @@ async function createContactsRemoteStorage(name, email){
       lastName: lastname,
       mail: email,
       name: firstname,
-      phone: 49179111666
+      phone: 0
     }
   ]
   
