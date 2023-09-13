@@ -225,13 +225,7 @@ h1{
   gap: 16px;
 }
 
-.acceptPrivacy {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 16px;
-  padding-top: 32px;
-}
+
 
 .loginButtons {
   display: flex;
@@ -338,13 +332,14 @@ h1{
   color: var(--reg-blue);
   background-color: white;
   width: unset;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .btnTxtBlue:hover {
   cursor: pointer;
   color: var(--strong-blue);
   text-decoration: underline;
-  font-size: 15px;
 }
 
 #rememberMe {
@@ -382,8 +377,21 @@ h1{
   }
 }
 
+.acceptPrivacy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 32px;
+}
+
 #acceptPrivacy {
   accent-color: var(--reg-blue);
+  margin-right: 16px;
+}
+
+#acceptPrivacy:hover {
+  cursor: pointer;
 }
 
 .d-none {
@@ -392,6 +400,10 @@ h1{
 
 .d-flex {
   display: flex;
+}
+
+.w-110{
+  width: 110px;
 }
 
 @media (min-height: 866px) {

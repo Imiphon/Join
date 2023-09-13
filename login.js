@@ -242,6 +242,10 @@ function closeResetPwd() {
 }
 
 
+function showPrivacy(){
+  window.open("./templates/privacy_policy.html", "_blank");
+}
+
 /**
  * This function is use to show messages to the user.
  *
