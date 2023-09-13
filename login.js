@@ -16,7 +16,7 @@ async function login() {
     let userId = emailAdresses.indexOf(email);
     if (checkPwdCorrect(userId, password)) {
       localStorage.setItem('userId', userId);
-      window.location = `./summary/summary.html?id=${userid}`; //or name=${users[userid]['name'] 
+      window.location = `./summary/summary.html?id=${userId}`; //or name=${users[userid]['name'] 
     } else {
       showPwdNotRightMessage();
     }
