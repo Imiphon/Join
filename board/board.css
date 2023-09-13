@@ -463,3 +463,7 @@
   transform: scale(1.1);
 }
 
+.dragging{
+  color: red !important;
+}
+

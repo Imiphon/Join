@@ -354,6 +354,8 @@ function clearForm(event) {
   showAssignedContactsInContainer();
   dropDownTemplates();
   resetPriorityButtons();
+
+  saveTasks()
   
 }
 

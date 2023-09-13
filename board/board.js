@@ -1,9 +1,12 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadTasks();
-  await init();
-});
+// document.addEventListener("DOMContentLoaded", async () => {
+//   await loadTasks();
+//   await init();
+//   const draggables = document.getElementById("card0");
+//   console.log(draggables);
+// });
 
-function init() {
+async function init() {
+  await loadTasks();
   renderTaskList("toDo", addedTasks);
   renderTaskList("inProgress", addedTasks);
   renderTaskList("awaitFeedback", addedTasks);
@@ -51,7 +54,7 @@ let topicColor;
 
 function createTaskElement(task, index, section) {
   return /*html */ `
-    <div  class="cards" id="card${index}" onclick="popUpTask(${section}, ${index})">
+    <div  class="cards draggable" id="card${index}" onclick="popUpTask(${section}, ${index})" draggable="true" ondragstart="startDargging(card${index}, ${section})">
       <span  class="topic">${task.category}</span>
       <div class="frame">
         <h4 class="title">${task.title}</h4>
@@ -257,9 +260,7 @@ function subtasksTemplates(task, taskIndex, section) {
         <p class="subtask-text">${subNames[i]}</p>
       </div>
     `;
-
   }
-
 
   return `
     <div class="subtasks-div assign-to info-div">
@@ -279,11 +280,52 @@ function updateSubtask(taskIndex, subtaskIndex, sectionId) {
   renderTaskList(sectionId, addedTasks);
 }
 
-
 function deleteTask(taskIndex, section) {
   addedTasks[0][section].splice(taskIndex, 1);
-  console.log(addedTasks[0][section].splice(taskIndex, 1))
+  console.log(addedTasks[0][section].splice(taskIndex, 1));
   saveTasks();
   closeTaskContainer();
   renderTaskList(section, addedTasks);
+}
+
+// Drag and drop
+
+// document.addEventListener("DOMContentLoaded", async () => {
+//   await init();
+//   let allTasks = document.querySelectorAll(".allstsks"); // Korrekte Klasse "allstsks"
+//   let draggables = document.querySelectorAll(".draggable");
+
+//   draggables.forEach((draggable) => {
+//     draggable.addEventListener("dragstart", () => {
+//       draggable.classList.add("dragging");
+//     });
+
+//     draggable.addEventListener("dragend", () => {
+//       draggable.classList.remove("dragging");
+//     });
+//   });
+//   containers.forEach((container) => {
+//     container.addEventListener("dragover", (e) => {
+//       allTasks.classList.add("highlighted");
+//       e.preventDefault();
+//       const draggable = document.querySelector(".dragging");
+//       container.prepend(draggable);
+//     });
+
+//     container.addEventListener("dragleave", () => {
+//       allTasks.classList.remove("highlighted");
+//     });
+
+//     allTasks.addEventListener("dragend", () => {
+//       container.classList.remove("highlighted");
+//     });
+//   });
+// });
+
+let currentDargedElement;
+
+function startDargging(id, secion){
+ currentDargedElement  = id;
+
+ console.log(currentDargedElement)
 }

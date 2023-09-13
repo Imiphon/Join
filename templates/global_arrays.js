@@ -80,7 +80,25 @@ let contactArray = [
 let initialGroups = [];
 let addedTasks = [
   {
-    toDo: [],
+    toDo: [
+      {
+        title: "darg",
+        description: "test",
+        date: "2023-09-22",
+        selectedContacts: [
+          {
+            shortName: "AB",
+            bColor: "var(--user-blue)",
+            name: "Ali",
+            lastName: "Berg",
+          },
+        ],
+        category: "marketing",
+        priority: "medium",
+        subTask: [{ name: "test", checked: false }],
+        progressWidth: 0,
+      },
+    ],
     inProgress: [
       {
         title: "Test",
@@ -98,6 +116,24 @@ let addedTasks = [
             bColor: "var(--user-yellow)",
             name: "Berta",
             lastName: "Anfang",
+          },
+        ],
+        category: "marketing",
+        priority: "medium",
+        subTask: [{ name: "test", checked: false }],
+        progressWidth: 0,
+      },
+
+      {
+        title: "darg",
+        description: "test",
+        date: "2023-09-22",
+        selectedContacts: [
+          {
+            shortName: "AB",
+            bColor: "var(--user-blue)",
+            name: "Ali",
+            lastName: "Berg",
           },
         ],
         category: "marketing",
@@ -128,6 +164,24 @@ let addedTasks = [
         category: "marketing",
         priority: "medium",
         subTask: [{ name: "test", checked: true }],
+        progressWidth: 0,
+      },
+
+      {
+        title: "darg",
+        description: "test",
+        date: "2023-09-22",
+        selectedContacts: [
+          {
+            shortName: "AB",
+            bColor: "var(--user-blue)",
+            name: "Ali",
+            lastName: "Berg",
+          },
+        ],
+        category: "marketing",
+        priority: "medium",
+        subTask: [{ name: "test", checked: false }],
         progressWidth: 0,
       },
     ],
