@@ -50,6 +50,11 @@ async function newUser() {
   enableButton("newUserBtn");
 }
 
+/**
+ *  This function is to check if the SignUp can be activatet.
+ * 
+ */
+
 function checkInput(){
   let name = getInput("newName");
   let email = getInput("newEmail");
@@ -57,7 +62,7 @@ function checkInput(){
   let newConfirmPassword = document.getElementById("newConfirmPassword");
   let acceptPrivacy = document.getElementById("acceptPrivacy");
 
-  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0){
+  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 || acceptPrivacy.checked == false){
     disableButton("newUserBtn");    
   }else{
     enableButton("newUserBtn");
@@ -88,7 +93,8 @@ async function sendResetEmail() {
   if (await checkUserExist(email)) {
     showSendEmailMessage();
     closeForgotPwd();
-    resetId = emailAdresses.indexOf(email);
+    // In the final version here we must send the E-Mail and the resetPage only avalible over the link in the mail.
+    resetId = emailAdresses.indexOf(email); 
     openResetPwd();
   } else {
     showEmailNotFoundMessage();
