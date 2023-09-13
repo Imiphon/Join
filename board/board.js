@@ -16,7 +16,7 @@ function renderTaskList(containerId, tasks) {
 
   for (let i = 0; i < tasks.length; i++) {
     const taskList = tasks[i][containerId]; // Get the specific task list (e.g., "to-do", "in-progress", "await-feedback")
-    if (taskList || taskList.length > 0) {
+    if (taskList && taskList.length > 0) {
       for (let j = 0; j < taskList.length; j++) {
         const task = taskList[j];
         container.innerHTML += createTaskElement(task, j, containerId);
@@ -157,7 +157,7 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
           ${subtasksTemplates(selectedTask, taskIndex, section)}
 
           <div class="edit-div">
-            <span onclick="deleteTask()">
+            <span onclick="deleteTask(${taskIndex},'${section.id}')">
               <i class="bi bi-trash"></i>
               <p>Delete</p>
             </span>
@@ -279,3 +279,11 @@ function updateSubtask(taskIndex, subtaskIndex, sectionId) {
   renderTaskList(sectionId, addedTasks);
 }
 
+
+function deleteTask(taskIndex, section) {
+  addedTasks[0][section].splice(taskIndex, 1);
+  console.log(addedTasks[0][section].splice(taskIndex, 1))
+  saveTasks();
+  closeTaskContainer();
+  renderTaskList(section, addedTasks);
+}

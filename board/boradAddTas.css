@@ -1,35 +1,187 @@
-.add-task-main {
+.head-line {
   display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.head-line .bi-x {
+  font-size: 35px !important;
+}
+
+.assign-div {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+}
+
+.options {
+  display: flex;
+}
+
+.profiles-div {
+  width: 100% !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  align-self: stretch;
+  border-radius: 10px;
+}
+
+.profiles {
+  width: 100%;
+  padding: 7px 16px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  gap: 16px;
+}
+
+.profiles span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  font-size: 13px;
+  border-radius: 50%;
+  color: black;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+.subtask {
+  width: 100%;
+  padding: 6px 16px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  gap: 16px;
+}
+
+.subtask label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 16px;
+  height: 16px;
   justify-content: center;
 }
 
-.add_task_section {
+.subtask label input {
   width: 100%;
-  padding-top: 50px;
-  margin: 0 auto;
-  max-width: 460px;
+  height: 100%;
+  position: absolute;
 }
-/* Div container styles */
-.add_task_section div {
+
+.subtask label input[type="checkbox"] {
+  background-color: var(--reg-blue);
+}
+
+.subtask label .costum-checkbox {
+  display: block;
   width: 100%;
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  border: 1px solid var(--reg-blue);
+}
+
+.subtask label .costum-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  bottom: 4px;
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  border: solid 1px var(--reg-blue);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.subtask label input {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.subtask label input:checked + .costum-checkbox::after {
+  width: 8px;
+  height: 15px;
+  opacity: 1; /* Das Pseudo-Element wird ausgeblendet, wenn das input ausgewählt ist */
+}
+
+.edit-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-div span {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.edit-div span .bi {
+  font-weight: 400;
+  font-size: larger;
+  color: var(--reg-blue);
+  transition: all 0.125s ease-in;
+  color: var(--reg-blue);
+}
+
+.edit-div span .bi:hover {
+  transform: scale(1.1);
+}
+
+.form-div {
+  transition: 155ms ease-in;
+  transform: translateX(150%);
+  position: fixed;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.head-line {
+  margin-top: 100px;
+}
+
+.Add-task-head-line {
+  align-self: stretch;
   padding: 12px;
+  margin-right: 16px;
+  font-size: 24px;
 }
 
 form {
+  padding: 0px 0 80px 0;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  overflow-y: scroll;
+  gap: 12px;
   flex-direction: column;
-  align-items: center;
 }
 
-/* Title input styles */
-.title-div {
-  display: flex;
-  padding: 7px 16px;
+form div {
+  padding: 8px;
   gap: 8px;
 }
 
@@ -47,9 +199,17 @@ form {
   color: var(--user-grey);
 }
 
-/* Description styles */
-.description {
+.description-div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.description-inp {
   height: 80px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -58,11 +218,11 @@ form {
   padding-bottom: 40px;
 }
 
-.description:focus {
+.description-inp:focus {
   border: 1px solid var(--reg-blue);
 }
 
-.add_task_section form input:focus:not(.subtask input) {
+form input:focus:not(.subtask input) {
   outline: none !important;
   border-bottom: 1px solid var(--reg-blue) !important;
 }
@@ -73,8 +233,20 @@ form {
   padding: 0 !important;
 }
 
+.bi {
+  cursor: pointer;
+  color: var(--reg-blue);
+  font-size: 16px !important;
+  transition: all 0.125s ease-in;
+}
+
+.bi-caret-down-fill {
+  margin-right: -5px;
+}
+
 #date {
   height: 100%;
+  width: 100%;
   padding-left: 8px;
   padding-bottom: 8px;
   outline: none;
@@ -104,17 +276,6 @@ form {
   display: flex;
   justify-content: space-between;
   border-bottom: solid 1px var(--user-grey);
-}
-
-.bi {
-  cursor: pointer;
-  color: var(--reg-blue);
-  font-size: 16px !important;
-  transition: all 0.125s ease-in;
-}
-
-.bi-caret-down-fill {
-  margin-right: -5px;
 }
 
 /* Dropdown content styles */
@@ -192,7 +353,6 @@ form {
 
 .category-div {
   position: relative;
-  width: 100%;
 }
 
 .select-container select {
@@ -215,17 +375,18 @@ form {
   position: relative;
 }
 
-.category-div .bi-caret-down-fill {
+#category-caret-down {
   display: block;
-  right: 10px;
-  top: 5px;
+  right: 8px;
+  top: 10px;
   pointer-events: none;
   position: absolute;
-  cursor: pointer;
+  cursor: pointer; /* Hinzufügen eines Cursors, um anzuzeigen, dass es anklickbar ist */
 }
 
 /* Priority values styles */
 .prio-values {
+  display: flex;
   flex-direction: row !important;
   justify-content: space-between;
   align-items: center;
@@ -236,7 +397,7 @@ form {
   border-radius: 12px;
   display: flex;
   width: 100px;
-  height: 50px;
+  height: 25px;
   align-items: center;
   justify-content: center;
   gap: 12px;
@@ -248,10 +409,31 @@ form {
   font-size: 20px !important;
 }
 
+.prio-values span:hover {
+  background-color: lightgray;
+}
+
 /* Subtask */
 
+.subask-div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.subtask-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtask {
+  display: block;
+  padding: 8px;
+}
+
 .subtask-wrapper {
-  flex-direction: row !important;
+  flex-direction: ;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--user-grey);
@@ -263,6 +445,14 @@ form {
   outline: none;
   border: none !important;
   font-size: 16px !important;
+}
+
+.subtask-icon-conatiner {
+  padding: 0 !important;
+  color: var(--user-grey);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row !important;
 }
 
 .subtask-icon-conatiner {
@@ -390,13 +580,17 @@ form {
 
   .center-line {
     display: block !important;
+    width: 0 !important;
   }
 
- 
+  .allsTsks {
+    align-items: center;
+  }
 }
 
 .selected-contact {
   display: flex;
+  padding: 12px;
   flex-direction: row !important;
   border-bottom: 1px solid var(--user-grey);
 }
@@ -411,16 +605,14 @@ form {
   form {
     flex-direction: row;
     align-items: stretch;
-    height: 100%;
+    height: 50vh;
     justify-content: space-between;
   }
 
   .center-line {
     background-color: var(--user-grey);
-    width: 100px;
     padding: 1px !important;
   }
-
 
   .second-div {
     position: static;
@@ -433,6 +625,9 @@ form {
     align-items: center;
   }
 
+  .tasks {
+    flex-direction: row;
+  }
 }
 
 @media only screen and (min-width: 1007px) {
@@ -453,9 +648,20 @@ form {
     align-items: flex-end;
   }
 
-  .form-btns {
-    display: none !important;
-    pointer-events: none;
+  .tasks {
+    flex-direction: row;
+  }
+
+  .board-main{
+    height: 100vh !important;
+  }
+
+  .card-parent{
+    height: 100vh;
+  }
+
+   .allsTsks {
+    align-items: center;
   }
 }
 

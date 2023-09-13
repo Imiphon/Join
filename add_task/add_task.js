@@ -249,14 +249,14 @@ function renderAddedTask() {
                     <p>${task.name}</p>
                     <span>
                     <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
-                    <i class="bi bi-trash" onclick="deleteTask(${i})"></i>
+                    <i class="bi bi-trash" onclick="deleteSubTask(${i})"></i>
                     </span>
                     </li>
                     `;
   });
 }
 
-function deleteTask(i) {
+function deleteSubTask(i) {
   tasksForSubtasks.splice(i, 1);
   renderAddedTask();
 }
@@ -270,13 +270,24 @@ function editTask(i) {
   taskValue.focus();
 }
 
-function addTask(event) {
+let conatainerIdForMobileAddTask;
+
+function addTask(event, containerId) {
   event.preventDefault();
   const taskData = collectTaskData();
   const task = createTaskObject(taskData);
-  pushTask(task);
+  pushTask(task, containerId);
   clearForm(event);
   showAddedTask();
+}
+
+function mobAddtask(event){
+   event.preventDefault();
+   const taskData = collectTaskData();
+   const task = createTaskObject(taskData);
+   pushTask(task, conatainerIdForMobileAddTask);
+   clearForm(event);
+   showAddedTask();
 }
 
 function changeLocation() {
@@ -324,8 +335,9 @@ function createTaskObject(taskData) {
   return task;
 }
 
-function pushTask(task) {
-  addedTasks[0]["toDo"].push(task);
+function pushTask(task, containerId) {
+  console.log(containerId)
+  addedTasks[0][containerId].push(task);
   console.log(addedTasks[0]["toDo"]);
   saveTasks();
 }
