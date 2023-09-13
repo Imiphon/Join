@@ -1,3 +1,6 @@
+/**
+ * checks innerWidth to control zoom-situation
+ */
 let userView = window.innerWidth > 1024;
 
 window.addEventListener('resize', function() {
@@ -6,14 +9,14 @@ window.addEventListener('resize', function() {
   if (userView !== deskWidth) {
     location.reload(); 
   }
-  userView = deskWidth; // Aktualisiert den Status für das nächste Mal
+  userView = deskWidth; 
 });
 
 /**
- * eventListener instead of onload-function to check if its the right side 
+ * eventListener to check if its the right side instead of onload-function
  * cause:
  * It separates the JavaScript logic from the HTML, making the code cleaner and more maintainable.
- * The same JavaScript code can (actually) be used for multiple HTML pages without having to modify the HTML code.
+ * The same JavaScript code can be used for multiple HTML pages without having to modify the HTML code.
  */
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
@@ -28,9 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
 async function getContactsFromServer() {
   try {
     contactArray = JSON.parse(await getItem('contacts'));
-  } catch (e) {
+  } catch(e) {
     console.info('could not find contacts')
   }
+
   showContacts();
 }
 
@@ -46,7 +50,6 @@ function showContacts() {
   //createInitials();
   showNameGroup();
 }
-
 /**
  * put all names in right initialGroup
  */
@@ -66,7 +69,6 @@ function showNameGroup() {
  */
 function deleteContact(index) {
   contactArray.splice(index, 1);
-  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
 }
 
@@ -133,7 +135,7 @@ async function widthForAdd() {
  */
 function showInfoDesk(index) {
   let person = contactArray[index];
-  let popupBox = document.getElementById('popupBox');
+  let popupBox = document.getElementById("popupBox");
   popupBox.innerHTML = showInfoText(person, index);
 }
 
@@ -143,15 +145,15 @@ function showInfoDesk(index) {
  * @param {number} index 
  */
 function showInfoMobile(index) {
-  let main = document.querySelector('main');
+  let main = document.querySelector("main");
   main.innerHTML = "";
   let person = contactArray[index];
   main.innerHTML += showInfoText(person, index);
-  document.getElementById('moreRow').style.display = "none";
+  document.getElementById("moreRow").style.display = "none";
 }
 
 //============================================================
-// TOGGLE DRAWER WITH MORE BTN IN INFO AREA
+// START TOGGLE DRAWER WITH MORE BTN
 //============================================================
 
 /**
@@ -165,11 +167,11 @@ function showInfoMobile(index) {
  * - If the drawer is open, allows the user to click outside to close it.
  */
 function toggleDrawer() {
-  let drawer = document.getElementById('drawer');
-  if (drawer.classList.toggle('open')) {
-    document.addEventListener('click', closeOnClick);
+  let drawer = document.getElementById("drawer");
+  if (drawer.classList.toggle("open")) {
+    document.addEventListener("click", closeOnClick);
   } else {
-    document.removeEventListener('click', closeOnClick);
+    document.removeEventListener("click", closeOnClick);
   }
 }
 
@@ -180,16 +182,16 @@ function toggleDrawer() {
  * @param {Event} event - The triggered click event.
  */
 function closeOnClick(event) {
-  let drawer = document.getElementById('drawer');
-  let moreBtn = document.querySelector('.more-btn');
+  let drawer = document.getElementById("drawer");
+  let moreBtn = document.querySelector(".more-btn");
   if (drawer && moreBtn) {
-      if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
-          closeDrawer();
-          document.removeEventListener('click', closeOnClick);
-      }
+    if (!drawer.contains(event.target) && !moreBtn.contains(event.target)) {
+      closeDrawer();
+      document.removeEventListener("click", closeOnClick);
+    }
   } else {
-      // if drawer or moreBtn doesn't exist
-      document.removeEventListener('click', closeOnClick);
+    // if drawer or moreBtn doesn't exists
+    document.removeEventListener("click", closeOnClick);
   }
 }
 
@@ -197,9 +199,8 @@ function closeOnClick(event) {
 * Closes the drawer by removing the 'open' class from the drawer element.
 */
 function closeDrawer() {
-  document.getElementById('drawer').classList.remove('open');
+  document.getElementById("drawer").classList.remove("open");
 }
-
 
 //============================================================
 //EDIT CONTACT
@@ -216,7 +217,7 @@ async function openEditMobile(index) {
   await mobilePopup();
   let content = document.getElementById("popContent");
   content.innerHTML = showEditContact(indexNr);
-  checkOldValues();
+  setInitialValues();
 }
 
 /**
@@ -230,13 +231,14 @@ async function openEditDesk(index) {
   await deskEditPopup();
   document.getElementById("popupLeft").innerHTML = showEditContact(indexNr);
   document.getElementById("popTop").style.borderTopLeftRadius = "0px";
-  checkOldValues();
+  setInitialValues();
 }
 
 /**
  * if user doesn'edit new info take old Infos
  */
-function checkOldValues() {
+
+function setInitialValues() {
   const fullNameInput = document.getElementById("fullName");
   const emailInput = document.getElementById("email");
   const phoneInput = document.getElementById("phone");
@@ -244,9 +246,11 @@ function checkOldValues() {
   if (!fullNameInput.value) {
     fullNameInput.value = fullNameInput.placeholder;
   }
+
   if (!emailInput.value) {
     emailInput.value = emailInput.placeholder;
   }
+
   if (!phoneInput.value) {
     phoneInput.value = phoneInput.placeholder;
   }
@@ -259,17 +263,17 @@ function checkOldValues() {
  * @param {number} index from personDatas
  */
 function editContactInArray(index) {
-  let fullName = document.getElementById("fullName").value; //.split(' ') in splitName()
+  let name = document.getElementById("fullName").value; //.split(' ') in splitName()
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
-  let { preName, lastName } = splitName(fullName);
+  let { preName, lastName } = splitName(name);
   let initials = preName[0] + lastName[0];
 
   contactArray[index].name = preName;
   contactArray[index].lastName = lastName;
   contactArray[index].mail = mail;
-  contactArray[index].phone = phone;
+  contactArray[index].phone = phone;  
   contactArray[index].initials = initials;
   contactArray[index].color = color;
 
@@ -296,24 +300,22 @@ function completeEdition(index) {
 function deleteInEditor(index) {
   contactArray.splice(index, 1);
   closePopup();
-  setItem('contacts', JSON.stringify(contactArray));
   showContacts();
 }
-
 //============================================================
-// CREATE NEW CONTACT 
+// CREATE NEW CONTACT IN MOBILE
 //============================================================
-
 
 /**
  * Toggles the visibility of the color picker and updates its content.
  */
 function openColorPicker() {
-  let colorPicker = document.getElementById('colorPicker');
-  if (colorPicker.style.display === 'none') {
-      colorPicker.style.display = 'flex';
+  let colorPicker = document.getElementById("colorPicker");
+
+  if (colorPicker.style.display === "none") {
+    colorPicker.style.display = "flex";
   } else {
-      colorPicker.style.display = 'none';
+    colorPicker.style.display = "none";
   }
   updateColors();
 }
@@ -322,7 +324,7 @@ function openColorPicker() {
 * Updates the content of the color picker with available user colors.
 */
 function updateColors() {
-  let colorPicker = document.getElementById('colorPicker');
+  let colorPicker = document.getElementById("colorPicker");
   colorPicker.innerHTML = colorsInPicker();
 }
 
@@ -332,13 +334,13 @@ function updateColors() {
 * @returns {string} The HTML string representing color options for the picker.
 */
 function colorsInPicker() {
-  let pickerBox = '';
+  let pickerBox = "";
   for (let color in userColors) {
-      pickerBox += `
-          <div class="color-option" 
-          style="background-color: ${userColors[color]};" 
-          onclick="setColor('${color}', event)"></div>
-          `;
+    pickerBox += `
+        <div class="color-option" 
+        style="background-color: ${userColors[color]};" 
+        onclick="setColor('${color}', event)"></div>
+        `;
   }
   return pickerBox;
 }
@@ -359,8 +361,8 @@ function setColor(color, event) {
   if (document.querySelector(".editor")) {
     //without space between the 2 classes to select exactly this element
     //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
-      let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
-      detailEllipse.style.backgroundColor = userColors[color];
+    let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
+    detailEllipse.style.backgroundColor = userColors[color];
   }
 }
 
@@ -370,7 +372,7 @@ function setColor(color, event) {
  */
 function createContact() {
   let createBtn = document.getElementById('createBtn');
-  createBtn.disabled = true;
+  createBtn.disabled = true; 
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
@@ -396,14 +398,13 @@ function createContact() {
  * a successful operation.
  */
 function completeCreation() {
-  let createBtn = document.getElementById('createBtn');
-  createBtn.disabled = false;
+  createBtn.disabled = false; 
   document.getElementById("userForm").reset();
   closePopup();
   setItem('contacts', JSON.stringify(contactArray));
-  let index = contactArray.length - 1;
-  showContacts();
+  let index = contactArray.length -1;
   widthForInfo(index);
+  showContacts();
   successInfo();
 }
 
@@ -443,7 +444,7 @@ function successInfo() {
  * @returns 
  */
 function splitName(fullName) {
-  let nameParts = fullName.split('');
+  let nameParts = fullName.split(" ");
   let preName = upperCaseFirstLetter(nameParts[0]);
   let lastName = upperCaseFirstLetter(nameParts[1]);
   return { preName, lastName };
@@ -455,6 +456,7 @@ function splitName(fullName) {
  * @param {string} str 
  * @returns 
  */
+
 function upperCaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -471,10 +473,12 @@ function upperCaseFirstLetter(str) {
  */
 function createInitalGroup() {
   initialGroups = contactArray.reduce((acc, current) => {
-    let initial = current.name[0].toUpperCase();   
+    let initial = current.name[0].toUpperCase();
+    // if key not exist as a letter in the accumulator, push it
     if (!acc[initial]) {
       acc[initial] = [];
     }
+    // push current name to acc
     acc[initial].push(current);
     return acc;
   }, {});
@@ -549,6 +553,7 @@ function closePopup() {
     colorPicker.remove();
   }
   popBg.remove();
+  //document.getElementById("popupBackground").style.display = "none";
 }
 
 //============================================================
@@ -563,23 +568,26 @@ function closePopup() {
  */
 function showMainFrame() {
   return `
-    <div class="main-frame" id="mainFrame">
-      <div class="group-frame" id="groupFrame">
-          <div class="arrow-div-up"><img class="scroll-arrow" id="arrow-up" src="../assets/img/arrow-up.png" alt="arrow-up"></div>          
-        <div class="add-btn-frame">
-          <button class="add-btn" id="addBtn" onclick="widthForAdd();">
-            <img src="../assets/img/person_add.png" alt="">
-          </button>
-        </div>
-        <div class="name-group" id="nameGroup">
-        </div>
-          <div class="arrow-div-down"><img class="scroll-arrow" id="arrow-down" src="../assets/img/arrow-down.png" alt="arrow-down"></div>
-      </div>
-        
-      <div class="popup-box" id="popupBox">
-      </div>
-      <div id="success-info">Contact successfully created</div>
+<div class="main-frame" id="mainFrame">
+  <div class="group-frame" id="groupFrame">
+      <div class="arrow-div-up"><img class="scroll-arrow" id="arrow-up" src="../assets/img/arrow-up.png" alt="arrow-up"></div>          
+    <div class="add-btn-frame">
+      <button class="add-btn" id="addBtn" onclick="widthForAdd();">
+        <img src="../assets/img/person_add.png" alt="">
+      </button>      
     </div>
+    <div class="name-group" id="nameGroup">
+    </div>
+      <div class="arrow-div-down"><img class="scroll-arrow" id="arrow-down" src="../assets/img/arrow-down.png" alt="arrow-down"></div>
+  </div>
+  <button class="add-mob-btn" id="addBtn" onclick="widthForAdd();">
+    <img src="../assets/img/person_add.png" alt="">
+  </button>      
+    
+  <div class="popup-box" id="popupBox">
+  </div>
+  <div id="success-info">Contact successfully created</div>
+</div>
     `;
 }
 
@@ -785,7 +793,7 @@ function showAddContact() {
                     <img src="../assets/img/call_small.png" alt="phone">
                 </div>
                 <div class="btn-box">
-                <button class="white-btn" onclick="closePopup(); return false;">
+                <button class="white-btn" onclick="closePopup()">
                     Cancel
                     <img src="../assets/img/close_dark-grey.png">
                 </button>
