@@ -13,8 +13,9 @@ async function login() {
   let form = document.getElementById('formLogin');
   
   if (await checkUserExist(email)) {
-    let userid = emailAdresses.indexOf(email);
-    if (checkPwdCorrect(userid, password)) {
+    let userId = emailAdresses.indexOf(email);
+    if (checkPwdCorrect(userId, password)) {
+      localStorage.setItem('userId', userId);
       window.location = `./summary/summary.html?id=${userid}`; //or name=${users[userid]['name'] 
     } else {
       showPwdNotRightMessage();
