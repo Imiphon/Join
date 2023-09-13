@@ -137,6 +137,12 @@ function showInfoDesk(index) {
   let person = contactArray[index];
   let popupBox = document.getElementById("popupBox");
   popupBox.innerHTML = showInfoText(person, index);
+  /*  
+    let rightDesk = document.getElementById('rightDesk');
+  rightDesk.innerHTML = showInfoText(person, index);
+
+   */
+
 }
 
 /**
@@ -580,6 +586,8 @@ function showMainFrame() {
     </div>
       <div class="arrow-div-down"><img class="scroll-arrow" id="arrow-down" src="../assets/img/arrow-down.png" alt="arrow-down"></div>
   </div>
+
+  <div id="rightDesk" class"right-desk"></div>
   <button class="add-mob-btn" id="addBtn" onclick="widthForAdd();">
     <img src="../assets/img/person_add.png" alt="">
   </button>      
