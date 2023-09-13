@@ -66,6 +66,12 @@
   font-family: "open-sans", sans-serif;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 5px;
+  width: 10px;
+}
+
 .d-none {
   display: none;
 }
