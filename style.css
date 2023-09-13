@@ -521,6 +521,18 @@ h1{
   .welcomeTextuserName {
     font-size: var(--fs-64px);
   }
+  .welcomeMsgDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18vh;
+    margin-bottom: 0;
+    transform: translate(0px);
+  }
+  .summaryWrapper {
+    transform: translateY(0px);
+    height: 50%;
+  }
   .summaryContainer {
     width: 912px;
     height: 442px;

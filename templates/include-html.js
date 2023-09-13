@@ -15,8 +15,11 @@ async function includeHTML() {
         let state = JSON.parse(localStorage.getItem("allBtnState"));
         updateBtnStyle(checkTrue(state));
     }
-    displayWelcomeMsg();
-    checkStrValueQueryParam(); 
+    
+    if (window.innerWidth < 1024) {
+        displayWelcomeMsg();
+        checkStrValueQueryParam(); 
+    }
 }
 
 function checkTrue(obj) {
