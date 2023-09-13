@@ -3,10 +3,34 @@ let selectedContacts = [];
 let tasksForSubtasks = [];
 
 document.addEventListener('DOMContentLoaded', async()=>{
-  await getContactsFromServer();
+  await getContactsFromServerForAddTask();
   await loadTasks();
   dropDownTemplates();
 })
+
+async function saveTasks() {
+  await setItem("storedTasks", JSON.stringify(addedTasks));
+}
+
+async function loadTasks() {
+  try {
+    const loadedTasks = await getItem("storedTasks");
+    if (loadedTasks) {
+      addedTasks = JSON.parse(loadedTasks);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getContactsFromServerForAddTask() {
+  try {
+    contactArray = JSON.parse(await getItem("contacts"));
+  } catch (e) {
+    console.info("could not find contacts");
+  }
+
+}
 
 // Function to show or hide options
 // Function to show or hide options

@@ -188,6 +188,9 @@ let addedTasks = [
   },
 ];
 
+/*
+IT'S ALL COPIED AND ADDAD TO ADD_TASK.JS
+
 async function saveTasks() {
   await setItem("storedTasks", JSON.stringify(addedTasks));
 }
@@ -203,7 +206,7 @@ async function loadTasks() {
   }
 }
 
-async function getContactsFromServer() {
+async function getContactsFromServerForAddTask() {
   try {
     contactArray = JSON.parse(await getItem("contacts"));
   } catch (e) {
@@ -211,7 +214,7 @@ async function getContactsFromServer() {
   }
 
 }
-
+*/
  
 //=============================================
 // COLORS

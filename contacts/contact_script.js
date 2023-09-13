@@ -365,7 +365,7 @@ function setColor(color, event) {
   colorPicker.style.display = "none";
   event.stopPropagation();
   if (document.querySelector(".editor")) {
-    //without space between the 2 classes to select exactly this element
+    //without space between ".popup-circle.detail-ellipse" to select exactly this element
     //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
     let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
     detailEllipse.style.backgroundColor = userColors[color];
@@ -383,6 +383,9 @@ function createContact() {
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
+  if(color == ''){
+    color = 'var(--user-grey)';
+  }
   let { preName, lastName } = splitName(fullName);
   let initials = preName[0] + lastName[0];
 
