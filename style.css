@@ -169,15 +169,15 @@
   left: 32px;
 }
 
+.backArrow:hover {
+  cursor: pointer;
+  height: 34px;
+  width: 35px;
+}
+
 h1{
   padding: 0 70px;
   color: black;
-}
-
-.backArrow:hover {
-  cursor: pointer;
-  width: calc(40px);
-  height: calc(40px);
 }
 
 .loginInput {
