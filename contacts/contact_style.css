@@ -278,7 +278,7 @@
 .detail-name {
   width: 300px;
   height: 40px;
-  font-size: 3vw;
+  font-size: 2.4rem;
   font-weight: 400;
   line-height: 40px;
   letter-spacing: 0em;
@@ -810,11 +810,12 @@
     width: 199px;
     height: 40px;
     gap: 13px;
-    font-size: 33px;
+    font-size: 26px;
     font-weight: 400;
     line-height: 40px;
     letter-spacing: 0em;
     text-align: left;
+    margin-bottom: 0;
   }
 }
 
