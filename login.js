@@ -61,24 +61,35 @@ async function newUser() {
 async function createContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
-  let longname = name.split(" ");
-  let firstname = longname[0];
-  let lastname = longname[1];
-  
-  //Initialien funktion hier einfügen
+  let { firstName, lastName } = splitName(name);
 
+  let initials = firstName[0] + lastName[0];
+  
   let array = [
     {
-      color: "var(--user-rose)",
-      initials: "JK",
-      lastName: lastname,
+      color: "var(--user-yellow)",
+      initials: initials,
+      lastName: lastName,
       mail: email,
-      name: firstname,
+      name: firstName,
       phone: 0
     }
   ]
   
   await setItem('contacts' + userId, JSON.stringify(array));
+}
+
+/**
+ * split the entry from the user into pre- and lastname
+ * 
+ * @param {string} fullName 
+ * @returns 
+ */
+function splitName(fullName) {
+  let nameParts = fullName.split(" ");
+  let preName = upperCaseFirstLetter(nameParts[0]);
+  let lastName = upperCaseFirstLetter(nameParts[1]);
+  return { preName, lastName };
 }
 
 /**
