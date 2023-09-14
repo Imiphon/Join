@@ -13,7 +13,6 @@
 }
 
 .group-frame {
-  /* for set arrow up/down absolute*/
   position: relative;
   width: 456px;
   height: 100%;
@@ -28,42 +27,11 @@
   width: 10px;
 }
 
-.arrow-div-up {
-  position: absolute;
-  top: 0;
-  right: 5px;
-}
-
-.arrow-div-down {
-  position: absolute;
-  bottom: 0;
-  right: 5px;
-}
-
-.scroll-arrow img {
-  width: 25px;
-}
-
-#arrow-up {
-  position: relative;
-  width: 10px;
-  height: 4px;
-  z-index: 30;
-}
-
-#arrow-down {
-  position: relative;
-  width: 10px;
-  height: 4px;
-  bottom: 5px;
-}
-
 .add-btn-frame {
   position: relative;
   left: 4px;
   right: 4px;
   margin-right: 5px;
-  /*  width: 448px;*/
   height: 104px;
   padding: 32px 24px 16px 24px;
   gap: 10px;
@@ -77,8 +45,6 @@
   position: relative;
   width: 100%;
   height: 50px;
-  /*  left: 256px;
-  top: 90px;*/
   right: unset;
   bottom: unset;
   background-color: var(--reg-blue);
@@ -91,7 +57,7 @@
 
 .add-btn img,
 .more-btn img {
-  z-index: 21;
+  z-index: 51;
 }
 
 /* useless for mobile */
@@ -104,13 +70,11 @@
 }
 
 /* only in mobile */
-.more-btn,
 .add-mob-btn {
   display: none;
 }
 
 .name-group {
-  /* to set scroll-bar EXACTLY in same line with arrows*/
   margin-right: 3px;
   margin-bottom: 15px;
   padding-top: 0;
@@ -259,7 +223,6 @@
   align-items: flex-start;
   /*changed in mobile*/
   justify-content: flex-start;
-  /*width: 50%;*/
   top: 0;
 }
 
@@ -267,9 +230,6 @@
   display: none;
 }
 
-/*.detail-top-head a {
-    display: none;
-}*/
 .desk-header {
   display: block;
   font-size: 1.5rem;
@@ -318,7 +278,7 @@
 .detail-name {
   width: 300px;
   height: 40px;
-  font-size: 3rem;
+  font-size: 3vw;
   font-weight: 400;
   line-height: 40px;
   letter-spacing: 0em;
@@ -352,10 +312,6 @@
   color: var(--reg-blue);
 }
 
-/*.more-row-box.active {
-    color: var(--reg-blue);
-}*/
-
 .adr-box {
   width: 100%;
   height: 128px;
@@ -383,8 +339,8 @@
 
 #drawer.open {
   right: 8px;
-  bottom: 90px;
-  z-index: 30;
+  bottom: 165px;
+  z-index: 60;
   padding: 10px;
   border-radius: 20px 20px 0px 20px;
   box-shadow: var(--toggle-shadow);
@@ -445,7 +401,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  /*box-shadow: var(--shadow);*/
   border-radius: 20px;
 }
 
@@ -459,7 +414,6 @@
   display: flex;
   flex-direction: column;
   box-shadow: none;
-  /* insted var(--shadow);*/
 }
 
 .pop-edit-content {
@@ -676,32 +630,6 @@
   font-size: 1.2rem;
 }
 
-/*
-@media (max-width:1210px) {
-  .group-frame {
-    width: 50%;
-  }
-
-  .detail-frame {
-    font-size: smaller;
-  }
-
-  .detail-name {
-    font-size: 2rem;
-  }
-
-  element.style {
-    background-color: var(--user-orange);
-  }
-
-  .detail-ellipse {
-    width: 90px !important;
-    height: 90px !important;
-    font-size: 2.3rem;
-  }
-}
-*/
-
 @media (max-width: 1024px) {
   .right-desk {
     display: none;
@@ -722,11 +650,6 @@
     /* Firefox */
   }
 
-  .arrow-div-up,
-  .arrow-div-down {
-    display: none;
-  }
-
   .name-group {
     padding-top: 0;
     width: 100%;
@@ -736,8 +659,7 @@
     box-shadow: var(--shadow-right);
   }
 
-  .add-mob-btn,
-  .more-btn {
+  .add-mob-btn {
     position: absolute;
     width: 64px;
     height: 64px;
@@ -747,7 +669,7 @@
     left: unset;
     background-color: var(--reg-blue);
     border-radius: 10px;
-    z-index: 20;
+    z-index: 21;
     border-width: 0;
     box-shadow: var(--shadow);
     display: inline;
@@ -756,9 +678,28 @@
     bottom: 32px !important;
   }
 
-  .add-mob-btn img,
-  .more-btn img {
+  .add-mob-btn img
+  {
     z-index: 21;
+    display: inline;
+  }
+
+  .more-btn {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    right: 16px;
+    bottom: 172px;
+    top: unset;
+    left: unset;
+    background-color: var(--reg-blue);
+    border-radius: 10px;
+    z-index: 51;
+    border-width: 0;
+    box-shadow: var(--shadow);
+  }
+  .more-btn img {
+    z-index: 51;
     display: inline;
   }
 
@@ -809,8 +750,25 @@
     padding: 4px 12px;
   }
 
-  .popup-box {
+  .info-box {
     display: block;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 50;
+    background-color: white;
+  }
+
+  .close-info {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    top: -5px;
+  }
+
+  .more-row {
+    display: none;
   }
 
   .pop-logo {

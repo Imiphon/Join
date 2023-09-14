@@ -7,7 +7,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
   if (currentPage.includes("contact_list")) {
-
     getContactsFromServer();
   }
 });
@@ -22,7 +21,6 @@ async function getContactsFromServer() {
   } catch (e) {
     console.info('could not find contacts')
   }
-
   showContacts();
 }
 
@@ -37,6 +35,7 @@ function showContacts() {
   createInitalGroup();
   showNameGroup();
 }
+
 /**
  * put all names in right initialGroup
  */
@@ -50,8 +49,7 @@ function showNameGroup() {
 }
 
 /**
- * takes index from personDatas(), over widthForInfo(), 
- * showInfoDesk() / showInfoMobile() and delete the contact 
+ * takes index from personDatas(), over showInfo() and delete the contact 
  * @param {int} index 
  */
 function deleteContact(index) {
@@ -63,42 +61,6 @@ function deleteContact(index) {
 // CHECK WIDTH TO CONTROL MOB OR DESK OPTIC
 //============================================================
 
-/**
- * takes index from personDatas()
- * open mob or desk optic
- * @param {number} index 
- */
-function widthForInfo(index) {
-  const width = window.innerWidth;
-  if (width <= 1024) {
-    showInfoMobile(index);
-  } else {
-    showInfoDesk(index);
-    showNameGroup();
-  }
-}
-
-/*
-function widthForInfo(index) {
-  // Listener hinzufügen
-  window.addEventListener('resize', handleResize);
-  updateView(index);
-}
-
-function handleResize() {
-  updateView();
-}
-
-function updateView(index) {
-  const width = window.innerWidth;
-  if (width <= 1024) {
-    showInfoMobile(index);
-  } else {
-    showInfoDesk(index);
-    showNameGroup();
-  }
-}
-*/
 /**
  * takes index from personDatas()
  * open mob or desk optic
@@ -137,27 +99,23 @@ async function widthForAdd() {
 //============================================================
 
 /**
- * takes index from widthForInfo(), find person in (global) contactArray
+ * takes index from person in (global) contactArray
  * get id from (desk-) popup and set content from showInfoText() 
  * @param {int} index 
  */
-function showInfoDesk(index) {
+function showInfo(index) {
   let person = contactArray[index];
-  let popupBox = document.getElementById("popupBox");
-  popupBox.innerHTML = showInfoText(person, index);
+  let infoBox = document.getElementById("infoBox");
+  infoBox.innerHTML = showInfoText(person, index);
+  infoBox.style.display ='inline';
 }
 
 /**
- * takes index from widthForInfo(), find person in (global) contactArray
- * get id from (mobile-)popup and set content from showInfoText() 
- * @param {int} index 
+ * set div #infoBox to none
  */
-function showInfoMobile(index) {
-  let main = document.querySelector("main");
-  main.innerHTML = "";
-  let person = contactArray[index];
-  main.innerHTML += showInfoText(person, index);
-  document.getElementById("moreRow").style.display = "none";
+function closeInfo() {
+  let infoBox = document.getElementById('infoBox')
+  infoBox.style.display ='none';
 }
 
 //============================================================
@@ -290,7 +248,7 @@ async function editContactInArray(index) {
 
 /**
  * takes index from editContactInArray(index)
- * close the popup, loadup infos to server and starts widthForInfo(index)
+ * close the popup, loadup infos to server and starts infoBox(index)
  * @param {int} index 
  */
 async function completeEdition(index) {
@@ -298,11 +256,11 @@ async function completeEdition(index) {
   closePopup();
   let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
-  widthForInfo(index);
+  showInfo(index);
 }
 
 /**
- * takes index from personDatas(), over widthForInfo(), 
+ * takes index from personDatas(), 
  * showEditContact() and delete the contact 
  * @param {int} index 
  */
@@ -416,7 +374,7 @@ async function completeCreation() {
   let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
   let index = contactArray.length - 1;
-  widthForInfo(index);
+  showInfo(index);
   showContacts();
   successInfo();
 }
@@ -598,6 +556,8 @@ function showMainFrame() {
     
   <div class="popup-box" id="popupBox">
   </div>
+  <div class="info-box" id="infoBox">
+  </div>
   <div id="success-info">Contact successfully created</div>
 </div>
     `;
@@ -637,7 +597,7 @@ function personDatas(initial) {
       let person = thisPerson;
       htmlContent += `
                 <div class="name-frame">
-                    <div class="name-box" onclick="widthForInfo(${i})">
+                    <div class="name-box" onclick="showInfo(${i})">
                         <div class="side-circle" class="initials" style="background-color: ${person.color};">
                             ${person.initials}
                         </div>
@@ -673,9 +633,12 @@ function showInfoText(person, indexNr) {
         <div class="detail-frame" id="detailFrame">
             <div class="detail-top-head">
                 <div>Contact Informations</div>
+                <button class="close-info" id="closeInfo" onclick="closeInfo()"><img src="../assets/img/arrow-left-line.svg" alt="back"></button>                
+                <!--
                 <a href="contact_list.html">
                     <img src="../assets/img/arrow-left-line.svg" alt="back">
                 </a>
+                -->
             </div>
             <div class="detail-name-box">
                 <div class="detail-ellipse" style="background-color: ${person.color}">
