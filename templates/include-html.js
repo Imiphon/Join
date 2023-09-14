@@ -49,6 +49,7 @@ window.addEventListener("resize", handleWindowResize);
 let displayed = false;
 function showSubmenuMobile() {
       let submenuMobile = document.getElementById("submenuMobile");
+      console.log(submenuMobile);
       if (displayed) {
             submenuMobile.style.right = "-200px";
       } else {
@@ -265,6 +266,8 @@ function removeWelcomeMsgAnimation() {
     }
   }
   
-  
+
+  let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
+  console.log("footerPolicyAnchor", footerPolicyAnchor);  
   
      
