@@ -271,7 +271,7 @@ function setInitialValues() {
  * starts comleteEdition()
  * @param {int} index from personDatas
  */
-async function editContactInArray(index) {
+function editContactInArray(index) {
   let name = document.getElementById("fullName").value; //.split(' ') in splitName()
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
@@ -286,7 +286,7 @@ async function editContactInArray(index) {
   contactArray[index].initials = initials;
   contactArray[index].color = color;
 
-  await completeEdition(index);
+  completeEdition(index);
 }
 
 /**
@@ -299,6 +299,7 @@ async function completeEdition(index) {
   closePopup();
   let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
+  showContacts();
   showInfo(index);
 }
 
@@ -843,7 +844,7 @@ function showEditContact(index) {
     </div>
     <div class="pop-bottom">
     <div class="form-frame">
-        <form id="userForm" class="user-form" onsubmit="await editContactInArray(${indexNr}); return false;">            
+        <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr}); return false;">            
                 <div class="contact-frame">
                     <input class="contact-input" type="text" id="fullName"
                         placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"
