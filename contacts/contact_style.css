@@ -55,14 +55,12 @@
   display: inline;
 }
 
-.add-btn img,
-.more-btn img {
-  z-index: 51;
+.add-btn img {
+  z-index: 20;
 }
 
 /* useless for mobile */
-.add-btn:hover,
-.more-btn:hover {
+.add-btn:hover {
   background-color: var(--strong-blue);
   cursor: pointer;
   transform: none;
@@ -70,7 +68,8 @@
 }
 
 /* only in mobile */
-.add-mob-btn {
+.add-mob-btn,
+.more-btn {
   display: none;
 }
 

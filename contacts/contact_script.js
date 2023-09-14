@@ -95,6 +95,7 @@ function personDatas(initial) {
  */
 async function deleteContact(index) {
   contactArray.splice(index, 1);
+  let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
   closeInfo();
   showContacts();
@@ -417,7 +418,7 @@ async function completeCreation() {
   document.getElementById("userForm").reset();
   closePopup();
   let userId = localStorage.getItem('userId');
-  await setItem('contacts' + userId, JSON.stringify(contactArray));
+  setItem('contacts' + userId, JSON.stringify(contactArray));
   let index = contactArray.length - 1;  
   showContacts();
   showInfo(index);
