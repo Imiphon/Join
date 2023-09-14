@@ -21,12 +21,29 @@ async function getContactsFromServer() {
   } catch (e) {
     console.info('could not find contacts')
   }
+  await sortContacts();
   showContacts();
 }
 
 /**
- * this starts a frame in the main area with #nameGroup, #popup and successInfo divs
- * calling functions to build initial groups, inner content and show all names
+ * sort last names in contactArray to alphabetic order
+ */
+async function sortContacts() {
+    
+    contactArray.sort((a, b) => {
+      let nameA = a.lastName;
+      let nameB = b.lastName;
+  
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+    await setItem('contacts', JSON.stringify(contactArray));
+}
+
+/**
+ * shows main structure of contact_list.html
+ * calls nameGroup
  */
 function showContacts() {
   let content = document.querySelector("main");
@@ -36,24 +53,50 @@ function showContacts() {
   showNameGroup();
 }
 
+
 /**
+ * sort all initials in right order
  * put all names in right initialGroup
  */
 function showNameGroup() {
   let content = document.getElementById("nameGroup");
   content.innerHTML = "";
-  for (let initial in initialGroups) {
+  let sortedInitials = Object.keys(initialGroups).sort();
+
+  for (let i = 0; i < sortedInitials.length; i++) {
+    let initial = sortedInitials[i];
     content.innerHTML += GroupName(initial);
     content.innerHTML += personDatas(initial);
   }
 }
 
 /**
+ * Constructs a specific initial group. It iterates over the contactArray and
+ * appends the appropriate HTML content for each person with the specified initial.
+ *
+ * @param {string} initial - The initial letter for filtering the persons in contactArray.
+ * @returns {string} The HTML content representing persons of the specified initial group.
+ */
+function personDatas(initial) {
+  let htmlContent = '';
+  for (let i = 0; i < contactArray.length; i++) {
+    let thisPerson = contactArray[i];
+    if (initialGroups[initial].includes(thisPerson)) {
+      let person = thisPerson;
+      htmlContent += showPersonDatas(person, i);
+    }
+  }
+  return htmlContent;
+}
+
+/**
  * takes index from personDatas(), over showInfo() and delete the contact 
  * @param {int} index 
  */
-function deleteContact(index) {
+async function deleteContact(index) {
   contactArray.splice(index, 1);
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
+  closeInfo();
   showContacts();
 }
 
@@ -264,8 +307,9 @@ async function completeEdition(index) {
  * showEditContact() and delete the contact 
  * @param {int} index 
  */
-function deleteInEditor(index) {
+async function deleteInEditor(index) {
   contactArray.splice(index, 1);
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
   closePopup();
   showContacts();
 }
@@ -373,9 +417,9 @@ async function completeCreation() {
   closePopup();
   let userId = localStorage.getItem('userId');
   await setItem('contacts' + userId, JSON.stringify(contactArray));
-  let index = contactArray.length - 1;
-  showInfo(index);
+  let index = contactArray.length - 1;  
   showContacts();
+  showInfo(index);
   successInfo();
 }
 
@@ -582,39 +626,29 @@ function GroupName(initial) {
 }
 
 /**
- * Constructs and returns the HTML content for displaying the data of persons
- * belonging to a specific initial group. It iterates over the contactArray and
- * appends the appropriate HTML content for each person with the specified initial.
- *
- * @param {string} initial - The initial letter for filtering the persons in contactArray.
- * @returns {string} The HTML content representing persons of the specified initial group.
+ * returns the HTML content for displaying the data of persons
+ * @param {string} person 
+ * @param {int} i 
+ * @returns 
  */
-function personDatas(initial) {
-  let htmlContent = '';
-  for (let i = 0; i < contactArray.length; i++) {
-    let thisPerson = contactArray[i];
-    if (initialGroups[initial].includes(thisPerson)) {
-      let person = thisPerson;
-      htmlContent += `
-                <div class="name-frame">
-                    <div class="name-box" onclick="showInfo(${i})">
-                        <div class="side-circle" class="initials" style="background-color: ${person.color};">
-                            ${person.initials}
-                        </div>
-                        <div class="name-mail-frame">
-                            <div class="full-name">
-                                ${person.name} ${person.lastName}
-                            </div>
-                            <div class="mail">
-                                ${person.mail}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `;
-    }
-  }
-  return htmlContent;
+function showPersonDatas(person, i) {
+  return `
+  <div class="name-frame">
+      <div class="name-box" onclick="showInfo(${i})">
+          <div class="side-circle initials" style="background-color: ${person.color};">
+              ${person.initials}
+          </div>
+          <div class="name-mail-frame">
+              <div class="full-name">
+                  ${person.name} ${person.lastName}
+              </div>
+              <div class="mail">
+                  ${person.mail}
+              </div>
+          </div>
+      </div>
+  </div>
+  `;
 }
 
 /**
@@ -736,7 +770,7 @@ function showAddContact() {
     </div>
     <div class="pop-bottom">
         <div class="form-frame">
-            <form id="userForm" class="user-form" onsubmit="await createContact(); return false;">
+            <form id="userForm" class="user-form" onsubmit="createContact(); return false;">
                 <div class="contact-frame">
                 <input 
                 class="contact-input" 
