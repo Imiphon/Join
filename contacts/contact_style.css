@@ -362,6 +362,10 @@
   margin-right: 16px;
 }
 
+.info-box {
+  display: none;
+}
+
 /*=====================
     POPOUP SELECTORS
     ====================*/
@@ -483,7 +487,7 @@
 }
 
 /*=====================
-    SELECTORS FOR ADD & EDIT CONTACT IN MOBILE
+    SELECTORS FOR ADD & EDIT 
     ====================*/
 
 .form-frame {
@@ -750,7 +754,7 @@
   }
 
   .info-box {
-    display: block;
+    display: none;
     position: absolute;
     width: 100%;
     height: 100vh;
