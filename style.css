@@ -10,7 +10,6 @@
   padding: 32px;
   animation: var(--animation-timer) changeBackground ease-in-out;
 }
-
 @keyframes changeBackground {
   from {
     background-color: var(--reg-blue);
@@ -35,7 +34,6 @@
   top: 32px;
   left: 32px;
 }
-
 @keyframes moveLogo {
   from {
     position: absolute;
@@ -77,7 +75,6 @@
   padding-top: 64px;
   justify-content: center;
 }
-
 @keyframes showForm {
   from {
     display: none;
@@ -172,15 +169,15 @@
   left: 32px;
 }
 
+.backArrow:hover {
+  cursor: pointer;
+  height: 34px;
+  width: 35px;
+}
+
 h1{
   padding: 0 70px;
   color: black;
-}
-
-.backArrow:hover {
-  cursor: pointer;
-  width: calc(40px);
-  height: calc(40px);
 }
 
 .loginInput {
@@ -228,13 +225,7 @@ h1{
   gap: 16px;
 }
 
-.acceptPrivacy {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 16px;
-  padding-top: 32px;
-}
+
 
 .loginButtons {
   display: flex;
@@ -315,7 +306,7 @@ h1{
   color: white;
 }
 
-.btnBlue:hover {
+.btnBlue:hover:enabled {
   background-color: var(--strong-blue);
   cursor: pointer;
   transform: none;
@@ -341,13 +332,14 @@ h1{
   color: var(--reg-blue);
   background-color: white;
   width: unset;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .btnTxtBlue:hover {
   cursor: pointer;
   color: var(--strong-blue);
   text-decoration: underline;
-  font-size: 15px;
 }
 
 #rememberMe {
@@ -371,6 +363,7 @@ h1{
   color: white;
   animation: var(--animation-timer) moveMessage ease-in-out;
 }
+
 .messageImg{
   padding-right: 16px;
 }
@@ -384,8 +377,21 @@ h1{
   }
 }
 
+.acceptPrivacy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 32px;
+}
+
 #acceptPrivacy {
   accent-color: var(--reg-blue);
+  margin-right: 16px;
+}
+
+#acceptPrivacy:hover {
+  cursor: pointer;
 }
 
 .d-none {
@@ -394,6 +400,10 @@ h1{
 
 .d-flex {
   display: flex;
+}
+
+.w-110{
+  width: 110px;
 }
 
 @media (min-height: 866px) {
@@ -408,24 +418,33 @@ h1{
   .formDivLogin, .formDivNewUser, .formDivResetPwd {
     width: 60%;
   }
+
   .signupDiv {
     position: absolute;
     top: 32px;
     right: 32px;
   }
+
   .joinLogo {
     width: 101px;
     height: 122px;
   }
+
   .logoDiv {
     height: 122px;
   }
+
   .loginOptions{
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
     align-items: center;
   }
+
+  .loginOptions div{
+    width: 30%;
+  }
+
   .rememberMe{
     align-items: center;
   }
@@ -449,155 +468,3 @@ h1{
 }
 
 
-/***********************/
-@media (min-width: 1024px) {
-  .body-frame {
-    flex-direction: row-reverse;
-  }
-  footer {
-    z-index: 9;
-    width: 232px;
-    height: 100%;
-    position: absolute;
-    padding-right: 48px;
-  }
-  .footerMenuContainer {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-  .toolNameNav {
-    display: block;
-  }
-  .questionsNav {
-    display: block;
-  }
-  .helpAnchorSubMenuHeader {
-    display: none;
-  }
-  .privacyLegalContainer {
-    display: block;
-    margin-bottom: 200px;
-    margin-left: 30px;
-  }
-  .footerWrapper {
-    flex-direction: column;
-    margin-top: 114px;
-    display: flex;
-    height: 100%;
-  }
-  .btnFooterMenuDesktopVersion {
-    width: 186px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: 8px;
-    padding: 8px 30px;
-    margin-bottom: 15px;
-    background: #ffffff;
-  }
-  .btnFooterMenuDesktopVersion img {
-    margin-right: 8px;
-    width: 24px;
-    height: 24px;
-  }
-  .btnFooterMenuDesktopVersionTextDiv {
-    font-size: var(--fs-16px);
-    font-weight: var(--fw-400);
-    font-style: normal;
-    color: #42526e;
-  }
-  .btnFooterMenuMobileVersion {
-    display: none;
-  }
-  .borad-main {
-    flex: none;
-    width: calc(100% - 232px);
-  }
-  .welcomeText {
-    font-size: var(--fs-48px);
-    font-weight: var(--fw-400);
-  }
-  .welcomeTextuserName {
-    font-size: var(--fs-64px);
-  }
-  .welcomeMsgDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 18vh;
-    margin-bottom: 0;
-    transform: translate(0px);
-  }
-  .summaryWrapper {
-    transform: translateY(0px);
-    height: 50%;
-  }
-  .summaryContainer {
-    width: 912px;
-    height: 442px;
-  }
-  .tasksDivContainer {
-    display: flex;
-    justify-content: space-between;
-  }
-  .clockAndTaskContainer {
-    display: flex;
-  }
-  .clockAndDateDiv {
-    width: 672px;
-    height: 191px;
-  }
-  .imgAndNrTasksToDoDiv {
-    display: flex;
-  }
-  .tasksToDoDiv {
-    display: flex;
-    flex-direction: column;
-    width: 208px;
-    height: 191px;
-    margin-left: 16px;
-  }
-  .taskDiv {
-    height: 219px;
-    width: 204px;
-  }
-  .tasksDiv {
-    gap: 18px;
-  }
-  .tasksToDoDivNr {
-    display: flex;
-    align-items: center;
-  }
-  .tasksToDoDivText {
-    font-size: var(--fs-23px);
-  }
-  .taskDivText {
-    width: 75px;
-    height: 56px;
-    font-size: var(--fs-23px);
-    margin: 0 auto;
-    margin-top: 7px;
-  }
-  .tasksDivNr {
-    font-size: var(--fs-48px);
-    margin-left: 20px;
-  }
-  .date {
-    font-size: var(--fs-33px);
-  }
-  .deadlineText, .taskUrgentDiv {
-    font-size: var(--fs-23px);
-  }
-  .deadlineText {
-    text-align: start;
-    width: 100%;
-  }
-  .taskNrDiv {
-    font-size: var(--fs-48px);
-  }
-  .clockAndDateDiv {
-    justify-content: center;
-    gap: 35px;
-  }
-}

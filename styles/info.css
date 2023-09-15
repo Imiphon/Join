@@ -3,3 +3,9 @@
   height: auto;
   padding: 20px;
 }
+
+.privacyPolicyWrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}

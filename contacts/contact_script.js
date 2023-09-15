@@ -1,18 +1,4 @@
 /**
- * checks innerWidth to control zoom-situation
- */
-let userView = window.innerWidth > 1024;
-
-window.addEventListener('resize', function() {
-  let deskWidth = window.innerWidth > 1024;
-
-  if (userView !== deskWidth) {
-    location.reload(); 
-  }
-  userView = deskWidth; 
-});
-
-/**
  * eventListener to check if its the right side instead of onload-function
  * cause:
  * It separates the JavaScript logic from the HTML, making the code cleaner and more maintainable.
@@ -29,46 +15,89 @@ document.addEventListener("DOMContentLoaded", function () {
  * load contacts from server
  */
 async function getContactsFromServer() {
+  let userId = localStorage.getItem('userId');
   try {
-    contactArray = JSON.parse(await getItem('contacts'));
-  } catch(e) {
+    contactArray = await JSON.parse(await getItem('contacts' + userId));
+  } catch (e) {
     console.info('could not find contacts')
   }
-
+  await sortContacts();
   showContacts();
 }
 
 /**
- * this starts a frame in the main area with #nameGroup, #popup and successInfo divs
- * calling functions to build initial groups, inner content and show all names
+ * sort last names in contactArray to alphabetic order
+ */
+async function sortContacts() {
+    
+    contactArray.sort((a, b) => {
+      let nameA = a.lastName;
+      let nameB = b.lastName;
+  
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+    await setItem('contacts', JSON.stringify(contactArray));
+}
+
+/**
+ * shows main structure of contact_list.html
+ * calls nameGroup
  */
 function showContacts() {
   let content = document.querySelector("main");
   content.innerHTML = "";
   content.innerHTML += showMainFrame();
   createInitalGroup();
-  //createInitials();
   showNameGroup();
 }
+
+
 /**
+ * sort all initials in right order
  * put all names in right initialGroup
  */
 function showNameGroup() {
   let content = document.getElementById("nameGroup");
   content.innerHTML = "";
-  for (let initial in initialGroups) {
+  let sortedInitials = Object.keys(initialGroups).sort();
+
+  for (let i = 0; i < sortedInitials.length; i++) {
+    let initial = sortedInitials[i];
     content.innerHTML += GroupName(initial);
     content.innerHTML += personDatas(initial);
   }
 }
 
 /**
- * takes index from personDatas(), over widthForInfo(), 
- * showInfoDesk() / showInfoMobile() and delete the contact 
- * @param {number} index 
+ * Constructs a specific initial group. It iterates over the contactArray and
+ * appends the appropriate HTML content for each person with the specified initial.
+ *
+ * @param {string} initial - The initial letter for filtering the persons in contactArray.
+ * @returns {string} The HTML content representing persons of the specified initial group.
  */
-function deleteContact(index) {
+function personDatas(initial) {
+  let htmlContent = '';
+  for (let i = 0; i < contactArray.length; i++) {
+    let thisPerson = contactArray[i];
+    if (initialGroups[initial].includes(thisPerson)) {
+      let person = thisPerson;
+      htmlContent += showPersonDatas(person, i);
+    }
+  }
+  return htmlContent;
+}
+
+/**
+ * takes index from personDatas(), over showInfo() and delete the contact 
+ * @param {int} index 
+ */
+async function deleteContact(index) {
   contactArray.splice(index, 1);
+  let userId = localStorage.getItem('userId');
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
+  closeInfo();
   showContacts();
 }
 
@@ -79,22 +108,7 @@ function deleteContact(index) {
 /**
  * takes index from personDatas()
  * open mob or desk optic
- * @param {number} index 
- */
-function widthForInfo(index) {
-  const width = window.innerWidth;
-  if (width <= 1024) {
-    showInfoMobile(index);
-  } else {
-    showInfoDesk(index);
-    showNameGroup();
-  }
-}
-
-/**
- * takes index from personDatas()
- * open mob or desk optic
- * @param {number} index 
+ * @param {int} index 
  */
 function widthForEdit(index) {
   const width = window.innerWidth;
@@ -108,7 +122,7 @@ function widthForEdit(index) {
 /**
  * takes index from personDatas()
  * open mob or desk optic
- * @param {number} index 
+ * @param {int} index 
  */
 async function widthForAdd() {
   const width = window.innerWidth;
@@ -129,33 +143,23 @@ async function widthForAdd() {
 //============================================================
 
 /**
- * takes index from widthForInfo(), find person in (global) contactArray
+ * takes index from person in (global) contactArray
  * get id from (desk-) popup and set content from showInfoText() 
- * @param {number} index 
+ * @param {int} index 
  */
-function showInfoDesk(index) {
+function showInfo(index) {
   let person = contactArray[index];
-  let popupBox = document.getElementById("popupBox");
-  popupBox.innerHTML = showInfoText(person, index);
-  /*  
-    let rightDesk = document.getElementById('rightDesk');
-  rightDesk.innerHTML = showInfoText(person, index);
-
-   */
-
+  let infoBox = document.getElementById("infoBox");
+  infoBox.innerHTML = showInfoText(person, index);
+  infoBox.style.display ='inline';
 }
 
 /**
- * takes index from widthForInfo(), find person in (global) contactArray
- * get id from (mobile-)popup and set content from showInfoText() 
- * @param {number} index 
+ * set div #infoBox to none
  */
-function showInfoMobile(index) {
-  let main = document.querySelector("main");
-  main.innerHTML = "";
-  let person = contactArray[index];
-  main.innerHTML += showInfoText(person, index);
-  document.getElementById("moreRow").style.display = "none";
+function closeInfo() {
+  let infoBox = document.getElementById('infoBox')
+  infoBox.style.display ='none';
 }
 
 //============================================================
@@ -216,7 +220,7 @@ function closeDrawer() {
  * takes index from widthForEdit(index)
  * add contact from showEditContact() into mobilePopup
  * starts checkOldValues()
- * @param {number} index 
+ * @param {int} index 
  */
 async function openEditMobile(index) {
   let indexNr = index; //Nr of contactArray
@@ -230,7 +234,7 @@ async function openEditMobile(index) {
  * takes index from widthForEdit(index)
  * add contact from showEditContact() into deskEditPopup()
  * starts checkOldValues()
- * @param {number} index 
+ * @param {int} index 
  */
 async function openEditDesk(index) {
   let indexNr = index; //Nr of contactArray
@@ -266,7 +270,7 @@ function setInitialValues() {
  * takes index from showEditContact(index)
  * Takes elements from inputfields and push it into contactArray()
  * starts comleteEdition()
- * @param {number} index from personDatas
+ * @param {int} index from personDatas
  */
 function editContactInArray(index) {
   let name = document.getElementById("fullName").value; //.split(' ') in splitName()
@@ -279,7 +283,7 @@ function editContactInArray(index) {
   contactArray[index].name = preName;
   contactArray[index].lastName = lastName;
   contactArray[index].mail = mail;
-  contactArray[index].phone = phone;  
+  contactArray[index].phone = phone;
   contactArray[index].initials = initials;
   contactArray[index].color = color;
 
@@ -288,23 +292,26 @@ function editContactInArray(index) {
 
 /**
  * takes index from editContactInArray(index)
- * close the popup, loadup infos to server and starts widthForInfo(index)
- * @param {number} index 
+ * close the popup, loadup infos to server and starts infoBox(index)
+ * @param {int} index 
  */
-function completeEdition(index) {
+async function completeEdition(index) {
   document.getElementById("userForm").reset();
   closePopup();
-  setItem('contacts', JSON.stringify(contactArray));
-  widthForInfo(index);
+  let userId = localStorage.getItem('userId');
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
+  showContacts();
+  showInfo(index);
 }
 
 /**
- * takes index from personDatas(), over widthForInfo(), 
+ * takes index from personDatas(), 
  * showEditContact() and delete the contact 
- * @param {number} index 
+ * @param {int} index 
  */
-function deleteInEditor(index) {
+async function deleteInEditor(index) {
   contactArray.splice(index, 1);
+  await setItem('contacts' + userId, JSON.stringify(contactArray));
   closePopup();
   showContacts();
 }
@@ -365,7 +372,7 @@ function setColor(color, event) {
   colorPicker.style.display = "none";
   event.stopPropagation();
   if (document.querySelector(".editor")) {
-    //without space between the 2 classes to select exactly this element
+    //without space between ".popup-circle.detail-ellipse" to select exactly this element
     //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
     let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
     detailEllipse.style.backgroundColor = userColors[color];
@@ -376,13 +383,16 @@ function setColor(color, event) {
  * Creates a new contact entry based on the user input from the form. After the contact
  * is created, the contact creation process is finalized by calling the completeCreation function.
  */
-function createContact() {
+async function createContact() {
   let createBtn = document.getElementById('createBtn');
-  createBtn.disabled = true; 
+  createBtn.disabled = true;
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
   let phone = parseInt(document.getElementById("phone").value);
   let color = document.getElementById("colorBox").style.backgroundColor;
+  if (color == '') {
+    color = 'var(--user-grey)';
+  }
   let { preName, lastName } = splitName(fullName);
   let initials = preName[0] + lastName[0];
 
@@ -395,7 +405,7 @@ function createContact() {
     color: color,
   });
 
-  completeCreation();
+  await completeCreation();
 }
 
 /**
@@ -403,14 +413,15 @@ function createContact() {
  * the form, and saving the new contact to storage. Also, triggers a visual feedback for 
  * a successful operation.
  */
-function completeCreation() {
-  createBtn.disabled = false; 
+async function completeCreation() {
+  createBtn.disabled = false;
   document.getElementById("userForm").reset();
   closePopup();
-  setItem('contacts', JSON.stringify(contactArray));
-  let index = contactArray.length -1;
-  widthForInfo(index);
+  let userId = localStorage.getItem('userId');
+  setItem('contacts' + userId, JSON.stringify(contactArray));
+  let index = contactArray.length - 1;  
   showContacts();
+  showInfo(index);
   successInfo();
 }
 
@@ -575,8 +586,7 @@ function closePopup() {
 function showMainFrame() {
   return `
 <div class="main-frame" id="mainFrame">
-  <div class="group-frame" id="groupFrame">
-      <div class="arrow-div-up"><img class="scroll-arrow" id="arrow-up" src="../assets/img/arrow-up.png" alt="arrow-up"></div>          
+  <div class="group-frame" id="groupFrame">        
     <div class="add-btn-frame">
       <button class="add-btn" id="addBtn" onclick="widthForAdd();">
         <img src="../assets/img/person_add.png" alt="">
@@ -584,15 +594,15 @@ function showMainFrame() {
     </div>
     <div class="name-group" id="nameGroup">
     </div>
-      <div class="arrow-div-down"><img class="scroll-arrow" id="arrow-down" src="../assets/img/arrow-down.png" alt="arrow-down"></div>
   </div>
 
-  <div id="rightDesk" class"right-desk"></div>
   <button class="add-mob-btn" id="addBtn" onclick="widthForAdd();">
     <img src="../assets/img/person_add.png" alt="">
   </button>      
     
   <div class="popup-box" id="popupBox">
+  </div>
+  <div class="info-box" id="infoBox">
   </div>
   <div id="success-info">Contact successfully created</div>
 </div>
@@ -618,39 +628,29 @@ function GroupName(initial) {
 }
 
 /**
- * Constructs and returns the HTML content for displaying the data of persons
- * belonging to a specific initial group. It iterates over the contactArray and
- * appends the appropriate HTML content for each person with the specified initial.
- *
- * @param {string} initial - The initial letter for filtering the persons in contactArray.
- * @returns {string} The HTML content representing persons of the specified initial group.
+ * returns the HTML content for displaying the data of persons
+ * @param {string} person 
+ * @param {int} i 
+ * @returns 
  */
-function personDatas(initial) {
-  let htmlContent = '';
-  for (let i = 0; i < contactArray.length; i++) {
-    let thisPerson = contactArray[i];
-    if (initialGroups[initial].includes(thisPerson)) {
-      let person = thisPerson;
-      htmlContent += `
-                <div class="name-frame">
-                    <div class="name-box" onclick="widthForInfo(${i})">
-                        <div class="side-circle" class="initials" style="background-color: ${person.color};">
-                            ${person.initials}
-                        </div>
-                        <div class="name-mail-frame">
-                            <div class="full-name">
-                                ${person.name} ${person.lastName}
-                            </div>
-                            <div class="mail">
-                                ${person.mail}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `;
-    }
-  }
-  return htmlContent;
+function showPersonDatas(person, i) {
+  return `
+  <div class="name-frame">
+      <div class="name-box" onclick="showInfo(${i})">
+          <div class="side-circle initials" style="background-color: ${person.color};">
+              ${person.initials}
+          </div>
+          <div class="name-mail-frame">
+              <div class="full-name">
+                  ${person.name} ${person.lastName}
+              </div>
+              <div class="mail">
+                  ${person.mail}
+              </div>
+          </div>
+      </div>
+  </div>
+  `;
 }
 
 /**
@@ -661,7 +661,7 @@ function personDatas(initial) {
  *
  * @param {Object} person - The object representing the person's data. The object should have
  * properties: name, lastName, mail, phone, initials, and color.
- * @param {number} indexNr - The index number of the person in the contactArray or a similar array.
+ * @param {int} indexNr - The index number of the person in the contactArray or a similar array.
  * @returns {string} The HTML content representing the detailed information of the specified person.
  */
 function showInfoText(person, indexNr) {
@@ -669,9 +669,12 @@ function showInfoText(person, indexNr) {
         <div class="detail-frame" id="detailFrame">
             <div class="detail-top-head">
                 <div>Contact Informations</div>
+                <button class="close-info" id="closeInfo" onclick="closeInfo()"><img src="../assets/img/arrow-left-line.svg" alt="back"></button>                
+                <!--
                 <a href="contact_list.html">
                     <img src="../assets/img/arrow-left-line.svg" alt="back">
                 </a>
+                -->
             </div>
             <div class="detail-name-box">
                 <div class="detail-ellipse" style="background-color: ${person.color}">
@@ -822,7 +825,7 @@ function showAddContact() {
  * including name, email, phone number, and contact color. The form also includes options 
  * for deleting the contact or saving the changes.
  *
- * @param {number} index - The index of the contact in the contactArray to be edited.
+ * @param {int} index - The index of the contact in the contactArray to be edited.
  * @returns {string} The HTML content representing the "Edit Contact" form layout.
  */
 function showEditContact(index) {

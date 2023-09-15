@@ -27,6 +27,7 @@ async function login() {
   enableButtonLogin();  
 }
 
+
 /**
  *  This function is use to create a new user. If the E-Mail is not in use.
  *
@@ -41,6 +42,7 @@ async function newUser() {
 
   if (!(await checkUserExist(email))) {
     await registerUser(name, email, password);
+    await createContactsRemoteStorage(name, email);
     showSignUpMessage();
     closeSignUp();
   } else {
@@ -50,6 +52,50 @@ async function newUser() {
   enableButton("newUserBtn");
 }
 
+/**
+ * This function is to create the contact array on the remote storage.
+ * 
+ * @param {int} userId - Id of the new User to create the contact array 
+ */
+
+async function createContactsRemoteStorage(name, email){
+  emailAdresses = await getExistingEmailAdresses();
+  let userId = emailAdresses.indexOf(email);
+  let { firstName, lastName } = splitName(name);
+
+  let initials = firstName[0] + lastName[0];
+  
+  let array = [
+    {
+      color: "var(--user-yellow)",
+      initials: initials,
+      lastName: lastName,
+      mail: email,
+      name: firstName,
+      phone: 0
+    }
+  ]
+  
+  await setItem('contacts' + userId, JSON.stringify(array));
+}
+
+/**
+ * split the entry from the user into pre- and lastname
+ * 
+ * @param {string} fullName 
+ * @returns 
+ */
+function splitName(fullName) {
+  let nameParts = fullName.split(" ");
+  let preName = upperCaseFirstLetter(nameParts[0]);
+  let lastName = upperCaseFirstLetter(nameParts[1]);
+  return { preName, lastName };
+}
+
+/**
+ *  This function is to check if the SignUp can be activatet.
+ * 
+ */
 function checkInput(){
   let name = getInput("newName");
   let email = getInput("newEmail");
@@ -57,12 +103,13 @@ function checkInput(){
   let newConfirmPassword = document.getElementById("newConfirmPassword");
   let acceptPrivacy = document.getElementById("acceptPrivacy");
 
-  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0){
+  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 || acceptPrivacy.checked == false){
     disableButton("newUserBtn");    
   }else{
     enableButton("newUserBtn");
   }
 }
+
 
 /**
  * This function is use to login as quest user.
@@ -71,9 +118,11 @@ function checkInput(){
  */
 function guestLogin() {
   disableButtonLogin();
+  localStorage.setItem('userId', '');
   window.location = "./summary/summary.html";
   
 }
+
 
 /**
  * This function is use to send the reset your password email to the user.
@@ -88,7 +137,8 @@ async function sendResetEmail() {
   if (await checkUserExist(email)) {
     showSendEmailMessage();
     closeForgotPwd();
-    resetId = emailAdresses.indexOf(email);
+    // In the final version here we must send the E-Mail and the resetPage only avalible over the link in the mail.
+    resetId = emailAdresses.indexOf(email); 
     openResetPwd();
   } else {
     showEmailNotFoundMessage();
@@ -96,6 +146,7 @@ async function sendResetEmail() {
   form.reset();
   enableButton("resetEmailBtn");
 }
+
 
 /**
  * This function is use to reset the password of the user.
@@ -114,6 +165,7 @@ async function resetPwd() {
   enableButton("resetPwdBtn");
 }
 
+
 /**
  * This function is use to open the login formular.
  *
@@ -130,6 +182,7 @@ function openLogin() {
   loginFooter.classList.remove("d-none");
   logInPage.classList.remove("d-none");
 }
+
 
 /**
  * This function is use to close the login formular.
@@ -150,6 +203,7 @@ function closeLogin() {
   loginFooter.classList.add("d-none");
 }
 
+
 /**
  * This function is use to open the sign up formular.
  *
@@ -162,6 +216,7 @@ function openSignUp() {
   loginFooter.classList.add("loginFooterWhite");
   disableButton("newUserBtn");
 }
+
 
 /**
  * This function is use to close the sign up formular.
@@ -178,6 +233,7 @@ function closeSignUp() {
   openLogin();
 }
 
+
 /**
  * This function is use to open the forgot password formular.
  *
@@ -187,6 +243,7 @@ function openForgotPwd() {
   let resetEmailPage = document.getElementById("formResetEmailDiv");
   resetEmailPage.classList.remove("d-none");
 }
+
 
 /**
  * This function is use to close the forgot password formular.
@@ -200,6 +257,7 @@ function closeForgotPwd() {
   openLogin();
 }
 
+
 /**
  * This function is use to open the reset password formular.
  *
@@ -210,6 +268,11 @@ function openResetPwd() {
   resetPwdPage.classList.remove("d-none");
 }
 
+
+/**
+ * This function is use to close the reset password formular.
+ *
+ */
 function closeResetPwd() {
   let form = document.getElementById("formResetPwd");
   let resetPwdPage = document.getElementById("formResetPwdDiv");
@@ -217,6 +280,11 @@ function closeResetPwd() {
   form.reset();
   resetPwdPage.classList.add("d-none");
   openLogin();
+}
+
+
+function showPrivacy(){
+  window.open("./templates/privacy_policy.html", "_blank");
 }
 
 /**
@@ -232,6 +300,7 @@ function showMessage(html) {
   }, 3000);
 }
 
+
 /**
  * This function is use to define the password not right message.
  * The function showMessage() shows the message on the screen.
@@ -243,6 +312,7 @@ function showPwdNotRightMessage() {
     `;
   showMessage(html);
 }
+
 
 /**
  * This function is use to define the email has been send message.
@@ -257,6 +327,7 @@ function showSendEmailMessage() {
   showMessage(html);
 }
 
+
 /**
  * This function is use to define the email not found message.
  * The function showMessage() shows the message on the screen.
@@ -268,6 +339,7 @@ function showEmailNotFoundMessage() {
     `;
   showMessage(html);
 }
+
 
 /**
  * This function is use to define the sign up message.
@@ -281,6 +353,7 @@ function showSignUpMessage() {
   showMessage(html);
 }
 
+
 /**
  * This function is use to define the already exist message.
  * The function showMessage() shows the message on the screen.
@@ -292,6 +365,7 @@ function showSignUpAlreadyExistMessage() {
     `;
   showMessage(html);
 }
+
 
 /**
  * This function is use to define the password has been reset message.
@@ -305,6 +379,7 @@ function showresetPwdMessage() {
   showMessage(html);
 }
 
+
 /**
  * This function is use to check if the email adress of an user exist.
  *
@@ -316,6 +391,7 @@ async function checkUserExist(email) {
   return emailAdresses.includes(email);
 }
 
+
 /**
  * This function is use to check if the is correct.
  * @param {string} password - password to check if is correct.
@@ -324,6 +400,7 @@ async function checkUserExist(email) {
 function checkPwdCorrect(userid, password) {
   return password == users[userid]["password"];
 }
+
 
 /**
  * This function is use to load the existing email adresses to an array.
@@ -339,6 +416,7 @@ async function getExistingEmailAdresses() {
   }
   return emailAdresses;
 }
+
 
 /**
  * This function is use to register a new user.
@@ -356,6 +434,7 @@ async function registerUser(name, email, password) {
   saveUsers();
 }
 
+
 /**
  * This function is use to get the value of an html tag
  *
@@ -365,6 +444,7 @@ async function registerUser(name, email, password) {
 function getInput(id) {
   return document.getElementById(id).value;
 }
+
 
 /**
  * This function is use to disable the buttons on the login form.
@@ -379,6 +459,7 @@ function disableButtonLogin() {
   disableButton("signUp");
 }
 
+
 /**
  * This function is use to enable the buttons on the login form.
  *
@@ -391,6 +472,7 @@ function enableButtonLogin() {
   enableButton("signUp");
 }
 
+
 /**
  * This function is use to diable a html button.
  *
@@ -401,6 +483,7 @@ function disableButton(buttonId) {
   button.disabled = true;
 }
 
+
 /**
  * This function is use to enable a html button.
  *
@@ -410,6 +493,7 @@ function enableButton(buttonId) {
   let button = document.getElementById(buttonId);
   button.disabled = false;
 }
+
 
 /**
  * This function is use to load the users from the remote storage.
@@ -423,6 +507,7 @@ async function loadUsers() {
   }
 }
 
+
 /**
  * This function is use to save the users to the remote storage.
  *
@@ -430,6 +515,7 @@ async function loadUsers() {
 async function saveUsers() {
   await setItem("users", JSON.stringify(users));
 }
+
 
 /*Validate Password Match HTML5 newUser + resetPwd*/
 let newPassword = document.getElementById("newPassword"),
@@ -449,6 +535,7 @@ function validatenewPassword() {
   }
 }
 
+
 /**
  * This function is use to check if the passwords on the reset password page match.
  *
@@ -460,6 +547,7 @@ function validateresetPassword() {
     resetConfirmPassword.setCustomValidity("");
   }
 }
+
 
 newPassword.onchange = validatenewPassword;
 newConfirmPassword.onkeyup = validatenewPassword;
