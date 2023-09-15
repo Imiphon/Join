@@ -68,8 +68,7 @@
 }
 
 /* only in mobile */
-.add-mob-btn,
-.more-btn {
+.add-mob-btn {
   display: none;
 }
 
