@@ -30,7 +30,6 @@ footer {
 }
 
 .footerPolicyAnchor {
-  padding-bottom: 15px;
   color: #42526e;
   font-size: var(--fs-16px);
   font-weight: var(--fw-400);
@@ -64,6 +63,18 @@ footer {
 
 .footerLegalAnchor:hover {
   color: blue;
+}
+
+.footerLegalAnchorActive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--dark-blue);
+  color: #ffffff;
+  border-radius: 5px;
+  border: none;
+  padding: 14px;
+  margin-bottom: 10px;
 }
 
 

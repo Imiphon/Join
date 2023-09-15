@@ -220,7 +220,7 @@ async function displayWelcomeMsgDesktop() {
         icon = "coffee";
     }
     else if (currentHour < 20){
-        welcomeMessage = 'Good afternoon!';
+        welcomeMessage = 'Good afternoon';
         icon = "sun-o";
     }
     else if (currentHour < 24){
@@ -288,13 +288,12 @@ function removeWelcomeMsgAnimation() {
     const myParam = urlParams.get('id');
     if (myParam) {
         return await findUserId(myParam);
+    } else {
+        return " dear guest"
     }
   }  
 
   
-
-
-
 async function findUserId(userId) {
     await loadUsers();
     return users[userId]['name'];
