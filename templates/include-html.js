@@ -20,6 +20,10 @@ async function includeHTML() {
         displayWelcomeMsg();
         checkStrValueQueryParam(); 
     }
+
+    if (window.innerWidth >= 1024) {
+        displayWelcomeMsgDesktop();
+    }
 }
 
 function checkTrue(obj) {
@@ -87,7 +91,10 @@ function navigateToPage(buttonName) {
             break;
         case 'policy':
             window.location.href = '../templates/privacy_policy.html';
-            break;                
+            break;
+        case 'login':
+            window.location = '../index.html';
+            break;                    
         default:
             break;
     }
@@ -203,6 +210,30 @@ document.getElementById("welcomeTextuserName").innerHTML = await checkStrValueQu
 // ********************************************************************************
 
 
+async function displayWelcomeMsgDesktop() {
+    const date = new Date();
+    const currentHour = date.getHours();
+    let welcomeMessage;
+
+    if (currentHour < 12){
+        welcomeMessage = "Good Morning";
+        icon = "coffee";
+    }
+    else if (currentHour < 20){
+        welcomeMessage = 'Good afternoon!';
+        icon = "sun-o";
+    }
+    else if (currentHour < 24){
+        welcomeMessage = "Good evening"
+        icon = "moon-o";
+    }
+    else {
+        welcomeMessage = "Welcome";
+    }
+    document.getElementById("welcomeText").innerHTML = welcomeMessage + `, `;
+    document.getElementById("welcomeTextuserName").innerHTML = await checkStrValueQueryParamDesktop();
+}
+
 // ***************** Welcome Msg based on the day time ****************************
 // ********************************************************************************
 function welcomeMsgAnimation() {
@@ -251,8 +282,20 @@ function removeWelcomeMsgAnimation() {
   }
   // ********************************************************************************
   // ********************************************************************************
+
+  async function checkStrValueQueryParamDesktop() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('id');
+    if (myParam) {
+        return await findUserId(myParam);
+    }
+  }  
+
   
-  async function findUserId(userId) {
+
+
+
+async function findUserId(userId) {
     await loadUsers();
     return users[userId]['name'];
 }
