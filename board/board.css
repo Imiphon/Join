@@ -4,6 +4,8 @@
 
 .board-frame {
   margin-top: 100px;
+  margin-bottom: 100px;
+  padding-bottom: 40px;
 }
 
 .body-frame .borad-main {
@@ -45,26 +47,29 @@
 .tasks {
   width: calc(100%);
   display: flex;
+  height: 100%;
   gap: 26px;
   flex-direction: column;
   align-items: flex-start;
 }
 
 .card-parent {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  align-items: flex-start;
-  min-height: 100px;
   width: 100%;
+  height: 100%;
 }
 
 .allsTsks {
   width: 100%;
   display: flex;
+  justify-content: flex-start;
+  height: 100%;
   flex-direction: column;
   gap: 16px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .row-title {
@@ -92,6 +97,8 @@
 .empty-todo {
   width: 100%;
   height: 40px;
+  position: absolute;
+  top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -464,6 +471,10 @@
 }
 
 .dragging{
-  color: red !important;
+  transform: rotate(20deg);
+}
+
+.drag-area-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 

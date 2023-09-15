@@ -583,8 +583,12 @@ form input:focus:not(.subtask input) {
     width: 0 !important;
   }
 
-  .allsTsks {
-    align-items: center;
+  .cards{
+    width: 230px;
+  }
+
+  .allstsk{
+    justify-content: center;
   }
 }
 
@@ -613,6 +617,7 @@ form input:focus:not(.subtask input) {
     background-color: var(--user-grey);
     padding: 1px !important;
   }
+  
 
   .second-div {
     position: static;
@@ -627,6 +632,10 @@ form input:focus:not(.subtask input) {
 
   .tasks {
     flex-direction: row;
+  }
+
+   .cards{
+    width: 240px;
   }
 }
 
@@ -658,10 +667,6 @@ form input:focus:not(.subtask input) {
 
   .card-parent{
     height: 100vh;
-  }
-
-   .allsTsks {
-    align-items: center;
   }
 }
 

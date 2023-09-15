@@ -1,10 +1,3 @@
-// document.addEventListener("DOMContentLoaded", async () => {
-//   await loadTasks();
-//   await init();
-//   const draggables = document.getElementById("card0");
-//   console.log(draggables);
-// });
-
 async function init() {
   await loadTasks();
   renderTaskList("toDo", addedTasks);
@@ -54,7 +47,7 @@ let topicColor;
 
 function createTaskElement(task, index, section) {
   return /*html */ `
-    <div  class="cards draggable" id="card${index}" onclick="popUpTask(${section}, ${index})" draggable="true" ondragstart="startDargging(card${index}, ${section})">
+    <div  class="cards draggable" id="card${index}" onclick="popUpTask(${section}, ${index})" draggable="true" ondragstart="startDargging(event, ${index}, ${section})">
       <span  class="topic">${task.category}</span>
       <div class="frame">
         <h4 class="title">${task.title}</h4>
@@ -64,6 +57,39 @@ function createTaskElement(task, index, section) {
       ${createSelectedContacts(task, index)}
     </div>
   `;
+}
+
+let currentDargedElement;
+let currenSection;
+
+async function startDargging(event, id, section) {
+  currentDargedElement = id;
+  currenSection = section.id;
+  console.log(currenSection);
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function highlight(conatinerId) {
+  document.getElementById(conatinerId).classList.add("drag-area-highlight");
+}
+
+function removeHighlight(conatinerId) {
+  document.getElementById(conatinerId).classList.remove("drag-area-highlight");
+  document.getElementById(currenSection).classList.remove("drag-area-highlight");
+}
+
+async function moveTo(containerId) {
+  document.getElementById(containerId).classList.remove("drag-area-highlight");
+  let dragedJson = addedTasks[0][currenSection][currentDargedElement];
+  addedTasks[0][containerId].push(dragedJson);
+  addedTasks[0][currenSection].splice(currentDargedElement, 1);
+  saveTasks();
+  await loadTasks()
+  await init();
+  await renderTaskList(containerId, addedTasks);
 }
 
 function createProgressBar(task, index) {
@@ -286,46 +312,4 @@ function deleteTask(taskIndex, section) {
   saveTasks();
   closeTaskContainer();
   renderTaskList(section, addedTasks);
-}
-
-// Drag and drop
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   await init();
-//   let allTasks = document.querySelectorAll(".allstsks"); // Korrekte Klasse "allstsks"
-//   let draggables = document.querySelectorAll(".draggable");
-
-//   draggables.forEach((draggable) => {
-//     draggable.addEventListener("dragstart", () => {
-//       draggable.classList.add("dragging");
-//     });
-
-//     draggable.addEventListener("dragend", () => {
-//       draggable.classList.remove("dragging");
-//     });
-//   });
-//   containers.forEach((container) => {
-//     container.addEventListener("dragover", (e) => {
-//       allTasks.classList.add("highlighted");
-//       e.preventDefault();
-//       const draggable = document.querySelector(".dragging");
-//       container.prepend(draggable);
-//     });
-
-//     container.addEventListener("dragleave", () => {
-//       allTasks.classList.remove("highlighted");
-//     });
-
-//     allTasks.addEventListener("dragend", () => {
-//       container.classList.remove("highlighted");
-//     });
-//   });
-// });
-
-let currentDargedElement;
-
-function startDargging(id, secion){
- currentDargedElement  = id;
-
- console.log(currentDargedElement)
 }

@@ -208,7 +208,7 @@ function checkedUser(userInitials, userName, userLastName, bColor, index) {
       shortName: userInitials,
       bColor: bColor,
       name: userName,
-      lastName: userLastName
+      lastName: userLastName,
     });
   } else {
     const indexToRemove = assignedContacts.findIndex(
@@ -307,13 +307,13 @@ function addTask(event, containerId) {
   showAddedTask();
 }
 
-function mobAddtask(event){
-   event.preventDefault();
-   const taskData = collectTaskData();
-   const task = createTaskObject(taskData);
-   pushTask(task, conatainerIdForMobileAddTask);
-   clearForm(event);
-   showAddedTask();
+function mobAddtask(event) {
+  event.preventDefault();
+  const taskData = collectTaskData();
+  const task = createTaskObject(taskData);
+  pushTask(task, conatainerIdForMobileAddTask);
+  clearForm(event);
+  showAddedTask();
 }
 
 function changeLocation() {
@@ -343,7 +343,7 @@ function collectTaskData() {
     priority,
     subtasks,
     selectedContact,
-    progressWidth
+    progressWidth,
   };
 }
 
@@ -356,13 +356,13 @@ function createTaskObject(taskData) {
     category: taskData.category,
     priority: taskData.priority,
     subTask: taskData.subtasks,
-    progressWidth: taskData.progressWidth
+    progressWidth: taskData.progressWidth,
   };
   return task;
 }
 
 function pushTask(task, containerId) {
-  console.log(containerId)
+  console.log(containerId);
   addedTasks[0][containerId].push(task);
   console.log(addedTasks[0]["toDo"]);
   saveTasks();
@@ -380,9 +380,117 @@ function clearForm(event) {
   showAssignedContactsInContainer();
   dropDownTemplates();
   resetPriorityButtons();
+  addedTasks = [
+    {
+      toDo: [
+        {
+          title: "darg",
+          description: "test",
+          date: "2023-09-22",
+          selectedContacts: [
+            {
+              shortName: "AB",
+              bColor: "var(--user-blue)",
+              name: "Ali",
+              lastName: "Berg",
+            },
+          ],
+          category: "marketing",
+          priority: "medium",
+          subTask: [{ name: "test", checked: false }],
+          progressWidth: 0,
+        },
+      ],
+      inProgress: [
+        {
+          title: "Test",
+          description: "Test",
+          date: "2023-09-16",
+          selectedContacts: [
+            {
+              shortName: "AB",
+              bColor: "var(--user-blue)",
+              name: "Ali",
+              lastName: "Berg",
+            },
+            {
+              shortName: "BA",
+              bColor: "var(--user-yellow)",
+              name: "Berta",
+              lastName: "Anfang",
+            },
+          ],
+          category: "marketing",
+          priority: "medium",
+          subTask: [{ name: "test", checked: false }],
+          progressWidth: 0,
+        },
 
-  saveTasks()
+        {
+          title: "darg",
+          description: "test",
+          date: "2023-09-22",
+          selectedContacts: [
+            {
+              shortName: "AB",
+              bColor: "var(--user-blue)",
+              name: "Ali",
+              lastName: "Berg",
+            },
+          ],
+          category: "marketing",
+          priority: "medium",
+          subTask: [{ name: "test", checked: false }],
+          progressWidth: 0,
+        },
+      ],
+      awaitFeedback: [
+        {
+          title: "Test",
+          description: "Test",
+          date: "2023-09-16",
+          selectedContacts: [
+            {
+              shortName: "AB",
+              bColor: "var(--user-blue)",
+              name: "Ali",
+              lastName: "Berg",
+            },
+            {
+              shortName: "BA",
+              bColor: "var(--user-yellow)",
+              name: "Berta",
+              lastName: "Anfang",
+            },
+          ],
+          category: "marketing",
+          priority: "medium",
+          subTask: [{ name: "test", checked: true }],
+          progressWidth: 0,
+        },
+
+        {
+          title: "darg",
+          description: "test",
+          date: "2023-09-22",
+          selectedContacts: [
+            {
+              shortName: "AB",
+              bColor: "var(--user-blue)",
+              name: "Ali",
+              lastName: "Berg",
+            },
+          ],
+          category: "marketing",
+          priority: "medium",
+          subTask: [{ name: "test", checked: false }],
+          progressWidth: 0,
+        },
+      ],
+    },
+  ];
   
+  saveTasks();
 }
 
 function resetPriorityButtons() {
@@ -398,10 +506,10 @@ function showMessage(html) {
   setTimeout(function () {
     msg.classList.add("d-none");
   }, 3000);
-  setTimeout(()=>{
-      toggleButton('board');
-      changeLocation();
-  }, 3500)
+  setTimeout(() => {
+    toggleButton("board");
+    changeLocation();
+  }, 3500);
 }
 
 function showAddedTask() {
@@ -410,4 +518,3 @@ function showAddedTask() {
             `;
   showMessage(html);
 }
-
