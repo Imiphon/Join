@@ -101,9 +101,9 @@ function checkInput(){
   let email = getInput("newEmail");
   let password = getInput("newPassword");
   let newConfirmPassword = document.getElementById("newConfirmPassword");
-  let acceptPrivacy = document.getElementById("acceptPrivacy");
+  //let acceptPrivacy = document.getElementById("acceptPrivacy"); //|| acceptPrivacy.checked == false
 
-  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 || acceptPrivacy.checked == false){
+  if (name.length == 0 || email.length == 0 || password.length == 0 || newConfirmPassword.length == 0 ){
     disableButton("newUserBtn");    
   }else{
     enableButton("newUserBtn");
