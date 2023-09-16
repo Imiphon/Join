@@ -1,11 +1,20 @@
-if (window.innerWidth < 1024) {
-    displayWelcomeMsg();
-    checkStrValueQueryParam(); 
-}
+document.addEventListener("DOMContentLoaded", function () {
+    let currentPage = window.location.pathname;
+    if (currentPage.includes("summary")) {
+     
+        if (window.innerWidth < 1024) {
+            displayWelcomeMsg();
+            checkStrValueQueryParam(); 
+        }
+        
+        if (window.innerWidth >= 1024) {
+            displayWelcomeMsgDesktop();
+        }
 
-if (window.innerWidth >= 1024) {
-    displayWelcomeMsgDesktop();
-}
+    }
+  });
+
+
 
 function checkTrue(obj) {
     return Object.entries(obj).filter(state => state[1])[0][0];
