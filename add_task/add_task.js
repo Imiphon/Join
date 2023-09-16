@@ -2,11 +2,11 @@ let assignedContacts = [];
 let selectedContacts = [];
 let tasksForSubtasks = [];
 
-document.addEventListener('DOMContentLoaded', async()=>{
+document.addEventListener("DOMContentLoaded", async () => {
   await getContactsFromServerForAddTask();
   await loadTasks();
   dropDownTemplates();
-})
+});
 
 async function saveTasks() {
   await setItem("storedTasks", JSON.stringify(addedTasks));
@@ -29,7 +29,6 @@ async function getContactsFromServerForAddTask() {
   } catch (e) {
     console.info("could not find contacts");
   }
-
 }
 
 // Function to show or hide options
@@ -380,117 +379,6 @@ function clearForm(event) {
   showAssignedContactsInContainer();
   dropDownTemplates();
   resetPriorityButtons();
-  addedTasks = [
-    {
-      toDo: [
-        {
-          title: "darg",
-          description: "test",
-          date: "2023-09-22",
-          selectedContacts: [
-            {
-              shortName: "AB",
-              bColor: "var(--user-blue)",
-              name: "Ali",
-              lastName: "Berg",
-            },
-          ],
-          category: "marketing",
-          priority: "medium",
-          subTask: [{ name: "test", checked: false }],
-          progressWidth: 0,
-        },
-      ],
-      inProgress: [
-        {
-          title: "Test",
-          description: "Test",
-          date: "2023-09-16",
-          selectedContacts: [
-            {
-              shortName: "AB",
-              bColor: "var(--user-blue)",
-              name: "Ali",
-              lastName: "Berg",
-            },
-            {
-              shortName: "BA",
-              bColor: "var(--user-yellow)",
-              name: "Berta",
-              lastName: "Anfang",
-            },
-          ],
-          category: "marketing",
-          priority: "medium",
-          subTask: [{ name: "test", checked: false }],
-          progressWidth: 0,
-        },
-
-        {
-          title: "darg",
-          description: "test",
-          date: "2023-09-22",
-          selectedContacts: [
-            {
-              shortName: "AB",
-              bColor: "var(--user-blue)",
-              name: "Ali",
-              lastName: "Berg",
-            },
-          ],
-          category: "marketing",
-          priority: "medium",
-          subTask: [{ name: "test", checked: false }],
-          progressWidth: 0,
-        },
-      ],
-      awaitFeedback: [
-        {
-          title: "Test",
-          description: "Test",
-          date: "2023-09-16",
-          selectedContacts: [
-            {
-              shortName: "AB",
-              bColor: "var(--user-blue)",
-              name: "Ali",
-              lastName: "Berg",
-            },
-            {
-              shortName: "BA",
-              bColor: "var(--user-yellow)",
-              name: "Berta",
-              lastName: "Anfang",
-            },
-          ],
-          category: "marketing",
-          priority: "medium",
-          subTask: [{ name: "test", checked: true }],
-          progressWidth: 0,
-        },
-
-        {
-          title: "darg",
-          description: "test",
-          date: "2023-09-22",
-          selectedContacts: [
-            {
-              shortName: "AB",
-              bColor: "var(--user-blue)",
-              name: "Ali",
-              lastName: "Berg",
-            },
-          ],
-          category: "marketing",
-          priority: "medium",
-          subTask: [{ name: "test", checked: false }],
-          progressWidth: 0,
-        },
-      ],
-    },
-  ];
-  
-  saveTasks();
 }
 
 function resetPriorityButtons() {

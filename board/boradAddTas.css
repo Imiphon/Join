@@ -427,7 +427,7 @@ form input:focus:not(.subtask input) {
 }
 
 .subtask {
-  display: block;
+  display: flex;
   padding: 8px;
 }
 

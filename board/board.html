@@ -37,7 +37,7 @@
               <i class="bi bi-plus-lg" onclick="openMobileAddTask('toDo')"></i>
             </div>
 
-            <div class="allsTsks" id="toDo" ondrop="moveTo('toDo') ,removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
+            <div class="allsTsks" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
           </div>
 
           <div class="card-parent">
@@ -61,7 +61,7 @@
               ></i>
             </div>
 
-            <div class="allsTsks" id="awaitFeedback" ondrop="moveTo('awaitFeedback') ,removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')"></div>
+            <div class="allsTsks" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')"></div>
           </div>
         </section>
       </main>

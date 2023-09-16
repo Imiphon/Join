@@ -59,39 +59,6 @@ function createTaskElement(task, index, section) {
   `;
 }
 
-let currentDargedElement;
-let currenSection;
-
-async function startDargging(event, id, section) {
-  currentDargedElement = id;
-  currenSection = section.id;
-  console.log(currenSection);
-}
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-function highlight(conatinerId) {
-  document.getElementById(conatinerId).classList.add("drag-area-highlight");
-}
-
-function removeHighlight(conatinerId) {
-  document.getElementById(conatinerId).classList.remove("drag-area-highlight");
-  document.getElementById(currenSection).classList.remove("drag-area-highlight");
-}
-
-async function moveTo(containerId) {
-  document.getElementById(containerId).classList.remove("drag-area-highlight");
-  let dragedJson = addedTasks[0][currenSection][currentDargedElement];
-  addedTasks[0][containerId].push(dragedJson);
-  addedTasks[0][currenSection].splice(currentDargedElement, 1);
-  saveTasks();
-  await loadTasks()
-  await init();
-  await renderTaskList(containerId, addedTasks);
-}
-
 function createProgressBar(task, index) {
   const checkedSubTasks = task.subTask
     ? task.subTask.filter((subtask) => subtask.checked == true)
@@ -160,6 +127,8 @@ function closeTaskContainer(event) {
 
 function taskPopUpTemplate(selectedTask, taskIndex, section) {
   let date = selectedTask.date.split("-").join("/");
+    console.log(subtasksTemplates(selectedTask, taskIndex, section));
+
 
   return `
         <div class="taskpoUp" id="taskpoUp" onclick="taskPopUp(event)">
@@ -197,10 +166,6 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
             </span>
           </div>
         </div>
-
-        
-
-
   `;
 }
 
@@ -275,7 +240,8 @@ function subtasksTemplates(task, taskIndex, section) {
   for (let i = 0; i < subNames.length; i++) {
     const subtaskID = `subtask${i}`;
     const checkedValue = task.subTask[i].checked;
-    subHtml += `
+    if (subNames.length >= 0) {
+      subHtml += `
       <div class="subtask">
         <label for="${subtaskID}">
           <input type="checkbox" ${
@@ -286,6 +252,9 @@ function subtasksTemplates(task, taskIndex, section) {
         <p class="subtask-text">${subNames[i]}</p>
       </div>
     `;
+    } else {
+      subHtml = "No Subtasks added.";
+    }
   }
 
   return `
@@ -312,4 +281,41 @@ function deleteTask(taskIndex, section) {
   saveTasks();
   closeTaskContainer();
   renderTaskList(section, addedTasks);
+}
+
+//deag and drop functions
+
+let currentDargedElement;
+let currenSection;
+
+async function startDargging(event, id, section) {
+  currentDargedElement = id;
+  currenSection = section.id;
+  console.log(currenSection);
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function highlight(conatinerId) {
+  document.getElementById(conatinerId).classList.add("drag-area-highlight");
+}
+
+function removeHighlight(conatinerId) {
+  document.getElementById(conatinerId).classList.remove("drag-area-highlight");
+  document
+    .getElementById(currenSection)
+    .classList.remove("drag-area-highlight");
+}
+
+async function moveTo(containerId) {
+  document.getElementById(containerId).classList.remove("drag-area-highlight");
+  let dragedJson = addedTasks[0][currenSection][currentDargedElement];
+  addedTasks[0][containerId].push(dragedJson);
+  addedTasks[0][currenSection].splice(currentDargedElement, 1);
+  saveTasks();
+  await loadTasks();
+  await init();
+  await renderTaskList(containerId, addedTasks);
 }

@@ -470,11 +470,10 @@
   transform: scale(1.1);
 }
 
-.dragging{
+.dragging {
   transform: rotate(20deg);
 }
 
 .drag-area-highlight {
-    background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
-
