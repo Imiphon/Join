@@ -7,7 +7,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
   if (currentPage.includes("contact_list")) {
-    getContactsFromServer();
+   getContactsFromServer();
   }
 });
 
@@ -16,10 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 async function getContactsFromServer() {
   let userId = localStorage.getItem('userId');
-  try {
-    contactArray = await JSON.parse(await getItem('contacts' + userId));
-  } catch (e) {
-    console.info('could not find contacts')
+  if (userId != ''){
+    try {
+      contactArray = await JSON.parse(await getItem('contacts' + userId));
+    } catch (e) {
+      console.info('could not find contacts')
+    }
+  } else {
+    console.log('You are a guest of Lars. userId = "4"');
+    userId = '4';
   }
   await sortContacts();
   showContacts();

@@ -81,4 +81,8 @@ footer {
   border: none;
 }
 
+.btnsBackgroundColorActive {
+  background-color: var(--toggle-blue);
+}
+
 

@@ -9,3 +9,7 @@
   flex-direction: column;
   overflow: auto;
 }
+
+.helpWrapperContainer {
+  overflow: auto;
+}
