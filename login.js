@@ -92,6 +92,10 @@ function splitName(fullName) {
   return { preName, lastName };
 }
 
+function upperCaseFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 /**
  *  This function is to check if the SignUp can be activatet.
  * 
