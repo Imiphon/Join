@@ -7,9 +7,9 @@
   height: 40px;
   margin: 0 auto;
   text-align: center;
-  margin-top: 34vh;
+  margin-top: 12vh;
   
-  margin-bottom: 70vh;
+  /* margin-bottom: 70vh; */
   transition: margin-bottom 1.5s ease;
 }
 

@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = window.location.pathname;
+    
+
     if (currentPage.includes("summary")) {
-     
+        displayAddedTasksArr();
+
         if (window.innerWidth < 1024) {
             displayWelcomeMsg();
             checkStrValueQueryParam(); 
@@ -12,8 +15,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     }
+
+
   });
 
+
+function displayAddedTasksArr() {
+    let taskInBoardDiv = document.querySelector("#taskInBoardDiv");
+    let tasksToDoDivNr = document.querySelector(".tasksToDoDivNr");
+    let taskInProgressDiv = document.querySelector("#taskInProgressDiv");
+    let taskAwaitingFeedback = document.querySelector("#taskAwaitingFeedback");
+    taskInBoardDiv.innerHTML = addedTasks.length;
+    taskInProgressDiv.innerHTML = addedTasks[0]['inProgress'].length;
+    taskAwaitingFeedback.innerHTML = addedTasks[0]['awaitFeedback'].length;
+    tasksToDoDivNr.innerHTML = addedTasks[0]['toDo'].length;
+} 
 
 
 function checkTrue(obj) {
@@ -167,8 +183,7 @@ function checkTrue(obj) {
  // ********************************************************************************
  // ********************************************************************************
  
- 
- 
+
  
  // ***************** Welcome Msg based on the day time ****************************
  // ********************************************************************************
