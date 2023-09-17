@@ -10,27 +10,43 @@ async function login() {
   disableButtonLogin();
   let email = getInput("loginEmail");
   let password = getInput("loginPassword");
-  let form = document.getElementById('formLogin');
-  
   if (await checkUserExist(email)) {
     let userId = emailAdresses.indexOf(email);
     if (checkPwdCorrect(userId, password)) {
-      localStorage.setItem('userId', userId);
-      window.location = `./summary/summary.html?id=${userId}`; //or name=${users[userid]['name'] 
+      showSummaryPage(userId);
     } else {
       showPwdNotRightMessage();
     }
   } else {
     showEmailNotFoundMessage();
   }
-  form.reset();
+  resetLoginForm();
   enableButtonLogin();  
+}
+
+/**
+ * This function is use to reset all inputs from the login form.
+ * 
+ */
+function resetLoginForm(){
+  let form = document.getElementById('formLogin'); 
+  form.reset();
+}
+
+
+/**
+ * This function save the userId to localstorage and set as id for redirect.
+ * 
+ * @param {int} userId - UserId save to localstorage and set as id for redirect
+ */
+function showSummaryPage(userId){
+  localStorage.setItem('userId', userId);
+  window.location = `./summary/summary.html?id=${userId}`;
 }
 
 
 /**
  *  This function is use to create a new user. If the E-Mail is not in use.
- *
  *
  */
 async function newUser() {
@@ -38,8 +54,7 @@ async function newUser() {
   let name = getInput("newName");
   let email = getInput("newEmail");
   let password = getInput("newPassword");
-  let form = document.getElementById("formNewUser");
-
+  
   if (!(await checkUserExist(email))) {
     await registerUser(name, email, password);
     await createOwnContactsRemoteStorage(name, email);
@@ -49,12 +64,22 @@ async function newUser() {
   } else {
     showSignUpAlreadyExistMessage();
   }
-  form.reset();
+  resetNewUserForm();
   enableButton("newUserBtn");
 }
 
+
 /**
- * This function is to create the contact array on the remote storage.
+ * This function is use to reset all inputs from the new user form.
+ * 
+ */
+function resetNewUserForm(){
+  let form = document.getElementById("formNewUser");
+  form.reset();
+}
+
+/**
+ * This function is to create the contact array for the new registered user on the remote storage.
  * 
  * @param {int} userId - Id of the new User to create the contact array 
  */
@@ -62,34 +87,61 @@ async function newUser() {
 async function createOwnContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
-  let {preName,lastName} = splitName(name);
-  let initials = preName[0] + lastName[0];  
-  let array = [
-    {
-      color: "var(--user-yellow)",
-      initials: initials,
-      lastName: lastName,
-      mail: email,
-      name: preName,
-      phone: 0
-    }
-  ] 
+  let array = createContactsArray(name, email);
   await setItem('contacts' + userId, JSON.stringify(array));
 }
 
 
+/**
+ * This function is use to create an contact array with his own contact for new created user.
+ * 
+ * @param {String} name - name of the new registered user
+ * @returns an new contact array with the new created user as contact
+ */
+function createContactsArray(name,email){
+  let {preName,lastName} = splitName(name);
+  let initials = preName[0] + lastName[0];  
+  return [
+          {
+            color: "var(--user-yellow)",
+            initials: initials,
+            lastName: lastName,
+            mail: email,
+            name: preName,
+            phone: 0
+          }
+        ]; 
+}
+
+
+/**
+ * This function is use to create the addedTask array for the new registered user on the remote storage.
+ * 
+ * @param {String} email - email adress of the user to search for his userId 
+ */
 async function createOwnTasksRemoteStorage(email){
   let userId = emailAdresses.indexOf(email);
-  let addedTasks = [
-    {
-      toDo: [],
-      inProgress: [],
-      awaitFeedback: [],
-      done: [],
-    },
-  ];
+  let addedTasks = createTasksArray();
   await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
 }
+
+
+/**
+ * This function ist use to create an empty array for the new registered user.
+ * 
+ * @returns the empty task array for the new registered user
+ */
+function createTasksArray(){
+  return [
+          {
+            toDo: [],
+            inProgress: [],
+            awaitFeedback: [],
+            done: [],
+          },
+        ];
+}
+
 
 /**
  * split the entry from the user into pre- and lastname
@@ -104,9 +156,16 @@ function splitName(fullName) {
   return {preName,lastName};
 }
 
+/**
+ * This function is use to get the first letter of a string as upper case.
+ * 
+ * @param {String} str - string to get the first letter as upper case
+ * @returns first letter of a string as upper case
+ */
 function upperCaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
 
 /**
  *  This function is to check if the SignUp can be activatet.
