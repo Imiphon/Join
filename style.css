@@ -416,7 +416,7 @@ h1{
 
 @media (min-width:800px){
   .formDivLogin, .formDivNewUser, .formDivResetPwd {
-    width: 60%;
+    width: 550px;
   }
 
   .signupDiv {
