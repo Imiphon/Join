@@ -428,8 +428,9 @@
   width: 40%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   /*box-shadow: var(--shadow); */
+  flex-direction: column;
+  z-index: 60;
 }
 
 .pop-top,
