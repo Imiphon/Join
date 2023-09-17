@@ -51,14 +51,9 @@ function showSummaryPage(userId){
  */
 async function newUser() {
   disableButton("newUserBtn");
-  let name = getInput("newName");
   let email = getInput("newEmail");
-  let password = getInput("newPassword");
-  
   if (!(await checkUserExist(email))) {
-    await registerUser(name, email, password);
-    await createOwnContactsRemoteStorage(name, email);
-    await createOwnTasksRemoteStorage(email);
+    await registerUser(email);
     showSignUpMessage();
     closeSignUp();
   } else {
@@ -502,13 +497,17 @@ async function getExistingEmailAdresses() {
  * @param {string} email - email of the user to register.
  * @param {string} password password of the user to register.
  */
-async function registerUser(name, email, password) {
+async function registerUser(email) {
+  let name = getInput("newName");
+  let password = getInput("newPassword");  
   users.push({
     name: name,
     email: email,
     password: password,
   });
   saveUsers();
+  await createOwnContactsRemoteStorage(name, email);
+  await createOwnTasksRemoteStorage(email);
 }
 
 
