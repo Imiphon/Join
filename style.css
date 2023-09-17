@@ -225,8 +225,6 @@ h1{
   gap: 16px;
 }
 
-
-
 .loginButtons {
   display: flex;
   flex-direction: column;
@@ -276,7 +274,7 @@ h1{
   display: flex;
   justify-content: center;
   align-items: end;
-  width: 90vw;
+  width: 95vw;
   padding: 32px 0;
   gap: 64px;
 }
@@ -295,6 +293,14 @@ h1{
 .loginFooter a {
   text-decoration: none;
   color: rgb(160, 168, 182);
+}
+
+.loginFooter a:hover {
+  color: var(--strong-blue);
+}
+
+.loginFooterWhite a {
+  color: white;
 }
 
 .btnBlue {
@@ -322,10 +328,10 @@ h1{
 
 .btnWhite:hover{
   box-shadow: var(--bottom-shadow);
-  color: var(--reg-blue);
+  color: var(--strong-blue);
   cursor: pointer;
   transform: none;
-  border-color: var(--reg-blue);
+  border-color: var(--strong-blue);
 }
 
 .btnTxtBlue {
@@ -462,7 +468,7 @@ h1{
     .loginFooter {
       position: fixed;
       bottom: 32px;
-      left: 0;
+      left: 32px;
     }
   }
 }
