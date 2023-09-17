@@ -70,7 +70,7 @@ async function createOwnContactsRemoteStorage(name, email){
       initials: initials,
       lastName: lastName,
       mail: email,
-      name: firstName,
+      name: preName,
       phone: 0
     }
   ] 
