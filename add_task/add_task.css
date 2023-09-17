@@ -19,6 +19,7 @@
 }
 
 form {
+  margin-top: 50px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
@@ -189,6 +190,16 @@ form {
 .d-none {
   display: none !important;
 }
+
+#select-container{
+  border-bottom: solid 1px var(--user-grey);
+}
+
+#select-container span{
+    position: relative;
+    width: 100%;
+}
+
 
 .category-div {
   position: relative;
@@ -476,4 +487,25 @@ form {
     bottom: calc(100vh / 2 + 60px);
     display: none;
   }
+}
+
+.add-category {
+  cursor: pointer;
+  pointer-events: none;
+  background-color: var(--reg-blue);
+  color: white;
+}
+
+
+.cateory-value{
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: none;
+}
+
+.category-wrapper{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center;  
 }

@@ -649,7 +649,7 @@ form input:focus:not(.subtask input) {
     gap: 5px;
   }
 
-  .card-parent{
+  .card-parent {
     width: 150px;
   }
   .cards {
@@ -678,13 +678,13 @@ form input:focus:not(.subtask input) {
   main {
     width: 200px;
   }
-   .tasks {
+  .tasks {
     flex-direction: row;
     justify-content: space-around;
     gap: 16px;
   }
 
-  .card-parent{
+  .card-parent {
     width: 25%;
   }
   .cards {
@@ -715,4 +715,39 @@ form input:focus:not(.subtask input) {
     bottom: calc(100vh / 2 + 60px);
     display: none;
   }
+}
+
+
+#select-container{
+  border-bottom: solid 1px var(--user-grey);
+}
+
+
+#select-container span{
+    position: relative;
+    width: 100%;
+}
+.assigned-div span{
+  position: relative;
+}
+
+.add-category {
+  cursor: pointer;
+  pointer-events: none;
+  background-color: var(--reg-blue);
+  color: white;
+}
+
+
+.cateory-value{
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: none;
+}
+
+.category-wrapper{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center;  
 }

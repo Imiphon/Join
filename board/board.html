@@ -12,6 +12,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
+    <link
+      rel="shortcut icon"
+      href="../assets/img/favicon.svg"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="../styles/header_mobile.css" />
     <link rel="stylesheet" href="../styles/footer_mobile.css" />
     <link rel="stylesheet" href="../main.css" />
@@ -156,18 +161,20 @@
               <div class="selected-contact d-none" id="selected-contact"></div>
             </div>
 
-            <div class="category-div" id="category-div">
+            <div class="assigned-div">
               <b>Category</b>
-              <div class="select-container">
-                <select name="Select" id="category" required>
-                  <option disabled selected>Select task Category</option>
-                  <option value="design">Design</option>
-                  <option value="programming">Programming</option>
-                  <option value="marketing">Marketing</option>
-                  <!-- Du hattest einen Tippfehler in "Marketinf" -->
-                </select>
+              <span onclick="showCategoryOptions()" id="category-div"
+                >Select task Category
                 <i class="bi bi-caret-down-fill" id="category-caret-down"></i>
+              </span>
+
+              <div id="dropdown-category" class="dropdown-content">
+                <div class="options" value="design">Design</div>
               </div>
+
+              <div class="selected-contact d-none" id="selected-category"></div>
+
+              <div class="new-category" id="new-category"></div>
             </div>
           </div>
 

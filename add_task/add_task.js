@@ -1,10 +1,14 @@
 let tasksForSubtasks = [];
 let selectedContacts = [];
 let assignedContacts = [];
+let categories = ["Design", "Programming", "Marketing"];
+let categoryValue;
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   await getContactsFromServerForAddTask();
   await loadTasks();
+  await loadCaegories();
   dropDownTemplates();
 });
 
@@ -17,6 +21,21 @@ async function loadTasks() {
     const loadedTasks = await getItem("storedTasks");
     if (loadedTasks) {
       addedTasks = JSON.parse(loadedTasks);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function saveCategories() {
+  await setItem("storedCategories", JSON.stringify(categories));
+}
+
+async function loadCaegories() {
+  try {
+    const loadedCategories = await getItem("storedCategories");
+    if (loadedCategories) {
+      categories = JSON.parse(loadedCategories);
     }
   } catch (error) {
     console.log(error);
@@ -111,13 +130,75 @@ document.addEventListener("click", (event) => {
 
 function rotateCategoryIcon(event) {
   let categoryIcon = document.getElementById("category-caret-down");
-  if ((event.target.id == "category") & !showCategory) {
+  if (
+    (event.target.id == "category-div") & !showCategory ||
+    (event.target.id == "category-caret-down") & !showCategory
+  ) {
     categoryIcon.style.transform = "rotate(180deg)";
     showCategory = true;
-  } else if (event.target.id !== "category" || showCategory === true) {
+    openCategory();
+  } else if (event.target.id !== "category-div" || showCategory === true) {
     categoryIcon.style.transform = "rotate(0deg)";
     showCategory = false;
+    closeCategory();
   }
+}
+
+function openCategory() {
+  let dropdown = document.getElementById("dropdown-category");
+  if (dropdown.classList.contains("dropdown-content")) {
+    dropdown.classList.remove("dropdown-content");
+    dropdown.classList.add("hidden");
+    document.getElementById("selected-category").classList.remove("d-none");
+  }
+}
+
+function closeCategory() {
+  let dropdown = document.getElementById("dropdown-category");
+  dropdown.classList.add("dropdown-content");
+  dropdown.classList.remove("hidden");
+}
+
+function showCategoryOptions() {
+  let select = document.getElementById("dropdown-category");
+  select.innerHTML =
+    '<div class="options" onclick="addCategory(event)">Add category</div>';
+  for (let i in categories) {
+    select.innerHTML += `
+      <div class="options" value="${categories[i]}" onclick="checkedCategory(event, ${i})">${categories[i]}</div>
+      `;
+  }
+}
+
+function checkedCategory(event, i) {
+  event.stopPropagation();
+  let category_area = document.getElementById("selected-category");
+  category_area.innerHTML = "";
+  category_area.innerHTML = categories[i];
+  categoryValue = categories[i];
+}
+
+function addCategory(event) {
+  event.stopPropagation();
+  document.getElementById("new-category").style.display = "flex";
+  document.getElementById("new-category").innerHTML = `
+  <div class="category-wrapper" id="subtask-wrapper">
+  <input class="cateory-value" type="text" id="cateory-value" placeholder="Add new category"> 
+  <div id="subtask-icon-container" class="subtask-icon-conatiner">
+  <i class="bi bi-x" onclick="clearAddCategoryk()"></i>                |
+  <i class="bi bi-check-lg" onclick="addNewcategory()"></i>
+  </div>
+  `;
+}
+
+function addNewcategory() {
+  let catValue = document.getElementById("cateory-value");
+  categories.push(catValue.value);
+  document.getElementById("new-category").style.display = "none";
+}
+
+function clearAddCategoryk() {
+  document.getElementById("cateory-value").value = "";
 }
 
 //add and remove blue colcor of the line from subtasks
@@ -327,7 +408,7 @@ function collectTaskData() {
   const title = document.getElementById("title").value;
   const description = document.getElementById("description").value;
   const date = document.getElementById("date").value;
-  const category = document.getElementById("category").value;
+  const category = categoryValue;
   const priority = prio;
   const subtasks = tasksForSubtasks;
   const selectedContact = selectedContacts;
@@ -351,7 +432,7 @@ function createTaskObject(taskData) {
     description: taskData.description,
     date: taskData.date,
     selectedContacts: taskData.selectedContact,
-    category: taskData.category,
+    category: categoryValue,
     priority: taskData.priority,
     subTask: taskData.subtasks,
     progressWidth: taskData.progressWidth,
@@ -373,7 +454,7 @@ function clearForm(event) {
   document.getElementById("title").value = "";
   document.getElementById("description").value = "";
   document.getElementById("date").value = "";
-  document.getElementById("category").value = "Select task Category";
+  category = "";
   tasksForSubtasks = [];
   selectedContacts = [];
   assignedContacts = [];
