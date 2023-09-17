@@ -10,6 +10,12 @@ async function login() {
   disableButtonLogin();
   let email = getInput("loginEmail");
   let password = getInput("loginPassword");
+  await checkCredentials(email,password);
+  resetLoginForm();
+  enableButtonLogin();  
+}
+
+async function checkCredentials(email,password){
   if (await checkUserExist(email)) {
     let userId = emailAdresses.indexOf(email);
     if (checkPwdCorrect(userId, password)) {
@@ -20,8 +26,6 @@ async function login() {
   } else {
     showEmailNotFoundMessage();
   }
-  resetLoginForm();
-  enableButtonLogin();  
 }
 
 /**
@@ -73,12 +77,12 @@ function resetNewUserForm(){
   form.reset();
 }
 
+
 /**
  * This function is to create the contact array for the new registered user on the remote storage.
  * 
  * @param {int} userId - Id of the new User to create the contact array 
  */
-
 async function createOwnContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
@@ -141,8 +145,8 @@ function createTasksArray(){
 /**
  * split the entry from the user into pre- and lastname
  * 
- * @param {string} fullName 
- * @returns 
+ * @param {string} fullName - fullname of the user
+ * @returns the first and the lastname of the user
  */
 function splitName(fullName) {
   let nameParts = fullName.split(" ");
@@ -150,6 +154,7 @@ function splitName(fullName) {
   let lastName = upperCaseFirstLetter(nameParts[1]);
   return {preName,lastName};
 }
+
 
 /**
  * This function is use to get the first letter of a string as upper case.
@@ -188,9 +193,9 @@ function checkInput(){
  */
 function guestLogin() {
   disableButtonLogin();
+  resetLoginForm();
   localStorage.setItem('userId', '');
-  window.location = "./summary/summary.html";
-  
+  window.location = "./summary/summary.html";  
 }
 
 
@@ -358,6 +363,7 @@ function closeResetPwd() {
 function showPrivacy(){
   window.open("./templates/privacy_policy.html", "_blank");
 }
+
 
 /**
  * This function is use to show messages to the user.
@@ -595,9 +601,10 @@ async function saveUsers() {
 
 /*Validate Password Match HTML5 newUser + resetPwd*/
 let newPassword = document.getElementById("newPassword"),
-  newConfirmPassword = document.getElementById("newConfirmPassword"),
-  resetPassword = document.getElementById("resetPassword"),
-  resetConfirmPassword = document.getElementById("resetConfirmPassword");
+    newConfirmPassword = document.getElementById("newConfirmPassword"),
+    resetPassword = document.getElementById("resetPassword"),
+    resetConfirmPassword = document.getElementById("resetConfirmPassword");
+
 
 /**
  * This function is use to check if the passwords on the sign up page match.
