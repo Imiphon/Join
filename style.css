@@ -416,7 +416,7 @@ h1{
   .loginFooter {
     position: fixed;
     bottom: 32px;
-    left: 0;
+    left: 32px;
   }
 }
 
