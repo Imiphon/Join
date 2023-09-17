@@ -2,7 +2,7 @@ let emailAdresses = [];
 let resetId;
 
 /**
- *  This function is use to check if the credentials email and password correct.
+ *  This function is get user and password and checkCredentials.
  *  If correct redirect to welcome message.
  *
  */
@@ -15,6 +15,13 @@ async function login() {
   enableButtonLogin();  
 }
 
+
+/**
+ * This function is use to check if the credentials email and password correct.
+ * 
+ * @param {String} email - email adress of the user to login
+ * @param {String} password password of the user to login
+ */
 async function checkCredentials(email,password){
   if (await checkUserExist(email)) {
     let userId = emailAdresses.indexOf(email);
