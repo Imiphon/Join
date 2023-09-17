@@ -274,7 +274,17 @@ h1{
   display: flex;
   justify-content: center;
   align-items: end;
-  width: 95vw;
+  width: calc(100vw - 64px);
+  padding: 32px 0;
+  gap: 64px;
+}
+
+.newUserFooter{
+  animation: var(--animation-timer) showFooter ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: calc(100vw - 64px);
   padding: 32px 0;
   gap: 64px;
 }
@@ -290,12 +300,12 @@ h1{
   }
 }
 
-.loginFooter a {
+.loginFooter a,.newUserFooter a {
   text-decoration: none;
   color: rgb(160, 168, 182);
 }
 
-.loginFooter a:hover {
+.loginFooter a:hover,.newUserFooter a:hover {
   color: var(--strong-blue);
 }
 
@@ -420,6 +430,28 @@ h1{
   }
 }
 
+@media (max-width: 349px){
+  @media (min-height: 891px) {
+    .newUserFooter {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+    }
+  }
+}
+
+@media(max-width:799px){
+  @media(min-width:350px){
+    @media (min-height: 853px) {
+      .newUserFooter {
+        position: fixed;
+        bottom: 32px;
+        left: 32px;
+      }
+    }
+  }
+}
+
 @media (min-width:800px){
   .formDivLogin, .formDivNewUser, .formDivResetPwd {
     width: 550px;
@@ -466,6 +498,13 @@ h1{
   
   @media (min-height: 747px) {
     .loginFooter {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+    }
+  }
+  @media (min-height: 897px) {
+    .newUserFooter {
       position: fixed;
       bottom: 32px;
       left: 32px;

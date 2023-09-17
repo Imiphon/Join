@@ -287,9 +287,12 @@ function openSignUp() {
   closeLogin();
   let signUpPage = document.getElementById("formNewUserDiv");
   let loginFooter = document.getElementById("loginFooter");
+  
   signUpPage.classList.remove("d-none");
   loginFooter.classList.add("loginFooterWhite");
-  loginFooter.classList.remove("d-none");
+  loginFooter.classList.add("newUserFooter");
+  loginFooter.classList.remove("loginFooter"); 
+  loginFooter.classList.remove("d-none"); 
   disableButton("newUserBtn");
 }
 
@@ -307,6 +310,8 @@ function closeSignUp() {
   signUpPage.classList.add("d-none");
   loginFooter.classList.remove("loginFooterWhite");
   loginFooter.classList.add("d-none");
+  loginFooter.classList.add("loginFooter");
+  loginFooter.classList.remove("newUserFooter");
   openLogin();
 }
 
