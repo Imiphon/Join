@@ -605,9 +605,7 @@ form input:focus:not(.subtask input) {
     justify-content: center;
   }
 
-   .card-parent{
-    height: auto;
-   }
+
 }
 
 .selected-contact {
@@ -651,14 +649,15 @@ form input:focus:not(.subtask input) {
     flex-direction: row;
     justify-content: space-around;
     gap: 5px;
+    height: 100;
   }
 
   .card-parent {
     width: 150px;
-    height: auto;
+    height: unset;
   }
   .cards {
-    width: 80%;
+    width: 100%;
   }
 }
 
@@ -679,10 +678,6 @@ form input:focus:not(.subtask input) {
     flex-direction: row;
     align-items: flex-end;
   }
-
-  main {
-    width: 200px;
-  }
   .tasks {
     flex-direction: row;
     justify-content: space-around;
@@ -691,11 +686,13 @@ form input:focus:not(.subtask input) {
 
   .card-parent {
     width: 25%;
+    height: 100%;
   }
   .cards {
     width: 80%;
   }
 }
+
 
 .message {
   display: flex;
