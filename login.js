@@ -230,6 +230,7 @@ function openSignUp() {
   let loginFooter = document.getElementById("loginFooter");
   signUpPage.classList.remove("d-none");
   loginFooter.classList.add("loginFooterWhite");
+  loginFooter.classList.remove("d-none");
   disableButton("newUserBtn");
 }
 
@@ -246,6 +247,7 @@ function closeSignUp() {
   form.reset();
   signUpPage.classList.add("d-none");
   loginFooter.classList.remove("loginFooterWhite");
+  loginFooter.classList.add("d-none");
   openLogin();
 }
 
