@@ -43,7 +43,7 @@ async function newUser() {
   if (!(await checkUserExist(email))) {
     await registerUser(name, email, password);
     await createOwnContactsRemoteStorage(name, email);
-    //await createOwnTasksRemoteStorage(email);
+    await createOwnTasksRemoteStorage(email);
     showSignUpMessage();
     closeSignUp();
   } else {

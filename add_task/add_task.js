@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 
 async function saveTasks() {
-  await setItem("storedTasks", JSON.stringify(addedTasks));
+  let userId = localStorage.getItem('userId');
+  await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
 }
 
 /**
@@ -28,7 +29,8 @@ async function saveTasks() {
  */
 async function loadTasks() {
   try {
-    const loadedTasks = await getItem("storedTasks");
+    let userId = localStorage.getItem('userId');
+    const loadedTasks = await getItem("storedTasks" + userId);
     if (loadedTasks) {
       addedTasks = JSON.parse(loadedTasks);
     }
@@ -37,6 +39,7 @@ async function loadTasks() {
   }
 }
 
+
 /**
  * This function saves the array 'categories' 
  */
@@ -44,6 +47,7 @@ async function loadTasks() {
 async function saveCategories() {
   await setItem("storedCategories", JSON.stringify(categories));
 }
+
 
 /**
  * loading the array categories from the server
@@ -59,18 +63,19 @@ async function loadCaegories() {
   }
 }
 
+
 /**
  * Also here is the same this saving the array
  */
 
 async function getContactsFromServerForAddTask() {
   try {
-    contactArray = JSON.parse(await getItem("contacts"));
+    let userId = localStorage.getItem('userId');
+    contactArray = JSON.parse(await getItem("contacts" + userId));
   } catch (e) {
     console.info("could not find contacts");
   }
 }
-
 
 
 /**
