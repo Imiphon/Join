@@ -102,15 +102,15 @@ function createContactsArray(name,email){
   let {preName,lastName} = splitName(name);
   let initials = preName[0] + lastName[0];  
   return [
-          {
-            color: "var(--user-yellow)",
-            initials: initials,
-            lastName: lastName,
-            mail: email,
-            name: preName,
-            phone: 0
-          }
-        ]; 
+    {
+      color: "var(--user-yellow)",
+      initials: initials,
+      lastName: lastName,
+      mail: email,
+      name: preName,
+      phone: 0
+    }
+  ]; 
 }
 
 
@@ -133,13 +133,13 @@ async function createOwnTasksRemoteStorage(email){
  */
 function createTasksArray(){
   return [
-          {
-            toDo: [],
-            inProgress: [],
-            awaitFeedback: [],
-            done: [],
-          },
-        ];
+    {
+      toDo: [],
+      inProgress: [],
+      awaitFeedback: [],
+      done: [],
+    },
+  ];
 }
 
 
