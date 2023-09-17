@@ -9,5 +9,4 @@ function closeMobileAddtask() {
 function openMobileAddTask(conatainerId){
   formDiv.style.transform = "translateX(0%)";
   conatainerIdForMobileAddTask = conatainerId;
-  console.log(conatainerIdForMobileAddTask);
 }

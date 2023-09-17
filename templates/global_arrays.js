@@ -82,6 +82,7 @@ let addedTasks = [
     toDo: [],
     inProgress: [],
     awaitFeedback: [],
+    done: [],
   },
 ];
 
@@ -100,3 +101,4 @@ let userColors = {
   red: "var(--user-red)",
   turquoise: "var(--user-turquoise)",
 };
+

@@ -57,12 +57,30 @@
   line-height: 120%;
 }
 
+.subtasks-div {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+}
+.subtasks-div span {
+  font-weight: bold;
+}
+
+.subtasks-div .subtask {
+  display: flex !important;
+  flex-direction: row;
+}
+
 .subtask {
+  flex-direction: column;
   width: 100%;
   padding: 6px 16px;
   background-color: white;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   font-weight: 400;
   gap: 16px;
 }
@@ -120,6 +138,10 @@
   opacity: 1; /* Das Pseudo-Element wird ausgeblendet, wenn das input ausgewählt ist */
 }
 
+.tasks-area {
+  width: 100%;
+}
+
 .edit-div {
   display: flex;
   align-items: center;
@@ -152,6 +174,7 @@
   transform: translateX(150%);
   position: fixed;
   top: 0;
+  z-index: 110;
   background-color: white;
   width: 100%;
   height: 100vh;
@@ -426,11 +449,6 @@ form input:focus:not(.subtask input) {
   flex-direction: column;
 }
 
-.subtask {
-  display: flex;
-  padding: 8px;
-}
-
 .subtask-wrapper {
   flex-direction: ;
   display: flex;
@@ -456,11 +474,7 @@ form input:focus:not(.subtask input) {
 }
 
 .subtask-icon-conatiner {
-  padding: 0 !important;
-  color: var(--user-grey);
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: row !important;
+  display: flex;
 }
 
 .bi-x,
@@ -583,11 +597,11 @@ form input:focus:not(.subtask input) {
     width: 0 !important;
   }
 
-  .cards{
-    width: 230px;
+  .cards {
+    width: 60%;
   }
 
-  .allstsk{
+  .allstsk {
     justify-content: center;
   }
 }
@@ -617,7 +631,6 @@ form input:focus:not(.subtask input) {
     background-color: var(--user-grey);
     padding: 1px !important;
   }
-  
 
   .second-div {
     position: static;
@@ -632,10 +645,15 @@ form input:focus:not(.subtask input) {
 
   .tasks {
     flex-direction: row;
+    justify-content: space-around;
+    gap: 5px;
   }
 
-   .cards{
-    width: 240px;
+  .card-parent{
+    width: 150px;
+  }
+  .cards {
+    width: 80%;
   }
 }
 
@@ -657,16 +675,20 @@ form input:focus:not(.subtask input) {
     align-items: flex-end;
   }
 
-  .tasks {
-    flex-direction: row;
+  main {
+    width: 200px;
   }
-
-  .board-main{
-    height: 100vh !important;
+   .tasks {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 16px;
   }
 
   .card-parent{
-    height: 100vh;
+    width: 25%;
+  }
+  .cards {
+    width: 80%;
   }
 }
 

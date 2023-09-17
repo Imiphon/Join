@@ -21,3 +21,6 @@ async function getItem(key) {
       throw `Could not find data with key "${key}".`;
     });
 }
+
+let prio; //To save the priority-value
+

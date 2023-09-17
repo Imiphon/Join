@@ -1,11 +1,5 @@
-.board-main::-webkit-scrollbar {
-  display: none;
-}
-
 .board-frame {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  padding-bottom: 40px;
+  padding-top: 100px;
 }
 
 .body-frame .borad-main {
@@ -47,8 +41,10 @@
 .tasks {
   width: calc(100%);
   display: flex;
+  overflow-x: scroll;
+  gap: 65px;
   height: 100%;
-  gap: 26px;
+  padding: 40px 40px;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -98,7 +94,6 @@
   width: 100%;
   height: 40px;
   position: absolute;
-  top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -384,6 +379,7 @@
   width: 100%;
   padding: 6px 16px;
   background-color: white;
+  background-color: #726bd3;
   display: flex;
   align-items: center;
   font-weight: 400;

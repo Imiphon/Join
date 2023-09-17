@@ -1,6 +1,6 @@
-let assignedContacts = [];
-let selectedContacts = [];
 let tasksForSubtasks = [];
+let selectedContacts = [];
+let assignedContacts = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
   await getContactsFromServerForAddTask();
@@ -71,7 +71,7 @@ function dropDownTemplates() {
     const userHtml = `
                     <div class="options">
                     <span class="profile" id="profile${index}">${user.initials}</span>
-                    <label for="checkbox">${user.name} ${user.lastName}</label>
+                    <label for="checkbox${index}">${user.name} ${user.lastName}</label>
                     <input type="checkbox" id="checkbox${index}" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
                     </div>
                     `;
@@ -158,8 +158,6 @@ function activeCreateTaskBtn() {
 function activeClearTaskBtn() {
   document.getElementById("clear-task").click();
 }
-
-let prio; //To save the priority-value
 
 // Function to set priority and update it
 const boxShadowColors = [
@@ -296,12 +294,13 @@ function editTask(i) {
 }
 
 let conatainerIdForMobileAddTask;
+let editIndex = -1;
 
 function addTask(event, containerId) {
   event.preventDefault();
   const taskData = collectTaskData();
   const task = createTaskObject(taskData);
-  pushTask(task, containerId);
+  pushTask(task, containerId, editIndex);
   clearForm(event);
   showAddedTask();
 }
@@ -310,7 +309,7 @@ function mobAddtask(event) {
   event.preventDefault();
   const taskData = collectTaskData();
   const task = createTaskObject(taskData);
-  pushTask(task, conatainerIdForMobileAddTask);
+  pushTask(task, conatainerIdForMobileAddTask, editIndex);
   clearForm(event);
   showAddedTask();
 }
@@ -360,10 +359,12 @@ function createTaskObject(taskData) {
   return task;
 }
 
-function pushTask(task, containerId) {
-  console.log(containerId);
-  addedTasks[0][containerId].push(task);
-  console.log(addedTasks[0]["toDo"]);
+function pushTask(task, containerId, editIndex) {
+  if (editIndex === -1) {
+    addedTasks[0][containerId].push(task);
+  } else if (editIndex > -1) {
+    addedTasks[0][containerId][editIndex] = task;
+  }
   saveTasks();
 }
 
@@ -379,6 +380,7 @@ function clearForm(event) {
   showAssignedContactsInContainer();
   dropDownTemplates();
   resetPriorityButtons();
+  openAddTask();
 }
 
 function resetPriorityButtons() {

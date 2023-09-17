@@ -25,9 +25,14 @@
       <header include-html="../templates/header.html"></header>
       <main class="board-main">
         <div class="search-bar" id="search-bar">
-          <input type="search" name="search" id="search" />
+          <input
+            type="search"
+            name="search"
+            id="search"
+            oninput="searchTask()"
+          />
           |
-          <i class="bi-search" onclick="searchTask()"></i>
+          <i class="bi-search"></i>
         </div>
 
         <section class="tasks" id="tasks">
@@ -37,7 +42,13 @@
               <i class="bi bi-plus-lg" onclick="openMobileAddTask('toDo')"></i>
             </div>
 
-            <div class="allsTsks" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')"></div>
+            <div
+              class="allsTsks"
+              id="toDo"
+              ondrop="moveTo('toDo')"
+              ondragleave="removeHighlight('toDo')"
+              ondragover="allowDrop(event); highlight('toDo')"
+            ></div>
           </div>
 
           <div class="card-parent">
@@ -49,7 +60,13 @@
               ></i>
             </div>
 
-            <div class="allsTsks" id="inProgress" ondrop="moveTo('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
+            <div
+              class="allsTsks"
+              id="inProgress"
+              ondrop="moveTo('inProgress')"
+              ondragleave="removeHighlight('inProgress')"
+              ondragover="allowDrop(event); highlight('inProgress')"
+            ></div>
           </div>
 
           <div class="card-parent">
@@ -61,7 +78,28 @@
               ></i>
             </div>
 
-            <div class="allsTsks" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')"></div>
+            <div
+              class="allsTsks"
+              id="awaitFeedback"
+              ondrop="moveTo('awaitFeedback')"
+              ondragleave="removeHighlight('awaitFeedback')"
+              ondragover="allowDrop(event); highlight('awaitFeedback')"
+            ></div>
+          </div>
+
+          <div class="card-parent">
+            <div class="row-title">
+              <b>Done</b>
+              <i class="bi bi-plus-lg" onclick="openMobileAddTask('done')"></i>
+            </div>
+
+            <div
+              class="allsTsks"
+              id="done"
+              ondrop="moveTo('done')"
+              ondragleave="removeHighlight('done')"
+              ondragover="allowDrop(event); highlight('done')"
+            ></div>
           </div>
         </section>
       </main>
@@ -139,17 +177,17 @@
             <div class="prio">
               <b>Prio</b>
               <div class="prio-values">
-                <span onclick="setPrio('urgent')"
+                <span id="urgent" onclick="setPrio('urgent')"
                   >Urgent
                   <i
                     class="bi bi-chevron-double-up"
                     id="bi bi-chevron-double-up"
                   ></i
                 ></span>
-                <span onclick="setPrio('medium')"
+                <span id="medium" onclick="setPrio('medium')"
                   >Medium<i class="fa-solid fa-equals"></i
                 ></span>
-                <span onclick="setPrio('low')"
+                <span id="" onclick="setPrio('low')"
                   >Low
                   <i
                     class="bi bi-chevron-double-down"

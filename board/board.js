@@ -3,6 +3,7 @@ async function init() {
   renderTaskList("toDo", addedTasks);
   renderTaskList("inProgress", addedTasks);
   renderTaskList("awaitFeedback", addedTasks);
+  renderTaskList("done", addedTasks);
 }
 
 // Function to render tasks in a specified container
@@ -127,8 +128,7 @@ function closeTaskContainer(event) {
 
 function taskPopUpTemplate(selectedTask, taskIndex, section) {
   let date = selectedTask.date.split("-").join("/");
-    console.log(subtasksTemplates(selectedTask, taskIndex, section));
-
+  subtasksTemplates(selectedTask, taskIndex, section);
 
   return `
         <div class="taskpoUp" id="taskpoUp" onclick="taskPopUp(event)">
@@ -160,7 +160,7 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
               <p>Delete</p>
             </span>
 
-            <span onclick="edittask()">
+            <span onclick="edittask(${taskIndex}, '${section.id}')">
               <i class="bi bi-pencil"></i>
               <p>Edit</p>
             </span>
@@ -258,9 +258,9 @@ function subtasksTemplates(task, taskIndex, section) {
   }
 
   return `
-    <div class="subtasks-div assign-to info-div">
+    <div class="subtasks-div">
       <span>Subtasks:</span>
-      <div class="subasks profiles">
+      <div class="subasks-profiles">
         ${subHtml}
       </div>
     </div>
@@ -291,7 +291,6 @@ let currenSection;
 async function startDargging(event, id, section) {
   currentDargedElement = id;
   currenSection = section.id;
-  console.log(currenSection);
 }
 
 function allowDrop(event) {
@@ -318,4 +317,96 @@ async function moveTo(containerId) {
   await loadTasks();
   await init();
   await renderTaskList(containerId, addedTasks);
+}
+
+
+function edittask(taskIndex, sectiondId) {
+  conatainerIdForMobileAddTask = sectiondId;
+  currentSection = addedTasks[0][sectiondId];
+  currentTask = addedTasks[0][sectiondId][taskIndex];
+  editIndex = currentSection.indexOf(currentTask);
+  formDiv.style.transform = "translateX(0%)";
+
+  showToEdditInner(currentTask);
+}
+
+function showToEdditInner(task) {
+  document.getElementById("title").value = task.title;
+  document.getElementById("description").value = task.description;
+  document.getElementById("date").value = task.date;
+  selectedContact(task);
+  document.getElementById("category").value = task.category;
+  setPriority(task);
+  ShowaddedTasks(task);
+}
+
+function selectedContact(task) {
+  for (let i in task.selectedContacts) {
+    const contactIndex = findContactIndex(task.selectedContacts[i]);
+    if (contactIndex !== -1) {
+      document.getElementById(`checkbox${contactIndex}`).checked = true;
+      assignedContacts.push(task.selectedContacts[i]);
+      selectedContacts.push(task.selectedContacts[i]);
+      
+      showOptions();
+      showAssignedContactsInContainer();
+      // Hier können Sie den Index verwenden, um weitere Aktionen durchzuführen.
+    } else {
+      console.log("no assigned contacts");
+    }
+  }
+}
+
+function findContactIndex(task) {
+  for (let i = 0; i < contactArray.length; i++) {
+    if (contactArray[i].name === task.name) {
+      return i; // Index des gefundenen Kontakts
+    }
+  }
+  return -1; // Kontakt wurde nicht gefunden
+}
+
+function setPriority(task) {
+  prio = task.priority;
+  switch (prio) {
+    case "urgent":
+      document.getElementById("urgent").style.boxShadow =
+        "0px 0px 4px 0px #fb4746";
+        selectedIndex = 0;
+      break;
+    case "medium":
+      document.getElementById("medium").style.boxShadow =
+        "0px 0px 4px 0px #FFBB2B";
+        selectedIndex = 1;
+      break;
+    case "lo":
+      document.getElementById("low").style.boxShadow =
+        "0px 0px 4px 0px #1FD7C1";
+        selectedIndex = 2;
+  }
+}
+
+function ShowaddedTasks(task) {
+  for (let i in task.subTask) {
+    tasksForSubtasks.push(task.subTask[i]);
+    openAddTask();
+    renderAddedTask();
+  }
+}
+
+
+function searchTask() {
+  const searchInput = document.getElementById("search").value.toLowerCase();
+  const allstsks = document.getElementsByClassName("allsTsks"); // Ändern Sie dies auf die tatsächliche ID Ihres Containers
+    for (let i = 0; i < allstsks.length; i++) {
+      const tasks = allstsks[i].getElementsByClassName("cards");
+      for (let j = 0; j < tasks.length; j++) {
+        const task = tasks[j];
+        const title = task.querySelector(".title").textContent.toLowerCase();
+        const description = task.querySelector(".content").textContent.toLowerCase();
+        const isVisible =
+          title.includes(searchInput) || description.includes(searchInput);
+        task.style.display = isVisible ? "flex" : "none";
+      }
+    }
 }
