@@ -42,7 +42,8 @@ async function newUser() {
 
   if (!(await checkUserExist(email))) {
     await registerUser(name, email, password);
-    await createContactsRemoteStorage(name, email);
+    await createOwnContactsRemoteStorage(name, email);
+    //await createOwnTasksRemoteStorage(email);
     showSignUpMessage();
     closeSignUp();
   } else {
@@ -58,7 +59,7 @@ async function newUser() {
  * @param {int} userId - Id of the new User to create the contact array 
  */
 
-async function createContactsRemoteStorage(name, email){
+async function createOwnContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
   let {preName,lastName} = splitName(name);
@@ -74,6 +75,20 @@ async function createContactsRemoteStorage(name, email){
     }
   ] 
   await setItem('contacts' + userId, JSON.stringify(array));
+}
+
+
+async function createOwnTasksRemoteStorage(email){
+  let userId = emailAdresses.indexOf(email);
+  let addedTasks = [
+    {
+      toDo: [],
+      inProgress: [],
+      awaitFeedback: [],
+      done: [],
+    },
+  ];
+  await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
 }
 
 /**
