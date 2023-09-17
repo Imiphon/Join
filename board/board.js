@@ -1,3 +1,6 @@
+/**
+ * Initializes the application.
+ */
 async function init() {
   await loadTasks();
   renderTaskList("toDo", addedTasks);
@@ -6,7 +9,11 @@ async function init() {
   renderTaskList("done", addedTasks);
 }
 
-// Function to render tasks in a specified container
+/**
+ * Renders a list of tasks in a specified container.
+ * @param {string} containerId - The ID of the container where tasks should be rendered.
+ * @param {Array} tasks - An array of tasks to render.
+ */
 function renderTaskList(containerId, tasks) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
@@ -25,6 +32,10 @@ function renderTaskList(containerId, tasks) {
   }
 }
 
+/**
+ * Generates HTML for an empty task area.
+ * @returns {string} - HTML representing an empty task area.
+ */
 function emptyTaskArea() {
   return `
     <div class="empty-todo">
@@ -33,7 +44,9 @@ function emptyTaskArea() {
   `;
 }
 
-// Function that the search-baer should get a border-color blue, when the sarch-inout is clicked
+/**
+ * Changes the border color of the search bar when it's clicked.
+ */
 let searchBar = document.getElementById("search-bar");
 
 document.addEventListener("click", (event) => {
@@ -46,7 +59,16 @@ document.addEventListener("click", (event) => {
 
 let topicColor;
 
+/**
+ * Creates an HTML element representing a task.
+ * @param {object} task - The task object to create an element for.
+ * @param {number} index - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML representation of the task element.
+ */
+
 function createTaskElement(task, index, section) {
+  // ... Function implementation
   return /*html */ `
     <div  class="cards draggable" id="card${index}" onclick="popUpTask(${section}, ${index})" draggable="true" ondragstart="startDargging(event, ${index}, ${section})">
       <span  class="topic">${task.category}</span>
@@ -60,6 +82,12 @@ function createTaskElement(task, index, section) {
   `;
 }
 
+/**
+ * Creates an HTML progress bar element based on task subtasks.
+ * @param {object} task - The task object.
+ * @param {number} index - The index of the task.
+ * @returns {string} - HTML representation of the progress bar.
+ */
 function createProgressBar(task, index) {
   const checkedSubTasks = task.subTask
     ? task.subTask.filter((subtask) => subtask.checked == true)
@@ -77,6 +105,14 @@ function createProgressBar(task, index) {
     </div>
   `;
 }
+
+/**
+ * Creates HTML elements for selected contacts in a task.
+ * @param {object} task - The task object.
+ * @param {number} index - The index of the task.
+ * @returns {string} - HTML representation of selected contacts.
+ */
+
 function createSelectedContacts(task, index) {
   const profile = task.selectedContacts
     .map((contact, subIndex) => {
@@ -95,6 +131,12 @@ function createSelectedContacts(task, index) {
   `;
 }
 
+/**
+ * Creates a priority icon based on task priority.
+ * @param {object} task - The task object.
+ * @returns {string} - HTML representation of the priority icon.
+ */
+
 function createPriorityIcon(task) {
   let icon;
   const prio = task.priority;
@@ -109,6 +151,12 @@ function createPriorityIcon(task) {
   return icon;
 }
 
+/**
+ * Opens a pop-up for a task.
+ * @param {object} section - The section object.
+ * @param {number} index - The index of the task.
+ */
+
 function popUpTask(section, index) {
   const selectedTask = addedTasks[0][section.id][index];
   const selectedContainer = addedTasks[0][section.id];
@@ -117,14 +165,33 @@ function popUpTask(section, index) {
   showTaskContainer.innerHTML = taskPopUpTemplate(selectedTask, index, section);
 }
 
+/**
+ * Prevents propagation of an event.
+ * @param {Event} event - The event object.
+ */
+
 function taskPopUp(event) {
   event.stopPropagation();
 }
+
+/**
+ * Closes the task container.
+ * @param {Event} event - The event object.
+ */
 
 function closeTaskContainer(event) {
   let showTaskContainer = document.getElementById("show-task-container");
   showTaskContainer.style.display = "none";
 }
+
+
+/**
+ * Generates HTML for a task pop-up.
+ * @param {object} selectedTask - The selected task object.
+ * @param {number} taskIndex - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML representation of the task pop-up.
+ */
 
 function taskPopUpTemplate(selectedTask, taskIndex, section) {
   let date = selectedTask.date.split("-").join("/");
@@ -169,6 +236,13 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
   `;
 }
 
+/**
+ * Generates HTML for task priority.
+ * @param {object} task - The task object.
+ * @param {number} taskIndex - The index of the task.
+ * @returns {string} - HTML representation of the task priority.
+ */
+
 function prioTemplate(task) {
   let prio = task.priority;
   let icon;
@@ -195,6 +269,12 @@ function prioTemplate(task) {
   `;
 }
 
+/**
+ * Generates HTML for assigned contacts in a task.
+ * @param {object} task - The task object.
+ * @param {number} taskIndex - The index of the task.
+ * @returns {string} - HTML representation of assigned contacts.
+ */
 function assignToTemplate(task) {
   let names = [];
   let lastNames = [];
@@ -228,6 +308,14 @@ function assignToTemplate(task) {
     </div>
   `;
 }
+
+/**
+ * Generates HTML for subtasks in a task.
+ * @param {object} task - The task object.
+ * @param {number} taskIndex - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML representation of subtasks.
+ */
 
 function subtasksTemplates(task, taskIndex, section) {
   let subNames = [];
@@ -267,6 +355,13 @@ function subtasksTemplates(task, taskIndex, section) {
   `;
 }
 
+/**
+ * Updates the subtask state in a task.
+ * @param {number} taskIndex - The index of the task.
+ * @param {number} subtaskIndex - The index of the subtask.
+ * @param {string} sectionId - The ID of the section.
+ */
+
 function updateSubtask(taskIndex, subtaskIndex, sectionId) {
   let task = addedTasks[0][sectionId][taskIndex];
   let subtask = task.subTask[subtaskIndex];
@@ -275,6 +370,11 @@ function updateSubtask(taskIndex, subtaskIndex, sectionId) {
   renderTaskList(sectionId, addedTasks);
 }
 
+/**
+ * Deletes a task from a section.
+ * @param {number} taskIndex - The index of the task.
+ * @param {string} section - The section ID.
+ */
 function deleteTask(taskIndex, section) {
   addedTasks[0][section].splice(taskIndex, 1);
   console.log(addedTasks[0][section].splice(taskIndex, 1));
@@ -283,24 +383,46 @@ function deleteTask(taskIndex, section) {
   renderTaskList(section, addedTasks);
 }
 
-//deag and drop functions
+//drog and drop functions
 
 let currentDargedElement;
 let currenSection;
 
+
+/**
+ * Initializes drag and drop functionality.
+ * @param {Event} event - The drag event.
+ * @param {number} id - The ID of the dragged element.
+ * @param {object} section - The section object.
+ */
 async function startDargging(event, id, section) {
   currentDargedElement = id;
   currenSection = section.id;
 }
 
+
+/**
+ * Allows dropping of a dragged element.
+ * @param {Event} event - The drop event.
+ */
 function allowDrop(event) {
   event.preventDefault();
 }
+
+
+/**
+ * Highlights a container during drag and drop.
+ * @param {string} containerId - The ID of the container to highlight.
+ */
 
 function highlight(conatinerId) {
   document.getElementById(conatinerId).classList.add("drag-area-highlight");
 }
 
+/**
+ * Removes highlighting from a container.
+ * @param {string} containerId - The ID of the container to remove highlighting from.
+ */
 function removeHighlight(conatinerId) {
   document.getElementById(conatinerId).classList.remove("drag-area-highlight");
   document
@@ -308,6 +430,10 @@ function removeHighlight(conatinerId) {
     .classList.remove("drag-area-highlight");
 }
 
+/**
+ * Moves a dragged element to a different container.
+ * @param {string} containerId - The ID of the target container.
+ */
 async function moveTo(containerId) {
   document.getElementById(containerId).classList.remove("drag-area-highlight");
   let dragedJson = addedTasks[0][currenSection][currentDargedElement];
@@ -319,17 +445,24 @@ async function moveTo(containerId) {
   await renderTaskList(containerId, addedTasks);
 }
 
-
+/**
+ * Edits a task.
+ * @param {number} taskIndex - The index of the task.
+ * @param {string} sectiondId - The ID of the section.
+ */
 function edittask(taskIndex, sectiondId) {
   conatainerIdForMobileAddTask = sectiondId;
   currentSection = addedTasks[0][sectiondId];
   currentTask = addedTasks[0][sectiondId][taskIndex];
   editIndex = currentSection.indexOf(currentTask);
   formDiv.style.transform = "translateX(0%)";
-
   showToEdditInner(currentTask);
 }
 
+/**
+ * Displays task details for editing.
+ * @param {object} task - The task object.
+ */
 function showToEdditInner(task) {
   document.getElementById("title").value = task.title;
   document.getElementById("description").value = task.description;
@@ -340,6 +473,10 @@ function showToEdditInner(task) {
   ShowaddedTasks(task);
 }
 
+/**
+ * Selects contacts in the task.
+ * @param {object} task - The task object.
+ */
 function selectedContact(task) {
   for (let i in task.selectedContacts) {
     const contactIndex = findContactIndex(task.selectedContacts[i]);
@@ -347,7 +484,7 @@ function selectedContact(task) {
       document.getElementById(`checkbox${contactIndex}`).checked = true;
       assignedContacts.push(task.selectedContacts[i]);
       selectedContacts.push(task.selectedContacts[i]);
-      
+
       showOptions();
       showAssignedContactsInContainer();
       // Hier können Sie den Index verwenden, um weitere Aktionen durchzuführen.
@@ -357,6 +494,11 @@ function selectedContact(task) {
   }
 }
 
+/**
+ * Finds the index of a contact in the contact array.
+ * @param {object} task - The contact object.
+ * @returns {number} - The index of the contact, or -1 if not found.
+ */
 function findContactIndex(task) {
   for (let i = 0; i < contactArray.length; i++) {
     if (contactArray[i].name === task.name) {
@@ -366,26 +508,34 @@ function findContactIndex(task) {
   return -1; // Kontakt wurde nicht gefunden
 }
 
+/**
+ * Sets the priority of a task.
+ * @param {object} task - The task object.
+ */
 function setPriority(task) {
   prio = task.priority;
   switch (prio) {
     case "urgent":
       document.getElementById("urgent").style.boxShadow =
         "0px 0px 4px 0px #fb4746";
-        selectedIndex = 0;
+      selectedIndex = 0;
       break;
     case "medium":
       document.getElementById("medium").style.boxShadow =
         "0px 0px 4px 0px #FFBB2B";
-        selectedIndex = 1;
+      selectedIndex = 1;
       break;
     case "lo":
       document.getElementById("low").style.boxShadow =
         "0px 0px 4px 0px #1FD7C1";
-        selectedIndex = 2;
+      selectedIndex = 2;
   }
 }
 
+/**
+ * Displays added tasks for editing.
+ * @param {object} task - The task object.
+ */
 function ShowaddedTasks(task) {
   for (let i in task.subTask) {
     tasksForSubtasks.push(task.subTask[i]);
@@ -394,19 +544,23 @@ function ShowaddedTasks(task) {
   }
 }
 
-
+/**
+ * Searches for tasks based on user input.
+ */
 function searchTask() {
   const searchInput = document.getElementById("search").value.toLowerCase();
   const allstsks = document.getElementsByClassName("allsTsks"); // Ändern Sie dies auf die tatsächliche ID Ihres Containers
-    for (let i = 0; i < allstsks.length; i++) {
-      const tasks = allstsks[i].getElementsByClassName("cards");
-      for (let j = 0; j < tasks.length; j++) {
-        const task = tasks[j];
-        const title = task.querySelector(".title").textContent.toLowerCase();
-        const description = task.querySelector(".content").textContent.toLowerCase();
-        const isVisible =
-          title.includes(searchInput) || description.includes(searchInput);
-        task.style.display = isVisible ? "flex" : "none";
-      }
+  for (let i = 0; i < allstsks.length; i++) {
+    const tasks = allstsks[i].getElementsByClassName("cards");
+    for (let j = 0; j < tasks.length; j++) {
+      const task = tasks[j];
+      const title = task.querySelector(".title").textContent.toLowerCase();
+      const description = task
+        .querySelector(".content")
+        .textContent.toLowerCase();
+      const isVisible =
+        title.includes(searchInput) || description.includes(searchInput);
+      task.style.display = isVisible ? "flex" : "none";
     }
+  }
 }
