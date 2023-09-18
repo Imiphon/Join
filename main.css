@@ -92,23 +92,6 @@ a:hover {
   transform: scale(1.1);
 }
 
-
-
-/*
-button {
-  cursor: pointer;
-  transition: color 0.3s ease;
-  transform: 0.3s ease;
-  display: inline-block;
-}
-button:hover {
-  color: rgba(255, 255, 255, 0.9);  
-  color: white;
-  transform: scale(1.1);
-  box-shadow: var(--shadow);
-}
-*/
-
 h1,
 h2,
 h3 {
@@ -129,6 +112,28 @@ h3 {
 
 .no-deco {
   text-decoration: none;
+}
+
+/*arrow left to close sites and popups*/
+.arr-left {
+z-index: 100;
+background-color: transparent;
+}
+
+.back-btn {
+/*z-index: 50;*/
+background-color: transparent;
+border: none;
+cursor: pointer;
+}
+
+.info-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3rem;
+  height: 80px;
+  color: var(--reg-blue);
 }
 
 /*  ===========================================================

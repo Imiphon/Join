@@ -674,12 +674,7 @@ function showInfoText(person, indexNr) {
         <div class="detail-frame" id="detailFrame">
             <div class="detail-top-head">
                 <div>Contact Informations</div>
-                <button class="close-info" id="closeInfo" onclick="closeInfo()"><img src="../assets/img/arrow-left-line.svg" alt="back"></button>                
-                <!--
-                <a href="contact_list.html">
-                    <img src="../assets/img/arrow-left-line.svg" alt="back">
-                </a>
-                -->
+                <button class="close-info" id="closeInfo" onclick="closeInfo()"><img class="arr-left" src="../assets/img/arrow-left-line.svg" alt="back"></button>   
             </div>
             <div class="detail-name-box">
                 <div class="detail-ellipse" style="background-color: ${person.color}">

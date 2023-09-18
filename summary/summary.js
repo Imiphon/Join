@@ -78,8 +78,23 @@ function checkTrue(obj) {
        } else {
              submenuMobile.style.right = "24px";
        }
-       displayed = !displayed;
+       setTimeout(function() {
+        document.addEventListener('click', closeOnOutsideClick);
+    }, 0);
+
+       displayed = !displayed;       
  }
+
+ function closeOnOutsideClick(event) {
+    let submenuMobile = document.getElementById("submenuMobile");
+    
+    if (!submenuMobile.contains(event.target) && event.target !== submenuMobile) {
+        submenuMobile.style.right = "-200px";
+        displayed = false;
+        
+        document.removeEventListener('click', closeOnOutsideClick);
+    }
+}
  // ********************************************************************************
  // ********************************************************************************
  // ********************************************************************************

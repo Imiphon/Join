@@ -24,3 +24,6 @@ async function getItem(key) {
 
 let prio; //To save the priority-value
 
+function historyBack() {
+  window.history.back();
+}

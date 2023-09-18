@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="../main.css" />
     <link rel="stylesheet" href="../style.css" />
     <title>Help</title>
+    <script src="../script.js"></script>  
   </head>
-
+  
   <body onload="includeHTML()">
     <div class="body-frame">
       <header include-html="../templates/header.html"></header>
@@ -24,12 +25,13 @@
 
         <div class="info-text main-frame" id="helpFrame">
           <div class="helpWrapperContainer">
-            <h1>Help</h1>
-
-            <br />
-            <hr />
-            <br />
-
+            <div class="info-header">
+              <p>Help</p>
+              <button class="back-btn" id="" onclick="historyBack()"><img src="../assets/img/arrow-left-line.svg" alt="back"></button>
+            </div>
+              <br />
+              <hr />
+              <br />
             <p>
               Welcome to the help page for <span class="jblue">Join</span>, your
               guide to using our kanban project management tool. Here, we'll
