@@ -1,9 +1,13 @@
 .head-line {
   display: flex;
+  position: absolute;
+  top: 50px;
   width: 100%;
   align-items: center;
   justify-content: space-around;
 }
+
+
 
 .head-line .bi-x {
   font-size: 35px !important;
@@ -184,9 +188,6 @@
   justify-content: center;
 }
 
-.head-line {
-  margin-top: 100px;
-}
 
 .Add-task-head-line {
   align-self: stretch;
@@ -196,9 +197,9 @@
 }
 
 form {
+  margin-top: 100px;
   padding: 0px 0 80px 0;
   display: flex;
-  overflow-y: scroll;
   gap: 12px;
   flex-direction: column;
 }
@@ -209,6 +210,7 @@ form div {
 }
 
 .title-div input {
+  width: 100%;
   padding-left: 8px;
   outline: none;
   font-size: 28px;
@@ -450,7 +452,7 @@ form input:focus:not(.subtask input) {
 }
 
 .subtask-wrapper {
-  flex-direction: ;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -593,8 +595,8 @@ form input:focus:not(.subtask input) {
   }
 
   .center-line {
-    display: block !important;
-    width: 0 !important;
+    display: none;
+
   }
 
   .cards {
@@ -605,6 +607,12 @@ form input:focus:not(.subtask input) {
     justify-content: center;
   }
 
+  form{
+    width: 100%;
+  }
+  .subtask-wrapper{
+    width: 100%;
+  }
 
 }
 
@@ -625,7 +633,6 @@ form input:focus:not(.subtask input) {
   form {
     flex-direction: row;
     align-items: stretch;
-    height: 50vh;
     justify-content: space-between;
   }
 
@@ -635,8 +642,9 @@ form input:focus:not(.subtask input) {
   }
 
   .second-div {
-    position: static;
-    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .add_task_section {
@@ -752,4 +760,8 @@ form input:focus:not(.subtask input) {
   display: flex;
   flex-direction: row !important;
   justify-content: center;  
+}
+
+.board-main{
+  margin-bottom: 100px;
 }

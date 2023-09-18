@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
  */
 
 async function saveTasks() {
-  let userId = localStorage.getItem('userId');
+  let userId = localStorage.getItem("userId");
   await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
 }
 
@@ -29,7 +29,7 @@ async function saveTasks() {
  */
 async function loadTasks() {
   try {
-    let userId = localStorage.getItem('userId');
+    let userId = localStorage.getItem("userId");
     const loadedTasks = await getItem("storedTasks" + userId);
     if (loadedTasks) {
       addedTasks = JSON.parse(loadedTasks);
@@ -39,15 +39,13 @@ async function loadTasks() {
   }
 }
 
-
 /**
- * This function saves the array 'categories' 
+ * This function saves the array 'categories'
  */
 
 async function saveCategories() {
   await setItem("storedCategories", JSON.stringify(categories));
 }
-
 
 /**
  * loading the array categories from the server
@@ -63,20 +61,18 @@ async function loadCaegories() {
   }
 }
 
-
 /**
  * Also here is the same this saving the array
  */
 
 async function getContactsFromServerForAddTask() {
   try {
-    let userId = localStorage.getItem('userId');
+    let userId = localStorage.getItem("userId");
     contactArray = JSON.parse(await getItem("contacts" + userId));
   } catch (e) {
     console.info("could not find contacts");
   }
 }
-
 
 /**
  * // Function to show or hide the options for contacts to assign
@@ -139,10 +135,9 @@ function dropDownTemplates() {
   });
 }
 
-
 /**
  * Function to set a  background color for a profile
- * @param {string} user - This is the name of the person which added to the 'options' in the 'dropDownTemplates()' 
+ * @param {string} user - This is the name of the person which added to the 'options' in the 'dropDownTemplates()'
  * @param {number} index - This is the index of the person which added to the 'options' in the 'dropDownTemplates()'
  */
 function setBackgroundColor(user, index) {
@@ -150,9 +145,8 @@ function setBackgroundColor(user, index) {
   userBackground.style.backgroundColor = user.color;
 }
 
-
 /**
- * this fucntion ist calling other functions to rotate the icons from  assign contacts and categories 
+ * this fucntion ist calling other functions to rotate the icons from  assign contacts and categories
  */
 
 let showCategory = false;
@@ -164,7 +158,6 @@ document.addEventListener("click", (event) => {
 
   blueColorOfSubTasksContainer(event);
 });
-
 
 /**
  *  Function to rotate the category icon
@@ -224,7 +217,7 @@ function showCategoryOptions() {
 /**
  * this functions initialize the category
  * @param { event object,} event This line prevents the event from propagating further up the DOM tree. It stops the event from triggering any parent event listeners that might also be listening for the same event. This is commonly used to control event bubbling
- * @param {number} i The i parameter is  used as a convention to represent the index. 
+ * @param {number} i The i parameter is  used as a convention to represent the index.
  */
 function checkedCategory(event, i) {
   event.stopPropagation();
@@ -235,7 +228,7 @@ function checkedCategory(event, i) {
 }
 
 /**
- * 
+ *
  * @param {event object} event - the event.stopPropagation(); should stop the trigger from the openCategory()
  */
 
@@ -270,7 +263,7 @@ function clearAddCategoryk() {
 
 /**
  * //add and remove blue colcor of the line from subtasks
- * @param {event object} event - This event show where i'm so that the color of the div becomes blue 
+ * @param {event object} event - This event show where i'm so that the color of the div becomes blue
  */
 function blueColorOfSubTasksContainer(event) {
   let subtaskWrapper = document.getElementById("subtask-wrapper");
@@ -419,7 +412,6 @@ function showAssignedContactsInContainer() {
 
 let editingIndex = -1;
 
-
 /**
  * Function to add a subtasks;
  */
@@ -493,7 +485,7 @@ let editIndex = -1;
 /**
  * This function adds a now Task to the board section
  * @param {event object} event -is used to prevent the default behavior of an event in JavaScrip
- * @param {string} containerId - the name of each array in the addedTasks 
+ * @param {string} containerId - the name of each array in the addedTasks
  */
 function addTask(event, containerId) {
   event.preventDefault();
@@ -533,7 +525,7 @@ function clearAddTask() {
 }
 
 /**
- * 
+ *
  * @returns This function is collecting all the information from the from and returns to the function addTask()
  */
 function collectTaskData() {
@@ -559,8 +551,8 @@ function collectTaskData() {
 }
 
 /**
- * 
- * @param {object} taskData - All infromation from the collectTaskData(); 
+ *
+ * @param {object} taskData - All infromation from the collectTaskData();
  * @returns This return an Json to add it to the AddedTasks
  */
 
@@ -582,7 +574,7 @@ function createTaskObject(taskData) {
  * This function is Pushing the task to add it to the AddedTask
  * @param {object} task This is the generated Json-object which has to be added
  * @param {number} containerId The name of each section for exaple 'toDo, inProgress etc...'
- * @param {*} editIndex 
+ * @param {*} editIndex
  */
 function pushTask(task, containerId, editIndex) {
   /**
@@ -595,7 +587,6 @@ function pushTask(task, containerId, editIndex) {
   }
   saveTasks();
 }
-
 
 /**
  * This function clear the from
@@ -617,7 +608,7 @@ function clearForm(event) {
 }
 
 /**
- * Reseting the prioBtns 
+ * Reseting the prioBtns
  */
 function resetPriorityButtons() {
   prioBtns.forEach((btn) => {
@@ -626,7 +617,7 @@ function resetPriorityButtons() {
 }
 
 /**
- * 
+ *
  * @param {html-code} html - this is html-code to show a message after a task is added
  */
 function showMessage(html) {
@@ -647,8 +638,13 @@ function showMessage(html) {
  */
 
 function showAddedTask() {
-  let html = `
-           <p>Task added</p> 
-            `;
-  showMessage(html);
+  let newTask = `<p>Task added.</p>`;
+  let editedTask = `Task edited.`
+  let message;
+  if (editIndex === -1) {
+    message = newTask;
+  } else {
+    message = editedTask;
+  }
+  showMessage(message);
 }

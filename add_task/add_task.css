@@ -18,8 +18,11 @@
   padding: 12px;
 }
 
+.prio-values span {
+  width: 100%;
+}
+
 form {
-  margin-top: 50px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
@@ -191,15 +194,14 @@ form {
   display: none !important;
 }
 
-#select-container{
+#select-container {
   border-bottom: solid 1px var(--user-grey);
 }
 
-#select-container span{
-    position: relative;
-    width: 100%;
+#select-container span {
+  position: relative;
+  width: 100%;
 }
-
 
 .category-div {
   position: relative;
@@ -399,7 +401,7 @@ form {
     font-size: smaller;
   }
   .center-line {
-    display: block !important;
+    display: none !important;
   }
 }
 .selected-contact {
@@ -412,6 +414,10 @@ form {
   margin: -8px;
 }
 
+.add_task_section {
+  margin-top: 100px;
+}
+
 /* There is the responsiveness for the Medium screen */
 
 @media only screen and (min-width: 768px) and (max-width: 1007px) {
@@ -419,6 +425,7 @@ form {
     flex-direction: row;
     align-items: stretch;
     height: 100%;
+    margin-top: 50px;
     justify-content: space-between;
   }
 
@@ -437,6 +444,10 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .second-div {
+    margin-top: -60px;
   }
 }
 
@@ -461,6 +472,10 @@ form {
   .form-btns {
     display: none !important;
     pointer-events: none;
+  }
+
+  .second-div {
+    margin-top: -60px;
   }
 }
 
@@ -496,16 +511,15 @@ form {
   color: white;
 }
 
-
-.cateory-value{
+.cateory-value {
   width: 100%;
   padding: 8px;
   border: none;
   border-bottom: none;
 }
 
-.category-wrapper{
+.category-wrapper {
   display: flex;
   flex-direction: row !important;
-  justify-content: center;  
+  justify-content: center;
 }

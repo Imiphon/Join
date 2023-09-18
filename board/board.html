@@ -22,22 +22,29 @@
     <link rel="stylesheet" href="../main.css" />
     <link rel="stylesheet" href="board.css" />
     <link rel="stylesheet" href="../style.css" />
-    <link rel="stylesheet" href="boradAddTas.css" />
+    <link rel="stylesheet" href="boardAddTas.css" />
   </head>
 
   <body onload="includeHTML(), init()">
     <div class="body-frame board-frame">
       <header include-html="../templates/header.html"></header>
       <main class="board-main">
-        <div class="search-bar" id="search-bar">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            oninput="searchTask()"
-          />
-          |
-          <i class="bi-search"></i>
+        <div class="search-div">
+          <div class="search-bar" id="search-bar">
+            <input
+              type="search"
+              name="search"
+              id="search"
+              oninput="searchTask()"
+            />
+            |
+            <i class="bi-search"></i>
+          </div>
+
+          <button id="create-task" class="create-task" onclick="openMobileAddTask('toDo')">
+            <span>Add Task</span>
+            <i class="bi bi-check-lg"></i>
+          </button>
         </div>
 
         <section class="tasks" id="tasks">
@@ -226,7 +233,7 @@
 
             <div class="btns-container form-btns">
               <button id="create-task" class="create-task">
-                <span>Create Task</span>
+                <span id="create-task-btn">Create Task</span>
                 <i class="bi bi-check-lg"></i>
               </button>
               <button

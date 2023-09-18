@@ -184,7 +184,6 @@ function closeTaskContainer(event) {
   showTaskContainer.style.display = "none";
 }
 
-
 /**
  * Generates HTML for a task pop-up.
  * @param {object} selectedTask - The selected task object.
@@ -388,7 +387,6 @@ function deleteTask(taskIndex, section) {
 let currentDargedElement;
 let currenSection;
 
-
 /**
  * Initializes drag and drop functionality.
  * @param {Event} event - The drag event.
@@ -400,7 +398,6 @@ async function startDargging(event, id, section) {
   currenSection = section.id;
 }
 
-
 /**
  * Allows dropping of a dragged element.
  * @param {Event} event - The drop event.
@@ -408,7 +405,6 @@ async function startDargging(event, id, section) {
 function allowDrop(event) {
   event.preventDefault();
 }
-
 
 /**
  * Highlights a container during drag and drop.
@@ -456,6 +452,8 @@ function edittask(taskIndex, sectiondId) {
   currentTask = addedTasks[0][sectiondId][taskIndex];
   editIndex = currentSection.indexOf(currentTask);
   formDiv.style.transform = "translateX(0%)";
+  document.getElementById("create-task-btn").innerText = "Edit Task";
+
   showToEdditInner(currentTask);
 }
 
@@ -468,7 +466,8 @@ function showToEdditInner(task) {
   document.getElementById("description").value = task.description;
   document.getElementById("date").value = task.date;
   selectedContact(task);
-  document.getElementById("category").value = task.category;
+  categoryValue = task.category;
+  document.getElementById("selected-category").innerHTML = task.category;
   setPriority(task);
   ShowaddedTasks(task);
 }
@@ -549,7 +548,7 @@ function ShowaddedTasks(task) {
  */
 function searchTask() {
   const searchInput = document.getElementById("search").value.toLowerCase();
-  const allstsks = document.getElementsByClassName("allsTsks"); // Ändern Sie dies auf die tatsächliche ID Ihres Containers
+  const allstsks = document.getElementsByClassName("allsTsks");
   for (let i = 0; i < allstsks.length; i++) {
     const tasks = allstsks[i].getElementsByClassName("cards");
     for (let j = 0; j < tasks.length; j++) {

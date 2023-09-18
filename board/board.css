@@ -10,6 +10,20 @@
   align-items: center;
   gap: 12px;
 }
+
+.search-div{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+
+}
+
+.search-div button{
+  height: 40px;
+}
 .search-bar input {
   border: none;
   outline: none;
@@ -22,15 +36,15 @@
 }
 
 .search-bar {
+  height: 40px;
   color: var(--user-grey);
-  display: flex;
+  display:inline-flex;
   border: 1px solid var(--user-grey);
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   outline: none;
   padding: 8px 16px;
-  margin-bottom: 20px;
   border-radius: 10px;
 }
 
