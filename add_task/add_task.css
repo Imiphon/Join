@@ -3,6 +3,7 @@
   justify-content: center;
 }
 
+
 .add_task_section {
   width: 100%;
   padding-top: 50px;
@@ -17,6 +18,7 @@
   gap: 8px;
   padding: 12px;
 }
+
 
 .prio-values span {
   width: 100%;
@@ -194,14 +196,15 @@ form {
   display: none !important;
 }
 
-#select-container {
+#select-container{
   border-bottom: solid 1px var(--user-grey);
 }
 
-#select-container span {
-  position: relative;
-  width: 100%;
+#select-container span{
+    position: relative;
+    width: 100%;
 }
+
 
 .category-div {
   position: relative;
@@ -414,9 +417,13 @@ form {
   margin: -8px;
 }
 
-.add_task_section {
+.add_task_section{
   margin-top: 100px;
 }
+
+ .second-div{
+    margin-top: -60px;
+  }
 
 /* There is the responsiveness for the Medium screen */
 
@@ -446,7 +453,7 @@ form {
     align-items: center;
   }
 
-  .second-div {
+  .second-div{
     margin-top: -60px;
   }
 }
@@ -474,9 +481,6 @@ form {
     pointer-events: none;
   }
 
-  .second-div {
-    margin-top: -60px;
-  }
 }
 
 .message {
@@ -511,15 +515,16 @@ form {
   color: white;
 }
 
-.cateory-value {
+
+.cateory-value{
   width: 100%;
   padding: 8px;
   border: none;
   border-bottom: none;
 }
 
-.category-wrapper {
+.category-wrapper{
   display: flex;
   flex-direction: row !important;
-  justify-content: center;
+  justify-content: center;  
 }
