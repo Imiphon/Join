@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = window.location.pathname;
+
     
 
     if (currentPage.includes("summary")) {
@@ -15,10 +16,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     }
+    
+    if (currentPage.includes("templates/privacy_policy.html")) {
+        let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
+
+        console.log("policy works", footerPolicyAnchor);
+    }
 
 
   });
 
+
+function changeBackgroundColorfooterPolicyAnchor() {
+    let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
+
+    console.log("change changeBackgroundColorfooterPolicyAnchor()", footerPolicyAnchor);
+}  
 
 function displayAddedTasksArr() {
     let taskInBoardDiv = document.querySelector("#taskInBoardDiv");
