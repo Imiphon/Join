@@ -1,6 +1,5 @@
 User-Agent: * 
 
-Disallow: agb.html
-Disallow: impressum.html
-Disallow: datenschutz.html
-Disallow:widerruf.html
+Disallow: help.html
+Disallow: imprint.html
+Disallow: privacy-policy.html

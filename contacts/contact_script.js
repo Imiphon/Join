@@ -23,7 +23,7 @@ async function getContactsFromServer() {
       console.info('could not find contacts')
     }
   } else {
-    console.log('You are a guest of Lars. userId = "4"');
+    console.log('You are a guest.');
     userId = '4';
   }
   await sortContacts();
