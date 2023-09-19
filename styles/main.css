@@ -263,7 +263,7 @@ footer {
         Mobile LOOK
 ==========================================================*/
 
-@media (max-width: 1023px) {
+@media (max-width: 1124px) {
   main {
     background-color: rgb(255, 255, 255);
     width: 100%;
@@ -282,7 +282,7 @@ footer {
 }
 
 /***********************/
-@media (min-width: 1024px) {
+@media (min-width: 1124px) {
   .body-frame {
     flex-direction: row-reverse;
   }

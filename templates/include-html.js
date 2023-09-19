@@ -15,6 +15,5 @@ async function includeHTML() {
         let state = JSON.parse(localStorage.getItem("allBtnState"));
         updateBtnStyle(checkTrue(state));
     }
-
 }
 

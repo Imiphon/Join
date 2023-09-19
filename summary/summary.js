@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function changeBackgroundColorfooterPolicyAnchor() {
     let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
-
-    console.log("change changeBackgroundColorfooterPolicyAnchor()", footerPolicyAnchor);
+    console.log( "footerPolicyAnchor", footerPolicyAnchor);
+    footerPolicyAnchor.style.classList.add("btnsBackgroundColorActive");
 }  
 
 function displayAddedTasksArr() {
