@@ -581,7 +581,7 @@ function searchTask() {
  * @param {string} actualSection This is the name of the sections, where our task is in 
  */
 
-async function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
+ function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
   let popUp = document.getElementById("show-task-container");
   let taskCard = document.getElementById("taskpoUp");
   let task = addedTasks[0][actualSection][taskIndex];
@@ -589,6 +589,6 @@ async function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
   addedTasks[0][moveToThisSection].push(task);
   addedTasks[0][actualSection].splice(taskIndex, 1);
   saveTasks();
+   init();
   popUp.style.display = 'none';
-  await init();
 }
