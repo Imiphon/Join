@@ -102,6 +102,11 @@
   font-weight: bolder;
 }
 
+.row-title i:hover{
+ transform: scale(1.1);
+ font-size: larger;
+}
+
 .empty-todo {
   width: 100%;
   height: 40px;
@@ -484,4 +489,22 @@
 
 .drag-area-highlight {
   background-color: rgba(0, 0, 0, 0.2);
+}
+.move-buttons{
+  padding: 7px 8px;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.move-buttons div{
+  display: flex;
+  gap: 12px;
+}
+.move-buttons button{
+  padding: 8px !important;
+  font-size: 16px !important;
 }

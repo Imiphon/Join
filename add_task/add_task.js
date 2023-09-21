@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadTasks();
   await loadCaegories();
   dropDownTemplates();
+  getCurrentDate();
 });
 
 /**
@@ -639,7 +640,7 @@ function showMessage(html) {
 
 function showAddedTask() {
   let newTask = `<p>Task added.</p>`;
-  let editedTask = `Task edited.`
+  let editedTask = `Task edited.`;
   let message;
   if (editIndex === -1) {
     message = newTask;
@@ -647,4 +648,21 @@ function showAddedTask() {
     message = editedTask;
   }
   showMessage(message);
+}
+
+/**
+ * This functions allows the user in the 'input ="date"'-field only take a available date, and not a date from past
+ */
+function getCurrentDate() {
+  const toDayDate = new Date();
+  const year = toDayDate.getFullYear();
+  let month = toDayDate.getMonth() + 1;
+  let today = toDayDate.getDate();
+
+  if (month < 10) month = "0" + month;
+  if (today < 10) today = "0" + today;
+
+  let minDate = `${year}-${month}-${today}`;
+  document.getElementById("date").min = minDate;
+  console.log(minDate);
 }

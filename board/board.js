@@ -39,7 +39,7 @@ function renderTaskList(containerId, tasks) {
 function emptyTaskArea() {
   return `
     <div class="empty-todo">
-      <p>No tasks To do</p>
+      <p>No tasks added</p>
     </div>
   `;
 }
@@ -231,7 +231,17 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
               <p>Edit</p>
             </span>
           </div>
+
+        <div class="move-buttons">
+        <b>Move To</b>
+          <div>
+            <button class = "create-task" onclick="moveTaskTo('ToDo', ${taskIndex}, '${section.id}')">To do</button>
+            <button class = "create-task" onclick="moveTaskTo('InProgress', ${taskIndex}, '${section.id}')">In progress</button>
+            <button class = "create-task" onclick="movetaskTo('awaitFeedBack', ${taskIndex}, '${section.id}')"> Await feedback </button>
+            <button class = "create-task" onclick="moveTaskTo('Done', ${taskIndex}, '${section.id}')">Done</button>
+          </div?
         </div>
+      </div>
   `;
 }
 
