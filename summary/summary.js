@@ -274,13 +274,13 @@ function checkTrue(obj) {
      const summaryWrapper = document.querySelector('.summaryWrapper');
      setTimeout( function toggleAnimation() {
          welcomeMsgDiv.style.marginBottom = '-45vh';
-         summaryWrapper.style.transform = 'translateY(0)';
+         summaryWrapper.style.transform = 'translateY(25%)';
          setTimeout( () => {
              welcomeMsgDiv.style.opacity = "0"; 
          }, 700)
          setTimeout( () => {
-             welcomeMsgDiv.style.display = "none";
-         }, 1000)
+            //  welcomeMsgDiv.style.display = "none";
+         }, 100)
      }, 2000) 
  }
  // ********************************************************************************
