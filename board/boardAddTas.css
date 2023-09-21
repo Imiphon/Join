@@ -555,7 +555,7 @@ form input:focus:not(.subtask input) {
 }
 
 .create-task:hover {
-  background-color: #5a96fc;
+  background-color: var(--strong-blue);
   color: white;
   transform: scale(1.05) !important;
 }
@@ -614,6 +614,13 @@ form input:focus:not(.subtask input) {
     width: 100%;
   }
 
+  .btns-container button{
+    width: 6rem;
+    font-size: 16px;
+    height: 2.5rem;
+    
+  }
+
 }
 
 .selected-contact {
@@ -626,6 +633,7 @@ form input:focus:not(.subtask input) {
 .selected-contact span {
   margin: -8px;
 }
+
 
 /* There is the responsiveness for the Medium screen */
 
@@ -699,6 +707,7 @@ form input:focus:not(.subtask input) {
   .cards {
     width: 80%;
   }
+
 }
 
 

@@ -365,7 +365,7 @@ form {
 }
 
 .create-task:hover {
-  background-color: #5a96fc;
+  background-color: var(--strong-blue);
   color: white;
   transform: scale(1.05) !important;
 }
@@ -405,6 +405,12 @@ form {
   }
   .center-line {
     display: none !important;
+  }
+  .btns-container button{
+    width: 6rem;
+    font-size: 16px;
+    height: 2.5rem;
+    
   }
 }
 .selected-contact {

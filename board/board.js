@@ -235,11 +235,11 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
         <div class="move-buttons">
         <b>Move To</b>
           <div>
-            <button class = "create-task" onclick="moveTaskTo('ToDo', ${taskIndex}, '${section.id}')">To do</button>
-            <button class = "create-task" onclick="moveTaskTo('InProgress', ${taskIndex}, '${section.id}')">In progress</button>
-            <button class = "create-task" onclick="movetaskTo('awaitFeedBack', ${taskIndex}, '${section.id}')"> Await feedback </button>
-            <button class = "create-task" onclick="moveTaskTo('Done', ${taskIndex}, '${section.id}')">Done</button>
-          </div?
+            <button class = "create-task" onclick="moveTaskTo('toDo', ${taskIndex}, '${section.id}', '${section.id}')">To do</button>
+            <button class = "create-task" onclick="moveTaskTo('inProgress', ${taskIndex}, '${section.id}', '${section.id}')">In progress</button>
+            <button class = "create-task" onclick="moveTaskTo('awaitFeedback', ${taskIndex}, '${section.id}', '${section.id}')">Await feedback</button>
+            <button class = "create-task" onclick="moveTaskTo('done', ${taskIndex}, '${section.id}', '${section.id}')">Done</button>
+          </div>
         </div>
       </div>
   `;
@@ -572,4 +572,23 @@ function searchTask() {
       task.style.display = isVisible ? "flex" : "none";
     }
   }
+}
+
+/**
+ * This function moves the task to another area.
+ * @param {string} moveToThisSection This is the name of the section or the array, where we want to move our task, based on the button
+ * @param {number} taskIndex This is the index of the task
+ * @param {string} actualSection This is the name of the sections, where our task is in 
+ */
+
+async function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
+  let popUp = document.getElementById("show-task-container");
+  let taskCard = document.getElementById("taskpoUp");
+  let task = addedTasks[0][actualSection][taskIndex];
+
+  addedTasks[0][moveToThisSection].push(task);
+  addedTasks[0][actualSection].splice(taskIndex, 1);
+  saveTasks();
+  popUp.style.display = 'none';
+  await init();
 }
