@@ -26,13 +26,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   });
 
-
+/**
+ * Changes the background color of the footerPolicyAnchor element.
+ * Queries the element with class .footerPolicyAnchor and adds the class 'btnsBackgroundColorActive' to it.
+ */
 function changeBackgroundColorfooterPolicyAnchor() {
     let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
     console.log( "footerPolicyAnchor", footerPolicyAnchor);
     footerPolicyAnchor.style.classList.add("btnsBackgroundColorActive");
 }  
 
+/**
+ * Displays the number of tasks in different states in respective HTML elements.
+ * - Updates taskInBoardDiv with the length of addedTasks array.
+ * - Updates taskInProgressDiv with the number of 'inProgress' tasks in addedTasks.
+ * - Updates taskAwaitingFeedback with the number of 'awaitFeedback' tasks in addedTasks.
+ * - Updates tasksToDoDivNr with the number of 'toDo' tasks in addedTasks.
+ */
 function displayAddedTasksArr() {
     let taskInBoardDiv = document.querySelector("#taskInBoardDiv");
     let tasksToDoDivNr = document.querySelector(".tasksToDoDivNr");
@@ -44,7 +54,11 @@ function displayAddedTasksArr() {
     tasksToDoDivNr.innerHTML = addedTasks[0]['toDo'].length;
 } 
 
-
+/**
+ * Filters and returns the first truthy state from the object.
+ * @param {Object} obj - An object representing different states.
+ * @returns {string} - The key of the first truthy state in the object.
+ */
 function checkTrue(obj) {
     return Object.entries(obj).filter(state => state[1])[0][0];
  }
@@ -52,6 +66,11 @@ function checkTrue(obj) {
  // ********************************************************************************
  // ******************* checks the windows width ***********************************
  // ********************************************************************************
+
+ /**
+ * Handles window resize event and returns whether the window width is 1024 or more.
+ * @returns {boolean} - True if window width is 1024 or more, otherwise false.
+ */
  function handleWindowResize() {
      var windowWidth = window.innerWidth;
      if (windowWidth >= 1024) {
@@ -103,6 +122,11 @@ function checkTrue(obj) {
  // ********************************************************************************
  // ********************* navigates to listed pages ********************************
  // ********************************************************************************
+
+ /**
+ * Navigates to the page associated with the given buttonName.
+ * @param {string} buttonName - The name of the button, representing a specific page.
+ */
  function navigateToPage(buttonName) {
      switch (buttonName) {
          case 'summary':
@@ -142,6 +166,11 @@ function checkTrue(obj) {
  // ********************************************************************************
  // This logic changes footer icon btns when clicked & sets summary as default content
  // ********************************************************************************
+
+ /**
+ * Toggles the button states, updates their styles, and navigates to the associated pages.
+ * @param {string} buttonName - The name of the button.
+ */
  function toggleButton(buttonName) {
      let buttonStates = {
          summary: false,
@@ -215,6 +244,13 @@ function checkTrue(obj) {
  
  // ***************** Welcome Msg based on the day time ****************************
  // ********************************************************************************
+
+ /**
+ * Displays a welcome message on the screen based on the current hour of the day.
+ * - Morning: Displays 'Good Morning' if the current hour is less than 12.
+ * - Afternoon: Displays 'Good Afternoon' if the current hour is less than 20.
+ * - Evening: Displays 'Good Evening' if the current hour is less than 24.
+ */
  async function displayWelcomeMsg() {
  const date = new Date();
  const currentHour = date.getHours();
@@ -296,13 +332,15 @@ function checkTrue(obj) {
      welcomeMsgDiv.style.marginBottom = '0vh';
      summaryWrapper.style.transform = 'translateY(0)';
  }
- 
- // ********************************************************************************
- // ********************************************************************************
- 
+
  
  // ***************** Welcome Msg based on the day time ****************************
  // ********************************************************************************
+
+ /**
+ * Retrieves user name by user id from URL query parameters and returns it.
+ * @returns {Promise<string>} - The name of the user or 'dear guest' if user id is not found.
+ */
    async function checkStrValueQueryParam() {
      const urlParams = new URLSearchParams(window.location.search);
      const myParam = urlParams.get('id');
@@ -332,7 +370,9 @@ function checkTrue(obj) {
      return users[userId]['name'];
  }
  
- 
+ /**
+ * Loads users from local storage.
+ */
    async function loadUsers() {
      try {
        users = JSON.parse(await getItem("users"));
