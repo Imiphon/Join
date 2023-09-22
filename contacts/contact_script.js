@@ -393,7 +393,7 @@ async function createContact() {
   createBtn.disabled = true;
   let fullName = document.getElementById("fullName").value;
   let mail = document.getElementById("email").value;
-  let phone = parseInt(document.getElementById("phone").value);
+  let phone = document.getElementById("phone").value;
   let color = document.getElementById("colorBox").style.backgroundColor;
   if (color == '') {
     color = 'var(--user-grey)';
@@ -702,14 +702,14 @@ function showInfoText(person, indexNr) {
                 <div class="detail-description bold">
                     Email
                 </div>
-                <div class="mail">
-                ${person.mail}
+                <div class="mail send-mail">
+                <a href="mailto:${person.mail}">${person.mail}</a>
                 </div>
                 <div class="detail-description bold">
                     Phone
                 </div>
-                <div class="info-text">
-                ${person.phone}
+                <div class="info-text tel">
+                <a href="tel:${person.phone}">${person.phone}</a>
                 </div>
             </div>
         </div>
@@ -780,7 +780,7 @@ function showAddContact() {
                 id="fullName" 
                 placeholder="Name Nachname" 
                 required 
-                pattern="^[a-zA-Z]+ [a-zA-Z]+$" 
+                pattern="^[+\d]*[a-zA-Z]+ [+\d]*[a-zA-Z]+$" 
                 title="Bitte geben Sie einen Vor- und Nachnamen ein.">
             
                     <div class="color-img-box">
@@ -800,7 +800,7 @@ function showAddContact() {
                 </div>
                 <div class="contact-frame tel-box">
                     <input class="contact-input" required type="tel" id="phone" placeholder="Phone"
-                    pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein.">
+                    pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer zwischen 10 und 15 Ziffern ein.">
                     <img src="../assets/img/call_small.png" alt="phone">
                 </div>
                 <div class="btn-box">

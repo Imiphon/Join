@@ -176,7 +176,17 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 21.6px;
-  color: var(--mail-blue);
+  color: var(--mail-blue);  
+}
+
+.send-mail a {
+  color: var(--mail-blue);  
+  text-decoration: none !important;
+}
+
+.send-mail a:hover {
+  color: var(--dark-blue);
+  cursor: pointer;
 }
 
 .popup-box {
@@ -316,6 +326,15 @@
   gap: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.tel a {
+  text-decoration: none !important; 
+  color: var(--mail-blue);
+}
+
+.tel a:hover {
+  color: var(--dark-blue);
 }
 
 /*=====================
