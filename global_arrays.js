@@ -78,12 +78,14 @@ let contactArray = [
 
 let initialGroups = [];
 let addedTasks = [
+
   {
     toDo: [],
     inProgress: [],
     awaitFeedback: [],
     done: [],
   },
+
 ];
 
 //=============================================

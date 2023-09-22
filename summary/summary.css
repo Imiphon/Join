@@ -140,6 +140,7 @@
   padding: 15px 24px 15px 24px;
   transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
   border: none;
+  cursor: pointer;
 }
 
 .taskDivImgAndNr {

@@ -36,16 +36,19 @@ footer {
   font-size: var(--fs-16px);
   font-weight: var(--fw-400);
   margin-bottom: 34px;
+  cursor: pointer;
 }
 
 .footerLegalAnchor {
   color: #42526e;
   font-size: var(--fs-16px);
   font-weight: var(--fw-400);
+  cursor: pointer;
 }
 
 .btnFooterMenuDesktopVersion {
   display: none;
+  cursor: pointer;
 }
 
 .btnFooterMenuDesktopVersion:hover {
