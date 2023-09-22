@@ -195,6 +195,7 @@ function closeTaskContainer(event) {
 function taskPopUpTemplate(selectedTask, taskIndex, section) {
   let date = selectedTask.date.split("-").join("/");
   subtasksTemplates(selectedTask, taskIndex, section);
+  const availableSections = ["toDo", "inProgress", "awaitFeedback", "done"];
 
   return `
         <div class="taskpoUp" id="taskpoUp" onclick="taskPopUp(event)">
@@ -232,13 +233,17 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
             </span>
           </div>
 
-        <div class="move-buttons">
+               <div class="move-buttons">
         <b>Move To</b>
-          <div>
-            <button class = "create-task" onclick="moveTaskTo('toDo', ${taskIndex}, '${section.id}', '${section.id}')">To do</button>
-            <button class = "create-task" onclick="moveTaskTo('inProgress', ${taskIndex}, '${section.id}', '${section.id}')">In progress</button>
-            <button class = "create-task" onclick="moveTaskTo('awaitFeedback', ${taskIndex}, '${section.id}', '${section.id}')">Await feedback</button>
-            <button class = "create-task" onclick="moveTaskTo('done', ${taskIndex}, '${section.id}', '${section.id}')">Done</button>
+          <div id = "moveToBtns">
+            ${availableSections
+              .filter((targetSection) => targetSection !== section.id)
+              .map(
+                (targetSection) => `
+                  <button class = "create-task" onclick="moveTaskTo('${targetSection}', ${taskIndex}, '${section.id}', '${section}')">${targetSection}</button>
+                `
+              )
+              .join("")}
           </div>
         </div>
       </div>
@@ -578,10 +583,10 @@ function searchTask() {
  * This function moves the task to another area.
  * @param {string} moveToThisSection This is the name of the section or the array, where we want to move our task, based on the button
  * @param {number} taskIndex This is the index of the task
- * @param {string} actualSection This is the name of the sections, where our task is in 
+ * @param {string} actualSection This is the name of the sections, where our task is in
  */
 
- function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
+function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
   let popUp = document.getElementById("show-task-container");
   let taskCard = document.getElementById("taskpoUp");
   let task = addedTasks[0][actualSection][taskIndex];
@@ -589,6 +594,6 @@ function searchTask() {
   addedTasks[0][moveToThisSection].push(task);
   addedTasks[0][actualSection].splice(taskIndex, 1);
   saveTasks();
-   init();
-  popUp.style.display = 'none';
+  init();
+  popUp.style.display = "none";
 }

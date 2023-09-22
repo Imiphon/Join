@@ -252,6 +252,7 @@ function addCategory(event) {
 function addNewcategory() {
   let catValue = document.getElementById("cateory-value");
   categories.push(catValue.value);
+  saveCategories();
   document.getElementById("new-category").style.display = "none";
 }
 

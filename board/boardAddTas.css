@@ -7,8 +7,6 @@
   justify-content: space-around;
 }
 
-
-
 .head-line .bi-x {
   font-size: 35px !important;
 }
@@ -187,7 +185,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 .Add-task-head-line {
   align-self: stretch;
@@ -596,7 +593,6 @@ form input:focus:not(.subtask input) {
 
   .center-line {
     display: none;
-
   }
 
   .cards {
@@ -607,20 +603,23 @@ form input:focus:not(.subtask input) {
     justify-content: center;
   }
 
-  form{
+  form {
     width: 100%;
   }
-  .subtask-wrapper{
+  .subtask-wrapper {
     width: 100%;
   }
 
-  .btns-container button, .create-task{
+  .btns-container button,
+  .create-task {
     width: 6rem;
     font-size: 16px;
     height: 2.5rem;
-    
   }
 
+  .move-buttons button {
+    font-size: 12px !important;
+  }
 }
 
 .selected-contact {
@@ -633,7 +632,6 @@ form input:focus:not(.subtask input) {
 .selected-contact span {
   margin: -8px;
 }
-
 
 /* There is the responsiveness for the Medium screen */
 
@@ -707,9 +705,7 @@ form input:focus:not(.subtask input) {
   .cards {
     width: 80%;
   }
-
 }
-
 
 .message {
   display: flex;
@@ -736,17 +732,15 @@ form input:focus:not(.subtask input) {
   }
 }
 
-
-#select-container{
+#select-container {
   border-bottom: solid 1px var(--user-grey);
 }
 
-
-#select-container span{
-    position: relative;
-    width: 100%;
+#select-container span {
+  position: relative;
+  width: 100%;
 }
-.assigned-div span{
+.assigned-div span {
   position: relative;
 }
 
@@ -757,20 +751,19 @@ form input:focus:not(.subtask input) {
   color: white;
 }
 
-
-.cateory-value{
+.cateory-value {
   width: 100%;
   padding: 8px;
   border: none;
   border-bottom: none;
 }
 
-.category-wrapper{
+.category-wrapper {
   display: flex;
   flex-direction: row !important;
-  justify-content: center;  
+  justify-content: center;
 }
 
-.board-main{
+.board-main {
   margin-bottom: 100px;
 }
