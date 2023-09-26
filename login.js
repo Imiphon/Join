@@ -675,6 +675,7 @@ function validatePasswordMessage(){
 /**
  * This function is to validate the lower case letter of the password.
  *
+ * @param {variable} input - variable of the input field to validate
  */
 function validateLowerCase(input){
   var lowerCaseLetters = /[a-z]/g;
@@ -691,6 +692,7 @@ function validateLowerCase(input){
 /**
  * This function is to validate the upper case letter of the password.
  *
+ * @param {variable} input - variable of the input field to validate
  */
 function validateUpperCase(input){
   var upperCaseLetters = /[A-Z]/g;
@@ -707,6 +709,7 @@ function validateUpperCase(input){
 /**
  * This function is to validate the numbers of the password.
  *
+ * @param {variable} input - variable of the input field to validate
  */
 function validatenumbers(input){  
   var numbers = /[0-9]/g;
@@ -722,6 +725,7 @@ function validatenumbers(input){
 /**
  * This function is to validate the length of the password.
  *
+ * @param {variable} input - variable of the input field to validate
  */
 function validateLength(input){
   if(input.value.length >= 8) {
