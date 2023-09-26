@@ -394,11 +394,11 @@ h1{
 
 #pwdMessage {
   display:none;
-  background: #f1f1f1;
-  color: #000;
-  position: relative;
-  padding: 20px;
-  margin-top: 10px;
+  background-color: white;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: calc(100vw - 32px); 
 }
 
 #pwdMessage p {
