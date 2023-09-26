@@ -420,13 +420,28 @@ h1{
   width: 110px;
 }
 
-@media (min-height: 658px) {
-  .loginFooter {
-    position: fixed;
-    left: 32px;
-    bottom: 16px;
+@media(max-width:799px){
+  @media(min-width:332px){
+    @media (min-height: 658px) {
+      .loginFooter {
+        position: fixed;
+        left: 32px;
+        bottom: 16px;
+      }
+    }
   }
 }
+
+@media (max-width: 331px){
+  @media (min-height: 695px) {
+    .loginFooter {
+      position: fixed;
+      left: 32px;
+      bottom: 16px;
+    }
+  }
+}
+
 
 @media (max-width: 353px){
   @media (min-height: 731px) {
