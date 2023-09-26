@@ -93,7 +93,7 @@ function resetNewUserForm(){
 async function createOwnContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
-  let array = contactArray;
+  let array = await JSON.parse(await getItem('contacts'));
   array.push(createContactsArray(name, email));
   await setItem('contacts' + userId, JSON.stringify(array));
 }
@@ -128,6 +128,7 @@ function createContactsArray(name,email){
  */
 async function createOwnTasksRemoteStorage(email){
   let userId = emailAdresses.indexOf(email);
+  let addedTasks = await getItem("storedTasks");
   await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
 }
 
