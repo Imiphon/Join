@@ -93,7 +93,8 @@ function resetNewUserForm(){
 async function createOwnContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
-  let array = createContactsArray(name, email);
+  let array = contactArray;
+  array.push(createContactsArray(name, email));
   await setItem('contacts' + userId, JSON.stringify(array));
 }
 
@@ -127,25 +128,7 @@ function createContactsArray(name,email){
  */
 async function createOwnTasksRemoteStorage(email){
   let userId = emailAdresses.indexOf(email);
-  let addedTasks = createTasksArray();
   await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
-}
-
-
-/**
- * This function ist use to create an empty array for the new registered user.
- * 
- * @returns the empty task array for the new registered user
- */
-function createTasksArray(){
-  return [
-    {
-      toDo: [],
-      inProgress: [],
-      awaitFeedback: [],
-      done: [],
-    },
-  ];
 }
 
 
