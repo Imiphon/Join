@@ -618,6 +618,8 @@ let newPassword = document.getElementById("newPassword"),
     resetConfirmPassword = document.getElementById("resetConfirmPassword");
 
 
+
+
 /**
  * This function is use to check if the passwords on the sign up page match.
  *
@@ -630,6 +632,55 @@ function validatenewPassword() {
   }
 }
 
+newPassword.onfocus = function() {
+  document.getElementById("pwdMessage").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+newPassword.onblur = function() {
+  document.getElementById("pwdMessage").style.display = "none";
+}
+
+newPassword.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(newPassword.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+}
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(newPassword.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(newPassword.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(newPassword.value.length >= 8) {
+    length1.classList.remove("invalid");
+    length1.classList.add("valid");
+  } else {
+    length1.classList.remove("valid");
+    length1.classList.add("invalid");
+  }
+}
 
 /**
  * This function is use to check if the passwords on the reset password page match.
