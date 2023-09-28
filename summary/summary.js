@@ -50,8 +50,7 @@ async function displayAddedTasksArr() {
     let taskAwaitingFeedback = document.getElementById('taskAwaitingFeedback');
     let tasksDone = document.getElementById('taskDone');
     await loadAddedTasks();
-    console.log(addedTasks[0]['inProgress'].length + addedTasks[0]['awaitFeedback'].length + addedTasks[0]['toDo'].length);
-    taskInBoardDiv.innerHTML = addedTasks[0]['inProgress'].length + addedTasks[0]['awaitFeedback'].length + addedTasks[0]['toDo'].length;
+    taskInBoardDiv.innerHTML = addedTasks[0]['inProgress'].length + addedTasks[0]['awaitFeedback'].length + addedTasks[0]['toDo'].length + addedTasks[0]['done'].length;
     taskInProgressDiv.innerHTML = addedTasks[0]['inProgress'].length;
     taskAwaitingFeedback.innerHTML = addedTasks[0]['awaitFeedback'].length;
     tasksToDoDivNr.innerHTML = addedTasks[0]['toDo'].length;
