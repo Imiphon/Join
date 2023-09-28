@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (myParam) {
         let welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
         let summaryWrapper = document.getElementById('summaryWrapper');
+        welcomeMsgDiv.classList.remove('welcomeMsgDiv2');
         setTimeout(() => {   
             welcomeMsgDiv.classList.add('welcomeMsgDiv1');
             welcomeMsgDiv.classList.add('welcomeMsgDiv2');
@@ -45,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
             summaryWrapper.classList.remove('summaryWrapper1');
         }
         ,2000);
+    }else{
+        summaryWrapper.classList.add('summaryWrapper2');
     }
   }
 

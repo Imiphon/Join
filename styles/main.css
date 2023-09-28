@@ -310,6 +310,7 @@ footer {
       opacity: 1;
     }
   }
+  
   .summaryWrapper{
     opacity: 0;
   }
@@ -322,6 +323,7 @@ footer {
   .summaryWrapper2{
     opacity: 1;
   }
+
 
 
   @keyframes moveSummary {
