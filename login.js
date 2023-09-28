@@ -186,7 +186,7 @@ function guestLogin() {
   disableButtonLogin();
   resetLoginForm();
   localStorage.setItem('userId', '');
-  window.location = "./summary/summary.html";  
+  window.location = `./summary/summary.html?id=-1}`;  
 }
 
 

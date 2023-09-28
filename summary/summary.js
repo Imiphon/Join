@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (window.innerWidth < 1024) {
             displayWelcomeMsg();
-            checkStrValueQueryParam(); 
+            checkStrValueQueryParam();
+            showWelcomeMobile();
         }
         
         if (window.innerWidth >= 1024) {
@@ -25,6 +26,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   });
+
+ function showWelcomeMobile() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('id');
+    if (myParam) {
+        let welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
+        let summaryWrapper = document.getElementById('summaryWrapper');
+        setTimeout(() => {   
+            welcomeMsgDiv.classList.add('welcomeMsgDiv1');
+            welcomeMsgDiv.classList.add('welcomeMsgDiv2');
+            summaryWrapper.classList.add('summaryWrapper1');
+            summaryWrapper.classList.add('summaryWrapper2');
+        }
+        ,1000);
+        setTimeout(() => {
+            welcomeMsgDiv.classList.remove('welcomeMsgDiv1');
+            summaryWrapper.classList.remove('summaryWrapper1');
+        }
+        ,2000);
+    }
+  }
 
 /**
  * Changes the background color of the footerPolicyAnchor element.
@@ -323,10 +345,10 @@ function checkTrue(obj) {
      const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
      const summaryWrapper = document.querySelector('.summaryWrapper');
      setTimeout( function toggleAnimation() {
-         welcomeMsgDiv.style.marginBottom = '-45vh';
-         summaryWrapper.style.transform = 'translateY(25%)';
+         //welcomeMsgDiv.style.marginBottom = '-45vh';
+         //summaryWrapper.style.transform = 'translateY(25%)';
          setTimeout( () => {
-             welcomeMsgDiv.style.opacity = "0"; 
+             //welcomeMsgDiv.style.opacity = "0"; 
          }, 700)
          setTimeout( () => {
             //  welcomeMsgDiv.style.display = "none";
@@ -342,7 +364,6 @@ function checkTrue(obj) {
  function removeWelcomeMsgAnimation() {
      const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
      const summaryWrapper = document.querySelector('.summaryWrapper');
-     welcomeMsgDiv.style.display = "none";
      welcomeMsgDiv.style.marginBottom = '0vh';
      summaryWrapper.style.transform = 'translateY(0)';
  }
@@ -358,11 +379,11 @@ function checkTrue(obj) {
    async function checkStrValueQueryParam() {
      const urlParams = new URLSearchParams(window.location.search);
      const myParam = urlParams.get('id');
-     if (myParam) {
-         welcomeMsgAnimation();
+     if (myParam != '-1') {
+         //welcomeMsgAnimation();
          return await findUserId(myParam);
      } else {
-         removeWelcomeMsgAnimation();
+         //removeWelcomeMsgAnimation();
      }
    }
    // ********************************************************************************
@@ -371,7 +392,7 @@ function checkTrue(obj) {
    async function checkStrValueQueryParamDesktop() {
      const urlParams = new URLSearchParams(window.location.search);
      const myParam = urlParams.get('id');
-     if (myParam) {
+     if (myParam != '-1') {
          return await findUserId(myParam);
      } else {
          return " dear guest"

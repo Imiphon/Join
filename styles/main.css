@@ -259,6 +259,14 @@ footer {
   --fs-inter: 12px;
 }
 
+.welcomeText {
+  font-size: var(--fs-48px);
+  font-weight: var(--fw-400);
+}
+.welcomeTextuserName {
+  font-size: var(--fs-64px);
+}
+
 /* =====================================================
         Mobile LOOK
 ==========================================================*/
@@ -279,6 +287,56 @@ footer {
     /* same height like footer */
     padding-left: 0;
   }
+
+  .welcomeMsgDiv{
+    transform: translateY(calc(100vh / 2 - 107px));
+  }
+
+  .welcomeMsgDiv2{
+    opacity: 0;
+  }
+
+  .welcomeMsgDiv1{
+    animation: 1s moveWelcome ease-in-out;
+  }
+
+  @keyframes moveWelcome {
+    from {
+      transform: translateY(calc(100vh / 2 - 107px ));
+      opacity: 1;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .summaryWrapper{
+    opacity: 0;
+  }
+
+  .summaryWrapper1{
+    animation: 1.1s moveSummary ease-in-out;
+    opacity: 1;
+  }
+
+  .summaryWrapper2{
+    opacity: 1;
+  }
+
+
+  @keyframes moveSummary {
+    from {
+      transform: translateY(1000px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+
+
 }
 
 /***********************/
@@ -346,18 +404,11 @@ footer {
     flex: none;
     width: calc(100% - 232px);
   }
-  .welcomeText {
-    font-size: var(--fs-48px);
-    font-weight: var(--fw-400);
-  }
-  .welcomeTextuserName {
-    font-size: var(--fs-64px);
-  }
+  
   .welcomeMsgDiv {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 12vh;
     margin-bottom: 0;
     transform: translate(0px);
   }
