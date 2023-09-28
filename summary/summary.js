@@ -43,16 +43,31 @@ function changeBackgroundColorfooterPolicyAnchor() {
  * - Updates taskAwaitingFeedback with the number of 'awaitFeedback' tasks in addedTasks.
  * - Updates tasksToDoDivNr with the number of 'toDo' tasks in addedTasks.
  */
-function displayAddedTasksArr() {
-    let taskInBoardDiv = document.querySelector("#taskInBoardDiv");
-    let tasksToDoDivNr = document.querySelector(".tasksToDoDivNr");
-    let taskInProgressDiv = document.querySelector("#taskInProgressDiv");
-    let taskAwaitingFeedback = document.querySelector("#taskAwaitingFeedback");
-    taskInBoardDiv.innerHTML = addedTasks.length;
+async function displayAddedTasksArr() {
+    let taskInBoardDiv = document.getElementById('taskInBoardDiv');
+    let tasksToDoDivNr = document.getElementById('taskTodo');
+    let taskInProgressDiv = document.getElementById('taskInProgressDiv');
+    let taskAwaitingFeedback = document.getElementById('taskAwaitingFeedback');
+    let tasksDone = document.getElementById('taskDone');
+    await loadAddedTasks();
+    console.log(addedTasks[0]['inProgress'].length + addedTasks[0]['awaitFeedback'].length + addedTasks[0]['toDo'].length);
+    taskInBoardDiv.innerHTML = addedTasks[0]['inProgress'].length + addedTasks[0]['awaitFeedback'].length + addedTasks[0]['toDo'].length;
     taskInProgressDiv.innerHTML = addedTasks[0]['inProgress'].length;
     taskAwaitingFeedback.innerHTML = addedTasks[0]['awaitFeedback'].length;
     tasksToDoDivNr.innerHTML = addedTasks[0]['toDo'].length;
+    tasksDone.innerHTML = addedTasks[0]['done'].length;
 } 
+
+
+async function loadAddedTasks() {
+    userId = localStorage.getItem('userId');
+    try { 
+      addedTasks = JSON.parse(await getItem("storedTasks" + userId));
+    } catch (e) {
+      console.error("Loading error:", e);
+    }
+  }
+
 
 /**
  * Filters and returns the first truthy state from the object.
