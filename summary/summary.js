@@ -382,9 +382,13 @@ function checkTrue(obj) {
    async function checkStrValueQueryParam() {
      const urlParams = new URLSearchParams(window.location.search);
      const myParam = urlParams.get('id');
-     if (myParam != '-1') {
+     if (myParam) {
          //welcomeMsgAnimation();
-         return await findUserId(myParam);
+        try{
+             return await findUserId(myParam);
+        }catch(e){
+            return ""
+        }   
      } else {
          //removeWelcomeMsgAnimation();
      }
@@ -395,10 +399,14 @@ function checkTrue(obj) {
    async function checkStrValueQueryParamDesktop() {
      const urlParams = new URLSearchParams(window.location.search);
      const myParam = urlParams.get('id');
-     if (myParam != '-1') {
-         return await findUserId(myParam);
+     if (myParam) {
+        try{
+            return await findUserId(myParam);
+       }catch(e){
+            return ' dear guest'
+       }
      } else {
-         return " dear guest"
+         return ' dear guest'
      }
    }  
  
