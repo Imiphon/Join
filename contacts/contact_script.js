@@ -277,7 +277,7 @@ function setInitialValues() {
 function editContactInArray(index) {
   let name = document.getElementById("fullName").value; //.split(' ') in splitName()
   let mail = document.getElementById("email").value;
-  let phone = parseInt(document.getElementById("phone").value);
+  let phone = document.getElementById("phone").value;
   let color = document.getElementById("colorBox").style.backgroundColor;
   let { preName, lastName } = splitName(name);
   let initials = preName[0] + lastName[0];
@@ -756,7 +756,7 @@ function popupBack() {
  *
  * @returns {string} The HTML content representing the "Add Contact" form layout.
  */
-function showAddContact() {
+function showAddContact() {  
   return `
     <div class="pop-top" id="popTop">
         <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
@@ -796,9 +796,10 @@ function showAddContact() {
                     <img src="../assets/img/mail_small.png" alt="name">
                 </div>
                 <div class="contact-frame tel-box">
-                    <input class="contact-input" required type="tel" id="phone" placeholder="Phone"
-                    pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer zwischen 10 und 15 Ziffern ein.">
-                    <img src="../assets/img/call_small.png" alt="phone">
+                  <input class="contact-input" required type="tel" id="phone" placeholder="Telefon"
+                  pattern="^(\\+?\\d{9,15}|(\\+?|\\d{0,4})?\\s?\\d{3,4}\\s?\\d{3,8}|(\\+?|\\d{0,4})?\\s?\\d{3,5}\\s?\\d{7,8})$"
+                  title="9-15 Ziffern, opt. mit Leerzeichen oder + (+12345678901, 0123 4561234, 1 123 123 1234)">
+                  <img src="../assets/img/call_small.png" alt="phone">         
                 </div>
                 <div class="btn-box">
                 <button class="white-btn" onclick="closePopup()">
@@ -864,9 +865,10 @@ function showEditContact(index) {
                     <img src="../assets/img/mail_small.png" alt="name">
                 </div>
                 <div class="contact-frame">
-                    <input class="contact-input" required type="tel" id="phone" placeholder="${person.phone}"
-                        pattern="^\\+?\\d{10,15}$" title="Bitte geben Sie eine gültige Telefonnummer ein.">    
-                    <img src="../assets/img/call_small.png" alt="phone">
+                <input class="contact-input" required type="tel" id="phone" placeholder="${person.phone}"
+                pattern="^(\\+?\\d{9,15}|(\\+?|\\d{0,4})?\\s?\\d{3,4}\\s?\\d{3,8}|(\\+?|\\d{0,4})?\\s?\\d{3,5}\\s?\\d{7,8})$"
+                title="9-15 Ziffern, opt. mit Leerzeichen oder + (+12345678901, 0123 4561234, 1 123 123 1234)">
+         <img src="../assets/img/call_small.png" alt="phone">         
                 </div>
             
             <div class="btn-box">
