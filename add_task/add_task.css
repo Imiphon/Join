@@ -438,7 +438,7 @@ form {
     flex-direction: row;
     align-items: stretch;
     height: 100%;
-    margin-top: 50px;
+    margin-top: -50px;
     justify-content: space-between;
   }
 
@@ -533,4 +533,10 @@ form {
   display: flex;
   flex-direction: row !important;
   justify-content: center;  
+}
+
+.requiredText{
+  color: rgb(199, 2, 2);
+  margin: 0 12px;
+  display: none;
 }

@@ -41,7 +41,11 @@
             <i class="bi-search"></i>
           </div>
 
-          <button id="create-task" class="create-task" onclick="openMobileAddTask('toDo')">
+          <button
+            id="create-task"
+            class="create-task"
+            onclick="openMobileAddTask('toDo')"
+          >
             <span>Add Task</span>
             <i class="bi bi-check-lg"></i>
           </button>
@@ -122,11 +126,11 @@
       ></section>
 
       <div class="form-div" id="form-div">
-        <div class="head-line">
-          <b class="Add-task-head-line">Add Task</b>
-          <i class="bi bi-x" onclick="closeMobileAddtask()"></i>
-        </div>
         <form onsubmit="mobAddtask(event); return false;">
+          <div class="head-line">
+            <b class="Add-task-head-line">Add Task</b>
+            <i class="bi bi-x" onclick="closeMobileAddtask()"></i>
+          </div>
           <div class="first-div">
             <div class="title-div">
               <input
@@ -166,6 +170,9 @@
               <div id="dropdown-options" class="dropdown-content"></div>
 
               <div class="selected-contact d-none" id="selected-contact"></div>
+              <p class="requiredText" id="req-contact">
+                Bitte Kontakte auswählen.
+              </p>
             </div>
 
             <div class="assigned-div">
@@ -180,6 +187,7 @@
               </div>
 
               <div class="selected-contact d-none" id="selected-category"></div>
+              <p class="requiredText" id="req-task">Bitte Aufgabe auswählen.</p>
 
               <div class="new-category" id="new-category"></div>
             </div>
@@ -209,6 +217,9 @@
                   ></i>
                 </span>
               </div>
+              <p class="requiredText" id="req-prio">
+                Bitte Priorität auswählen.
+              </p>
             </div>
 
             <div

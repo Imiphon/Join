@@ -3,7 +3,7 @@ let tasksForSubtasks = []; // A list for subtasks
 let selectedContacts = []; // A list for selected contacts
 let assignedContacts = []; // A list for assigned contacts
 let categories = ["Design", "Programming", "Marketing"]; // A list of categories
-let categoryValue; // A variable to store the selected category value
+let categoryValue = undefined; // A variable to store the selected category value
 
 /**
  * calling this functions to be loaded from the server
@@ -237,7 +237,7 @@ function addCategory(event) {
   event.stopPropagation();
   document.getElementById("new-category").style.display = "flex";
   document.getElementById("new-category").innerHTML = `
-  <div class="category-wrapper" id="subtask-wrapper">
+  <div class="category-wrapper" id="Categorie-wrapper">
   <input class="cateory-value" type="text" id="cateory-value" placeholder="Add new category"> 
   <div id="subtask-icon-container" class="subtask-icon-conatiner">
   <i class="bi bi-x" onclick="clearAddCategoryk()"></i>                |
@@ -261,6 +261,7 @@ function addNewcategory() {
  */
 function clearAddCategoryk() {
   document.getElementById("cateory-value").value = "";
+  document.getElementById("Categorie-wrapper").style.display = "none";
 }
 
 /**
@@ -491,11 +492,15 @@ let editIndex = -1;
  */
 function addTask(event, containerId) {
   event.preventDefault();
-  const taskData = collectTaskData();
-  const task = createTaskObject(taskData);
-  pushTask(task, containerId, editIndex);
-  clearForm(event);
-  showAddedTask();
+  if (requiredContact() === false) {
+    requiredContact();
+  } else {
+    const taskData = collectTaskData();
+    const task = createTaskObject(taskData);
+    pushTask(task, containerId, editIndex);
+    clearForm(event);
+    showAddedTask();
+  }
 }
 
 /**
@@ -504,18 +509,23 @@ function addTask(event, containerId) {
  */
 function mobAddtask(event) {
   event.preventDefault();
-  const taskData = collectTaskData();
-  const task = createTaskObject(taskData);
-  pushTask(task, conatainerIdForMobileAddTask, editIndex);
-  clearForm(event);
-  showAddedTask();
+  if (requiredContact() === false) {
+    requiredContact();
+  } else {
+    const taskData = collectTaskData();
+    const task = createTaskObject(taskData);
+    pushTask(task, containerId, editIndex);
+    clearForm(event);
+    showAddedTask();
+  }
 }
 
 /**
  * After a task is added, we should switch to the board site
  */
 function changeLocation() {
-  let boradPage = "http://127.0.0.1:5501/board/board.html";
+  let boradPage =
+    "http://gruppe-672.developerakademie.net//DA_Join/board/board.html";
   window.location.href = boradPage;
 }
 
@@ -665,5 +675,28 @@ function getCurrentDate() {
 
   let minDate = `${year}-${month}-${today}`;
   document.getElementById("date").min = minDate;
-  console.log(minDate);
+}
+
+function requiredContact() {
+  let reqContact = document.getElementById("req-contact");
+  let reqTask = document.getElementById("req-task");
+  let reqPrio = document.getElementById("req-prio");
+  if (assignedContacts.length < 1) {
+    reqContact.style.display = "flex";
+    return false;
+  } else {
+    reqContact.style.display = "none";
+  }
+  if (categoryValue === undefined) {
+    reqTask.style.display = "flex";
+    return false;
+  } else {
+    reqTask.style.display = "none";
+  }
+  if (prio === undefined) {
+    reqPrio.style.display = "flex";
+    return false;
+  } else {
+    reqPrio.style.display = "none";
+  }
 }
