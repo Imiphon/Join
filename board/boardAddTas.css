@@ -605,6 +605,7 @@ form input:focus:not(.subtask input) {
 
   form {
     width: 100%;
+    overflow-y: scroll;
   }
   .subtask-wrapper {
     width: 100%;
@@ -641,17 +642,15 @@ form input:focus:not(.subtask input) {
     align-items: stretch;
     position: relative;
     justify-content: space-between;
-    padding-bottom: 24px;
-    height: 50vh;
+    padding-bottom: 24px;   
   }
 
-  .form-div{
+  .form-div {
     align-items: center;
   }
 
-  form div{
-    margin-top: 16px;
-
+  form div {
+    margin-top: 6px;
   }
 
   .center-line {
@@ -724,8 +723,12 @@ form input:focus:not(.subtask input) {
     width: 80%;
   }
 
-   .center-line {
+  .center-line {
     display: none;
+  }
+
+  form {
+    overflow-y: scroll;
   }
 }
 
@@ -790,7 +793,7 @@ form input:focus:not(.subtask input) {
   margin-bottom: 100px;
 }
 
-.requiredText{
+.requiredText {
   color: rgb(199, 2, 2);
   margin: 0 12px;
   display: none;
