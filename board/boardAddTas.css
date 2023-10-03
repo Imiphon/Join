@@ -197,6 +197,7 @@ form {
   border-radius: 14px;
   gap: 12px;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 form div {

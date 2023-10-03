@@ -492,8 +492,8 @@ let editIndex = -1;
  */
 function addTask(event, containerId) {
   event.preventDefault();
-  if (requiredContact() === false) {
-    requiredContact();
+  if (requiredField() === false) {
+    requiredField();
   } else {
     const taskData = collectTaskData();
     const task = createTaskObject(taskData);
@@ -509,15 +509,16 @@ function addTask(event, containerId) {
  */
 function mobAddtask(event) {
   event.preventDefault();
-  if (requiredContact() === false) {
-    requiredContact();
-  } else {
-    const taskData = collectTaskData();
-    const task = createTaskObject(taskData);
-    pushTask(task, containerId, editIndex);
-    clearForm(event);
-    showAddedTask();
-  }
+    event.preventDefault();
+    if (requiredField() === false) {
+      requiredField();
+    } else {
+      const taskData = collectTaskData();
+      const task = createTaskObject(taskData);
+      pushTask(task, conatainerIdForMobileAddTask, editIndex);
+      clearForm(event);
+      showAddedTask();
+    }
 }
 
 /**
@@ -677,7 +678,7 @@ function getCurrentDate() {
   document.getElementById("date").min = minDate;
 }
 
-function requiredContact() {
+function requiredField() {
   let reqContact = document.getElementById("req-contact");
   let reqTask = document.getElementById("req-task");
   let reqPrio = document.getElementById("req-prio");
