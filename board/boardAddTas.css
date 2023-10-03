@@ -599,6 +599,10 @@ form input:focus:not(.subtask input) {
     width: 60%;
   }
 
+  .frame .title {
+    font-size: 13px;
+  }
+
   .allstsk {
     justify-content: center;
   }
@@ -642,7 +646,8 @@ form input:focus:not(.subtask input) {
     align-items: stretch;
     position: relative;
     justify-content: space-between;
-    padding-bottom: 24px;   
+    padding-bottom: 24px;  
+    padding-top: 1rem; 
   }
 
   .form-div {
@@ -685,12 +690,18 @@ form input:focus:not(.subtask input) {
     width: 100%;
   }
 
+  .frame .title {
+    font-size: 13px;
+  }
+
   .head-line {
     position: absolute;
-    top: -100px;
+    top: -20px;
     width: 100%;
   }
 }
+
+
 
 @media only screen and (min-width: 1007px) {
   .add_task_section {

@@ -5,7 +5,8 @@ let formDiv = document.getElementById("form-div");
 /**
  * Closes the mobile add task form by translating it out of view.
  */
-function closeMobileAddtask() {
+function closeMobileAddtask(event) {
+  event.stopPropagation();
   formDiv.style.transform = "translateX(150%)";
 }
 

@@ -424,7 +424,10 @@ function addSubtask() {
   if (taskValue !== "") {
     if (editingIndex !== -1) {
       // If editingIndex is not -1, it means we are editing a task
-      tasksForSubtasks[editingIndex] = taskValue; // Update the task
+      tasksForSubtasks[editingIndex] = {
+        name: taskValue,
+        checked: false,
+      }; // Update the task
       editingIndex = -1; // Reset the index
     } else {
       // Otherwise, add a new task
@@ -475,7 +478,8 @@ function deleteSubTask(i) {
  */
 function editTask(i) {
   let taskValue = document.getElementById("subtask-value");
-  taskValue.value = tasksForSubtasks[i];
+  taskValue.value = tasksForSubtasks[i].name;
+  console.log(tasksForSubtasks)
   tasksForSubtasks.splice(i, 1);
   editingIndex = i;
   renderAddedTask();
@@ -526,7 +530,7 @@ function mobAddtask(event) {
  */
 function changeLocation() {
   let boradPage =
-    "http://gruppe-672.developerakademie.net//DA_Join/board/board.html";
+    "../board/board.html";
   window.location.href = boradPage;
 }
 
