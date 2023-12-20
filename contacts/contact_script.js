@@ -69,7 +69,6 @@ function showContacts() {
   showNameGroup();
 }
 
-
 /**
  * sort all initials in right order
  * put all names in right initialGroup
@@ -117,10 +116,6 @@ async function deleteContact(index) {
   showContacts();
 }
 
-//============================================================
-// CHECK WIDTH TO CONTROL MOB OR DESK OPTIC
-//============================================================
-
 /**
  * takes index from personDatas()
  * open mob or desk optic
@@ -154,10 +149,6 @@ async function widthForAdd() {
   }
 }
 
-//============================================================
-// INFO AREA
-//============================================================
-
 /**
  * takes index from person in (global) contactArray
  * get id from (desk-) popup and set content from showInfoText() 
@@ -177,10 +168,6 @@ function closeInfo() {
   let infoBox = document.getElementById('infoBox')
   infoBox.style.display ='none';
 }
-
-//============================================================
-// START TOGGLE DRAWER WITH MORE BTN
-//============================================================
 
 /**
  * get id from drawer in showInfoText()
@@ -227,10 +214,6 @@ function closeOnClick(event) {
 function closeDrawer() {
   document.getElementById("drawer").classList.remove("open");
 }
-
-//============================================================
-//EDIT CONTACT
-//============================================================
 
 /**
  * takes index from widthForEdit(index)
@@ -331,9 +314,6 @@ async function deleteInEditor(index) {
   closePopup();
   showContacts();
 }
-//============================================================
-// CREATE NEW CONTACT IN MOBILE
-//============================================================
 
 /**
  * Toggles the visibility of the color picker and updates its content.
@@ -494,10 +474,6 @@ function upperCaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-//=============================================
-// FUNCTIONS TO CREATE INITIALS (IN CIRCLE)
-//=============================================
-
 /**
  * Creates initialGroups from contactArray in templates/global_arrays.js 
  * and gives it back to showContacts()
@@ -516,10 +492,6 @@ function createInitalGroup() {
     return acc;
   }, {});
 }
-
-//============================================================
-//  POPUP FUNCTIONS
-//============================================================
 
 /**
  * Displays a mobile popup by appending it to the body and making it visible.
