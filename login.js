@@ -100,7 +100,7 @@ async function createOwnContactsRemoteStorage(name, email){
 
 
 /**
- * This function is use to create an contact array with his own contact for new created user.
+ * This function is use to create a contact-array with his own contact for new created user.
  * 
  * @param {String} name - name of the new registered user
  * @returns an new contact array with the new created user as contact
@@ -491,7 +491,6 @@ async function getExistingEmailAdresses() {
   return emailAdresses;
 }
 
-
 /**
  * This function is use to register a new user.
  *
@@ -507,7 +506,7 @@ async function registerUser(email) {
     email: email,
     password: password,
   });
-  saveUsers();
+  await saveUsers();
   await createOwnContactsRemoteStorage(name, email);
   await createOwnTasksRemoteStorage(email);
 }
@@ -526,7 +525,6 @@ function getInput(id) {
 
 /**
  * This function is use to disable the buttons on the login form.
- *
  *
  */
 function disableButtonLogin() {

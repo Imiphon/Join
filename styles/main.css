@@ -263,8 +263,8 @@ footer {
   font-size: var(--fs-48px);
   font-weight: var(--fw-400);
 }
-.welcomeTextuserName {
-  font-size: var(--fs-64px);
+.welcomeTextUserName {
+  font-size: var(--fs-48px);
 }
 
 /* =====================================================

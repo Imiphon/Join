@@ -67,20 +67,43 @@ function changeBackgroundColorfooterPolicyAnchor() {
  * - Updates taskInProgressDiv with the number of 'inProgress' tasks in addedTasks.
  * - Updates taskAwaitingFeedback with the number of 'awaitFeedback' tasks in addedTasks.
  * - Updates tasksToDoDivNr with the number of 'toDo' tasks in addedTasks.
+ * 
+ * count the urgents and set the number into 'tasksUrgent'-field.
  */
 async function displayAddedTasksArr() {
-    let taskInBoardDiv = document.getElementById('taskInBoardDiv');
-    let tasksToDoDivNr = document.getElementById('taskTodo');
-    let taskInProgressDiv = document.getElementById('taskInProgressDiv');
-    let taskAwaitingFeedback = document.getElementById('taskAwaitingFeedback');
-    let tasksDone = document.getElementById('taskDone');
-    await loadAddedTasks();
-    taskInBoardDiv.innerHTML = addedTasks[0]['inProgress'].length + addedTasks[0]['awaitFeedback'].length + addedTasks[0]['toDo'].length + addedTasks[0]['done'].length;
-    taskInProgressDiv.innerHTML = addedTasks[0]['inProgress'].length;
-    taskAwaitingFeedback.innerHTML = addedTasks[0]['awaitFeedback'].length;
-    tasksToDoDivNr.innerHTML = addedTasks[0]['toDo'].length;
-    tasksDone.innerHTML = addedTasks[0]['done'].length;
-} 
+        await loadAddedTasks();
+        let urgentCount = countUrgentTasksInAllCategories();
+        updateDisplay(urgentCount);
+    }
+    
+    function countUrgentTasks(tasks) {
+        return tasks.filter(task => task.priority === 'urgent').length;
+    }
+    
+    function countUrgentTasksInAllCategories() {
+        return countUrgentTasks(addedTasks[0].inProgress) +
+               countUrgentTasks(addedTasks[0].awaitFeedback) +
+               countUrgentTasks(addedTasks[0].toDo) +
+               countUrgentTasks(addedTasks[0].done);
+    }
+    
+    function updateDisplay(urgentCount) {
+        document.getElementById('tasksUrgent').innerHTML = urgentCount;
+        document.getElementById('taskInBoardDiv').innerHTML = countAllTasks();
+        document.getElementById('taskInProgressDiv').innerHTML = addedTasks[0].inProgress.length;
+        document.getElementById('taskAwaitingFeedback').innerHTML = addedTasks[0].awaitFeedback.length;
+        document.getElementById('taskTodo').innerHTML = addedTasks[0].toDo.length;
+        document.getElementById('taskDone').innerHTML = addedTasks[0].done.length;
+    }
+    
+    function countAllTasks() {
+        return addedTasks[0].inProgress.length + 
+               addedTasks[0].awaitFeedback.length + 
+               addedTasks[0].toDo.length + 
+               addedTasks[0].done.length;
+    }
+
+
 
 
 async function loadAddedTasks() {
@@ -217,7 +240,7 @@ function checkTrue(obj) {
          contacts: false,
          board: false
      };
-     let btnFooterMenuDesktopVersion = buttonName
+     //let btnFooterMenuDesktopVersion = buttonName
      if (!handleWindowResize()) {
          
          let newBtnState = Object.entries(buttonStates)
@@ -311,7 +334,7 @@ function checkTrue(obj) {
      welcomeMessage = "Welcome";
  }
  document.getElementById("welcomeText").innerHTML = welcomeMessage;
- document.getElementById("welcomeTextuserName").innerHTML = await checkStrValueQueryParam();
+ document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParam();
  
  }
  // ********************************************************************************
@@ -338,8 +361,8 @@ function checkTrue(obj) {
      else {
          welcomeMessage = "Welcome";
      }
-     document.getElementById("welcomeText").innerHTML = welcomeMessage + `, `;
-     document.getElementById("welcomeTextuserName").innerHTML = await checkStrValueQueryParamDesktop();
+     document.getElementById("welcomeText").innerHTML = welcomeMessage + `,&nbsp`;
+     document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParamDesktop();
  }
  
  // ***************** Welcome Msg based on the day time ****************************
@@ -403,10 +426,10 @@ function checkTrue(obj) {
         try{
             return await findUserId(myParam);
        }catch(e){
-            return ' dear guest'
+            return ` dear guest`;
        }
      } else {
-         return ' dear guest'
+         return `dear guest`;
      }
    }  
  
@@ -417,7 +440,7 @@ function checkTrue(obj) {
  }
  
  /**
- * Loads users from local storage.
+ * Loads users from remoteStorage
  */
    async function loadUsers() {
      try {

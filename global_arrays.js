@@ -73,13 +73,14 @@ let contactArray = [
     phone: "001123456789",
     initials: "EA",
     color: "var(--user-orange)",
-  },
+  }
 ];
 
 let initialGroups = [];
 let addedTasks = [
 
   {
+    urgent: [],
     toDo: [],
     inProgress: [],
     awaitFeedback: [],
