@@ -45,6 +45,8 @@ function showWelcomeMobile() {
     }
 }
 
+
+
 /**
  * Changes the background color of the footerPolicyAnchor element.
  * Queries the element with class .footerPolicyAnchor and adds the class 'btnsBackgroundColorActive' to it.
@@ -67,7 +69,9 @@ function changeBackgroundColorfooterPolicyAnchor() {
 async function displayAddedTasksArr() {
     await loadAddedTasks();
     let urgentCount = countUrgentTasksInAllCategories();
-    updateDisplay(urgentCount);
+    let nextDeadline = findNextDeadline();
+
+    updateDisplay(urgentCount, nextDeadline);
 }
 
 function countUrgentTasks(tasks) {
@@ -81,13 +85,15 @@ function countUrgentTasksInAllCategories() {
         countUrgentTasks(addedTasks[0].done);
 }
 
-function updateDisplay(urgentCount) {
+
+function updateDisplay(urgentCount, nextDeadline) {
     document.getElementById('tasksUrgent').innerHTML = urgentCount;
     document.getElementById('taskInBoardDiv').innerHTML = countAllTasks();
     document.getElementById('taskInProgressDiv').innerHTML = addedTasks[0].inProgress.length;
     document.getElementById('taskAwaitingFeedback').innerHTML = addedTasks[0].awaitFeedback.length;
     document.getElementById('taskTodo').innerHTML = addedTasks[0].toDo.length;
     document.getElementById('taskDone').innerHTML = addedTasks[0].done.length;
+    document.getElementById('deadline').innerHTML = nextDeadline;
 }
 
 function countAllTasks() {
@@ -104,6 +110,29 @@ async function loadAddedTasks() {
     } catch (e) {
         console.error("Loading error:", e);
     }
+}
+
+/**
+ * Filters all due dates of categories without 'done'
+ * @returns array
+ */
+function findAllDeadlines() {
+    let allDeadlines = [];
+    const categories = ['inProgress', 'awaitFeedback', 'toDo'];
+
+    categories.forEach(category => {
+        allDeadlines.push(...addedTasks[0][category].map(task => task.date));
+    });
+
+    return allDeadlines;
+}
+/** 
+ * @returns first date
+ */
+function findNextDeadline() {
+    const allDeadlines = findAllDeadlines();
+    const sortedDeadlines = allDeadlines.sort((a, b) => new Date(a) - new Date(b));
+    return sortedDeadlines[0];
 }
 
 /**

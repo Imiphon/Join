@@ -10,10 +10,12 @@ async function includeHTML() {
         }
     }
 
-    // ***** check footer btns state & display apropriate icon (clicked or default)
+    // checks footer btns state & display apropriate icon (clicked or default)
     if (localStorage.getItem("allBtnState")) {
         let state = JSON.parse(localStorage.getItem("allBtnState"));
         updateBtnStyle(checkTrue(state));
     }
+    // shows actual initials in the header
+    showNavInits();
 }
 

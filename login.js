@@ -52,6 +52,7 @@ function resetLoginForm(){
  */
 function showSummaryPage(userId){
   localStorage.setItem('userId', userId);
+  //localStorage.setItem('initials', userId);
   window.location = `./summary/summary.html?id=${userId}`;
 }
 
@@ -94,7 +95,7 @@ async function createOwnContactsRemoteStorage(name, email){
   emailAdresses = await getExistingEmailAdresses();
   let userId = emailAdresses.indexOf(email);
   let array = await JSON.parse(await getItem('contacts'));
-  array.push(createContactsArray(name, email));
+  array.push(createContactsArray(name, email, userId));
   await setItem('contacts' + userId, JSON.stringify(array));
 }
 
@@ -105,9 +106,11 @@ async function createOwnContactsRemoteStorage(name, email){
  * @param {String} name - name of the new registered user
  * @returns an new contact array with the new created user as contact
  */
-function createContactsArray(name,email){
+function createContactsArray(name,email, userId){
   let {preName,lastName} = splitName(name);
-  let initials = preName[0] + lastName[0];  
+  initials = preName[0] + lastName[0]; 
+  let userInitials = 'userInitials' + userId;
+  localStorage.setItem(userInitials, initials); 
   return [
     {
       color: "var(--user-yellow)",
@@ -115,7 +118,8 @@ function createContactsArray(name,email){
       lastName: lastName,
       mail: email,
       name: preName,
-      phone: 0
+      phone: 0,
+      owner: true
     }
   ]; 
 }
@@ -583,15 +587,12 @@ async function loadUsers() {
   }
 }
 
-
 /**
  * This function is use to save the users to the remote storage.
- *
  */
 async function saveUsers() {
   await setItem("users", JSON.stringify(users));
 }
-
 
 /*Validate Password Match HTML5 newUser + resetPwd*/
 let newPassword = document.getElementById("newPassword"),
@@ -623,7 +624,6 @@ function validateresetPassword() {
   }
 }
 
-
 /**
  * This function is to show the pwdMessage Div.
  *
@@ -632,7 +632,6 @@ function showPwdMessage(){
   document.getElementById("pwdMessage").style.display = "block";
 }
 
-
 /**
  * This function is to close the pwdMessage Div.
  *
@@ -640,7 +639,6 @@ function showPwdMessage(){
 function closePwdMessage(){
   document.getElementById("pwdMessage").style.display = "none";
 }
-
 
 /**
  * This function is to validate and show the requierments of the password.
@@ -652,7 +650,6 @@ function validatePasswordMessage(){
   validatenumbers(this);
   validateLength(this);
 }
-
 
 /**
  * This function is to validate the lower case letter of the password.
@@ -670,7 +667,6 @@ function validateLowerCase(input){
   }
 }
 
-
 /**
  * This function is to validate the upper case letter of the password.
  *
@@ -686,7 +682,6 @@ function validateUpperCase(input){
     capital.classList.add("invalid");
   }
 }
-
 
 /**
  * This function is to validate the numbers of the password.

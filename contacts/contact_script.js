@@ -12,36 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * load contacts from server
- * checks for arrays in the array
- */
-async function getContactsFromServer() {
-  let userId = localStorage.getItem('userId');
-  if (userId != '') {
-    try {
-      contactArray = await JSON.parse(await getItem('contacts' + userId));
-      if (Array.isArray(contactArray) && contactArray.some(Array.isArray)) {
-       replaceArrWithObj();
-      }
-    } catch (e) {
-      console.info('could not find contacts')
-    }
-  } else {
-    contactArray = await JSON.parse(await getItem('contacts' + userId));
-  }
-  await sortContacts();
-  showContacts();
-}
-
-/**
- * replace the array with object inside.
- */
-function replaceArrWithObj(){
-  contactArray = contactArray.map(innerArray => 
-    Array.isArray(innerArray) && innerArray.length > 0 ? innerArray[0] : innerArray
-  );}
-
-/**
  * sort last names in contactArray to alphabetic order
  */
 async function sortContacts() {

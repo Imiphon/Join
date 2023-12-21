@@ -24,6 +24,7 @@
 .clockAndDateDiv {
   color: #ffffff;
   font-family: var(--ff-s-mob);
+  width: 100%;
   height: 150px;
   display: flex;
   align-items: center;
