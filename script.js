@@ -1,8 +1,6 @@
 let userId = localStorage.getItem('userId');
 let prio = undefined; //To save the priority-value
 
-//let userInitials = '';
-
 /*Remote Storage Implementierung*/
 const STORAGE_TOKEN = "F4LGRNFMG9GWI4STVSTG89MGMCVVVRZDK3KPVIVF";
 const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
@@ -41,7 +39,7 @@ async function getContactsFromServer() {
     try {
       contactArray = await JSON.parse(await getItem('contacts' + userId));
       if (Array.isArray(contactArray) && contactArray.some(Array.isArray)) {
-       replaceArrWithObj();
+        replaceArrWithObj();
       }
     } catch (e) {
       console.info('could not find contacts')
@@ -56,10 +54,11 @@ async function getContactsFromServer() {
 /**
  * replace the array with object inside.
  */
-function replaceArrWithObj(){
-  contactArray = contactArray.map(innerArray => 
+function replaceArrWithObj() {
+  contactArray = contactArray.map(innerArray =>
     Array.isArray(innerArray) && innerArray.length > 0 ? innerArray[0] : innerArray
-  );}
+  );
+}
 
 /**
  * Called from include-html.js
@@ -67,9 +66,12 @@ function replaceArrWithObj(){
  */
 async function showNavInits() {
   let initialsElement = document.getElementById('userNameDivInnerId');
-  let userInitialsKey = 'userInitials' + userId;  
-  let initials = localStorage.getItem(userInitialsKey); 
-  initialsElement.innerHTML = initials;
+  let userInitialsKey = 'userInitials' + userId;
+  let initials = localStorage.getItem(userInitialsKey);
+  if (initials != null) {
+    initialsElement.innerHTML = initials;
+  } if (initials === null) {
+    initialsElement.innerHTML = 'XY';
+  }
 }
 
-  

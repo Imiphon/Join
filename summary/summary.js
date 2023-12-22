@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (currentPage.includes("templates/privacy_policy.html")) {
         let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
-
-        console.log("policy works", footerPolicyAnchor);
     }
 });
 
@@ -314,9 +312,8 @@ async function displayWelcomeMsg() {
     else {
         welcomeMessage = "Welcome";
     }
-    document.getElementById("welcomeText").innerHTML = welcomeMessage;
+    document.getElementById("welcomeText").innerHTML = welcomeMessage + `,&nbsp`;
     document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParam();
-
 }
 
 async function displayWelcomeMsgDesktop() {
@@ -343,6 +340,7 @@ async function displayWelcomeMsgDesktop() {
     document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParamDesktop();
 }
 
+/*
 function welcomeMsgAnimation() {
     const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
     const summaryWrapper = document.querySelector('.summaryWrapper');
@@ -364,6 +362,7 @@ function removeWelcomeMsgAnimation() {
     welcomeMsgDiv.style.marginBottom = '0vh';
     summaryWrapper.style.transform = 'translateY(0)';
 }
+*/
 
 /**
 * Retrieves user name by user id from URL query parameters and returns it.
@@ -377,10 +376,11 @@ async function checkStrValueQueryParam() {
         try {
             return await findUserId(myParam);
         } catch (e) {
-            return '';
+            return 'dear Guest';
         }
     } else {
-        //removeWelcomeMsgAnimation();
+        let userName = localStorage.getItem('myName');
+        return userName; 
     }
 }
 
@@ -391,16 +391,19 @@ async function checkStrValueQueryParamDesktop() {
         try {
             return await findUserId(myParam);
         } catch (e) {
-            return ` dear guest`;
+            return `dear Guest`;            
         }
-    } else {
-        return `dear guest`;
+    } else { 
+        let userName = localStorage.getItem('myName');
+        return userName;       
     }
 }
 
 async function findUserId(userId) {
     await loadUsers();
-    return users[userId]['name'];
+    let userName = users[userId]['name'];
+    setNameToLocaleStorage(userName) 
+    return userName
 }
 
 /**
@@ -409,7 +412,12 @@ async function findUserId(userId) {
 async function loadUsers() {
     try {
         users = JSON.parse(await getItem("users"));
+
     } catch (e) {
         console.error("Loading error:", e);
     }
+}
+
+function setNameToLocaleStorage(userName) {
+localStorage.setItem('myName', userName);
 }
