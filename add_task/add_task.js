@@ -17,12 +17,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /**
- * I am saving the array 'addedTasks'
+ * Also here is the same this saving the array
  */
 
-async function saveTasks() {
-  let userId = localStorage.getItem("userId");
-  await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
+async function getContactsFromServerForAddTask() {
+  try {
+    let userId = localStorage.getItem("userId");
+    contactArray = JSON.parse(await getItem("contacts" + userId));
+  } catch (e) {
+    console.info("could not find contacts");
+  }
 }
 
 /**
@@ -41,14 +45,6 @@ async function loadTasks() {
 }
 
 /**
- * This function saves the array 'categories'
- */
-
-async function saveCategories() {
-  await setItem("storedCategories", JSON.stringify(categories));
-}
-
-/**
  * loading the array categories from the server
  */
 async function loadCaegories() {
@@ -63,57 +59,19 @@ async function loadCaegories() {
 }
 
 /**
- * Also here is the same this saving the array
+ * This functions allows the user in the 'input ="date"'-field only take a available date, and not a date from past
  */
+function getCurrentDate() {
+  const toDayDate = new Date();
+  const year = toDayDate.getFullYear();
+  let month = toDayDate.getMonth() + 1;
+  let today = toDayDate.getDate();
 
-async function getContactsFromServerForAddTask() {
-  try {
-    let userId = localStorage.getItem("userId");
-    contactArray = JSON.parse(await getItem("contacts" + userId));
-  } catch (e) {
-    console.info("could not find contacts");
-  }
-}
+  if (month < 10) month = "0" + month;
+  if (today < 10) today = "0" + today;
 
-/**
- * // Function to show or hide the options for contacts to assign
- */
-function showOptions() {
-  let dropdown = document.getElementById("dropdown-options");
-
-  if (dropdown.classList.contains("dropdown-content")) {
-    showDropdownOptions();
-  } else {
-    hideDropdownOptions();
-  }
-}
-
-/**
- * global variable to be called from two different functions
- */
-let dropdown = document.getElementById("dropdown-options");
-
-/**
- * // Function to show dropdown options for contacts to assign
- */
-function showDropdownOptions() {
-  document.getElementById("caret-down").style.transform = "rotate(180deg)";
-  document.getElementById("selected-contact").classList.remove("d-none");
-  document.getElementById("assigned-div").style.borderBottom =
-    "solid 1px var(--reg-blue)";
-  dropdown.classList.remove("dropdown-content");
-  dropdown.classList.add("hidden");
-}
-
-/**
- * Function to hide dropdown options for contacts to assign
- */
-
-function hideDropdownOptions() {
-  document.getElementById("caret-down").style.transform = "rotate(0deg)";
-  document.getElementById("assigned-div").style.borderBottom = "";
-  dropdown.classList.add("dropdown-content");
-  dropdown.classList.remove("hidden");
+  let minDate = `${year}-${month}-${today}`;
+  document.getElementById("date").min = minDate;
 }
 
 /**
@@ -125,12 +83,12 @@ function dropDownTemplates() {
 
   contactArray.forEach((user, index) => {
     const userHtml = `
-                    <div class="options">
-                    <span class="profile" id="profile${index}">${user.initials}</span>
-                    <label for="checkbox${index}">${user.name} ${user.lastName}</label>
-                    <input type="checkbox" id="checkbox${index}" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
-                    </div>
-                    `;
+      <div class="options">
+      <span class="profile" id="profile${index}">${user.initials}</span>
+      <label for="checkbox${index}">${user.name} ${user.lastName}</label>
+      <input type="checkbox" id="checkbox${index}" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
+      </div>
+      `;
     dropdown.innerHTML += userHtml;
     setBackgroundColor(user, index);
   });
@@ -146,74 +104,7 @@ function setBackgroundColor(user, index) {
   userBackground.style.backgroundColor = user.color;
 }
 
-/**
- * this fucntion ist calling other functions to rotate the icons from  assign contacts and categories
- */
 
-let showCategory = false;
-document.addEventListener("click", (event) => {
-  // Function to rotate the category icon
-  rotateCategoryIcon(event);
-
-  //Add the blue color of the subtask-wrapper
-
-  blueColorOfSubTasksContainer(event);
-});
-
-/**
- *  Function to rotate the category icon
- * @param {string} event - This is  event shows which element is clicked, to select the right icon and rotate ist
- */
-function rotateCategoryIcon(event) {
-  let categoryIcon = document.getElementById("category-caret-down");
-  if (
-    (event.target.id == "category-div") & !showCategory ||
-    (event.target.id == "category-caret-down") & !showCategory
-  ) {
-    categoryIcon.style.transform = "rotate(180deg)";
-    showCategory = true;
-    openCategory();
-  } else if (event.target.id !== "category-div" || showCategory === true) {
-    categoryIcon.style.transform = "rotate(0deg)";
-    showCategory = false;
-    closeCategory();
-  }
-}
-
-/**
- * If the category area is clicked, so the dropdown should be opened
- */
-function openCategory() {
-  let dropdown = document.getElementById("dropdown-category");
-  if (dropdown.classList.contains("dropdown-content")) {
-    dropdown.classList.remove("dropdown-content");
-    dropdown.classList.add("hidden");
-    document.getElementById("selected-category").classList.remove("d-none");
-  }
-}
-
-/**
- * If the category area is clicked, so the dropdown should be closed
- */
-function closeCategory() {
-  let dropdown = document.getElementById("dropdown-category");
-  dropdown.classList.add("dropdown-content");
-  dropdown.classList.remove("hidden");
-}
-
-/**
- * this function renders the categories from the categories array
- */
-function showCategoryOptions() {
-  let select = document.getElementById("dropdown-category");
-  select.innerHTML =
-    '<div class="options" onclick="addCategory(event)">Add category</div>';
-  for (let i in categories) {
-    select.innerHTML += `
-      <div class="options" value="${categories[i]}" onclick="checkedCategory(event, ${i})">${categories[i]}</div>
-      `;
-  }
-}
 
 /**
  * this functions initialize the category
@@ -287,41 +178,6 @@ function openAddTask() {
 }
 
 /**
- * // Function to generate the HTML template for tasks
- * @returns This function return the html-code for the opedAddTask()
- */
-function tasksTemplate() {
-  return `
-                    <div class="subtask" id="subtask">
-                    <b>Subtasks</b>
-                    <div class="subtask-wrapper" id="subtask-wrapper">
-                    <input type="text" id="subtask-value" placeholder="Add new subtask">  
-                    <div id="subtask-icon-container" class="subtask-icon-conatiner">
-                    <i class="bi bi-x" onclick="clearAddTask()"></i>
-                    |
-                    <i class="bi bi-check-lg" onclick="addSubtask()"></i>
-                    </div> 
-                    </div>
-                    <ul id="tasks-area" class="tasks-area">
-
-                    </ul>
-                    </div>
-                    `;
-}
-
-/**
- * // Functions to programmatically click the create task button
-
- */
-function activeCreateTaskBtn() {
-  document.getElementById("create-task").click();
-}
-
-function activeClearTaskBtn() {
-  document.getElementById("clear-task").click();
-}
-
-/**
  * Function to set priority and update it
  */
 const boxShadowColors = [
@@ -390,8 +246,8 @@ function checkedUser(userInitials, userName, userLastName, bColor, index) {
       selectedContacts.splice(indexToRemove, 1);
     }
   }
-
   showAssignedContactsInContainer();
+  toggleContactContainer();
 }
 
 /**
@@ -406,14 +262,35 @@ function showAssignedContactsInContainer() {
 
     bColor = assignedContacts[i]["bColor"];
     selectedContainer.innerHTML += `
-                    <span style="background-color:${bColor}; z-index:${i}" class="profile" id="selected-profile${i}">
-                    ${profile}
-                    </span>
-                    `;
+       <span style="background-color:${bColor}; z-index:${i}" class="profile" id="selected-profile${i}">
+       ${profile}
+       </span>
+       `;
   }
 }
 
 let editingIndex = -1;
+
+/**
+ * // Function to generate the HTML template for tasks
+ * @returns This function return the html-code for the opendAddTask()
+ */
+function tasksTemplate() {
+  return `
+     <div class="subtask" id="subtask">
+     <b>Subtasks</b>
+     <div class="subtask-wrapper" id="subtask-wrapper">
+     <input type="text" id="subtask-value" placeholder="Add new subtask">  
+     <div id="subtask-icon-container" class="subtask-icon-conatiner">
+     <i class="bi bi-x" onclick="clearAddTask()"></i>
+     |
+     <i class="bi bi-check-lg" onclick="addSubtask()"></i>
+     </div> 
+     </div>
+     <ul id="tasks-area" class="tasks"></ul>
+     </div>
+     `;
+}
 
 /**
  * Function to add a subtasks;
@@ -436,7 +313,6 @@ function addSubtask() {
         checked: false,
       });
     }
-
     renderAddedTask();
     document.getElementById("subtask-value").value = "";
   }
@@ -451,14 +327,14 @@ function renderAddedTask() {
 
   tasksForSubtasks.forEach((task, i) => {
     tasksArea.innerHTML += `
-                    <li>
-                    <p>${task.name}</p>
-                    <span>
-                    <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
-                    <i class="bi bi-trash" onclick="deleteSubTask(${i})"></i>
-                    </span>
-                    </li>
-                    `;
+       <li>
+       <p>${task.name}</p>
+       <span>
+       <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
+       <i class="bi bi-trash" onclick="deleteSubTask(${i})"></i>
+       </span>
+       </li>
+       `;
   });
 }
 
@@ -490,7 +366,8 @@ let conatainerIdForMobileAddTask;
 let editIndex = -1;
 
 /**
- * This function adds a now Task to the board section
+ * This function adds a new Task to the board section
+ * For mobile it's adding from the board-site a new task
  * @param {event object} event -is used to prevent the default behavior of an event in JavaScrip
  * @param {string} containerId - the name of each array in the addedTasks
  */
@@ -501,7 +378,11 @@ function addTask(event, containerId) {
   } else {
     const taskData = collectTaskData();
     const task = createTaskObject(taskData);
-    pushTask(task, containerId, editIndex);
+    if(containerId) {
+      pushTask(task, containerId, editIndex);
+    } else {
+      pushTask(task, conatainerIdForMobileAddTask, editIndex);
+    }
     clearForm(event);
     showAddedTask();
   }
@@ -510,7 +391,7 @@ function addTask(event, containerId) {
 /**
  * This function is adding from the board-site a new task
  * @param {event object} event -is used to prevent the default behavior of an event in JavaScrip
- */
+
 function mobAddtask(event) {
   event.preventDefault();
     event.preventDefault();
@@ -524,6 +405,7 @@ function mobAddtask(event) {
       showAddedTask();
     }
 }
+ */
 
 /**
  * After a task is added, we should switch to the board site
@@ -606,34 +488,6 @@ function pushTask(task, containerId, editIndex) {
 }
 
 /**
- * This function clear the from
- * @param {event object} event wer are stopping the this function from its function, to not trigger our from
- */
-function clearForm(event) {
-  event.preventDefault();
-  document.getElementById("title").value = "";
-  document.getElementById("description").value = "";
-  document.getElementById("date").value = "";
-  category = "";
-  tasksForSubtasks = [];
-  selectedContacts = [];
-  assignedContacts = [];
-  showAssignedContactsInContainer();
-  dropDownTemplates();
-  resetPriorityButtons();
-  openAddTask();
-}
-
-/**
- * Reseting the prioBtns
- */
-function resetPriorityButtons() {
-  prioBtns.forEach((btn) => {
-    btn.style.boxShadow = `0px 0px 4px 0px ${boxShadowColors[0]}`;
-  });
-}
-
-/**
  *
  * @param {html-code} html - this is html-code to show a message after a task is added
  */
@@ -650,58 +504,3 @@ function showMessage(html) {
   }, 3500);
 }
 
-/**
- * Template for the message
- */
-
-function showAddedTask() {
-  let newTask = `<p>Task added.</p>`;
-  let editedTask = `Task edited.`;
-  let message;
-  if (editIndex === -1) {
-    message = newTask;
-  } else {
-    message = editedTask;
-  }
-  showMessage(message);
-}
-
-/**
- * This functions allows the user in the 'input ="date"'-field only take a available date, and not a date from past
- */
-function getCurrentDate() {
-  const toDayDate = new Date();
-  const year = toDayDate.getFullYear();
-  let month = toDayDate.getMonth() + 1;
-  let today = toDayDate.getDate();
-
-  if (month < 10) month = "0" + month;
-  if (today < 10) today = "0" + today;
-
-  let minDate = `${year}-${month}-${today}`;
-  document.getElementById("date").min = minDate;
-}
-
-function requiredField() {
-  let reqContact = document.getElementById("req-contact");
-  let reqTask = document.getElementById("req-task");
-  let reqPrio = document.getElementById("req-prio");
-  if (assignedContacts.length < 1) {
-    reqContact.style.display = "flex";
-    return false;
-  } else {
-    reqContact.style.display = "none";
-  }
-  if (categoryValue === undefined) {
-    reqTask.style.display = "flex";
-    return false;
-  } else {
-    reqTask.style.display = "none";
-  }
-  if (prio === undefined) {
-    reqPrio.style.display = "flex";
-    return false;
-  } else {
-    reqPrio.style.display = "none";
-  }
-}

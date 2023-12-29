@@ -195,7 +195,7 @@ function selectedContact(task) {
       assignedContacts.push(task.selectedContacts[i]);
       selectedContacts.push(task.selectedContacts[i]);
 
-      showOptions();
+      toggleContactContainer();
       showAssignedContactsInContainer();
       // Hier können Sie den Index verwenden, um weitere Aktionen durchzuführen.
     } else {
