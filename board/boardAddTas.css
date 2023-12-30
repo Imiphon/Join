@@ -679,13 +679,18 @@ form input:focus:not(.subtask input) {
     flex-direction: row;
     justify-content: space-around;
     gap: 5px;
-    height: 100;
   }
 
   .card-parent {
     width: 150px;
     height: unset;
   }
+
+  .card-parent b {    
+    min-height: 40px;
+    max-height: 40px;
+  }
+
   .cards {
     width: 100%;
   }

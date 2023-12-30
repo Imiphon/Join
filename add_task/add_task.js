@@ -107,7 +107,7 @@ function setBackgroundColor(user, index) {
 
 
 /**
- * this functions initialize the category
+ * this functions initialize the category and close the board
  * @param { event object,} event This line prevents the event from propagating further up the DOM tree. It stops the event from triggering any parent event listeners that might also be listening for the same event. This is commonly used to control event bubbling
  * @param {number} i The i parameter is  used as a convention to represent the index.
  */
@@ -117,6 +117,8 @@ function checkedCategory(event, i) {
   category_area.innerHTML = "";
   category_area.innerHTML = categories[i];
   categoryValue = categories[i];
+  closeCategory();
+  rotateCategoryIcon(event);
 }
 
 /**

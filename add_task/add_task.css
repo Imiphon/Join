@@ -374,6 +374,11 @@ form {
   display: none;
 }
 
+#tasks-area.tasks {
+  padding-left: inherit;
+  line-height: 1.5;
+}
+
 .tasks-area {
   display: flex;
   justify-content: center;

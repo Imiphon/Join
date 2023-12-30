@@ -109,7 +109,8 @@ document.addEventListener("click", (event) => {
 
 /**
  *  Function to rotate the category icon
- * @param {string} event - This is  event shows which element is clicked, to select the right icon and rotate ist
+ * @param {string} event - This event shows which element is clicked, 
+ * to select the right icon and rotate it.
  */
 function rotateCategoryIcon(event) {
   let categoryIcon = document.getElementById("category-caret-down");

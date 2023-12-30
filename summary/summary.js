@@ -73,14 +73,17 @@ async function displayAddedTasksArr() {
 }
 
 function countUrgentTasks(tasks) {
-    return tasks.filter(task => task.priority === 'urgent').length;
+    if(tasks) {
+        return tasks.filter(task => task.priority === 'urgent').length;
+    } else {
+        return 'no urgents';
+    }
 }
 
 function countUrgentTasksInAllCategories() {
     return countUrgentTasks(addedTasks[0].inProgress) +
         countUrgentTasks(addedTasks[0].awaitFeedback) +
-        countUrgentTasks(addedTasks[0].toDo) +
-        countUrgentTasks(addedTasks[0].done);
+        countUrgentTasks(addedTasks[0].toDo);
 }
 
 

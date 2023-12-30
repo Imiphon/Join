@@ -74,11 +74,12 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  height: 100%;
+  height: 100vh;
   flex-direction: column;
   gap: 16px;
   align-items: center;
 }
+
 
 .row-title {
   display: flex;
@@ -291,8 +292,7 @@
 
 .title {
   align-self: stretch;
-  color: var(--black, #000);
-  font-family: Open Sans;
+  color: var(--black, #000);  
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
@@ -302,7 +302,6 @@
 .description {
   align-self: stretch;
   color: var(--black, #000);
-  font-family: Open Sans;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -487,6 +486,7 @@
 }
 
 .drag-area-highlight {
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
 }
 .move-buttons{
@@ -506,4 +506,14 @@
 .move-buttons button{
   padding: 8px !important;
   font-size: 16px !important;
+}
+
+@media (max-width: 768px) {
+  
+  .allsTsks {
+    height: auto;
+  }
+  .board-main {
+    padding-top: 10px;
+  }
 }
