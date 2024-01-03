@@ -254,6 +254,11 @@ function toggleButton(buttonName) {
     localStorage.setItem("allBtnState", JSON.stringify(buttonStates));
 }
 
+/**
+ * Checks footer btns state & display apropriate icon (clicked or default).
+ * Used in include-html.js
+ * @param {*} buttonName 
+ */
 function updateBtnStyle(buttonName) {
     if (!handleWindowResize()) {
         switch (buttonName) {

@@ -435,8 +435,6 @@ function validateresetPassword() {
   }
 }
 
-
-
 newPassword.onchange = validatenewPassword;
 newPassword.onfocus = showPwdMessage;
 newPassword.onblur = closePwdMessage;
@@ -447,6 +445,3 @@ resetPassword.onfocus = showPwdMessage;
 resetPassword.onblur = closePwdMessage;
 resetPassword.onkeyup = validatePasswordMessage;
 resetConfirmPassword.onkeyup = validateresetPassword;
-
-
-
