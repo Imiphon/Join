@@ -260,8 +260,6 @@ function addSubtask() {
   }
 }
 
-
-
 /**
  * THis function is deleting the added subtasks
  * @param {number} i - this is the index of each the added subTasks, to recognize which task should be deleted
