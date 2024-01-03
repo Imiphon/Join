@@ -4,6 +4,9 @@ let selectedContacts = []; // A list for selected contacts
 let assignedContacts = []; // A list for assigned contacts
 let categories = ["Design", "Programming", "Marketing"]; // A list of categories
 let categoryValue = undefined; // A variable to store the selected category value
+let editingIndex = -1;
+let conatainerIdForMobileAddTask;
+let editIndex = -1;
 
 /**
  * calling this functions to be loaded from the server
@@ -75,26 +78,6 @@ function getCurrentDate() {
 }
 
 /**
- *  Function to populate dropdown with templates. this methode makes code to look better
- */
-function dropDownTemplates() {
-  let dropdown = document.getElementById("dropdown-options");
-  dropdown.innerHTML = "";
-
-  contactArray.forEach((user, index) => {
-    const userHtml = `
-      <div class="options">
-      <span class="profile" id="profile${index}">${user.initials}</span>
-      <label for="checkbox${index}">${user.name} ${user.lastName}</label>
-      <input type="checkbox" id="checkbox${index}" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
-      </div>
-      `;
-    dropdown.innerHTML += userHtml;
-    setBackgroundColor(user, index);
-  });
-}
-
-/**
  * Function to set a  background color for a profile
  * @param {string} user - This is the name of the person which added to the 'options' in the 'dropDownTemplates()'
  * @param {number} index - This is the index of the person which added to the 'options' in the 'dropDownTemplates()'
@@ -103,8 +86,6 @@ function setBackgroundColor(user, index) {
   let userBackground = document.getElementById(`profile${index}`);
   userBackground.style.backgroundColor = user.color;
 }
-
-
 
 /**
  * this functions initialize the category and close the board
@@ -122,28 +103,10 @@ function checkedCategory(event, i) {
 }
 
 /**
- *
- * @param {event object} event - the event.stopPropagation(); should stop the trigger from the openCategory()
- */
-
-function addCategory(event) {
-  event.stopPropagation();
-  document.getElementById("new-category").style.display = "flex";
-  document.getElementById("new-category").innerHTML = `
-  <div class="category-wrapper" id="Categorie-wrapper">
-  <input class="cateory-value" type="text" id="cateory-value" placeholder="Add new category"> 
-  <div id="subtask-icon-container" class="subtask-icon-conatiner">
-  <i class="bi bi-x" onclick="clearAddCategoryk()"></i>                |
-  <i class="bi bi-check-lg" onclick="addNewcategory()"></i>
-  </div>
-  `;
-}
-
-/**
  * This function added new category
  */
 function addNewcategory() {
-  let catValue = document.getElementById("cateory-value");
+  let catValue = document.getElementById("category-value");
   categories.push(catValue.value);
   saveCategories();
   document.getElementById("new-category").style.display = "none";
@@ -153,7 +116,7 @@ function addNewcategory() {
  * this function cleares the text in the input from the  addNewcategory()
  */
 function clearAddCategoryk() {
-  document.getElementById("cateory-value").value = "";
+  document.getElementById("category-value").value = "";
   document.getElementById("Categorie-wrapper").style.display = "none";
 }
 
@@ -271,29 +234,6 @@ function showAssignedContactsInContainer() {
   }
 }
 
-let editingIndex = -1;
-
-/**
- * // Function to generate the HTML template for tasks
- * @returns This function return the html-code for the opendAddTask()
- */
-function tasksTemplate() {
-  return `
-     <div class="subtask" id="subtask">
-     <b>Subtasks</b>
-     <div class="subtask-wrapper" id="subtask-wrapper">
-     <input type="text" id="subtask-value" placeholder="Add new subtask">  
-     <div id="subtask-icon-container" class="subtask-icon-conatiner">
-     <i class="bi bi-x" onclick="clearAddTask()"></i>
-     |
-     <i class="bi bi-check-lg" onclick="addSubtask()"></i>
-     </div> 
-     </div>
-     <ul id="tasks-area" class="tasks"></ul>
-     </div>
-     `;
-}
-
 /**
  * Function to add a subtasks;
  */
@@ -320,25 +260,7 @@ function addSubtask() {
   }
 }
 
-/**
- * This function renders the added subtasks
- */
-function renderAddedTask() {
-  let tasksArea = document.getElementById("tasks-area");
-  tasksArea.innerHTML = "";
 
-  tasksForSubtasks.forEach((task, i) => {
-    tasksArea.innerHTML += `
-       <li>
-       <p>${task.name}</p>
-       <span>
-       <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
-       <i class="bi bi-trash" onclick="deleteSubTask(${i})"></i>
-       </span>
-       </li>
-       `;
-  });
-}
 
 /**
  * THis function is deleting the added subtasks
@@ -363,51 +285,6 @@ function editTask(i) {
   renderAddedTask();
   taskValue.focus();
 }
-
-let conatainerIdForMobileAddTask;
-let editIndex = -1;
-
-/**
- * This function adds a new Task to the board section
- * For mobile it's adding from the board-site a new task
- * @param {event object} event -is used to prevent the default behavior of an event in JavaScrip
- * @param {string} containerId - the name of each array in the addedTasks
- */
-function addTask(event, containerId) {
-  event.preventDefault();
-  if (requiredField() === false) {
-    requiredField();
-  } else {
-    const taskData = collectTaskData();
-    const task = createTaskObject(taskData);
-    if(containerId) {
-      pushTask(task, containerId, editIndex);
-    } else {
-      pushTask(task, conatainerIdForMobileAddTask, editIndex);
-    }
-    clearForm(event);
-    showAddedTask();
-  }
-}
-
-/**
- * This function is adding from the board-site a new task
- * @param {event object} event -is used to prevent the default behavior of an event in JavaScrip
-
-function mobAddtask(event) {
-  event.preventDefault();
-    event.preventDefault();
-    if (requiredField() === false) {
-      requiredField();
-    } else {
-      const taskData = collectTaskData();
-      const task = createTaskObject(taskData);
-      pushTask(task, conatainerIdForMobileAddTask, editIndex);
-      clearForm(event);
-      showAddedTask();
-    }
-}
- */
 
 /**
  * After a task is added, we should switch to the board site
@@ -469,24 +346,6 @@ function createTaskObject(taskData) {
     progressWidth: taskData.progressWidth,
   };
   return task;
-}
-
-/**
- * This function is Pushing the task to add it to the AddedTask
- * @param {object} task This is the generated Json-object which has to be added
- * @param {number} containerId The name of each section for exaple 'toDo, inProgress etc...'
- * @param {*} editIndex
- */
-function pushTask(task, containerId, editIndex) {
-  /**
-   * if editIndex ist not -1, this means we are editing a task
-   */
-  if (editIndex === -1) {
-    addedTasks[0][containerId].push(task);
-  } else if (editIndex > -1) {
-    addedTasks[0][containerId][editIndex] = task;
-  }
-  saveTasks();
 }
 
 /**

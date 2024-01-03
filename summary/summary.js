@@ -1,24 +1,20 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = window.location.pathname;
     if (currentPage.includes("summary")) {
         displayAddedTasksArr();
 
         if (window.innerWidth < 1024) {
-            displayWelcomeMsg();
             checkStrValueQueryParam();
             showWelcomeMobile();
         }
-
-        if (window.innerWidth >= 1024) {
-            displayWelcomeMsgDesktop();
-        }
-    }
-
-    if (currentPage.includes("templates/privacy_policy.html")) {
-        let footerPolicyAnchor = document.querySelector(".footerPolicyAnchor");
+        displayWelcomeMsg();
     }
 });
 
+/**
+ * Shows welcome message after login
+ */
 function showWelcomeMobile() {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('id');
@@ -42,8 +38,6 @@ function showWelcomeMobile() {
         summaryWrapper.classList.add('summaryWrapper2');
     }
 }
-
-
 
 /**
  * Changes the background color of the footerPolicyAnchor element.
@@ -73,7 +67,7 @@ async function displayAddedTasksArr() {
 }
 
 function countUrgentTasks(tasks) {
-    if(tasks) {
+    if (tasks) {
         return tasks.filter(task => task.priority === 'urgent').length;
     } else {
         return 'no urgents';
@@ -291,81 +285,28 @@ function updateBtnStyle(buttonName) {
 
 /**
 * Displays a welcome message on the screen based on the current hour of the day.
-* - Morning: Displays 'Good Morning' if the current hour is less than 12.
-* - Afternoon: Displays 'Good Afternoon' if the current hour is less than 20.
-* - Evening: Displays 'Good Evening' if the current hour is less than 24.
 */
 async function displayWelcomeMsg() {
-    const date = new Date();
-    const currentHour = date.getHours();
-    let welcomeMessage;
-
-    if (currentHour < 12) {
-        welcomeMessage = "Good Morning";
-        icon = "coffee";
-    }
-    else if (currentHour < 20) {
-        welcomeMessage = 'Good afternoon!';
-        icon = "sun-o";
-    }
-    else if (currentHour < 24) {
-        welcomeMessage = "Good evening"
-        icon = "moon-o";
-    }
-    else {
-        welcomeMessage = "Welcome";
-    }
-    document.getElementById("welcomeText").innerHTML = welcomeMessage + `,&nbsp`;
-    document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParam();
+        const date = new Date();
+        const currentHour = date.getHours();
+        let welcomeMessage;
+    
+        if (currentHour < 12) {
+            welcomeMessage = "Good Morning";
+        }
+        else if (currentHour < 20) {
+            welcomeMessage = "Good afternoon";
+        }
+        else if (currentHour < 24) {
+            welcomeMessage = "Good evening";
+        }
+        else {
+            welcomeMessage = "Welcome";
+        }
+        document.getElementById("welcomeText").innerHTML = welcomeMessage + `,&nbsp`;
+        document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParam(); 
+        firstHello = true;    
 }
-
-async function displayWelcomeMsgDesktop() {
-    const date = new Date();
-    const currentHour = date.getHours();
-    let welcomeMessage;
-
-    if (currentHour < 12) {
-        welcomeMessage = "Good Morning";
-        icon = "coffee";
-    }
-    else if (currentHour < 20) {
-        welcomeMessage = 'Good afternoon';
-        icon = "sun-o";
-    }
-    else if (currentHour < 24) {
-        welcomeMessage = "Good evening"
-        icon = "moon-o";
-    }
-    else {
-        welcomeMessage = "Welcome";
-    }
-    document.getElementById("welcomeText").innerHTML = welcomeMessage + `,&nbsp`;
-    document.getElementById("welcomeTextUserName").innerHTML = await checkStrValueQueryParamDesktop();
-}
-
-/*
-function welcomeMsgAnimation() {
-    const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
-    const summaryWrapper = document.querySelector('.summaryWrapper');
-    setTimeout(function toggleAnimation() {
-        //welcomeMsgDiv.style.marginBottom = '-45vh';
-        //summaryWrapper.style.transform = 'translateY(25%)';
-        setTimeout(() => {
-            //welcomeMsgDiv.style.opacity = "0"; 
-        }, 700)
-        setTimeout(() => {
-            //  welcomeMsgDiv.style.display = "none";
-        }, 100)
-    }, 2000)
-}
-
-function removeWelcomeMsgAnimation() {
-    const welcomeMsgDiv = document.getElementById('welcomeMsgDiv');
-    const summaryWrapper = document.querySelector('.summaryWrapper');
-    welcomeMsgDiv.style.marginBottom = '0vh';
-    summaryWrapper.style.transform = 'translateY(0)';
-}
-*/
 
 /**
 * Retrieves user name by user id from URL query parameters and returns it.
@@ -375,7 +316,6 @@ async function checkStrValueQueryParam() {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('id');
     if (myParam) {
-        //welcomeMsgAnimation();
         try {
             return await findUserId(myParam);
         } catch (e) {
@@ -383,29 +323,14 @@ async function checkStrValueQueryParam() {
         }
     } else {
         let userName = localStorage.getItem('myName');
-        return userName; 
-    }
-}
-
-async function checkStrValueQueryParamDesktop() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('id');
-    if (myParam) {
-        try {
-            return await findUserId(myParam);
-        } catch (e) {
-            return `dear Guest`;            
-        }
-    } else { 
-        let userName = localStorage.getItem('myName');
-        return userName;       
+        return userName;
     }
 }
 
 async function findUserId(userId) {
     await loadUsers();
     let userName = users[userId]['name'];
-    setNameToLocaleStorage(userName) 
+    setNameToLocaleStorage(userName)
     return userName
 }
 
@@ -422,5 +347,5 @@ async function loadUsers() {
 }
 
 function setNameToLocaleStorage(userName) {
-localStorage.setItem('myName', userName);
+    localStorage.setItem('myName', userName);
 }

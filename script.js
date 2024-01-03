@@ -25,6 +25,9 @@ async function getItem(key) {
     });
 }
 
+/**
+ * used in help-, imprint- and privacy.html
+ */
 function historyBack() {
   window.history.back();
 }

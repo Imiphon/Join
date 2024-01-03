@@ -6,10 +6,12 @@
 
 .add_task_section {
   width: 100%;
-  padding-top: 50px;
   margin: 0 auto;
   max-width: 460px;
 }
+
+
+
 /* Div container styles */
 .add_task_section div {
   width: 100%;
@@ -146,24 +148,13 @@ form {
   gap: 8px;
 }
 
-/* Scrollbar styles */
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+#addCatHeader{
+  color: var(--reg-blue);
+  cursor: pointer;  
 }
 
-*::-webkit-scrollbar-thumb {
-  background: #969696;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
-}
-
-*::-webkit-scrollbar-thumb:active {
-  background: #bfbfbf;
+#addCatHeader:hover {
+  color: var(--strong-blue);
 }
 
 /* Options styles */
@@ -443,9 +434,11 @@ form {
     flex-direction: row;
     align-items: stretch;
     height: 100%;
-    margin-top: -50px;
+    margin-top: -180px;
     justify-content: space-between;
   }
+
+
 
   .center-line {
     background-color: var(--user-grey);
@@ -543,5 +536,10 @@ form {
 .requiredText{
   color: rgb(199, 2, 2);
   margin: 0 12px;
-  display: ;
+}
+
+@media (max-width: 768px) {
+  .add_task_section form {
+    padding-top: 220px;
+  }
 }

@@ -62,6 +62,10 @@
   align-items: flex-start;
 }
 
+.tasks p {
+  line-height: 32px;
+  }
+
 .card-parent {
   position: relative;
   display: flex;

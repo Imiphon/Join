@@ -4,7 +4,6 @@ let resetId;
 /**
  *  This function is get user and password and checkCredentials.
  *  If correct redirect to welcome message.
- *
  */
 async function login() {
   disableButtonLogin();
@@ -15,10 +14,8 @@ async function login() {
   enableButtonLogin();  
 }
 
-
 /**
  * This function is use to check if the credentials email and password correct.
- * 
  * @param {String} email - email adress of the user to login
  * @param {String} password password of the user to login
  */
@@ -37,17 +34,14 @@ async function checkCredentials(email,password){
 
 /**
  * This function is use to reset all inputs from the login form.
- * 
- */
+*/
 function resetLoginForm(){
   let form = document.getElementById('formLogin'); 
   form.reset();
 }
 
-
 /**
  * This function save the userId to localstorage and set as id for redirect.
- * 
  * @param {int} userId - UserId save to localstorage and set as id for redirect
  */
 function showSummaryPage(userId){
@@ -56,10 +50,8 @@ function showSummaryPage(userId){
   window.location = `./summary/summary.html?id=${userId}`;
 }
 
-
 /**
  *  This function is use to create a new user. If the E-Mail is not in use.
- *
  */
 async function newUser() {
   disableButton("newUserBtn");
@@ -75,20 +67,16 @@ async function newUser() {
   enableButton("newUserBtn");
 }
 
-
 /**
  * This function is use to reset all inputs from the new user form.
- * 
  */
 function resetNewUserForm(){
   let form = document.getElementById("formNewUser");
   form.reset();
 }
 
-
 /**
  * This function is to create the contact array for the new registered user on the remote storage.
- * 
  * @param {int} userId - Id of the new User to create the contact array 
  */
 async function createOwnContactsRemoteStorage(name, email){
@@ -99,10 +87,8 @@ async function createOwnContactsRemoteStorage(name, email){
   await setItem('contacts' + userId, JSON.stringify(array));
 }
 
-
 /**
  * This function is use to create a contact-array with his own contact for new created user.
- * 
  * @param {String} name - name of the new registered user
  * @returns an new contact array with the new created user as contact
  */
@@ -124,10 +110,8 @@ function createContactsArray(name,email, userId){
   ]; 
 }
 
-
 /**
  * This function is use to create the addedTask array for the new registered user on the remote storage.
- * 
  * @param {String} email - email adress of the user to search for his userId 
  */
 async function createOwnTasksRemoteStorage(email){
@@ -136,10 +120,8 @@ async function createOwnTasksRemoteStorage(email){
   await setItem("storedTasks" + userId, JSON.stringify(addedTasks));
 }
 
-
 /**
  * split the entry from the user into pre- and lastname
- * 
  * @param {string} fullName - fullname of the user
  * @returns the first and the lastname of the user
  */
@@ -150,10 +132,8 @@ function splitName(fullName) {
   return {preName,lastName};
 }
 
-
 /**
  * This function is use to get the first letter of a string as upper case.
- * 
  * @param {String} str - string to get the first letter as upper case
  * @returns first letter of a string as upper case
  */
@@ -161,10 +141,8 @@ function upperCaseFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-
 /**
  *  This function is to check if the SignUp can be activatet.
- * 
  */
 function checkInput(){
   let name = getInput("newName");
@@ -180,12 +158,10 @@ function checkInput(){
   }
 }
 
-
 /**
  * This function is use to login as quest user.
  * Redirect to wellcome message.
- *
- */
+*/
 function guestLogin() {
   disableButtonLogin();
   resetLoginForm();
@@ -193,11 +169,9 @@ function guestLogin() {
   window.location = `./summary/summary.html?id=-1}`;  
 }
 
-
 /**
  * This function is use to send the reset your password email to the user.
  * In the prototype its redirect to the reset password form.
- *
  */
 async function sendResetEmail() {
   disableButton("resetEmailBtn");
@@ -217,11 +191,9 @@ async function sendResetEmail() {
   enableButton("resetEmailBtn");
 }
 
-
 /**
  * This function is use to reset the password of the user.
- *
- */
+*/
 async function resetPwd() {
   disableButton("resetPwdBtn");
   let password = getInput("resetPassword");
@@ -235,11 +207,9 @@ async function resetPwd() {
   enableButton("resetPwdBtn");
 }
 
-
 /**
  * This function is use to open the login formular.
- *
- */
+*/
 function openLogin() {
   enableButtonLogin();
   let background = document.getElementById("background");
@@ -253,11 +223,9 @@ function openLogin() {
   logInPage.classList.remove("d-none");
 }
 
-
 /**
  * This function is use to close the login formular.
- *
- */
+*/
 function closeLogin() {
   disableButtonLogin();
   let form = document.getElementById('formLogin');
@@ -273,11 +241,9 @@ function closeLogin() {
   loginFooter.classList.add("d-none");
 }
 
-
 /**
  * This function is use to open the sign up formular.
- *
- */
+*/
 function openSignUp() {
   closeLogin();
   let signUpPage = document.getElementById("formNewUserDiv");
@@ -291,11 +257,9 @@ function openSignUp() {
   disableButton("newUserBtn");
 }
 
-
 /**
  * This function is use to close the sign up formular.
- *
- */
+*/
 function closeSignUp() {
   let form = document.getElementById("formNewUser");
   let signUpPage = document.getElementById("formNewUserDiv");
@@ -310,22 +274,18 @@ function closeSignUp() {
   openLogin();
 }
 
-
 /**
  * This function is use to open the forgot password formular.
- *
- */
+*/
 function openForgotPwd() {
   closeLogin();
   let resetEmailPage = document.getElementById("formResetEmailDiv");
   resetEmailPage.classList.remove("d-none");
 }
 
-
 /**
  * This function is use to close the forgot password formular.
- *
- */
+*/
 function closeForgotPwd() {
   let form = document.getElementById("formResetEmail");
   let resetEmailPage = document.getElementById("formResetEmailDiv");
@@ -334,22 +294,18 @@ function closeForgotPwd() {
   openLogin();
 }
 
-
 /**
  * This function is use to open the reset password formular.
- *
- */
+*/
 function openResetPwd() {
   closeLogin();
   let resetPwdPage = document.getElementById("formResetPwdDiv");
   resetPwdPage.classList.remove("d-none");
 }
 
-
 /**
  * This function is use to close the reset password formular.
- *
- */
+*/
 function closeResetPwd() {
   let form = document.getElementById("formResetPwd");
   let resetPwdPage = document.getElementById("formResetPwdDiv");
@@ -360,15 +316,9 @@ function closeResetPwd() {
 }
 
 
-function showPrivacy(){
-  window.open("./templates/privacy_policy.html", "_blank");
-}
-
-
 /**
  * This function is use to show messages to the user.
- *
- */
+*/
 function showMessage(html) {
   let msg = document.getElementById("message");
   msg.innerHTML = html;
@@ -378,89 +328,8 @@ function showMessage(html) {
   }, 3000);
 }
 
-
-/**
- * This function is use to define the password not right message.
- * The function showMessage() shows the message on the screen.
- *
- */
-function showPwdNotRightMessage() {
-  let html = `
-        <p>Your Password are wrong</p> 
-    `;
-  showMessage(html);
-}
-
-
-/**
- * This function is use to define the email has been send message.
- * The function showMessage() shows the message on the screen.
- *
- */
-function showSendEmailMessage() {
-  let html = `
-        <img class="messageImg" src="./assets/img/SendCheck.svg">
-        <p>An E-Mail has been send to you</p> 
-    `;
-  showMessage(html);
-}
-
-
-/**
- * This function is use to define the email not found message.
- * The function showMessage() shows the message on the screen.
- *
- */
-function showEmailNotFoundMessage() {
-  let html = `
-        <p>Your email address was not found</p> 
-    `;
-  showMessage(html);
-}
-
-
-/**
- * This function is use to define the sign up message.
- * The function showMessage() shows the message on the screen.
- *
- */
-function showSignUpMessage() {
-  let html = `
-        <p>You Signed Up successfully</p> 
-    `;
-  showMessage(html);
-}
-
-
-/**
- * This function is use to define the already exist message.
- * The function showMessage() shows the message on the screen.
- *
- */
-function showSignUpAlreadyExistMessage() {
-  let html = `
-        <p>Your email already in use</p> 
-    `;
-  showMessage(html);
-}
-
-
-/**
- * This function is use to define the password has been reset message.
- * The function showMessage() shows the message on the screen.
- *
- */
-function showresetPwdMessage() {
-  let html = `
-        <p>You reset your password</p> 
-    `;
-  showMessage(html);
-}
-
-
 /**
  * This function is use to check if the email adress of an user exist.
- *
  * @param {string} email - email adress of the user to check if exist.
  * @returns true if user exist, false if user not exist.
  */
@@ -468,7 +337,6 @@ async function checkUserExist(email) {
   emailAdresses = await getExistingEmailAdresses();
   return emailAdresses.includes(email);
 }
-
 
 /**
  * This function is use to check if the is correct.
@@ -479,11 +347,9 @@ function checkPwdCorrect(userid, password) {
   return password == users[userid]["password"];
 }
 
-
 /**
  * This function is use to load the existing email adresses to an array.
- *
- * @returns email adresses from all users
+* @returns email adresses from all users
  */
 async function getExistingEmailAdresses() {
   await loadUsers();
@@ -497,7 +363,6 @@ async function getExistingEmailAdresses() {
 
 /**
  * This function is use to register a new user.
- *
  * @param {string} name - name of the user to register.
  * @param {string} email - email of the user to register.
  * @param {string} password password of the user to register.
@@ -515,10 +380,8 @@ async function registerUser(email) {
   await createOwnTasksRemoteStorage(email);
 }
 
-
 /**
  * This function is use to get the value of an html tag
- *
  * @param {string} id - id of the html tag to get the value.
  * @returns value of the html tag.
  */
@@ -526,59 +389,9 @@ function getInput(id) {
   return document.getElementById(id).value;
 }
 
-
-/**
- * This function is use to disable the buttons on the login form.
- *
- */
-function disableButtonLogin() {
-  disableButton("forgotPwd");
-  disableButton("rememberMe");
-  disableButton("userLoginBtn");
-  disableButton("guestLoginBtn");
-  disableButton("signUp");
-}
-
-
-/**
- * This function is use to enable the buttons on the login form.
- *
- */
-function enableButtonLogin() {
-  enableButton("forgotPwd");
-  enableButton("rememberMe");
-  enableButton("userLoginBtn");
-  enableButton("guestLoginBtn");
-  enableButton("signUp");
-}
-
-
-/**
- * This function is use to diable a html button.
- *
- * @param {string} buttonId - id of the html button to disable.
- */
-function disableButton(buttonId) {
-  let button = document.getElementById(buttonId);
-  button.disabled = true;
-}
-
-
-/**
- * This function is use to enable a html button.
- *
- * @param {string} buttonId - id of the html button to enable.
- */
-function enableButton(buttonId) {
-  let button = document.getElementById(buttonId);
-  button.disabled = false;
-}
-
-
 /**
  * This function is use to load the users from the remote storage.
- *
- */
+*/
 async function loadUsers() {
   try {
     users = JSON.parse(await getItem("users"));
@@ -602,8 +415,7 @@ let newPassword = document.getElementById("newPassword"),
 
 /**
  * This function is use to check if the passwords on the sign up page match.
- *
- */
+*/
 function validatenewPassword() {
   if (newPassword.value != newConfirmPassword.value) {
     newConfirmPassword.setCustomValidity("Passwords Don't Match");
@@ -614,7 +426,6 @@ function validatenewPassword() {
 
 /**
  * This function is use to check if the passwords on the reset password page match.
- *
  */
 function validateresetPassword() {
   if (resetPassword.value != resetConfirmPassword.value) {
@@ -624,95 +435,7 @@ function validateresetPassword() {
   }
 }
 
-/**
- * This function is to show the pwdMessage Div.
- *
- */
-function showPwdMessage(){
-  document.getElementById("pwdMessage").style.display = "block";
-}
 
-/**
- * This function is to close the pwdMessage Div.
- *
- */
-function closePwdMessage(){
-  document.getElementById("pwdMessage").style.display = "none";
-}
-
-/**
- * This function is to validate and show the requierments of the password.
- *
- */
-function validatePasswordMessage(){
-  validateLowerCase(this);
-  validateUpperCase(this);
-  validatenumbers(this);
-  validateLength(this);
-}
-
-/**
- * This function is to validate the lower case letter of the password.
- *
- * @param {variable} input - variable of the input field to validate
- */
-function validateLowerCase(input){
-  var lowerCaseLetters = /[a-z]/g;
-  if(input.value.match(lowerCaseLetters)) {
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-  } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-  }
-}
-
-/**
- * This function is to validate the upper case letter of the password.
- *
- * @param {variable} input - variable of the input field to validate
- */
-function validateUpperCase(input){
-  var upperCaseLetters = /[A-Z]/g;
-  if(input.value.match(upperCaseLetters)) {
-    capital.classList.remove("invalid");
-    capital.classList.add("valid");
-  } else {
-    capital.classList.remove("valid");
-    capital.classList.add("invalid");
-  }
-}
-
-/**
- * This function is to validate the numbers of the password.
- *
- * @param {variable} input - variable of the input field to validate
- */
-function validatenumbers(input){  
-  var numbers = /[0-9]/g;
-  if(input.value.match(numbers)) {
-    number.classList.remove("invalid");
-    number.classList.add("valid");
-  } else {
-    number.classList.remove("valid");
-    number.classList.add("invalid");
-  }
-}
-
-/**
- * This function is to validate the length of the password.
- *
- * @param {variable} input - variable of the input field to validate
- */
-function validateLength(input){
-  if(input.value.length >= 8) {
-    length1.classList.remove("invalid");
-    length1.classList.add("valid");
-  } else {
-    length1.classList.remove("valid");
-    length1.classList.add("invalid");
-  }
-}
 
 newPassword.onchange = validatenewPassword;
 newPassword.onfocus = showPwdMessage;

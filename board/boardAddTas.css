@@ -322,26 +322,6 @@ form input:focus:not(.subtask input) {
   gap: 8px;
 }
 
-/* Scrollbar styles */
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #969696;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
-}
-
-*::-webkit-scrollbar-thumb:active {
-  background: #bfbfbf;
-}
-
 /* Options styles */
 .options {
   cursor: pointer;
@@ -374,6 +354,14 @@ form input:focus:not(.subtask input) {
 
 .category-div {
   position: relative;
+}
+
+#addCatHeader {
+  color: var(--reg-blue);
+}
+
+#addCatHeader:hover{
+  color: var(--strong-blue);
 }
 
 .select-container select {
@@ -474,6 +462,10 @@ form input:focus:not(.subtask input) {
 
 .subtask-icon-conatiner {
   display: flex;
+}
+
+.bi-pencil {
+  padding-right: 5px;
 }
 
 .bi-x,
@@ -641,6 +633,9 @@ form input:focus:not(.subtask input) {
 /* There is the responsiveness for the Medium screen */
 
 @media only screen and (min-width: 768px) and (max-width: 1007px) {
+  .board-main {
+    padding-left: 70px;
+  }
   form {
     flex-direction: row;
     align-items: stretch;
@@ -679,6 +674,7 @@ form input:focus:not(.subtask input) {
     flex-direction: row;
     justify-content: space-around;
     gap: 5px;
+    padding-left: 70px;
   }
 
   .card-parent {
@@ -704,6 +700,11 @@ form input:focus:not(.subtask input) {
     top: -20px;
     width: 100%;
   }
+
+  .search-div {
+    margin-left: 130px;
+  }
+  
 }
 
 
@@ -814,3 +815,5 @@ form input:focus:not(.subtask input) {
   margin: 0 12px;
   display: none;
 }
+
+

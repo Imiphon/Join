@@ -1,3 +1,4 @@
+let topicColor;
 
 /**
  * Generates HTML for an empty task area.
@@ -23,8 +24,6 @@ document.addEventListener("click", (event) => {
     searchBar.style.borderColor = "var(--reg-blue)";
   }
 });
-
-let topicColor;
 
 /**
  * Creates an HTML element representing a task.
@@ -63,7 +62,7 @@ function createProgressBar(task, index) {
   const finishedSubTasks = checkedSubTasks.length;
   let lengthOfSubs =
     task.subTask && task.subTask.length ? task.subTask.length : 0;
-  return /*html */ `
+  return /*html*/ `
     <div class="progress-bar">
       <progress max="100" value="${
         (finishedSubTasks / lengthOfSubs) * 100
@@ -132,27 +131,23 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
     subtasksTemplates(selectedTask, taskIndex, section);
     const availableSections = ["toDo", "inProgress", "awaitFeedback", "done"];
   
-    return `
+    return /*html*/`
           <div class="taskpoUp" id="taskpoUp" onclick="taskPopUp(event)">
             <div class="topic-div" id="topic-div">
               <span class="topic"> ${selectedTask.category} </span>
               <i class="bi bi-x" onclick="closeTaskContainer(event)"></i>
-            </div>
-  
-            <span class="title"> ${selectedTask.title} </span>
-  
+            </div>  
+            <span class="title"> ${selectedTask.title} </span>  
             <span class="description"
-              >${selectedTask.description}</span
-            >
-  
+              >${selectedTask.description}</span>  
             <div class="date-div info-div">
               <span>Due date:</span>
               <span>${date}</span>
             </div>
   
-            ${prioTemplate(selectedTask, taskIndex)}
+            ${prioTemplate(selectedTask)}
   
-            ${assignToTemplate(selectedTask, taskIndex)}
+            ${assignToTemplate(selectedTask)}
   
             ${subtasksTemplates(selectedTask, taskIndex, section)}
   
@@ -185,78 +180,91 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
     `;
   }
   
-  /**
-   * Generates HTML for task priority.
-   * @param {object} task - The task object.
-   * @param {number} taskIndex - The index of the task.
-   * @returns {string} - HTML representation of the task priority.
-   */
-  
-  function prioTemplate(task) {
-    let prio = task.priority;
-    let icon;
-    let prioName;
-    if (prio === "urgent") {
+/**
+ * Determines the icon and name for a given task priority.
+ * @param {string} priority - The priority of the task.
+ * @returns {{icon: string, prioName: string}} 
+ */
+function getPriorityDetails(priority) {
+  let icon;
+  let prioName;
+
+  switch (priority) {
+    case "urgent":
       icon = `<span> <i class="bi bi-chevron-double-up"></i></span>`;
-      prioName = prio;
-    } else if (prio === "medium") {
+      break;
+    case "medium":
       icon = `<span> <i class="fa-solid fa-equals"></i></span>`;
-      prioName = prio;
-    } else {
+      break;
+    default:
       icon = `<span> <i class="bi bi-chevron-double-down"></i></span>`;
-      prioName = prio;
-    }
-  
-    return /*html */ `
-      <div class="prio-div info-div">
-        <span>Priority:</span>
-        <div class="prio-sign">
-          <span>${prioName}</span>
-          ${icon}
-        </div>
-      </div>
-    `;
+      break;
   }
-  
-  /**
-   * Generates HTML for assigned contacts in a task.
-   * @param {object} task - The task object.
-   * @param {number} taskIndex - The index of the task.
-   * @returns {string} - HTML representation of assigned contacts.
-   */
-  function assignToTemplate(task) {
-    let names = [];
-    let lastNames = [];
-    let bColors = [];
-    let shortNames = [];
-  
-    task.selectedContacts.forEach((contact) => {
-      names.push(contact.name);
-      lastNames.push(contact.lastName);
-      bColors.push(contact.bColor);
-      shortNames.push(contact.shortName);
-    });
-  
-    let profilesHTML = "";
-  
-    for (let i = 0; i < names.length; i++) {
-      profilesHTML += `
-        <div class="profiles">
-          <span style="background-color: ${bColors[i]}" class="profile">${shortNames[i]}</span>
-          <p>${names[i]} ${lastNames[i]}</p>
-        </div>
-      `;
-    }
-  
+
+  prioName = priority;
+  return { icon, prioName };
+}
+
+/**
+ * Generates HTML for task priority.
+ * @param {object} task - The task object.
+ * @returns {string} - HTML representation of the task priority.
+ */
+function prioTemplate(task) {
+  const { icon, prioName } = getPriorityDetails(task.priority);
+
+  return `
+    <div class="prio-div info-div">
+      <span>Priority:</span>
+      <div class="prio-sign">
+        <span>${prioName}</span>
+        ${icon}
+      </div>
+    </div>
+  `;
+}
+
+/**
+ * Extracts contact details from a task.
+ * @param {object} task - The task object.
+ * @returns {Array.<{name: string, lastName: string, bColor: string, shortName: string}>} - An array of objects containing contact details.
+ */
+function extractContactDetails(task) {
+  let contactDetails = task.selectedContacts.map(contact => ({
+    name: contact.name,
+    lastName: contact.lastName,
+    bColor: contact.bColor,
+    shortName: contact.shortName
+  }));
+
+  return contactDetails;
+}
+
+/**
+ * Generates HTML for assigned contacts in a task.
+ * @param {object} task - The task object.
+ * @returns {string} - HTML representation of assigned contacts.
+ */
+function assignToTemplate(task) {
+  const contactDetails = extractContactDetails(task);
+  let profilesHTML = contactDetails.map(detail => {
     return `
-      <div class="assign-to info-div">
-        <span>Assigned To:</span>
-        <div class="profiles-div">
-          ${profilesHTML}
-        </div>
+      <div class="profiles">
+        <span style="background-color: ${detail.bColor}" class="profile">${detail.shortName}</span>
+        <p>${detail.name} ${detail.lastName}</p>
       </div>
     `;
-  }
+  }).join('');
+
+  return `
+    <div class="assign-to info-div">
+      <span>Assigned To:</span>
+      <div class="profiles-div">
+        ${profilesHTML}
+      </div>
+    </div>
+  `;
+}
   
   /**
    * Generates HTML for subtasks in a task.
@@ -269,8 +277,8 @@ function taskPopUpTemplate(selectedTask, taskIndex, section) {
   function subtasksTemplates(task, taskIndex, section) {
     let subNames = [];
     let subHtml = "";
-    sectionId = section.id;
-    task.subTask.forEach((sub, index) => {
+    let sectionId = section.id;
+    task.subTask.forEach((sub) => {
       subNames.push(sub.name);
     });
   
