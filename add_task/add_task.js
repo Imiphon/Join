@@ -5,7 +5,7 @@ let assignedContacts = []; // A list for assigned contacts
 let categories = ["Design", "Programming", "Marketing"]; // A list of categories
 let categoryValue = undefined; // A variable to store the selected category value
 let editingIndex = -1;
-let conatainerIdForMobileAddTask;
+let containerIdForMobileAddTask;
 let editIndex = -1;
 
 /**
@@ -153,7 +153,8 @@ const boxShadowColors = [
 ];
 
 /**
- * Function to add each  button of the priority a shadow-color, to know which one is selected
+ * Function to add each  button of the priority a shadow-color, 
+ * to know which one is selected
  */
 const prioBtns = document.querySelectorAll(".prio-values span");
 let selectedIndex = -1;
@@ -179,30 +180,23 @@ function setPrio(value) {
   prio = value;
 }
 
-/**
- * Function to define the assigned user and push the name to the "assignedontacts"-Array to show them in the "selected-user" container and push also the selected contacts to the 'selectedContacts'
- * @param {string} userInitials - this is the shortcut of the checked-users full-name
- * @param {string} userName  - This is the first name of the checked-user
- * @param {string} userLastName - This is the second name of the checked-user
- * @param {string} bColor - This the background-color of each options from the 'assign contact'
- * @param {number} index - This is the index of each user
- */
+let assignedUserId = [];
+
 function checkedUser(userInitials, userName, userLastName, bColor, index) {
-  const checkbox = document.getElementById(`checkbox${index}`);
-  if (checkbox.checked) {
-    assignedContacts.push({
-      shortName: userInitials,
-      bColor: bColor,
-      name: userName,
-      lastName: userLastName,
-    });
-    selectedContacts.push({
-      shortName: userInitials,
-      bColor: bColor,
-      name: userName,
-      lastName: userLastName,
-    });
-  } else {
+  let checkbox = document.getElementById(`checkbox${index}`);
+
+  let currUser = {
+    shortName: userInitials,
+    bColor: bColor,
+    name: userName,
+    lastName: userLastName
+  }
+  if (!checkbox.checked && !assignedUserId.includes(currUser)) {
+    assignedUserId.push(currUser);
+    assignedContacts.push(currUser);
+    selectedContacts.push(currUser);
+  }
+  else if (checkbox.checked) {
     const indexToRemove = assignedContacts.findIndex(
       (contact) => contact.shortName === userInitials
     );
@@ -211,17 +205,25 @@ function checkedUser(userInitials, userName, userLastName, bColor, index) {
       selectedContacts.splice(indexToRemove, 1);
     }
   }
-  showAssignedContactsInContainer();
-  toggleContactContainer();
+  showAssignedContact();
+  changeCheckbox(index);
+}
+
+function changeCheckbox(index) {
+  let checkbox = document.getElementById(`checkbox${index}`);
+  if (checkbox.checked) {
+    checkbox.checked = false;
+  } else {
+    checkbox.checked = true;
+  }
 }
 
 /**
  * show the assigned contact which are checked
  */
-function showAssignedContactsInContainer() {
+function showAssignedContact() {
   selectedContainer = document.getElementById("selected-contact");
   selectedContainer.innerHTML = "";
-
   for (let i in assignedContacts) {
     profile = assignedContacts[i]["shortName"];
 
@@ -242,14 +244,14 @@ function addSubtask() {
 
   if (taskValue !== "") {
     if (editingIndex !== -1) {
-      // If editingIndex is not -1, it means we are editing a task
-      tasksForSubtasks[editingIndex] = {
+      taskValue = {
         name: taskValue,
         checked: false,
-      }; // Update the task
-      editingIndex = -1; // Reset the index
+      };
+
+      tasksForSubtasks.push(taskValue);
+      editingIndex = -1;
     } else {
-      // Otherwise, add a new task
       tasksForSubtasks.push({
         name: taskValue,
         checked: false,
@@ -302,7 +304,7 @@ function clearAddTask() {
 
 /**
  *
- * @returns This function is collecting all the information from the from and returns to the function addTask()
+ * @returns This function is collecting all the informations from the form and returns to the function addTask()
  */
 function collectTaskData() {
   const title = document.getElementById("title").value;
@@ -328,7 +330,7 @@ function collectTaskData() {
 
 /**
  *
- * @param {object} taskData - All infromation from the collectTaskData();
+ * @param {object} taskData - All infromations from the collectTaskData();
  * @returns This return an Json to add it to the AddedTasks
  */
 
@@ -346,20 +348,5 @@ function createTaskObject(taskData) {
   return task;
 }
 
-/**
- *
- * @param {html-code} html - this is html-code to show a message after a task is added
- */
-function showMessage(html) {
-  let msg = document.getElementById("message");
-  msg.innerHTML = html;
-  msg.classList.remove("d-none");
-  setTimeout(function () {
-    msg.classList.add("d-none");
-  }, 3000);
-  setTimeout(() => {
-    toggleButton("board");
-    changeLocation();
-  }, 3500);
-}
+
 

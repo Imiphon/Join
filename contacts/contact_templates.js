@@ -16,6 +16,7 @@ function showMainFrame() {
       <div class="add-btn-frame">
         <button class="add-btn" id="addBtn" onclick="widthForAdd();">
           <img src="../assets/img/person_add.png" alt="">
+          <span id="addBtnTxt">Create a contact</span>
         </button>      
       </div>
       <div class="name-group" id="nameGroup">
@@ -62,7 +63,7 @@ function showMainFrame() {
   function showPersonDatas(person, i) {
     return `
     <div class="name-frame">
-        <div class="name-box" onclick="showInfo(${i})">
+        <div class="name-box" onclick="showInfo(${i})" id="${i}">
             <div class="side-circle initials" style="background-color: ${person.color};">
                 ${person.initials}
             </div>
@@ -201,7 +202,7 @@ function showMainFrame() {
                   id="fullName" 
                   placeholder="Name Nachname" 
                   required 
-                  pattern="^[+\d]*[a-zA-Z]+ [+\d]*[a-zA-Z]+$" 
+                  pattern="[a-zA-ZäöüÄÖÜß]{2,15} [a-zA-ZäöüÄÖÜß]{2,15}" 
                   title="Bitte geben Sie einen Vor- und Nachnamen ein.">
               
                       <div class="color-img-box">
@@ -253,7 +254,7 @@ function showMainFrame() {
   function showEditContact(index) {
     let person = contactArray[index];
     let indexNr = index;
-    return `
+    return /*html */`
           <div class="pop-top" id="popTop">
           <a onclick="closePopup()"><img src="../assets/img/close.png" alt="close"></a>
           <img class="pop-logo" src="../assets/img/logo_mobile_white.svg">
@@ -269,8 +270,8 @@ function showMainFrame() {
       <div class="form-frame">
           <form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr}); return false;">            
                   <div class="contact-frame">
-                      <input class="contact-input" type="text" id="fullName"
-                          placeholder="${person.name} ${person.lastName}" required pattern="^[a-zA-Z]+ [a-zA-Z]+$"
+                      <input class="contact-input" type="text" id="fullName" onclick="keepString('fullName')"
+                          placeholder="${person.name} ${person.lastName}" required pattern="[a-zA-ZäöüÄÖÜß]{2,15} [a-zA-ZäöüÄÖÜß]{2,15}"
                           title="Bitte geben Sie einen Vor- und Nachnamen ein.">
   
                           <div class="color-img-box">
@@ -285,11 +286,11 @@ function showMainFrame() {
                       </div>
                   </div>
                   <div class="contact-frame">
-                      <input class="contact-input" required type="email" id="email" placeholder="${person.mail}">
+                      <input class="contact-input" onclick="keepString('email')" required type="email" id="email" placeholder="${person.mail}">
                       <img src="../assets/img/mail_small.png" alt="name">
                   </div>
                   <div class="contact-frame">
-                  <input class="contact-input" required type="tel" id="phone" placeholder="${person.phone}"
+                  <input class="contact-input" onclick="keepString('phone')" required type="tel" id="phone" placeholder="${person.phone}"
                   pattern="^(\\+?\\d{9,15}|(\\+?|\\d{0,4})?\\s?\\d{3,4}\\s?\\d{3,8}|(\\+?|\\d{0,4})?\\s?\\d{3,5}\\s?\\d{7,8})$"
                   title="9-15 Ziffern, opt. mit Leerzeichen oder + (+12345678901, 0123 4561234, 1 123 123 1234)">
            <img src="../assets/img/call_small.png" alt="phone">         

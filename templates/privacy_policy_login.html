@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="icon" href="./assets/img/favicon.svg" type="image/svg" />
-    <link rel="stylesheet" href="../contacts/contact_style.css" />
     <link rel="stylesheet" href="../styles/fonts.css" />
-    <link rel="stylesheet" href="../styles/footer_mobile.css" />
-    <link rel="stylesheet" href="../styles/header_mobile.css" />
     <link rel="stylesheet" href="../styles/info.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../style.css" />
@@ -16,17 +13,12 @@
     <script src="../script.js"></script> 
   </head>
 
-  <body onload="includeHTML()">
+  <body>
     <div class="body-frame">
-      <header include-html="../templates/header.html"></header>
-      <main>
-        <!--------------- ------------------------->
-        <header w3-include-html="templates/header.html"></header>
-
+      <main class="main-login-area">
         <article class="main-frame info-text" id="privacyFrame">
-
             <div class="privacyPolicyWrapper">
-              <div class="info-header">
+              <div class="info-header-login">
                 <p>Privacy Policy</p>
                 <button class="back-btn" id="" onclick="historyBack()"><img src="../assets/img/arrow-left-line.svg"
                     alt="back"></button>
@@ -101,7 +93,7 @@
 
               <h2>Kontaktformular</h2>
               <br />
-              <h3>Art und Zweck der Verarbeitung:</h3>
+              <h2>Art und Zweck der Verarbeitung:</h2>
               <p>
                 Die von Ihnen eingegebenen Daten werden zum Zweck der individuellen
                 Kommunikation mit Ihnen gespeichert. Hierfür ist die Angabe einer
@@ -110,7 +102,7 @@
                 derselben. Die Angabe weiterer Daten ist optional.
               </p>
 
-              <h3>Rechtsgrundlage:</h3>
+              <h2>Rechtsgrundlage:</h2>
               <p>
                 Die Verarbeitung der in das Kontaktformular eingegebenen Daten
                 erfolgt auf der Grundlage eines berechtigten Interesses (Art. 6 Abs.
@@ -129,14 +121,14 @@
                 lit. b DSGVO).
               </p>
 
-              <h3>Empfänger:</h3>
+              <h2>Empfänger:</h2>
               <p>Empfänger der Daten sind ggf. Auftragsverarbeiter.</p>
 
               <br />
               <hr />
               <br />
 
-              <h3>Speicherdauer:</h3>
+              <h2>Speicherdauer:</h2>
               <p>
                 Daten werden spätestens 6 Monate nach Bearbeitung der Anfrage
                 gelöscht.
@@ -147,7 +139,7 @@
                 nach Ablauf dieser Fristen.
               </p>
 
-              <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+              <h2>Bereitstellung vorgeschrieben oder erforderlich:</h2>
               <p>
                 Die Bereitstellung Ihrer personenbezogenen Daten erfolgt freiwillig.
                 Wir können Ihre Anfrage jedoch nur bearbeiten, sofern Sie uns Ihren
@@ -218,7 +210,8 @@
               <hr />
               <br />
 
-              <h3>Widerruf der Einwilligung:</h3>
+              <h2>Widerruf der Einwilligung:</h2>
+              <br>
               <p>
                 Sie können das Tracking durch Google Analytics auf unserer Website
                 unterbinden, indem Sie
@@ -288,7 +281,7 @@
 
               <h2>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO</h2>
               <br />
-              <h3>Einzelfallbezogenes Widerspruchsrecht</h3>
+              <h2>Einzelfallbezogenes Widerspruchsrecht</h2>
               <p>
                 Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen
                 Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender
@@ -307,7 +300,7 @@
               </p>
               <br />
 
-              <h3>Empfänger eines Widerspruchs</h3>
+              <h2>Empfänger eines Widerspruchs</h2>
               <p>Lars Mensching</p>
 
               <br />
@@ -363,12 +356,7 @@
             </div>    
         </article>
 
-        
-        <footer include-html="../templates/footer.html"></footer>
       </main>
     </div>
-    <script src="../contacts/contact_script.js"></script>
-    <script src="../templates/include-html.js"></script>
-    <script src="../summary/summary.js"></script>
   </body>
 </html>

@@ -158,7 +158,7 @@ async function moveTo(containerId) {
  * @param {string} sectiondId - The ID of the section.
  */
 function edittask(taskIndex, sectiondId) {
-  conatainerIdForMobileAddTask = sectiondId;
+  containerIdForMobileAddTask = sectiondId;
   currentSection = addedTasks[0][sectiondId];
   currentTask = addedTasks[0][sectiondId][taskIndex];
   editIndex = currentSection.indexOf(currentTask);
@@ -196,7 +196,7 @@ function selectedContact(task) {
       selectedContacts.push(task.selectedContacts[i]);
 
       toggleContactContainer();
-      showAssignedContactsInContainer();
+      showAssignedContact();
       // Hier können Sie den Index verwenden, um weitere Aktionen durchzuführen.
     } else {
       console.log("no assigned contacts");

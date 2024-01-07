@@ -135,6 +135,20 @@ cursor: pointer;
   color: var(--reg-blue);
 }
 
+.info-header-login {
+  position: fixed;
+  top: 0;
+  left: 12px;
+  width: 100%;
+  padding: 0 32px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3rem;
+  height: 80px;
+  color: var(--reg-blue);
+}
+
 /*  ===========================================================
     general styles for selectors: body, header, main and footer
     =========================================================== */
@@ -181,6 +195,15 @@ main {
   padding-top: 80px;
   padding-left: 232px;
 }
+
+.main-login-area {
+padding-bottom: 20px;
+padding-left: 20px;
+}
+
+.main-login-area ul { 
+  padding-left: 24px;
+  }
 
 footer {
   background-color: white;
@@ -274,6 +297,15 @@ footer {
     padding-bottom: 80px;
     /* same height like footer */
     padding-left: 0;
+  }
+
+  .info-header-login p {
+    font-size: 0.8em;
+  }
+
+  .main-login-area h2, h3 {
+    font-size: 1em;
+    line-height: 1.5;
   }
 
   .welcomeMsgDiv{

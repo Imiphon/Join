@@ -110,7 +110,7 @@ function disableButtonLogin() {
    */
   function enableButton(buttonId) {
     let button = document.getElementById(buttonId);
-    button.disabled = false;
+    button.disabled = false;      
   }
 
 function showPrivacy(){

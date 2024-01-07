@@ -23,7 +23,7 @@ function clearForm(event) {
     tasksForSubtasks = [];
     selectedContacts = [];
     assignedContacts = [];
-    showAssignedContactsInContainer();
+    showAssignedContact();
     dropDownTemplates();
     resetPriorityButtons();
     openAddTask();
@@ -44,6 +44,23 @@ function showAddedTask() {
     }
     showMessage(message);
   }
+
+  /**
+ *
+ * @param {html-code} html - this is html-code to show a message after a task is added
+ */
+function showMessage(html) {
+  let msg = document.getElementById("message");
+  msg.innerHTML = html;
+  msg.classList.remove("d-none");
+  setTimeout(function () {
+    msg.classList.add("d-none");
+  }, 3000);
+  setTimeout(() => {
+    toggleButton("board");
+    changeLocation();
+  }, 3500);
+}
 
 /**
  * Reseting the prioBtns
@@ -214,7 +231,7 @@ function addTask(event, containerId) {
     if(containerId) {
       pushTask(task, containerId, editIndex);
     } else {
-      pushTask(task, conatainerIdForMobileAddTask, editIndex);
+      pushTask(task, containerIdForMobileAddTask, editIndex);
     }
     clearForm(event);
     showAddedTask();
@@ -228,9 +245,7 @@ function addTask(event, containerId) {
  * @param {*} editIndex
  */
 function pushTask(task, containerId, editIndex) {
-  /**
-   * if editIndex ist not -1, this means we are editing a task
-   */
+  // if editIndex ist not -1, this means we are editing a task
   if (editIndex === -1) {
     addedTasks[0][containerId].push(task);
   } else if (editIndex > -1) {
@@ -245,18 +260,26 @@ function pushTask(task, containerId, editIndex) {
 function dropDownTemplates() {
   let dropdown = document.getElementById("dropdown-options");
   dropdown.innerHTML = "";
-
   contactArray.forEach((user, index) => {
     const userHtml = `
-      <div class="options">
+      <div class="options" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
       <span class="profile" id="profile${index}">${user.initials}</span>
-      <label for="checkbox${index}">${user.name} ${user.lastName}</label>
-      <input type="checkbox" id="checkbox${index}" onclick="checkedUser('${user.initials}','${user.name}','${user.lastName}','${user.color}', ${index})">
+      <span for="checkbox${index}">${user.name} ${user.lastName}</span>
+      <input type="checkbox" id="checkbox${index}" onclick="stopEvent(event)">
       </div>
       `;
     dropdown.innerHTML += userHtml;
     setBackgroundColor(user, index);
   });
+}
+
+/**
+ * prevent to toggle checkbox and stops any propagation.
+ * @param {*} event 
+ */
+function stopEvent(event) {
+  event.stopPropagation();
+  event.preventDefault();
 }
 
 /**
@@ -289,7 +312,7 @@ function renderAddedTask() {
        <li>
        <p>${task.name}</p>
        <span>
-       <i class="bi bi-pencil" onclick="editTask(${i})"></i>|
+       <i class="bi bi-pencil" id="pencil" onclick="editTask(${i})"></i>|
        <i class="bi bi-trash" onclick="deleteSubTask(${i})"></i>
        </span>
        </li>

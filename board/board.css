@@ -55,7 +55,7 @@
 .tasks {
   width: calc(100%);
   display: flex;
-  gap: 65px;
+  gap: 5px;
   height: 100%;
   padding: 40px 40px;
   flex-direction: column;

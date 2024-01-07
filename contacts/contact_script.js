@@ -1,3 +1,5 @@
+let rememberNameBox;
+
 /**
  * eventListener to check if its the right side instead of onload-function
  * cause:
@@ -7,7 +9,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let currentPage = window.location.pathname;
   if (currentPage.includes("contact_list")) {
-   getContactsFromServer();
+    getContactsFromServer();
   }
 });
 
@@ -15,16 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
  * sort last names in contactArray to alphabetic order
  */
 async function sortContacts() {
-    
-    contactArray.sort((a, b) => {
-      let nameA = a.lastName;
-      let nameB = b.lastName;
-  
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    });
-    await setItem('contacts', JSON.stringify(contactArray));
+
+  contactArray.sort((a, b) => {
+    let nameA = a.lastName;
+    let nameB = b.lastName;
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+  });
+  await setItem('contacts', JSON.stringify(contactArray));
 }
 
 /**
@@ -126,17 +128,41 @@ async function widthForAdd() {
  */
 function showInfo(index) {
   let person = contactArray[index];
+  changeBackColor(index);
+  person.style = 'background-color: blue';
   let infoBox = document.getElementById("infoBox");
   infoBox.innerHTML = showInfoText(person, index);
-  infoBox.style.display ='inline';
+  infoBox.style.display = 'inline';
+}
+
+let closeMobile = false;
+/**
+ * Changes the background-color of clicked nameBox
+ * and set old background unset - if exist
+ * @param {number} index 
+ */
+function changeBackColor(index) {  
+  let lastBox = rememberNameBox;
+  if(lastBox) {
+    lastBox.style.backgroundColor = 'unset';
+  }
+  if(!closeMobile){
+    let currentNameBox = document.getElementById(index);
+    rememberNameBox = currentNameBox;
+    currentNameBox.style.backgroundColor = 'var(--toggle-blue)';
+  } else {
+    closeMobile = false;
+  }
 }
 
 /**
  * set div #infoBox to none
  */
 function closeInfo() {
+  closeMobile = true;
+  changeBackColor();
   let infoBox = document.getElementById('infoBox')
-  infoBox.style.display ='none';
+  infoBox.style.display = 'none';
 }
 
 /**
@@ -183,6 +209,11 @@ function closeOnClick(event) {
 */
 function closeDrawer() {
   document.getElementById("drawer").classList.remove("open");
+}
+
+function keepString(id) {
+  document.getElementById(id).select();
+  console.log('selected id is ', id);
 }
 
 /**
@@ -325,7 +356,7 @@ async function completeCreation() {
   closePopup();
   let userId = localStorage.getItem('userId');
   setItem('contacts' + userId, JSON.stringify(contactArray));
-  let index = contactArray.length - 1;  
+  let index = contactArray.length - 1;
   showContacts();
   showInfo(index);
   successInfo();

@@ -166,6 +166,10 @@ form {
   align-items: center;
 }
 
+.options label {
+  cursor: pointer;
+}
+
 .options:hover {
   background-color: var(--user-grey);
 }
@@ -383,6 +387,10 @@ form {
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
+}
+
+#pencil {
+  padding-right: 5px;
 }
 
 .tasks-area li span {
