@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body onload="includeHTML()">
+
+  <div class="footerWrapper">
+    <div class="footerMenuContainer">
+
+      <button
+        class="btnFooterMenuMobileVersion"
+        id="btnSummaryFooterMenu"
+        onclick="toggleButton('summary')"
+      >
+        <img
+          id="imgSummaryFooterMenu"
+          src="../assets/img/summary_button_default.png"
+          alt="summary menu button"
+        />
+      </button>
+  
+      <!--******* btn for the desktop version only *******-->
+      <div
+        class="btnFooterMenuDesktopVersion"
+        id="btn_summary_FooterMenuDesktopVersion"
+        onclick="toggleButton('summary')"
+      >
+        <img
+          src="../assets/img/desktop_footer/summary_icon_desktop.png"
+          alt="summary icon desktop"
+        />
+        <div class="btnFooterMenuDesktopVersionTextDiv">Summary</div>
+      </div>
+      <!-- ********************************************* -->
+  
+      <button
+        class="btnFooterMenuMobileVersion"
+        id="btnBoardFooterMenu"
+        onclick="toggleButton('board')"
+      >
+        <img
+          id="imgBoardFooterMenu"
+          src="../assets/img/board_button_default.png"
+          alt="board menu button"
+        />
+      </button>
+  
+      <!--******* btn for the desktop version only *******-->
+      <div
+        class="btnFooterMenuDesktopVersion"
+        id="btn_board_FooterMenuDesktopVersion"
+        onclick="toggleButton('board')"
+      >
+        <img
+          src="../assets/img/desktop_footer/board_icon_desktop.png"
+          alt="board icon desktop"
+        />
+        <div class="btnFooterMenuDesktopVersionTextDiv">Board</div>
+      </div>
+      <!-- ********************************************* -->
+  
+      <button
+        class="btnFooterMenuMobileVersion"
+        id="btnAddFooterMenu"
+        onclick="toggleButton('add')"
+      >
+        <img
+          id="imgAddFooterMenu"
+          src="../assets/img/add_button_default.png"
+          alt="add task menu button"
+        />
+      </button>
+  
+      <!--******* btn for the desktop version only *******-->
+      <div
+        class="btnFooterMenuDesktopVersion"
+        id="btn_add_FooterMenuDesktopVersion"
+        onclick="toggleButton('add')"
+      >
+        <img
+          src="../assets/img/desktop_footer/add_icon_desktop.png"
+          alt="add task icon desktop"
+        />
+        <div class="btnFooterMenuDesktopVersionTextDiv">Add Task</div>
+      </div>
+      <!-- ********************************************* -->
+  
+      <button
+        class="btnFooterMenuMobileVersion"
+        id="btnContactsFooterMenu"
+        onclick="toggleButton('contacts')"
+      >
+        <img
+          id="imgContactsFooterMenu"
+          src="../assets/img/contacts_button_default.png"
+          alt="contacts menu button"
+        />
+      </button>
+  
+      <!--****** btn for the desktop version only *******-->
+      <div
+        class="btnFooterMenuDesktopVersion"
+        id="btn_contacts_FooterMenuDesktopVersion"
+        onclick="toggleButton('contacts')"
+      >
+        <img
+          src="../assets/img/desktop_footer/contacts_icon_desktop.png"
+          alt="contacts task icon desktop"
+        />
+        <div class="btnFooterMenuDesktopVersionTextDiv">Contacts</div>
+      </div>
+      <!-- ********************************************* -->
+    </div>
+
+    <div class="privacyLegalContainer">
+      <button class="footerPolicyAnchor" onclick="navigateToPage('policy'); changeBackgroundColorfooterPolicyAnchor()">Privacy Policy</button>
+      <div class="footerLegalAnchor" onclick="navigateToPage('legal')">Legal notice</div>
+    </div>
+
+  </div>
+
+  <script src="../templates/include-html.js"></script>
+  <script src="../summary/summary.js"></script>   
+</body>
+
+</html>

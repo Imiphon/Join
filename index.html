@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="./assets/img/favicon.svg" type="image/svg" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./global_arrays.js" defer></script>
+    <script src="./script.js" defer></script>
+    <script src="./login_ui_and_templates"></script>
+    <script src="./login.js" defer></script>
+  </head>
+
+  <body id="background">
+    <div class="mainDiv">
+      <div class="logoDiv">
+        <div class="logoDivHeaderMobile logoDivHeaderMobile1">
+          <div class="joinLogo" id="joinLogo"></div>
+        </div>
+      </div>
+
+      <div class="formDivLogin" id="formLoginDiv">
+        <form id="formLogin" class="login" onsubmit="login(); return false;">
+          <div class="inputDiv">
+            <h1 class="loginHeadline">Log in</h1>
+            <div class="line-blue"></div>
+          </div>
+          <div class="inputDiv">
+            <input
+              style="background-image: url('./assets/img/login-mail.svg')"
+              class="loginInput"
+              required
+              type="email"
+              id="loginEmail"
+              placeholder="Email"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="inputDiv">
+            <input
+              class="loginInput loginInputPwd"
+              required
+              type="password"
+              id="loginPassword"
+              placeholder="Password"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="loginOptions">
+            <div>
+              <button
+                type="button"
+                onclick="openForgotPwd()"
+                id="forgotPwd"
+                class="loginBtn btnTxtBlue"
+              >
+                Forgot my password
+              </button>
+            </div>
+            <div class="rememberMe">
+              <input title="rememberMe" type="checkbox" id="rememberMe" />
+              <p>Remember me</p>
+            </div>
+          </div>
+          <div class="loginButtons">
+            <button 
+            class="loginBtn btnBlue" 
+            id="userLoginBtn">Log in</button>
+            <button
+              type="button"
+              onclick="guestLogin()"
+              class="loginBtn btnWhite"
+              id="guestLoginBtn"
+            >
+              Guest Log in
+            </button>
+          </div>
+        </form>
+        <div class="signupDiv">
+          <p>Not a Join user?</p>
+          <button
+            type="submit"
+            id="signUp"
+            onclick="openSignUp();"
+            class="loginBtn btnBlue"
+          >
+            Sign up
+          </button>
+        </div>
+      </div>
+
+      <div class="formDivNewUser d-none" id="formNewUserDiv">
+        <form id="formNewUser" class="newUser" onsubmit="newUser(); return false;">
+          <div class="inputDiv">
+            <h1 class="loginHeadline">Sign up</h1>
+            <div class="line-blue"></div>
+            <img onclick="closeSignUp()" class="backArrow" src="./assets/img/arrow-left.svg" alt="">
+          </div>
+          <div class="inputDiv">
+            <input
+              style="background-image: url('./assets/img/login-person.svg')"
+              pattern="[a-zA-ZäöüÄÖÜß]{2,15} [a-zA-ZäöüÄÖÜß]{2,15}"
+              title="You must enter 'firstname lastname'"
+              class="loginInput"
+              required
+              id="newName"
+              placeholder="Name"
+              onchange="checkInput()"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="inputDiv">
+            <input
+              style="background-image: url('./assets/img/login-mail.svg')"
+              class="loginInput"
+              required
+              type="email"
+              id="newEmail"
+              placeholder="Email"
+              onchange="checkInput()"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="inputDiv">
+            <input
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+              class="loginInput loginInputPwd"
+              required
+              type="password"
+              id="newPassword"
+              placeholder="Password"
+              onchange="checkInput()"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="inputDiv">
+            <input
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              class="loginInput loginInputPwd"
+              required
+              type="password"
+              id="newConfirmPassword"
+              placeholder="Confirm Password"
+              onchange="checkInput()"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="acceptPrivacy">
+            <input required title="acceptPrivacy" type="checkbox" id="acceptPrivacy" onchange="checkInput()" />
+            <p>I accept the <p><button type="button" class="loginBtn btnTxtBlue w-110" onclick="showPrivacy()" >Privacy policy</button></p></p>
+          </div>
+          <button type="submit" class="signUpBtn btnBlue" id="newUserBtn">
+            Sign up
+          </button>
+        </form>
+      </div>
+
+      <div class="formDivResetPwd d-none" id="formResetEmailDiv">
+        <form id="formResetEmail" class="resetPwd" onsubmit="sendResetEmail(); return false;">
+          <div class="inputDiv">
+            <h1 class="loginHeadline">I forgot my password</h1>
+            <div class="line-blue"></div>
+            <img onclick="closeForgotPwd()" class="backArrow" src="./assets/img/arrow-left.svg" alt="">
+            <p>
+              Don't worry! We will send you an email with the instructions to
+              reset your password.
+            </p>
+          </div>
+          <div class="inputDiv">
+            <input
+              style="background-image: url('./assets/img/login-mail.svg')"
+              class="loginInput"
+              required
+              type="email"
+              id="resetEmail"
+              placeholder="Email"
+            />
+            <div class="line"></div>
+          </div>
+          <button type="submit" class="resetBtn btnBlue" id="resetEmailBtn">
+            Send me the email
+          </button>
+        </form>
+      </div>
+
+      <div class="formDivResetPwd d-none" id="formResetPwdDiv">
+        <form id="formResetPwd" class="resetPwd" onsubmit="resetPwd(); return false;">
+          <div class="inputDiv">
+            <h1 class="loginHeadline">Reset your password</h1>
+            <div class="line-blue"></div>
+            <p>Change your account password here.</p>
+            <img onclick="closeResetPwd()" class="backArrow" src="./assets/img/arrow-left.svg" alt="">
+          </div>
+          <div class="inputDiv">
+            <input
+              class="loginInput loginInputPwd"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+              required
+              type="password"
+              id="resetPassword"
+              placeholder="New Password"
+            />
+            <div class="line"></div>
+          </div>
+          <div class="inputDiv">
+            <input
+              class="loginInput loginInputPwd"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              required
+              type="password"
+              id="resetConfirmPassword"
+              placeholder="Confirm Password"
+            />
+            <div class="line"></div>
+          </div>
+          <button type="submit" class="resetBtn btnBlue" id="resetPwdBtn">
+            Continue
+          </button>
+        </form>
+      </div>
+
+      <div id="message" class="message d-none"></div>
+
+      <div id="pwdMessage">
+        <h3>Password must contain the following:</h3>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length1" class="invalid">Minimum <b>8 characters</b></p>
+      </div>
+
+      <div id="loginFooter" class="loginFooter">
+        <a href="./templates/privacy_policy_login.html">Privacy Policy</a>
+        <a href="./templates/imprint_login.html">Legal Notice</a>
+      </div>
+    </div>
+  </body>
+</html>

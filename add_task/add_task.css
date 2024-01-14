@@ -1,0 +1,557 @@
+.add-task-main {
+  display: flex;
+  justify-content: center;
+}
+
+
+.add_task_section {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 460px;
+}
+
+
+
+/* Div container styles */
+.add_task_section div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+
+.prio-values span {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title input styles */
+.title-div {
+  display: flex;
+  padding: 7px 16px;
+  gap: 8px;
+}
+
+.title-div input {
+  padding-left: 8px;
+  outline: none;
+  font-size: 28px;
+  line-height: 70px;
+  font-weight: var(--fw-s-mob);
+  border: none;
+  border-bottom: 1px solid var(--user-grey);
+}
+
+.title-div input::placeholder {
+  color: var(--user-grey);
+}
+
+/* Description styles */
+.description {
+  height: 80px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border: 2px solid var(--user-grey);
+  padding: 12px;
+  padding-bottom: 40px;
+}
+
+.description:focus {
+  border: 1px solid var(--reg-blue);
+}
+
+.add_task_section form input:focus:not(.subtask input) {
+  outline: none !important;
+  border-bottom: 1px solid var(--reg-blue) !important;
+}
+
+/* Date input styles */
+.date-div {
+  position: relative;
+  padding: 0 !important;
+}
+
+#date {
+  height: 100%;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--user-grey);
+}
+
+#date[type="date"]::-webkit-calendar-picker-indicator {
+  background: none;
+  cursor: pointer;
+  z-index: 20;
+  outline: none;
+}
+
+.bi-calendar {
+  z-index: 0;
+  position: absolute;
+  right: 5px;
+  pointer-events: none;
+  bottom: 8px;
+}
+
+/* Assigned span styles */
+.assigned-div span {
+  cursor: pointer;
+  padding: 7px 8px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px var(--user-grey);
+}
+
+.bi {
+  cursor: pointer;
+  color: var(--reg-blue);
+  font-size: 16px !important;
+  transition: all 0.125s ease-in;
+}
+
+.bi-caret-down-fill {
+  margin-right: -5px;
+}
+
+/* Dropdown content styles */
+.dropdown-content {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  display: flex;
+  transition: all 125ms ease-in;
+  flex-direction: column;
+  padding: 0 !important;
+  gap: 8px;
+}
+
+.hidden {
+  transition: all 125ms linear;
+  width: 100% !important;
+  height: 100px;
+  overflow-y: scroll;
+  display: flex;
+  padding: 0 !important;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#addCatHeader{
+  color: var(--reg-blue);
+  cursor: pointer;  
+}
+
+#addCatHeader:hover {
+  color: var(--strong-blue);
+}
+
+/* Options styles */
+.options {
+  cursor: pointer;
+  padding: 5px !important;
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkbox {
+  cursor: pointer !important;
+}
+
+.options label {
+  cursor: pointer;
+}
+
+.options:hover {
+  background-color: var(--user-grey);
+}
+
+/* Profile styles */
+.profile {
+  display: flex !important;
+  width: 30px;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0px !important;
+  color: #ffffff;
+}
+
+/* Hidden class */
+.d-none {
+  display: none !important;
+}
+
+#select-container{
+  border-bottom: solid 1px var(--user-grey);
+}
+
+#select-container span{
+    position: relative;
+    width: 100%;
+}
+
+
+.category-div {
+  position: relative;
+  width: 100%;
+}
+
+.select-container select {
+  padding: 7px 8px;
+  font-size: 16px;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  background-image: none;
+  border-bottom: var(--user-grey) solid 1px;
+  width: 100%; /* Breite auf 100% setzen, um den gesamten Container zu füllen */
+}
+
+.category-div select:focus {
+  outline: none;
+}
+
+.category-div .select-container {
+  padding: 0 !important;
+  position: relative;
+}
+
+.category-div .bi-caret-down-fill {
+  display: block;
+  right: 10px;
+  top: 5px;
+  pointer-events: none;
+  position: absolute;
+  cursor: pointer;
+}
+
+/* Priority values styles */
+.prio-values {
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prio-values span {
+  cursor: pointer;
+  border-radius: 12px;
+  display: flex;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px;
+  box-shadow: var(--shadow);
+}
+
+.prio-values span .bi {
+  font-size: 20px !important;
+}
+
+/* Subtask */
+
+.subtask-wrapper {
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--user-grey);
+}
+
+.subtask-container input {
+  cursor: pointer;
+  height: 20px;
+  outline: none;
+  border: none !important;
+  font-size: 16px !important;
+}
+
+.subtask-icon-conatiner {
+  padding: 0 !important;
+  color: var(--user-grey);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row !important;
+}
+
+.bi-x,
+.bi-check-lg {
+  font-size: 24px !important;
+}
+
+.bi-x:hover,
+.bi-check-lg:hover {
+  transform: scale(1.2);
+}
+
+.bi-chevron-double-up {
+  color: var(--user-red);
+}
+
+.fa-equals {
+  color: var(--user-yellow);
+}
+
+.bi-chevron-double-down {
+  color: var(--user-green);
+}
+
+.prio-values span:hover {
+  background-color: lightgray;
+}
+
+.second-div {
+  align-items: center;
+}
+
+.btns-container {
+  display: flex;
+  flex-direction: row-reverse !important;
+  justify-content: center;
+}
+
+.create-task {
+  transition: all ease-in 0.125s;
+  cursor: pointer;
+  display: flex;
+  padding: 12px 8px !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  outline: none;
+  background-color: var(--reg-blue);
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  font-size: larger;
+  color: white;
+}
+
+.create-task .bi-check-lg {
+  transition: none !important;
+  transform: none !important;
+  color: white;
+}
+
+.clear-btn {
+  background-color: white;
+  color: var(--dark-grey);
+  border: 1px solid var(--dark-grey);
+}
+
+.clear-btn .bi-x-lg {
+  color: var(--dark-grey);
+}
+
+.clear-btn:hover,
+.bi-x-lg:hover {
+  background-color: rgba(0, 0, 0, 0.021) !important;
+  color: black !important;
+}
+
+.create-task:hover {
+  background-color: var(--strong-blue);
+  color: white;
+  transform: scale(1.05) !important;
+}
+
+.main-btns-container {
+  display: none;
+}
+
+#tasks-area.tasks {
+  padding-left: inherit;
+  line-height: 1.5;
+}
+
+.tasks-area {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tasks-area li {
+  display: flex;
+  width: 60%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#pencil {
+  padding-right: 5px;
+}
+
+.tasks-area li span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: var(--user-grey);
+}
+
+/* Media Query für kleine Bildschirme */
+@media screen and (max-width: 641px) {
+  .prio-values span {
+    height: 25px;
+    font-size: smaller;
+  }
+  .center-line {
+    display: none !important;
+  }
+  .btns-container button{
+    width: 6rem;
+    font-size: 16px;
+    height: 2.5rem;
+    
+  }
+}
+.selected-contact {
+  display: flex;
+  flex-direction: row !important;
+  border-bottom: 1px solid var(--user-grey);
+}
+
+.selected-contact span {
+  margin: -8px;
+}
+
+.add_task_section{
+  margin-top: 100px;
+}
+
+ .second-div{
+    margin-top: -60px;
+  }
+
+/* There is the responsiveness for the Medium screen */
+
+@media only screen and (min-width: 768px) and (max-width: 1007px) {
+  form {
+    flex-direction: row;
+    align-items: stretch;
+    height: 100%;
+    margin-top: -180px;
+    justify-content: space-between;
+  }
+
+
+
+  .center-line {
+    background-color: var(--user-grey);
+    width: 100px;
+    padding: 1px !important;
+  }
+
+  .second-div {
+    position: static;
+    justify-content: space-around;
+  }
+
+  .add_task_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .second-div{
+    margin-top: -60px;
+  }
+}
+
+@media only screen and (min-width: 1007px) {
+  .add_task_section {
+    overflow-y: scroll;
+    height: 100%;
+  }
+
+  .main-btns-container {
+    display: flex !important;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .add-task-main {
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .form-btns {
+    display: none !important;
+    pointer-events: none;
+  }
+
+}
+
+.message {
+  display: flex;
+  position: fixed;
+  bottom: calc(100vh / 2 + 60px);
+  left: calc(100vw / 2 - 115px);
+  width: 230px;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--reg-blue);
+  color: white;
+  animation: 450ms moveMessage ease-in-out;
+}
+
+@keyframes moveMessage {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: calc(100vh / 2 + 60px);
+    display: none;
+  }
+}
+
+.add-category {
+  cursor: pointer;
+  pointer-events: none;
+  background-color: var(--reg-blue);
+  color: white;
+}
+
+
+.cateory-value{
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: none;
+}
+
+.category-wrapper{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center;  
+}
+
+.requiredText{
+  color: rgb(199, 2, 2);
+  margin: 0 12px;
+}
+
+@media (max-width: 768px) {
+  .add_task_section form {
+    padding-top: 220px;
+  }
+}

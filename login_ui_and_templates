@@ -1,0 +1,187 @@
+/**
+ * This function is use to define the password not right message.
+ */
+function showPwdNotRightMessage() {
+  let html = `
+        <p>Your Password are wrong</p> 
+    `;
+  showMessage(html);
+}
+
+/**
+ * This function is use to define the email has been send message.
+*/
+function showSendEmailMessage() {
+  let html = `
+        <img class="messageImg" src="./assets/img/SendCheck.svg">
+        <p>An E-Mail has been send to you</p> 
+    `;
+  showMessage(html);
+}
+
+/**
+ * This function is use to define the email not found message.
+ */
+function showEmailNotFoundMessage() {
+  let html = `
+        <p>Your email address was not found</p> 
+    `;
+  showMessage(html);
+}
+
+/**
+ * This function is use to define the sign up message.
+*/
+function showSignUpMessage() {
+  let html = `
+        <p>You Signed Up successfully</p> 
+    `;
+  showMessage(html);
+}
+
+/**
+ * This function is use to define the already exist message.
+*/
+function showSignUpAlreadyExistMessage() {
+  let html = `
+        <p>Your email already in use</p> 
+    `;
+  showMessage(html);
+}
+
+/**
+ * This function is use to define the password has been reset message.
+ */
+function showresetPwdMessage() {
+  let html = `
+        <p>You reset your password</p> 
+    `;
+  showMessage(html);
+}
+
+/**
+ * This function is to show the pwdMessage Div.
+*/
+function showPwdMessage(){
+    document.getElementById("pwdMessage").style.display = "block";
+  }
+  
+  /**
+   * This function is to close the pwdMessage Div.
+   */
+  function closePwdMessage(){
+    document.getElementById("pwdMessage").style.display = "none";
+  }
+
+  /**
+ * This function is use to disable the buttons on the login form.
+*/
+function disableButtonLogin() {
+    disableButton("forgotPwd");
+    disableButton("rememberMe");
+    disableButton("userLoginBtn");
+    disableButton("guestLoginBtn");
+    disableButton("signUp");
+  }
+  
+  /**
+   * This function is use to enable the buttons on the login form.
+  */
+  function enableButtonLogin() {
+    enableButton("forgotPwd");
+    enableButton("rememberMe");
+    enableButton("userLoginBtn");
+    enableButton("guestLoginBtn");
+    enableButton("signUp");
+  }
+  
+  /**
+   * This function is use to diable a html button.
+  * @param {string} buttonId - id of the html button to disable.
+   */
+  function disableButton(buttonId) {
+    let button = document.getElementById(buttonId);
+    button.disabled = true;
+  }
+  
+  /**
+   * This function is use to enable a html button.
+   * @param {string} buttonId - id of the html button to enable.
+   */
+  function enableButton(buttonId) {
+    let button = document.getElementById(buttonId);
+    button.disabled = false;      
+  }
+
+function showPrivacy(){
+  window.open("./templates/privacy_policy.html", "_blank");
+}  
+
+/**
+ * This function is to validate and show the requierments of the password.
+*/
+function validatePasswordMessage(){
+  validateLowerCase(this);
+  validateUpperCase(this);
+  validatenumbers(this);
+  validateLength(this);
+}
+
+/**
+ * This function is to validate the lower case letter of the password.
+ * @param {variable} input - variable of the input field to validate
+ */
+function validateLowerCase(input){
+  var lowerCaseLetters = /[a-z]/g;
+  if(input.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+}
+
+/**
+ * This function is to validate the upper case letter of the password.
+ * @param {variable} input - variable of the input field to validate
+ */
+function validateUpperCase(input){
+  var upperCaseLetters = /[A-Z]/g;
+  if(input.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+}
+
+/**
+ * This function is to validate the numbers of the password.
+ * @param {variable} input - variable of the input field to validate
+ */
+function validatenumbers(input){  
+  var numbers = /[0-9]/g;
+  if(input.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+}
+
+/**
+ * This function is to validate the length of the password.
+ * @param {variable} input - variable of the input field to validate
+ */
+function validateLength(input){
+  if(input.value.length >= 8) {
+    length1.classList.remove("invalid");
+    length1.classList.add("valid");
+  } else {
+    length1.classList.remove("valid");
+    length1.classList.add("invalid");
+  }
+}

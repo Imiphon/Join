@@ -1,0 +1,490 @@
+/*  ===============
+     NORMALIZE 
+    =============== */
+
+:root {
+  /* using-example:  color: var(--standard)*/
+
+  /* --------- COLORS --------------*/
+  --reg-blue: #4589ff;
+  --mail-blue: #adcbff;
+  --toggle-blue: #d2e3ff;
+  --light-grey: #e7e7e7;
+  --light-blue: #d2e3ff;
+  --dark-blue: #0038ff;
+  --strong-blue: #095dff;
+  /* hover a button, popup-top*/
+  /* for buttons and descriptions*/
+  --user-grey: #d1d1d1;
+  /* also for lines*/
+  --dark-grey: #8992a4;
+  /* icon-color in footer*/
+  --user-orange: #ff7a00;
+  --user-lila: #9327ff;
+  --user-blue: #6e52ff;
+  --user-rose: #fc71ff;
+  --user-yellow: #ffbb2b;
+  --user-green: #1fd7c1;
+  --user-red: #fb4746;
+  --user-turquoise: #24bee8;
+  --user-black-welcome-message: #2a3647;
+  --user-blue-welcome-message-name: #005dff;
+
+  /*----------- FONT STYLES -----------*/
+
+  /*--- font-family NEW-------*/
+  --ff-opensans: "open-sans", sans-serif;
+  --ff-inter: "inter-regular", sans-serif;
+
+  /*--- font-size/weight -------*/
+  --fs-16px: 16px;
+  --fs-19px: 19px;
+  --fs-23px: 23px;
+  --fs-33px: 33px;
+  --fs-40px: 40px;
+  --fs-48px: 48px;
+  --fs-64px: 64px;
+  --fw-400: 400;
+  --fw-700: 700;
+
+  /*ATTENTION: not yet evaluated!*/
+  /* X=0, Y=4, Blur=8, Color=#000000 mit % Opazität */
+  --shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  --toggle-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  --shadow-right: 4px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  --bottom-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+/*  ================
+    General Styling 
+    ================ */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "open-sans", sans-serif;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 5px;
+  width: 10px;
+}
+
+.d-none {
+  display: none;
+}
+
+a {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  /* smooth change of color */
+  transform: 0.3s ease;
+  /* time to transform */
+  display: inline-block;
+  /* to get transform working */
+}
+
+a:hover {
+  color: var(--mail-blue);
+  /* soft color-change */
+  transform: scale(1.1);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--reg-blue);
+}
+
+.jblue {
+  color: var(--reg-blue);
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.no-deco {
+  text-decoration: none;
+}
+
+/*arrow left to close sites and popups*/
+.arr-left {
+z-index: 100;
+background-color: transparent;
+}
+
+.back-btn {
+background-color: transparent;
+border: none;
+cursor: pointer;
+}
+
+.info-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3rem;
+  height: 80px;
+  color: var(--reg-blue);
+}
+
+.info-header-login {
+  position: fixed;
+  top: 0;
+  left: 12px;
+  width: 100%;
+  padding: 0 32px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3rem;
+  height: 80px;
+  color: var(--reg-blue);
+}
+
+/*  ===========================================================
+    general styles for selectors: body, header, main and footer
+    =========================================================== */
+
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*overflow: hidden;*/
+  margin: 0;
+  padding: 0;
+}
+
+.body-frame {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+header {
+  /* background-color: var(--reg-blue); */
+  width: 100%;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+main {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: 80px;
+  padding-left: 232px;
+}
+
+.main-login-area {
+padding-bottom: 20px;
+padding-left: 20px;
+}
+
+.main-login-area ul { 
+  padding-left: 24px;
+  }
+
+footer {
+  background-color: white;
+  width: 100%;
+  height: 80px;
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/*  =======================
+    GENERAL CLASS-SELECTORS
+    ======================= */
+
+.welcome {
+  --fw-welcome-msg-user-name: 700;
+  --fs-welcome-msg-user-name: 47px;
+  --fs-welcome-msg: 33px;
+}
+
+.pop-header {
+  font-family: "inter-regular", sans-serif;
+  font-weight: 700;
+  font-size: 47px;
+  line-height: 56px;
+}
+
+.pop-subtitle {
+  font-family: "inter-regular", sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 25px;
+}
+
+/* font style for small text in mobile help and co.*/
+.info-text {
+  font-family: "open-sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.2px;
+}
+
+/* usefull???*/
+.s-names {
+  font-family: "open-sans", sans-serif;
+  font-weight: 400;
+  font-style: 23px;
+  line-height: 21.6px;
+}
+
+/* font style for email  in mobile*/
+.mail {
+  font-family: "open-sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+}
+
+/*font-style for names in contacts/mobile/shorts and other inter-stuff*/
+.font-inter {
+  --ff-inter: "inter-regular", sans-serif;
+  --fw-inter: 400;
+  --fs-inter: 12px;
+}
+
+.welcomeText {
+  font-size: var(--fs-48px);
+  font-weight: var(--fw-400);
+}
+.welcomeTextUserName {
+  font-size: var(--fs-48px);
+}
+
+/* =====================================================
+        Mobile LOOK
+==========================================================*/
+
+@media (max-width: 1124px) {
+  main {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-top: 80px;
+    /* same height like header */
+    padding-bottom: 80px;
+    /* same height like footer */
+    padding-left: 0;
+  }
+
+  .info-header-login p {
+    font-size: 0.8em;
+  }
+
+  .main-login-area h2, h3 {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+
+  .welcomeMsgDiv{
+    transform: translateY(calc(100vh / 2 - 107px));
+    opacity: 0; 
+  }
+
+  .welcomeMsgDiv1{
+    animation: 2s moveWelcome ease-in-out;
+  }
+
+  @keyframes moveWelcome {
+    from {
+      transform: translateY(calc(100vh / 2 - 107px ));
+      opacity: 1;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 0;
+      height: 7vh !important;
+    }
+  }
+  
+
+
+  @keyframes moveSummary {
+    from {
+      transform: translateY(1200px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+/***********************/
+@media (min-width: 1124px) {
+  .body-frame {
+    flex-direction: row-reverse;
+  }
+  footer {
+    z-index: 9;
+    width: 232px;
+    height: 100%;
+    position: absolute;
+    padding-right: 48px;
+  }
+  .footerMenuContainer {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .toolNameNav {
+    display: block;
+  }
+  .questionsNav {
+    display: block;
+  }
+  .helpAnchorSubMenuHeader {
+    display: none;
+  }
+  .privacyLegalContainer {
+    display: block;
+    margin-bottom: 200px;
+    margin-left: 30px;
+  }
+  .footerWrapper {
+    flex-direction: column;
+    margin-top: 114px;
+    display: flex;
+    height: 100%;
+  }
+  .btnFooterMenuDesktopVersion {
+    width: 186px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px 30px;
+    margin-bottom: 15px;
+    background: #ffffff;
+  }
+  .btnFooterMenuDesktopVersion img {
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+  }
+  .btnFooterMenuDesktopVersionTextDiv {
+    font-size: var(--fs-16px);
+    font-weight: var(--fw-400);
+    font-style: normal;
+    color: #42526e;
+  }
+  .btnFooterMenuMobileVersion {
+    display: none;
+  }
+  .borad-main {
+    flex: none;
+    width: calc(100% - 232px);
+  }
+  
+  .welcomeMsgDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    transform: translate(0px);
+  }
+/*  .summaryWrapper {
+    transform: translateY(0px);
+    height: 64%;
+  }*/
+  .summaryContainer {
+    width: 912px;
+    height: 442px;
+  }
+  .tasksDivContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .clockAndTaskContainer {
+    display: flex;
+  }
+  .clockAndDateDiv {
+    width: 672px;
+    height: 191px;
+  }
+  .imgAndNrTasksToDoDiv {
+    display: flex;
+  }
+  .tasksToDoDiv {
+    display: flex;
+    flex-direction: column;
+    width: 208px;
+    height: 191px;
+    margin-left: 16px;
+  }
+  .taskDiv {
+    height: 219px;
+    width: 204px;
+  }
+  .tasksDiv {
+    gap: 18px;
+  }
+  .tasksToDoDivNr {
+    display: flex;
+    align-items: center;
+  }
+  .tasksToDoDivText {
+    font-size: var(--fs-23px);
+  }
+  .taskDivText {
+    width: 75px;
+    height: 56px;
+    font-size: var(--fs-23px);
+    margin: 0 auto;
+    margin-top: 7px;
+  }
+  .tasksDivNr {
+    font-size: var(--fs-48px);
+    margin-left: 20px;
+  }
+  .date {
+    font-size: var(--fs-33px);
+  }
+  .deadlineText, .taskUrgentDiv {
+    font-size: var(--fs-23px);
+  }
+  .deadlineText {
+    text-align: start;
+    width: 100%;
+  }
+  .taskNrDiv {
+    font-size: var(--fs-48px);
+  }
+  .clockAndDateDiv {
+    justify-content: center;
+    gap: 35px;
+  }
+}

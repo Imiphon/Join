@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary</title>
+    <link rel="shortcut icon" href="../assets/img/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/footer_mobile.css" />
+    <link rel="stylesheet" href="../styles/header_mobile.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="summary.css" />
+    <link rel="stylesheet" href="../styles/welcome_message.css" />
+  </head>
+
+  <body onload="includeHTML()">
+    <div class="body-frame">
+      <header include-html="../templates/header.html"></header>
+
+      <main>
+
+        <div class="welcomeMsgDiv" id="welcomeMsgDiv">
+          <div class="welcomeText" id="welcomeText">Good morning, </div>
+          <div class="welcomeTextUserName" id="welcomeTextUserName"></div>
+        </div>
+
+        <div class="summaryWrapper" id="summaryWrapper">
+          <div class="summaryContainer" id="summaryContainer">
+
+            <div class="clockAndTaskContainer">
+              <button class="clockAndDateDiv" onclick="navigateToPage('board')">
+                <div class="clockAndTextDiv">
+                  <div class="clockAndTaskNrDiv">
+                    <img
+                      src="../assets/img/summary_mobile_clock_icon.png"
+                      alt="clock icon"
+                    />
+                    <div class="taskNrDiv" id="tasksUrgent"></div>
+                  </div>
+                  <div class="taskUrgentDiv">Tasks Urgent</div>
+                </div>
+
+                <div class="lineClockAndDateDiv"></div>
+
+                <div class="dateDiv">
+                  <div class="date" id="deadline">October 16, 2022</div>
+                  <div class="deadlineText">Next Deadline</div>
+                </div>
+              </button>
+
+              <button class="tasksToDoDiv" onclick="navigateToPage('board')">
+                <div class="imgAndNrTasksToDoDiv">
+                  <img
+                    src="../assets/img/to-do_icon_task_mobile.png"
+                    alt="icon task to-do"
+                  />
+                  <div class="tasksToDoDivNr" id="taskTodo">1</div>
+                </div>  
+                <div class="tasksToDoDivText">Tasks To-do</div>
+              </button>
+            </div>
+            
+            <div class="tasksDivContainer">
+              <div class="tasksDiv">
+                <button class="taskDiv" onclick="navigateToPage('board')">
+                  <div class="taskDivImgAndNr">
+                    <img
+                      class="imgTaskDiv"
+                      src="../assets/img/task-on-board_icon_mobile.png"
+                      alt="icon tasks on board"
+                    />
+                    <div class="tasksDivNr" id="taskInBoardDiv">5</div>
+                  </div>
+                  <div class="taskDivText">Task in Board</div>
+                </button>
+
+                <button class="taskDiv" onclick="navigateToPage('board')">
+                  <div class="taskDivImgAndNr">
+                    <img
+                      class="imgTaskDiv"
+                      src="../assets/img/task-in-progress_icon_mobile.png"
+                      alt="icon tasks on board"
+                    />
+                    <div class="tasksDivNr" id="taskInProgressDiv">1</div>
+                  </div>
+                  <div class="taskDivText">Task in Progress</div>
+                </button>
+              </div>
+
+              <div class="tasksDiv">
+                <button class="taskDiv" onclick="navigateToPage('board')">
+                  <div class="taskDivImgAndNr">
+                    <img
+                      class="imgTaskDiv"
+                      src="../assets/img/awaiting-feedback_icon_mobile.png"
+                      alt="icon tasks on board"
+                    />
+                    <div class="tasksDivNr" id="taskAwaitingFeedback">3</div>
+                  </div>
+                  <div class="taskDivText">Awaiting feedback</div>
+                </button>
+
+                <button class="taskDiv" onclick="navigateToPage('board')">
+                  <div class="taskDivImgAndNr">
+                    <img
+                      class="imgTaskDiv"
+                      src="../assets/img/tasks-done_icon_mobile.png"
+                      alt="icon tasks on board"
+                    />
+                    <div class="tasksDivNr" id="taskDone">4</div>
+                  </div>
+                  <div class="taskDivText">Tasks Done</div>
+                </button>
+              </div>
+          </div>
+
+          </div>
+        </div>
+      </main>
+
+      <footer include-html="../templates/footer.html"></footer>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="../templates/include-html.js"></script>
+    <script src="../global_arrays.js"></script>
+    <script src="../summary/summary.js"></script>
+
+  </body>
+</html>

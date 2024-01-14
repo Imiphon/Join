@@ -1,0 +1,5 @@
+User-Agent: * 
+
+Disallow: help.html
+Disallow: imprint.html
+Disallow: privacy-policy.html

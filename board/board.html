@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Board</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="shortcut icon" href="../assets/img/favicon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="../styles/header_mobile.css" />
+  <link rel="stylesheet" href="../styles/footer_mobile.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="board.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="boardAddTas.css" />
+</head>
+
+<body onload="includeHTML(), init()">
+  <div class="body-frame board-frame">
+    <header include-html="../templates/header.html"></header>
+    <main class="board-main">
+      <div class="search-div">
+        <div class="search-bar" id="search-bar">
+          <input placeholder="search task" type="search" name="search" id="search" oninput="searchTask()" />
+          <i class="bi-search"></i>
+        </div>
+
+        <button id="create-task" class="create-task" onclick="openMobileAddTask('toDo')">
+          <span>Add Task</span>
+          <i class="bi bi-check-lg"></i>
+        </button>
+      </div>
+
+      <section class="tasks" id="tasks">
+        <div class="card-parent">
+          <div class="row-title">
+            <b>To do</b>
+            <i class="bi bi-plus-lg" onclick="openMobileAddTask('toDo')"></i>
+          </div>
+
+          <div class="allsTsks" id="toDo" ondrop="moveTo('toDo')" ondragleave="removeHighlight('toDo')"
+            ondragover="allowDrop(event); highlight('toDo')"></div>
+        </div>
+
+        <div class="card-parent">
+          <div class="row-title">
+            <b>In progress</b>
+            <i class="bi bi-plus-lg" onclick="openMobileAddTask('inProgress')"></i>
+          </div>
+
+          <div class="allsTsks" id="inProgress" ondrop="moveTo('inProgress')"
+            ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')"></div>
+        </div>
+
+        <div class="card-parent">
+          <div class="row-title">
+            <b>Await feedback</b>
+            <i class="bi bi-plus-lg" onclick="openMobileAddTask('awaitFeedback')"></i>
+          </div>
+
+          <div class="allsTsks" id="awaitFeedback" ondrop="moveTo('awaitFeedback')"
+            ondragleave="removeHighlight('awaitFeedback')" ondragover="allowDrop(event); highlight('awaitFeedback')">
+          </div>
+        </div>
+
+        <div class="card-parent">
+          <div class="row-title">
+            <b>Done</b>
+            <i class="bi bi-plus-lg" onclick="openMobileAddTask('done')"></i>
+          </div>
+
+          <div class="allsTsks" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')"
+            ondragover="allowDrop(event); highlight('done')"></div>
+        </div>
+      </section>
+    </main>
+    <section id="show-task-container" class="show-task-container" onclick="closeTaskContainer(event)"></section>
+
+    <div class="form-div" id="form-div">
+      <form onsubmit="addTask(event); return false;">
+        <div class="head-line">
+          <b class="Add-task-head-line">Add Task</b>
+          <i class="bi bi-x" onclick="closeMobileAddtask(event)"></i>
+        </div>
+        <div class="first-div">
+          <div class="title-div">
+            <input type="text" id="title" class="title-inp" placeholder="Enter a title" required />
+          </div>
+
+          <div class="description-div">
+            <b>Description</b>
+            <input type="text" id="description" class="description-inp" placeholder="Enter Description" required />
+          </div>
+
+          <div class="date-container">
+            <b>Due date</b>
+            <div class="date-div">
+              <input type="date" name="Date" id="date" required />
+              <i for="date" class="bi bi-calendar"></i>
+            </div>
+          </div>
+
+          <div class="assigned-div">
+            <span onclick="toggleContactContainer()" id="assigned-div">Select contact to assign
+              <i class="bi bi-caret-down-fill" id="caret-down"></i>
+            </span>
+
+            <div id="dropdown-options" class="dropdown-content"></div>
+
+            <div class="selected-contact d-none" id="selected-contact"></div>
+            <p class="requiredText" id="req-contact">
+              Bitte Kontakte auswählen.
+            </p>
+          </div>
+
+          <div class="assigned-div">
+            <b>Category</b>
+            <span onclick="showCategoryOptions()" id="category-div">Select task Category
+              <i class="bi bi-caret-down-fill" id="category-caret-down"></i>
+            </span>
+
+            <div id="dropdown-category" class="dropdown-content">
+              <div class="options" value="design">Design</div>
+            </div>
+
+            <div class="selected-contact d-none" id="selected-category"></div>
+            <p class="requiredText" id="req-task">Bitte Aufgabe auswählen.</p>
+
+            <div class="new-category" id="new-category"></div>
+          </div>
+        </div>
+
+        <div class="center-line"></div>
+
+        <div class="second-div">
+          <div class="prio">
+            <b>Prio</b>
+            <div class="prio-values">
+              <span id="urgent" onclick="setPrio('urgent')">Urgent
+                <i class="bi bi-chevron-double-up" id="bi bi-chevron-double-up"></i></span>
+              <span id="medium" onclick="setPrio('medium')">Medium<i class="fa-solid fa-equals"></i></span>
+              <span id="" onclick="setPrio('low')">Low
+                <i class="bi bi-chevron-double-down" id="bi-chevron-double-down"></i>
+              </span>
+            </div>
+            <p class="requiredText" id="req-prio">
+              Bitte Priorität auswählen.
+            </p>
+          </div>
+
+          <div style="padding: 0" class="subtask-container" id="subtask-container">
+            <div class="subtask-div" id="subtask">
+              <b>Subtasks</b>
+              <div class="subtask-wrapper" id="subtask-wrapper">
+                <input onclick="openAddTask()" type="text" id="subtask-value" placeholder="Add new subtask" />
+              </div>
+            </div>
+
+            <ul class="tasks-wrapper" id="tasks-wrapper"></ul>
+          </div>
+
+          <div class="btns-container form-btns">
+            <button id="create-task" class="create-task">
+              <span id="create-task-btn">Create Task</span>
+              <i class="bi bi-check-lg"></i>
+            </button>
+            <button id="clear-task" class="create-task clear-btn" onclick="clearForm(event)">
+              <span>Clear</span>
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+        </div>
+        <div id="message" class="message d-none"></div>
+      </form>
+    </div>
+
+    <footer include-html="../templates/footer.html"></footer>
+  </div>
+  <script src="../templates/include-html.js"></script>
+  <script src="../global_arrays.js"></script>
+  <script src="board_templates.js"></script>
+  <script src="board.js"></script>
+  <script src="../script.js"></script>
+  <script src="./boardAddTask.js"></script>
+  <script src="../add_task/add_task_assets.js"></script>
+  <script src="../add_task/add_task.js"></script>
+  <script src="../summary/summary.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+.d-none-welcome_message_html {
+  display: none;
+}
+
+.welcomeMsgDiv {
+  width: 80vw;
+  height: 80px;
+  margin: 0;
+  text-align: center;
+  margin-top: 32px;
+  transition: margin-bottom 1.5s ease;
+}
+
+.welcomeText {
+  font-family: var(--ff-reg-mob);
+  font-weight: var(--fw-reg-mob);
+  color: var(--user-black-welcome-message);
+}
+
+.welcomeTextUserName {
+  font-family: var(--ff-reg-mob);
+  color: var(--user-blue-welcome-message-name);
+}
+
+@media (max-width: 1124px) {
+  .welcomeMsgDiv {
+    height: 0px;
+  }
+}

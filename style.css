@@ -1,0 +1,602 @@
+:root {
+  --animation-timer: 900ms;
+}
+
+.mainDiv {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  animation: var(--animation-timer) changeBackground ease-in-out;
+}
+@keyframes changeBackground {
+  from {
+    background-color: var(--reg-blue);
+  }
+  to {
+    background-color: white;
+  }
+}
+
+.logoDiv {
+  display: flex;
+  width: 100%;
+  height: 79px;
+}
+
+.background {
+  background-color: var(--reg-blue);
+}
+
+.logoDivHeaderMobile1 {  
+  animation: var(--animation-timer) moveLogo ease-in-out;
+  top: 16px;
+  left: 16px;
+}
+@keyframes moveLogo {
+  from {
+    position: absolute;
+    top: calc(100vh / 2 - 60px);
+    left: calc(100vw / 2 - 49.5px);
+  }
+  to {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+}
+
+.joinLogo {
+  animation: var(--animation-timer) changeLogo ease-in-out;
+  background-image: url("./assets/img/logo_mobile_blue.svg");
+  background-size: cover;
+  width: 65px;
+  height: 79px;
+}
+@keyframes changeLogo {
+  from {
+    background-image: url("./assets/img/logo_mobile_white.svg");
+  }
+  to {
+    background-image: url("./assets/img/logo_mobile_blue.svg");
+  }
+}
+
+.joinLogoWhite {
+  background-image: url("./assets/img/logo_mobile_white.svg");
+}
+
+.formDivLogin {
+  width: 100%;
+  animation: var(--animation-timer) showForm ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding-top: 32px;
+  justify-content: center;
+}
+
+@keyframes showForm {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    opacity: 1;    
+  }
+}
+
+.formDivResetPwd {
+  width: 100%;
+  display: flex;
+  padding-top: 16px;
+  justify-content: center;
+}
+
+.formDivNewUser {
+  width: 100%;
+  display: flex;
+  padding-top: 16px;
+  justify-content: center;
+}
+
+.login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 21px;
+  padding: 16px 0;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 32px;
+}
+
+
+.resetPwd {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 21px;
+  padding: 16px 0;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 32px;
+  background-color: white;
+}
+
+.newUser {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 21px;
+  padding: 16px 0;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 32px;
+  background-color: white;
+}
+
+.loginHeadline {
+  margin: 0;
+  font-size: 58px;
+}
+
+.line-blue {
+  margin: 12px 0;
+  background-color: var(--reg-blue);
+  width: 60px;
+  height: 2px;
+}
+
+.inputDiv {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 64px);
+  text-align: center;
+}
+
+.inputDiv p {
+  padding: 16px 32px;
+}
+
+.backArrow {
+  position: absolute;
+  top: 16px;
+  left: 0px;
+}
+
+.backArrow:hover {
+  cursor: pointer;
+  height: 34px;
+  width: 35px;
+}
+
+h1{
+  padding: 0 70px;
+  color: black;
+}
+
+.loginInput {
+  width: 90%;
+  height: 25px;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 24px;
+  font-size: 23px;
+}
+
+.loginInput::placeholder {
+  opacity: 0.25;
+}
+
+.loginInput:focus-visible {
+  outline: unset;
+}
+
+.loginInputPwd{
+  background-image: url('./assets/img/login-lock.svg')
+}
+
+.loginInputPwd:focus-visible {
+  background-image: none;
+}
+
+.line {
+  margin-top: 4px;
+  background-color: rgb(220, 220, 220);
+  height: 1px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.loginOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 85%;
+}
+
+.rememberMe {
+  display: flex;
+  gap: 16px;
+}
+
+.loginButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.loginBtn {
+  width: 180px; 
+  height: 48px; 
+  border-radius: 8px;
+  border: none;
+  color: white;
+}
+
+#guestLoginBtn,
+#userLoginBtn,
+#signUp {
+  width: auto;
+  height: 48px;
+  font-size: 28px;
+  font-weight: 200;
+  padding: 10px 35px;
+  text-align: center;
+  line-height: 28px;
+}
+
+.resetBtn {
+  width: 180px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  margin: 16px;
+}
+
+.signUpBtn {
+  width: 180px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  margin-bottom: 16px;
+}
+
+#newUserBtn {
+opacity: 0.4;
+}
+
+.signupDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+
+.loginFooter {
+  animation: var(--animation-timer) showFooter ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: calc(100vw - 64px);
+  padding: 16px 0;
+  gap: 64px;
+}
+
+.newUserFooter{
+  animation: var(--animation-timer) showFooter ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: calc(100vw - 64px);
+  padding: 16px 0;
+  gap: 64px;
+}
+
+@keyframes showFooter {
+  from {
+    display: none;
+    opacity: 0;
+  }
+  to {
+    display: flex;
+    opacity: 1;
+  }
+}
+
+.loginFooter a,.newUserFooter a {
+  text-decoration: none;
+  color: rgb(160, 168, 182);
+}
+
+.loginFooter a:hover,.newUserFooter a:hover {
+  color: var(--strong-blue);
+}
+
+.loginFooterWhite a {
+  color: white;
+}
+
+.btnBlue {
+  background-color: var(--reg-blue);
+  border-radius: 10px;
+  border-width: 0;
+  box-shadow: var(--shadow);
+  display: inline;
+  color: white;
+}
+
+.btnBlue:hover:enabled {
+  background-color: var(--strong-blue);
+  cursor: pointer;
+  transform: none;
+  box-shadow: var(--bottom-shadow);
+}
+
+.btnWhite {
+  border: 1px solid var(--dark-grey);
+  text-align: center;
+  background-color: white;
+  color: var(--dark-grey);
+}
+
+.btnWhite:hover{
+  box-shadow: var(--bottom-shadow);
+  color: var(--strong-blue);
+  cursor: pointer;
+  transform: none;
+  border-color: var(--strong-blue);
+}
+
+.btnTxtBlue {
+  color: var(--reg-blue);
+  background-color: white;
+  width: unset;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.btnTxtBlue:hover {
+  cursor: pointer;
+  color: var(--strong-blue);
+  text-decoration: underline;
+}
+
+#rememberMe {
+  accent-color: var(--reg-blue);
+}
+
+#rememberMe:hover {
+  cursor: pointer;
+}
+
+.message {
+  display: flex;
+  position: fixed;
+  bottom: calc(100vh / 2 + 60px);
+  left: calc(100vw / 2 - width / 2);
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--reg-blue);
+  color: white;
+  animation: var(--animation-timer) moveMessage ease-in-out;
+}
+
+.messageImg{
+  padding-right: 16px;
+}
+
+@keyframes moveMessage {
+  from {
+    bottom: 0;
+  }
+  to {
+    bottom: calc(100vh / 2 + 60px);
+  }
+}
+
+#pwdMessage {
+  display: none;
+  background-color: var(--light-blue);
+  color: white;
+  position: absolute;
+  top: 70%;
+  width: max-content;
+  border-radius: 20px;
+  padding: 12px;
+}
+
+#pwdMessage p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
+.acceptPrivacy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#acceptPrivacy {
+  accent-color: var(--reg-blue);
+  margin-right: 16px;
+}
+
+#acceptPrivacy:hover {
+  cursor: pointer;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.w-110{
+  width: 110px;
+}
+
+@media(max-width:440px){
+  @media(min-width:332px){
+    @media (min-height: 658px) {
+      .loginFooter {
+        position: fixed;
+        left: 32px;
+        bottom: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 331px){
+  @media (min-height: 695px) {
+    .loginFooter {
+      position: fixed;
+      left: 32px;
+      bottom: 16px;
+    }
+  }
+}
+
+
+@media (max-width: 353px){
+  @media (min-height: 651px) {
+    .newUserFooter {
+      position: fixed; 
+      left: 32px;
+      bottom: 16px;
+    }
+  }
+}
+
+@media (max-width:440px) {
+  .login h1 {
+    font-size: revert;
+  }
+
+  #userLoginBtn,
+  #guestLoginBtn,
+  #signUp {
+    font-size: 23px;
+  }
+
+  .loginFooter,
+  .newUserFooter {
+    position: static !important;
+  }
+
+  #pwdMessage {
+    top: 90%;
+    width: max-content;
+  }
+}
+
+@media(max-width:799px){
+  @media(min-width:354px){
+    @media (min-height: 614px) {
+      .newUserFooter {
+        position: fixed;
+        left: 32px;
+        bottom: 16px;
+      }
+    }
+  }
+}
+
+@media (min-width:800px){
+  .formDivLogin, .formDivNewUser, .formDivResetPwd {
+    width: 550px;
+  }
+
+  .signupDiv {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .joinLogo {
+    width: 101px;
+    height: 122px;
+  }
+
+  .logoDiv {
+    height: 122px;
+  }
+
+  .loginOptions{
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+  }
+
+  .loginOptions div{
+    width: 30%;
+  }
+
+  .rememberMe{
+    align-items: center;
+  }
+
+  .loginButtons{
+    flex-direction: row;
+  }
+  
+  @media (min-height: 555px) {
+    .loginFooter {
+      position: fixed;
+      bottom: 16px;
+      left: 32px;
+    }
+  }
+  @media (min-height: 657px) {
+    .newUserFooter {
+      position: fixed;
+      bottom: 16px;
+      left: 32px;
+    }
+  }
+}
+
+

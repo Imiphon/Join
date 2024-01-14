@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/fonts.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/footer_mobile.css" />
+    <link rel="stylesheet" href="../styles/header_mobile.css" />
+    <link rel="stylesheet" href="../styles/welcome_message.css" />
+    <script src="../templates/include-html.js"></script>
+  </head>
+  <body onload="includeHTML()">
+    <div class="body-frame">
+      <header include-html="../templates/header.html"></header>
+      <main>
+        <!--------------- ------------------------->
+        <div class="welcomeMsgDiv" id="welcomeMsgDiv">
+          <div class="welcomeText" id="welcomeText">Good morning, </div>
+          <div class="welcomeTextUserName" id="welcomeTextUserName">
+            Sofia Müller
+          </div>
+        </div>
+      </main>
+      <footer include-html="../templates/footer.html"></footer>
+    </div>
+  </body>
+</html>
