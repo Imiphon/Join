@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let userId = localStorage.getItem('userId');
+let prio = undefined; //To save the priority-value
+
+/*Remote Storage Implementierung*/
+const STORAGE_TOKEN = "F4LGRNFMG9GWI4STVSTG89MGMCVVVRZDK3KPVIVF";
+const STORAGE_URL = "https://remote-storage.developerakademie.org/item";
+
+async function setItem(key, value) {
+  const payload = { key, value, token: STORAGE_TOKEN };
+  return fetch(STORAGE_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  }).then((res) => res.json());
+}
+
+async function getItem(key) {
+  const url = `${STORAGE_URL}?key=${key}&amp;token=${STORAGE_TOKEN}`;
+  return fetch(url)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.data) {
+        return res.data.value;
+      }
+      throw `Could not find data with key "${key}".`;
+    });
+}
+
+/**
+ * used in help-, imprint- and privacy.html
+ */
+function historyBack() {
+  window.history.back();
+}
+
+/**
+ * load contacts from server
+ * checks for arrays in the array
+ */
+async function getContactsFromServer() {
+  //let userId = localStorage.getItem('userId');
+  if (userId != '') {
+    try {
+      contactArray = await JSON.parse(await getItem('contacts' + userId));
+      if (Array.isArray(contactArray) &amp;&amp; contactArray.some(Array.isArray)) {
+        replaceArrWithObj();
+      }
+    } catch (e) {
+      console.info('could not find contacts')
+    }
+  } else {
+    contactArray = await JSON.parse(await getItem('contacts' + userId));
+  }
+  await sortContacts();
+  showContacts();
+}
+
+/**
+ * replace the array with object inside.
+ */
+function replaceArrWithObj() {
+  contactArray = contactArray.map(innerArray =>
+    Array.isArray(innerArray) &amp;&amp; innerArray.length > 0 ? innerArray[0] : innerArray
+  );
+}
+
+/**
+ * Called from include-html.js
+ * Shows the Initials of user in the header
+ */
+async function showNavInits() {
+  let initialsElement = document.getElementById('userNameDivInnerId');
+  let fullName = localStorage.getItem('myName');
+  if (fullName) {
+    let {preName,lastName} = splitName(fullName);
+    initials = preName[0] + lastName[0];
+    initialsElement.innerHTML = initials;
+  } else {
+    initialsElement.innerHTML = 'XY';
+  }
+}
+
+/**
+ * split the entry from the user into pre- and lastname
+ * @param {string} fullName - fullname of the user
+ * @returns the first and the lastname of the user
+ */
+function splitName(fullName) {
+if (fullName != null){
+  let nameParts = fullName.split(" ");
+  let preName = upperCaseFirstLetter(nameParts[0]);
+  let lastName = upperCaseFirstLetter(nameParts[1]);
+  return {preName,lastName};
+} else {
+  return;
+}
+}
+
+/**
+ * This function is use to get the first letter of a string as upper case.
+ * @param {String} str - string to get the first letter as upper case
+ * @returns first letter of a string as upper case
+ */
+function upperCaseFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#checkCredentials">checkCredentials</a></li><li><a href="global.html#checkInput">checkInput</a></li><li><a href="global.html#checkPwdCorrect">checkPwdCorrect</a></li><li><a href="global.html#checkUserExist">checkUserExist</a></li><li><a href="global.html#closeForgotPwd">closeForgotPwd</a></li><li><a href="global.html#closeLogin">closeLogin</a></li><li><a href="global.html#closeResetPwd">closeResetPwd</a></li><li><a href="global.html#closeSignUp">closeSignUp</a></li><li><a href="global.html#createContactsArray">createContactsArray</a></li><li><a href="global.html#createOwnContactsRemoteStorage">createOwnContactsRemoteStorage</a></li><li><a href="global.html#createOwnTasksRemoteStorage">createOwnTasksRemoteStorage</a></li><li><a href="global.html#getContactsFromServer">getContactsFromServer</a></li><li><a href="global.html#getExistingEmailAdresses">getExistingEmailAdresses</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#guestLogin">guestLogin</a></li><li><a href="global.html#historyBack">historyBack</a></li><li><a href="global.html#loadUsers">loadUsers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#newUser">newUser</a></li><li><a href="global.html#openForgotPwd">openForgotPwd</a></li><li><a href="global.html#openLogin">openLogin</a></li><li><a href="global.html#openResetPwd">openResetPwd</a></li><li><a href="global.html#openSignUp">openSignUp</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#replaceArrWithObj">replaceArrWithObj</a></li><li><a href="global.html#resetLoginForm">resetLoginForm</a></li><li><a href="global.html#resetNewUserForm">resetNewUserForm</a></li><li><a href="global.html#resetPwd">resetPwd</a></li><li><a href="global.html#saveUsers">saveUsers</a></li><li><a href="global.html#sendResetEmail">sendResetEmail</a></li><li><a href="global.html#showMessage">showMessage</a></li><li><a href="global.html#showNavInits">showNavInits</a></li><li><a href="global.html#showSummaryPage">showSummaryPage</a></li><li><a href="global.html#splitName">splitName</a></li><li><a href="global.html#upperCaseFirstLetter">upperCaseFirstLetter</a></li><li><a href="global.html#validatenewPassword">validatenewPassword</a></li><li><a href="global.html#validateresetPassword">validateresetPassword</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jan 15 2024 08:52:44 GMT-0500 (Nordamerikanische Ostküsten-Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

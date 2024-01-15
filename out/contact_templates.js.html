@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact_templates.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact_templates.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+//============================================================
+//  HTML TEMPLATES
+//============================================================
+
+/**
+ * Constructs and returns the main frame HTML string. This frame includes
+ * an add button, name group, popup box, and a success info message.
+ *
+ * @returns {string} The HTML string representing the main frame.
+ */
+function showMainFrame() {
+    return `
+  &lt;div class="main-frame" id="mainFrame">
+    &lt;div class="group-frame" id="groupFrame">        
+      &lt;div class="add-btn-frame">
+        &lt;button class="add-btn" id="addBtn" onclick="widthForAdd();">
+          &lt;img src="../assets/img/person_add.png" alt="">
+          &lt;span id="addBtnTxt">Create a contact&lt;/span>
+        &lt;/button>      
+      &lt;/div>
+      &lt;div class="name-group" id="nameGroup">
+      &lt;/div>
+    &lt;/div>
+  
+    &lt;button class="add-mob-btn" id="addBtn" onclick="widthForAdd();">
+      &lt;img src="../assets/img/person_add.png" alt="">
+    &lt;/button>      
+      
+    &lt;div class="popup-box" id="popupBox">
+    &lt;/div>
+    &lt;div class="info-box" id="infoBox">
+    &lt;/div>
+    &lt;div id="success-info">Contact successfully created&lt;/div>
+  &lt;/div>
+      `;
+  }
+  
+  /**
+   * Constructs and returns the HTML string for a name group based on the given initial.
+   * The returned structure contains a letter box displaying the initial and a line box.
+   *
+   * @param {string} initial - The initial letter for the name group.
+   * @returns {string} The HTML string representing the name group.
+   */
+  function GroupName(initial) {
+    return `
+      &lt;div class="letter-box">
+          &lt;span class="letterBox">${initial}&lt;/span>
+      &lt;/div>
+      &lt;div class="line-box">
+          &lt;div class="line"> &lt;/div>
+      &lt;/div>
+  `;
+  }
+  
+  /**
+   * returns the HTML content for displaying the data of persons
+   * @param {string} person 
+   * @param {int} i 
+   * @returns 
+   */
+  function showPersonDatas(person, i) {
+    return `
+    &lt;div class="name-frame">
+        &lt;div class="name-box" onclick="showInfo(${i})" id="${i}">
+            &lt;div class="side-circle initials" style="background-color: ${person.color};">
+                ${person.initials}
+            &lt;/div>
+            &lt;div class="name-mail-frame">
+                &lt;div class="full-name">
+                    ${person.name} ${person.lastName}
+                &lt;/div>
+                &lt;div class="mail">
+                    ${person.mail}
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+    `;
+  }
+  
+  /**
+   * Constructs and returns the HTML content for displaying detailed information
+   * of a given person. The function renders the person's name, initials, email, and phone
+   * along with options to edit or delete the contact. Additional UI elements like a drawer 
+   * with edit and delete options are also included.
+   *
+   * @param {Object} person - The object representing the person's data. The object should have
+   * properties: name, lastName, mail, phone, initials, and color.
+   * @param {int} indexNr - The index number of the person in the contactArray or a similar array.
+   * @returns {string} The HTML content representing the detailed information of the specified person.
+   */
+  function showInfoText(person, indexNr) {
+    return `
+          &lt;div class="detail-frame" id="detailFrame">
+              &lt;div class="detail-top-head">
+                  &lt;div>Contact Informations&lt;/div>
+                  &lt;button class="close-info" id="closeInfo" onclick="closeInfo()">&lt;img class="arr-left" src="../assets/img/arrow-left-line.svg" alt="back">&lt;/button>   
+              &lt;/div>
+              &lt;div class="detail-name-box">
+                  &lt;div class="detail-ellipse" style="background-color: ${person.color}">
+                      ${person.initials}
+                  &lt;/div>
+                  
+                      &lt;div class="column">                      
+                          &lt;div class="detail-name">
+                          ${person.name} ${person.lastName}
+                          &lt;/div>
+                          &lt;div class="more-row" id="moreRow">
+                              &lt;div class="more-row-box" onclick="widthForEdit(${indexNr})">
+                                  &lt;img src="../assets/img/edit.png" alt="Edit">
+                                  &lt;span>Edit&lt;/span>
+                              &lt;/div>
+                              &lt;div class="more-row-box" onclick="deleteContact(${indexNr})">
+                                  &lt;img src="../assets/img/delete.png" alt="Delete">
+                                  &lt;span>Delete&lt;/span>
+                              &lt;/div>
+                          &lt;/div>
+                      &lt;/div>    
+              &lt;/div>
+              &lt;div class="adr-box">
+              &lt;div class="desk-header">Contact Informations&lt;/div>
+                  &lt;div class="detail-description bold">
+                      Email
+                  &lt;/div>
+                  &lt;div class="mail send-mail">
+                  &lt;a href="mailto:${person.mail}">${person.mail}&lt;/a>
+                  &lt;/div>
+                  &lt;div class="detail-description bold">
+                      Phone
+                  &lt;/div>
+                  &lt;div class="info-text tel">
+                  &lt;a href="tel:${person.phone}">${person.phone}&lt;/a>
+                  &lt;/div>
+              &lt;/div>
+          &lt;/div>
+          &lt;button class="more-btn" id="moreBtn" onclick="toggleDrawer()">
+              &lt;img src="../assets/img/more_btn.svg" alt="">
+          &lt;/button>
+          &lt;div id="drawer">
+            &lt;div class="drawer-item" onclick="widthForEdit(${indexNr})">
+              &lt;img src="../assets/img/edit.png" alt="Edit">
+              &lt;span>Edit&lt;/span>
+            &lt;/div>
+            &lt;div class="drawer-item" onclick="deleteContact(${indexNr})">
+              &lt;img src="../assets/img/delete.png" alt="Delete">
+              &lt;span>Delete&lt;/span>
+            &lt;/div>
+          &lt;/div>
+      `;
+  }
+  
+  /**
+   * Constructs and returns the HTML content for a generic popup background.
+   * This function creates a popup layout with separate sections for different
+   * content, namely general content, add content, and edit content.
+   *
+   * @returns {string} The HTML content representing the structure of the popup background.
+   */
+  function popupBack() {
+    return `
+      &lt;div class="popup-background" id="popupBackground">
+          &lt;div class="popup" id="popup">  
+              &lt;div class="popup-content" id="popContent">
+              &lt;/div>          
+              &lt;div class="pop-add-content" id="popupRight">
+              &lt;/div>
+              &lt;div class="pop-edit-content" id="popupLeft">
+              &lt;/div>
+          &lt;/div>
+      &lt;/div>
+      `;
+  }
+  
+  /**
+   * Constructs and returns the HTML content for the "Add Contact" popup form.
+   * This function creates a form that allows the user to input details for a new contact,
+   * including name, email, and phone number. The form also includes options for choosing 
+   * a contact color and avatar, as well as actions for creating the contact or canceling the process.
+   *
+   * @returns {string} The HTML content representing the "Add Contact" form layout.
+   */
+  function showAddContact() {  
+    return `
+      &lt;div class="pop-top" id="popTop">
+          &lt;a onclick="closePopup()">&lt;img src="../assets/img/close.png" alt="close">&lt;/a>
+          &lt;img class="pop-logo" src="../assets/img/logo_mobile_white.svg">
+          &lt;span class="pop-header">Add contact&lt;/span>
+          &lt;span class="pop-subtitle">Tasks are better with a team!&lt;/span>
+      &lt;/div>
+      &lt;div>
+          &lt;img class="popup-circle no-border detail-ellipse" src="../assets/img/person_initial.png" alt="person_initial">
+      &lt;/div>
+      &lt;div class="pop-bottom">
+          &lt;div class="form-frame">
+              &lt;form id="userForm" class="user-form" onsubmit="createContact(); return false;">
+                  &lt;div class="contact-frame">
+                  &lt;input 
+                  class="contact-input" 
+                  type="text" 
+                  id="fullName" 
+                  placeholder="Name Nachname" 
+                  required 
+                  pattern="[a-zA-ZäöüÄÖÜß]{2,15} [a-zA-ZäöüÄÖÜß]{2,15}" 
+                  title="Bitte geben Sie einen Vor- und Nachnamen ein.">
+              
+                      &lt;div class="color-img-box">
+                          &lt;div class="color-frame">
+                              &lt;div id="colorBox" class="color-box" onclick="openColorPicker()">
+                                  &lt;div id="colorPicker" class="color-picker" style="display: none;">
+                                      &lt;!-- colors -->
+                                  &lt;/div>
+                              &lt;/div>
+                          &lt;/div>
+                          &lt;img src="../assets/img/person_small.png" alt="name">
+                      &lt;/div>
+                  &lt;/div>
+                  &lt;div class="contact-frame">
+                      &lt;input class="contact-input" type="email" required id="email" placeholder="Email">
+                      &lt;img src="../assets/img/mail_small.png" alt="name">
+                  &lt;/div>
+                  &lt;div class="contact-frame tel-box">
+                    &lt;input class="contact-input" required type="tel" id="phone" placeholder="Telefon"
+                    pattern="^(\\+?\\d{9,15}|(\\+?|\\d{0,4})?\\s?\\d{3,4}\\s?\\d{3,8}|(\\+?|\\d{0,4})?\\s?\\d{3,5}\\s?\\d{7,8})$"
+                    title="9-15 Ziffern, opt. mit Leerzeichen oder + (+12345678901, 0123 4561234, 1 123 123 1234)">
+                    &lt;img src="../assets/img/call_small.png" alt="phone">         
+                  &lt;/div>
+                  &lt;div class="btn-box">
+                  &lt;button class="white-btn" onclick="closePopup()">
+                      Cancel
+                      &lt;img src="../assets/img/close_dark-grey.png">
+                  &lt;/button>
+                  &lt;button id="createBtn" type="submit" class="blue-btn">
+                      Create Contact
+                      &lt;img src="../assets/img/check_small.png">
+                  &lt;/button>
+              &lt;/div>
+              &lt;/form>
+          &lt;/div>
+      &lt;/div>
+          `;
+  }
+  
+  /**
+   * Constructs and returns the HTML content for the "Edit Contact" popup form.
+   * This function creates a form that allows the user to edit the details of an existing contact,
+   * including name, email, phone number, and contact color. The form also includes options 
+   * for deleting the contact or saving the changes.
+   *
+   * @param {int} index - The index of the contact in the contactArray to be edited.
+   * @returns {string} The HTML content representing the "Edit Contact" form layout.
+   */
+  function showEditContact(index) {
+    let person = contactArray[index];
+    let indexNr = index;
+    return /*html */`
+          &lt;div class="pop-top" id="popTop">
+          &lt;a onclick="closePopup()">&lt;img src="../assets/img/close.png" alt="close">&lt;/a>
+          &lt;img class="pop-logo" src="../assets/img/logo_mobile_white.svg">
+          &lt;span class="pop-header">Edit contact&lt;/span>
+          &lt;span class="pop-subtitle">Tasks are better with a team!&lt;/span>
+      &lt;/div>
+      &lt;div>
+          &lt;div class="popup-circle detail-ellipse" style="background-color: ${person.color}">
+              ${person.initials}
+          &lt;/div>
+      &lt;/div>
+      &lt;div class="pop-bottom">
+      &lt;div class="form-frame">
+          &lt;form id="userForm" class="user-form" onsubmit="editContactInArray(${indexNr}); return false;">            
+                  &lt;div class="contact-frame">
+                      &lt;input class="contact-input" type="text" id="fullName" onclick="keepString('fullName')"
+                          placeholder="${person.name} ${person.lastName}" required pattern="[a-zA-ZäöüÄÖÜß]{2,15} [a-zA-ZäöüÄÖÜß]{2,15}"
+                          title="Bitte geben Sie einen Vor- und Nachnamen ein.">
+  
+                          &lt;div class="color-img-box">
+                          &lt;div class="color-frame">
+                              &lt;div id="colorBox" class="color-box editor" onclick="openColorPicker()" style="background-color: ${person.color}">
+                                  &lt;div id="colorPicker" class="color-picker" style="display: none;">
+                                      &lt;!-- colors -->
+                                  &lt;/div>
+                              &lt;/div>
+                          &lt;/div>
+                          &lt;img src="../assets/img/person_small.png" alt="name">
+                      &lt;/div>
+                  &lt;/div>
+                  &lt;div class="contact-frame">
+                      &lt;input class="contact-input" onclick="keepString('email')" required type="email" id="email" placeholder="${person.mail}">
+                      &lt;img src="../assets/img/mail_small.png" alt="name">
+                  &lt;/div>
+                  &lt;div class="contact-frame">
+                  &lt;input class="contact-input" onclick="keepString('phone')" required type="tel" id="phone" placeholder="${person.phone}"
+                  pattern="^(\\+?\\d{9,15}|(\\+?|\\d{0,4})?\\s?\\d{3,4}\\s?\\d{3,8}|(\\+?|\\d{0,4})?\\s?\\d{3,5}\\s?\\d{7,8})$"
+                  title="9-15 Ziffern, opt. mit Leerzeichen oder + (+12345678901, 0123 4561234, 1 123 123 1234)">
+           &lt;img src="../assets/img/call_small.png" alt="phone">         
+                  &lt;/div>
+              
+              &lt;div class="btn-box">
+                  &lt;button class="white-btn" onclick="deleteInEditor(${indexNr})">
+                      Delete
+                  &lt;/button>
+                  &lt;button class="blue-btn" type="submit">
+                      Save
+                      &lt;img src="../assets/img/check_small.png">
+                  &lt;/button>
+              &lt;/div>
+          &lt;/form>
+          &lt;/div>
+      &lt;/div>
+      `;
+  }
+  </code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#GroupName">GroupName</a></li><li><a href="global.html#popupBack">popupBack</a></li><li><a href="global.html#showAddContact">showAddContact</a></li><li><a href="global.html#showEditContact">showEditContact</a></li><li><a href="global.html#showInfoText">showInfoText</a></li><li><a href="global.html#showMainFrame">showMainFrame</a></li><li><a href="global.html#showPersonDatas">showPersonDatas</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jan 15 2024 09:01:03 GMT-0500 (Nordamerikanische Ostküsten-Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

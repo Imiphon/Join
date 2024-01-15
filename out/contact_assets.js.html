@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contact_assets.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contact_assets.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Toggles the visibility of the color picker and updates its content.
+ */
+function openColorPicker() {
+  let colorPicker = document.getElementById("colorPicker");
+
+  if (colorPicker.style.display === "none") {
+    colorPicker.style.display = "flex";
+  } else {
+    colorPicker.style.display = "none";
+  }
+  updateColors();
+}
+
+/**
+* Updates the content of the color picker with available user colors.
+*/
+function updateColors() {
+  let colorPicker = document.getElementById("colorPicker");
+  colorPicker.innerHTML = colorsInPicker();
+}
+
+/**
+* Constructs the inner HTML for the color picker based on available user colors.
+*
+* @returns {string} The HTML string representing color options for the picker.
+*/
+function colorsInPicker() {
+  let pickerBox = "";
+  for (let color in userColors) {
+    pickerBox += `
+          &lt;div class="color-option" 
+          style="background-color: ${userColors[color]};" 
+          onclick="setColor('${color}', event)">&lt;/div>
+          `;
+  }
+  return pickerBox;
+}
+
+/**
+* Sets the background color of the specified element based on the selected user color.
+* Hides the color picker and updates the background color of the editor's detail ellipse if it exists.
+*
+* @param {string} color - The key representing the user color.
+* @param {Event} event - The click event triggering this function.
+*/
+function setColor(color, event) {
+  document.getElementById("colorBox").style.backgroundColor = userColors[color];
+
+  let colorPicker = document.getElementById("colorPicker");
+  colorPicker.style.display = "none";
+  event.stopPropagation();
+  if (document.querySelector(".editor")) {
+    //without space between ".popup-circle.detail-ellipse" to select exactly this element
+    //'.popup-circle .detail-ellipse' would select the 2nd one as a child of the 1st
+    let detailEllipse = document.querySelector(".popup-circle.detail-ellipse");
+    detailEllipse.style.backgroundColor = userColors[color];
+  }
+}
+
+/**
+ * Displays a mobile popup by appending it to the body and making it visible.
+ * Resolves the promise immediately after displaying the popup. 
+ * @returns {Promise&lt;void>} A promise that resolves once the popup is displayed.
+ */
+function mobilePopup() {
+  return new Promise((resolve) => {
+    let popupHTML = popupBack();
+    document.body.innerHTML += popupHTML;
+    let popupBg = document.getElementById("popupBackground");
+    popupBg.style.display = "block";
+    setTimeout(() => {
+      resolve();
+    }, 0);
+  });
+}
+
+/**
+ * Displays an editing popup for the desktop view. Initializes the popup background
+ * and sets its visibility. Resolves immediately after the popup is set to be displayed.
+ *
+ * @returns {Promise} A promise that resolves when the popup is displayed.
+ */
+function deskEditPopup() {
+  return new Promise((resolve) => {
+    //get popupBackground
+    let popupHTML = popupBack();
+    //set Background in popupBox in mainFrame
+    document.getElementById("popupBox").innerHTML += popupHTML;
+    let popupBg = document.getElementById("popupBackground");
+    popupBg.style.display = "block";
+    setTimeout(() => {
+      resolve();
+    }, 0);
+  });
+}
+
+/**
+ * Displays a popup to create new contact for the desktop view. Initializes the popup background
+ * and sets its visibility. Resolves immediately after the popup is set to be displayed.
+ *
+ * @returns {Promise} A promise that resolves when the popup is displayed.
+ */
+function deskAddPopup() {
+  return new Promise((resolve) => {
+    let popupHTML = popupBack();
+    document.getElementById("popupBox").innerHTML += popupHTML;
+    let popupBg = document.getElementById("popupBackground");
+    popupBg.style.display = "block";
+    setTimeout(() => {
+      resolve();
+    }, 0);
+  });
+}
+
+/**
+ * removing colorpicker if visible and closes the Popup
+ */
+function closePopup() {
+  let colorPicker = document.getElementById("colorPicker");
+  let popBg = document.getElementById("popupBackground");
+  if (colorPicker) {
+    colorPicker.remove();
+  }
+  popBg.remove();
+  //document.getElementById("popupBackground").style.display = "none";
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closePopup">closePopup</a></li><li><a href="global.html#colorsInPicker">colorsInPicker</a></li><li><a href="global.html#deskAddPopup">deskAddPopup</a></li><li><a href="global.html#deskEditPopup">deskEditPopup</a></li><li><a href="global.html#mobilePopup">mobilePopup</a></li><li><a href="global.html#openColorPicker">openColorPicker</a></li><li><a href="global.html#setColor">setColor</a></li><li><a href="global.html#updateColors">updateColors</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jan 15 2024 09:00:10 GMT-0500 (Nordamerikanische Ostküsten-Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: board_templates.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: board_templates.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let topicColor;
+
+/**
+ * Generates HTML for an empty task area.
+ * @returns {string} - HTML representing an empty task area.
+ */
+function emptyTaskArea() {
+  return `
+      &lt;div class="empty-todo">
+        &lt;p>No tasks added&lt;/p>
+      &lt;/div>
+    `;
+}
+
+/**
+ * Changes the border color of the search bar when it's clicked.
+ */
+let searchBar = document.getElementById("search-bar");
+
+document.addEventListener("click", (event) => {
+  if (!searchBar.contains(event.target)) {
+    searchBar.style.borderColor = "var(--user-grey)";
+  } else {
+    searchBar.style.borderColor = "var(--reg-blue)";
+  }
+});
+
+/**
+ * Creates an HTML element representing a task.
+ * @param {object} task - The task object to create an element for.
+ * @param {number} index - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML representation of the task element.
+ */
+
+function createTaskElement(task, index, section) {
+  // ... Function implementation
+  return /*html */ `
+    &lt;div  class="cards draggable" id="card${index}" onclick="popUpTask(${section}, ${index})" draggable="true" ondragstart="startDargging(event, ${index}, ${section})">
+      &lt;span  class="topic">${task.category}&lt;/span>
+      &lt;div class="frame">
+        &lt;h4 class="title">${task.title}&lt;/h4>
+        &lt;p class="content">${task.description}&lt;/p>
+      &lt;/div>
+      ${createProgressBar(task, index)}
+      ${createSelectedContacts(task, index)}
+    &lt;/div>
+  `;
+}
+
+/**
+ * Creates an HTML progress bar element based on task subtasks.
+ * @param {object} task - The task object.
+ * @param {number} index - The index of the task.
+ * @returns {string} - HTML representation of the progress bar.
+ */
+function createProgressBar(task, index) {
+  const checkedSubTasks = task.subTask
+    ? task.subTask.filter((subtask) => subtask.checked == true)
+    : [];
+
+  const finishedSubTasks = checkedSubTasks.length;
+  let lengthOfSubs =
+    task.subTask &amp;&amp; task.subTask.length ? task.subTask.length : 0;
+  return /*html*/ `
+    &lt;div class="progress-bar">
+      &lt;progress max="100" value="${(finishedSubTasks / lengthOfSubs) * 100
+    }">&lt;/progress>
+      &lt;div class="subtask-amount">&lt;span>${finishedSubTasks}/${lengthOfSubs}&lt;/span> Subtasks&lt;/div>
+    &lt;/div>
+  `;
+}
+
+/**
+ * Creates HTML elements for selected contacts in a task.
+ * @param {object} task - The task object.
+ * @param {number} index - The index of the task.
+ * @returns {string} - HTML representation of selected contacts.
+ */
+
+function createSelectedContacts(task, index) {
+  let contactsHtml = task.selectedContacts
+    .slice(0, 4).map((contact, subIndex) => {
+      return `&lt;span style="background-color: ${contact.bColor}" class="profile" style="z-index:${subIndex}">${contact.shortName}&lt;/span>`;
+    })
+    .join("");
+
+  if (task.selectedContacts.length > 4) {
+    contactsHtml += "&amp;nbsp...";
+  }
+
+  return /*html */ `
+    &lt;div class="assign-conatiner" id="assign-container${index}">
+      &lt;div class="assigned-person">
+        ${contactsHtml}
+      &lt;/div>
+      ${createPriorityIcon(task)}
+    &lt;/div>
+  `;
+}
+
+
+/**
+ * Creates a priority icon based on task priority.
+ * @param {object} task - The task object.
+ * @returns {string} - HTML representation of the priority icon.
+ */
+
+function createPriorityIcon(task) {
+  let icon;
+  const prio = task.priority;
+  if (prio === "urgent") {
+    icon = `&lt;span> &lt;i class="bi bi-chevron-double-up">&lt;/i>&lt;/span>`;
+  } else if (prio === "medium") {
+    icon = `&lt;span> &lt;i class="fa-solid fa-equals">&lt;/i>&lt;/span>`;
+  } else {
+    icon = `&lt;span> &lt;i class="bi bi-chevron-double-down">&lt;/i>&lt;/span>`;
+  }
+  return icon;
+}
+
+
+/**
+ * Converts a date from 'YYYY-MM-DD' format to 'YYYY/MM/DD'.
+ * @param {string} dateStr - The date string in 'YYYY-MM-DD' format.
+ * @returns {string} - The date string in 'YYYY/MM/DD' format.
+ */
+function formatDate(dateStr) {
+  return dateStr.split("-").join("/");
+}
+
+/**
+ * Generates HTML for 'Move To' buttons in the task pop-up.
+ * @param {object} selectedTask - The selected task object.
+ * @param {number} taskIndex - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML for 'Move To' buttons.
+ */
+function generateMoveToButtons(selectedTask, taskIndex, section) {
+  const availableSections = ["To Do", "In Progress", "Await Feedback", "Done"];
+  return availableSections
+    .filter((targetSection) => targetSection !== section.id)
+    .map(
+      (targetSection) => `
+        &lt;button class="create-task" onclick="moveTaskTo('${targetSection}', ${taskIndex}, '${section.id}', '${section}')">${targetSection}&lt;/button>
+      `
+    )
+    .join("");
+}
+
+/**
+ * Generates HTML for a task pop-up.
+ * @param {object} selectedTask - The selected task object.
+ * @param {number} taskIndex - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML representation of the task pop-up.
+ */
+function taskPopUpTemplate(selectedTask, taskIndex, section) {
+  let date = formatDate(selectedTask.date);
+  subtasksTemplates(selectedTask, taskIndex, section);
+
+  return /*html*/`
+    &lt;div class="taskpoUp" id="taskpoUp" onclick="taskPopUp(event)">
+      &lt;div class="topic-div" id="topic-div">
+        &lt;span class="topic"> ${selectedTask.category} &lt;/span>
+        &lt;i class="bi bi-x" onclick="closeTaskContainer(event)">&lt;/i>
+      &lt;/div>  
+      &lt;span class="title"> ${selectedTask.title} &lt;/span>  
+      &lt;span class="description">${selectedTask.description}&lt;/span>  
+      &lt;div class="date-div info-div">
+        &lt;span>Due date:&lt;/span>
+        &lt;span>${date}&lt;/span>
+      &lt;/div>
+      ${prioTemplate(selectedTask)}
+      ${assignToTemplate(selectedTask)}
+      ${subtasksTemplates(selectedTask, taskIndex, section)}
+      &lt;div class="move-buttons">
+        &lt;b>Move To&lt;/b>
+        &lt;div id="moveToBtns">
+          ${generateMoveToButtons(selectedTask, taskIndex, section)}
+        &lt;/div>
+        &lt;div class="edit-div-frame">
+          &lt;div class="edit-div">
+            &lt;span onclick="deleteTask(${taskIndex},'${section.id}')">
+              &lt;i class="bi bi-trash">&lt;/i>
+              &lt;p>Delete&lt;/p>
+            &lt;/span>
+            &lt;span onclick="edittask(${taskIndex}, '${section.id}')">
+              &lt;i class="bi bi-pencil">&lt;/i>
+              &lt;p>Edit&lt;/p>
+            &lt;/span>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  `;
+}
+
+
+/**
+ * Determines the icon and name for a given task priority.
+ * @param {string} priority - The priority of the task.
+ * @returns {{icon: string, prioName: string}} 
+ */
+function getPriorityDetails(priority) {
+  let icon;
+  let prioName;
+
+  switch (priority) {
+    case "urgent":
+      icon = `&lt;span> &lt;i class="bi bi-chevron-double-up">&lt;/i>&lt;/span>`;
+      break;
+    case "medium":
+      icon = `&lt;span> &lt;i class="fa-solid fa-equals">&lt;/i>&lt;/span>`;
+      break;
+    default:
+      icon = `&lt;span> &lt;i class="bi bi-chevron-double-down">&lt;/i>&lt;/span>`;
+      break;
+  }
+
+  prioName = priority;
+  return { icon, prioName };
+}
+
+/**
+ * Generates HTML for task priority.
+ * @param {object} task - The task object.
+ * @returns {string} - HTML representation of the task priority.
+ */
+function prioTemplate(task) {
+  const { icon, prioName } = getPriorityDetails(task.priority);
+
+  return `
+    &lt;div class="prio-div info-div">
+      &lt;span>Priority:&lt;/span>
+      &lt;div class="prio-sign">
+        &lt;span>${prioName}&lt;/span>
+        ${icon}
+      &lt;/div>
+    &lt;/div>
+  `;
+}
+
+/**
+ * Extracts contact details from a task.
+ * @param {object} task - The task object.
+ * @returns {Array.&lt;{name: string, lastName: string, bColor: string, shortName: string}>} - An array of objects containing contact details.
+ */
+function extractContactDetails(task) {
+  let contactDetails = task.selectedContacts.map(contact => ({
+    name: contact.name,
+    lastName: contact.lastName,
+    bColor: contact.bColor,
+    shortName: contact.shortName
+  }));
+
+  return contactDetails;
+}
+
+/**
+ * Generates HTML for assigned contacts in a task.
+ * @param {object} task - The task object.
+ * @returns {string} - HTML representation of assigned contacts.
+ */
+function assignToTemplate(task) {
+  const contactDetails = extractContactDetails(task);
+  let profilesHTML = contactDetails.map(detail => {
+    return `
+      &lt;div class="profiles">
+        &lt;span style="background-color: ${detail.bColor}" class="profile">${detail.shortName}&lt;/span>
+        &lt;p>${detail.name} ${detail.lastName}&lt;/p>
+      &lt;/div>
+    `;
+  }).join('');
+
+  return `
+    &lt;div class="assign-to info-div">
+      &lt;span>Assigned To:&lt;/span>
+      &lt;div class="profiles-div">
+        ${profilesHTML}
+      &lt;/div>
+    &lt;/div>
+  `;
+}
+
+/**
+ * Generates HTML for subtasks in a task.
+ * @param {object} task - The task object.
+ * @param {number} taskIndex - The index of the task.
+ * @param {object} section - The section object.
+ * @returns {string} - HTML representation of subtasks.
+ */
+
+function subtasksTemplates(task, taskIndex, section) {
+  let subNames = [];
+  let subHtml = "";
+  let sectionId = section.id;
+  task.subTask.forEach((sub) => {
+    subNames.push(sub.name);
+  });
+
+  for (let i = 0; i &lt; subNames.length; i++) {
+    const subtaskID = `subtask${i}`;
+    const checkedValue = task.subTask[i].checked;
+    if (subNames.length >= 0) {
+      subHtml += `
+        &lt;div class="subtask">
+          &lt;label for="${subtaskID}">
+            &lt;input type="checkbox" ${checkedValue ? "checked" : ""
+        } name="${sectionId}" id="${subtaskID}" onclick="updateSubtask(${taskIndex}, ${i}, '${sectionId}')"/>
+            &lt;span style="border-radius: 5px" class="costum-checkbox">&lt;/span>
+          &lt;/label>
+          &lt;p class="subtask-text">${subNames[i]}&lt;/p>
+        &lt;/div>
+      `;
+    } else {
+      subHtml = "No Subtasks added.";
+    }
+  }
+
+  return `
+      &lt;div class="subtasks-div">
+        &lt;span>Subtasks:&lt;/span>
+        &lt;div class="subasks-profiles">
+          ${subHtml}
+        &lt;/div>
+      &lt;/div>
+    `;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#assignToTemplate">assignToTemplate</a></li><li><a href="global.html#createPriorityIcon">createPriorityIcon</a></li><li><a href="global.html#createProgressBar">createProgressBar</a></li><li><a href="global.html#createSelectedContacts">createSelectedContacts</a></li><li><a href="global.html#createTaskElement">createTaskElement</a></li><li><a href="global.html#emptyTaskArea">emptyTaskArea</a></li><li><a href="global.html#extractContactDetails">extractContactDetails</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#generateMoveToButtons">generateMoveToButtons</a></li><li><a href="global.html#getPriorityDetails">getPriorityDetails</a></li><li><a href="global.html#prioTemplate">prioTemplate</a></li><li><a href="global.html#searchBar">searchBar</a></li><li><a href="global.html#subtasksTemplates">subtasksTemplates</a></li><li><a href="global.html#taskPopUpTemplate">taskPopUpTemplate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jan 15 2024 08:59:11 GMT-0500 (Nordamerikanische Ostküsten-Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
