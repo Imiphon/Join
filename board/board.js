@@ -273,19 +273,18 @@ function searchTask() {
 
 /**
  * This function moves the task to another area.
- * @param {string} moveToThisSection This is the name of the section or the array, where we want to move our task, based on the button
- * @param {number} taskIndex This is the index of the task
- * @param {string} actualSection This is the name of the sections, where our task is in
+ * @param {string} moveToThisSection array, where we want to move our task, based on the button
+ * @param {number} taskIndex index of the task
+ * @param {string} actualSection name of the sections, where our task is in
  */
 
-function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
-  debugger
+async function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
   let popUp = document.getElementById("show-task-container");
   let task = addedTasks[0][actualSection][taskIndex];
 
   addedTasks[0][moveToThisSection].push(task);
   addedTasks[0][actualSection].splice(taskIndex, 1);
-  saveTasks();
+  await saveTasks();
   init();
   popUp.style.display = "none";
 }
