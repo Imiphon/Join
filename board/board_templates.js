@@ -137,7 +137,7 @@ function formatDate(dateStr) {
  * @returns {string} - HTML for 'Move To' buttons.
  */
 function generateMoveToButtons(selectedTask, taskIndex, section) {
-  const availableSections = ["To Do", "In Progress", "Await Feedback", "Done"];
+  const availableSections = ["toDo", "inProgress", "awaitFeedback", "done"];
   return availableSections
     .filter((targetSection) => targetSection !== section.id)
     .map(

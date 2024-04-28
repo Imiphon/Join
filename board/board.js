@@ -279,6 +279,7 @@ function searchTask() {
  */
 
 function moveTaskTo(moveToThisSection, taskIndex, actualSection) {
+  debugger
   let popUp = document.getElementById("show-task-container");
   let task = addedTasks[0][actualSection][taskIndex];
 
